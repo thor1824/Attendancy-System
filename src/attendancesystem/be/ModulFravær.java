@@ -11,19 +11,17 @@ package attendancesystem.be;
  */
 public class ModulFravær
 {
-    private boolean canceledHour;
+    private boolean canceled;
     private String teacher;
-    private String studentName;
     private String classStart;
     private String classEnded;
     private String module;
     
     
-    public ModulFravær(boolean canceledHour, String teacher, String studentName,String module, String classStart, String classEnded)
+    public ModulFravær(boolean canceled, String teacher,String module, String classStart, String classEnded)
     {
-        this.canceledHour = canceledHour;
+        this.canceled = canceled;
         this.teacher = teacher;
-        this.studentName = studentName;
         this.module = module;
         this.classStart = classStart;
         this.classEnded = classEnded;
@@ -91,28 +89,6 @@ public class ModulFravær
     {
         this.classStart = classStart;
     }
-    
-
-    /**
-     * Get the value of studentName
-     *
-     * @return the value of studentName
-     */
-    public String getStudentName()
-    {
-        return studentName;
-    }
-
-    /**
-     * Set the value of studentName
-     *
-     * @param studentName new value of studentName
-     */
-    public void setStudentName(String studentName)
-    {
-        this.studentName = studentName;
-    }
-
 
     /**
      * Get the value of teacher
@@ -141,17 +117,17 @@ public class ModulFravær
      */
     public boolean isCanceledHour()
     {
-        return canceledHour;
+        return canceled;
     }
 
     /**
      * Set the value of canceledHour
      *
-     * @param canceledHour new value of canceledHour
+     * @param canceled new value of canceledHour
      */
-    public void setCanceledHour(boolean canceledHour)
+    public void setCanceledHour(boolean canceled)
     {
-        this.canceledHour = canceledHour;
+        this.canceled = canceled;
     }
     
 }

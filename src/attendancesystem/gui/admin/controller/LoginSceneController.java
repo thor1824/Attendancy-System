@@ -10,22 +10,15 @@ import attendancesystem.gui.admin.model.AdminModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -45,8 +38,7 @@ public class LoginSceneController implements Initializable {
     private JFXPasswordField txtfldPassword;
     @FXML
     private JFXButton btnLogin;
-    @FXML
-    private ImageView imgviewBanner;
+    
     
     
 
@@ -55,9 +47,7 @@ public class LoginSceneController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        imgviewBanner.setImage(new Image("Resources/Images/Banner.png"));
         imgviewAvatar.setImage(new Image("Resources/Images/Login-avatar.png"));
-        imgviewBanner.setFitWidth(0);
         model = new AdminModel();
         teacher = new Teacher();
         teacher = model.generateTeachers();
@@ -69,20 +59,9 @@ public class LoginSceneController implements Initializable {
         String password = txtfldPassword.getText();
         
         if (username.equals(model.getTeacherID(teacher)) && password.equals(model.getTeacherPassword(teacher))) {
-            System.out.println("welcome");
-//            try {
-//                ((Node)event.getSource()).getScene().getWindow().close();
-//                FXMLLoader loader = new FXMLLoader();
-//                loader.setLocation(this.getClass().getResource("/adminLogIn/GUI/View/Fravaer.fxml"));
-//                Parent root1 = (Parent) loader.load();
-//                Stage stage = new Stage();
-//                stage.initModality(Modality.APPLICATION_MODAL);
-//                stage.initStyle(StageStyle.DECORATED);
-//                stage.setTitle("");
-//                stage.setScene(new Scene(root1));
-//                stage.show();
-//            } catch (IOException e) {
-//            }
+            Stage stage = (Stage) btnLogin.getScene().getWindow();
+            stage.close();
+            
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             
@@ -90,7 +69,7 @@ public class LoginSceneController implements Initializable {
             alert.setHeaderText("TeacherID or Password are incorrect");
             alert.setContentText("Please confirm your input or contact system administrator");
             
-            alert.showAndWait();
+            alert.show();
         }
         
     }
