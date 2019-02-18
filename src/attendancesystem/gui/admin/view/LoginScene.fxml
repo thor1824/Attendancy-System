@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="459.0" prefWidth="370.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendancesystem.gui.admin.controller.LoginSceneController">
+   <children>
+      <ImageView fx:id="imgviewAvatar" fitHeight="109.0" fitWidth="108.0" layoutX="153.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="153.0" AnchorPane.rightAnchor="139.0" AnchorPane.topAnchor="127.0" />
+      <Text layoutX="146.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EASV ADMIN LOGIN" AnchorPane.leftAnchor="146.0" AnchorPane.rightAnchor="145.58984375" AnchorPane.topAnchor="238.0" />
+      <Text layoutX="31.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teacher ID" />
+      <Text layoutX="34.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
+      <JFXTextField fx:id="txtfldTeacherID" layoutX="33.0" layoutY="284.0" prefHeight="26.0" prefWidth="334.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="32.60000000000002" />
+      <JFXPasswordField fx:id="txtfldPassword" layoutX="33.0" layoutY="348.0" prefWidth="334.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="32.60000000000002" />
+      <JFXButton fx:id="btnLogin" defaultButton="true" layoutX="334.0" layoutY="310.0" onMouseClicked="#handleLoginButton" text="Log in" AnchorPane.bottomAnchor="14.399999999999999" AnchorPane.rightAnchor="17.200000000000003" />
+      <ImageView fx:id="imgviewBanner" fitHeight="127.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
