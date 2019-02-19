@@ -10,6 +10,7 @@ import attendancesystem.be.User;
 import attendancesystem.be.Student;
 import attendancesystem.be.Teacher;
 import attendancesystem.dal.UserDAO;
+import attendancesystem.dal.AbsenceDAO;
 import attendancesystem.dal.TeacherDAO;
 import java.util.List;
 
@@ -18,17 +19,20 @@ import java.util.List;
  * @author Nijas Hansen
  */
 public class BLLManager{
-    
-    TeacherDAO teachDAO = new TeacherDAO();
+
+    TeacherDAO teachDAO;
+    AbsenceDAO absenceDAO;
     UserDAO userDao;
 
     public BLLManager()
     {
         userDao = new UserDAO();
+        teachDAO = new TeacherDAO();
+        absenceDAO = new AbsenceDAO();
     }
-    
-    
-    
+
+
+
     public List<Student> getAllStudents() {
         return getAllStudents();
     }
@@ -37,7 +41,7 @@ public class BLLManager{
         return teacher.getTeacherID();
     }
 
-    
+
     public String getTeacherPassword(Teacher teacher) {
         return teacher.getPassword();
     }
@@ -50,12 +54,15 @@ public class BLLManager{
     {
         return userDao.handleLoginRequest(username, password);
     }
-    
+
 //    public User handleLoginRequestReal(String username, String password)
 //    {
 //        new UnsupportedOperationException("not supported yet");
 //    }
-    
-    
-    
+
+    public void getAbsencedModuls(){
+        absenceDAO.getget();
+    }
+
+
 }
