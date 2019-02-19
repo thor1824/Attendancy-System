@@ -7,6 +7,7 @@ package attendancesystem.gui.admin.model;
 
 import attendancesystem.be.Student;
 import attendancesystem.be.Teacher;
+import attendancesystem.be.User;
 import attendancesystem.bll.BLLManager;
 import java.util.List;
 
@@ -33,5 +34,16 @@ public class AdminModel {
     public Teacher generateTeachers() {
         return bllMan.generateTeachers();
     }
+    
+    public boolean handleLoginRequestMock(String username, String password)
+    {
+        return bllMan.handleLoginRequestMock(username, password);
+    }
+    
+//    public User handleLoginRequestReal(String username, String password)
+//    {
+//        User user = bllMan.handleLoginRequestReal(username, password);
+//        return User;
+//    }
     
 }

@@ -5,12 +5,11 @@
  */
 package attendancesystem.gui.admin.controller;
 
+import attendancesystem.gui.admin.model.AdminModel;
 import attendancesystem.gui.elements.UserElement;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,6 +28,8 @@ import javafx.stage.StageStyle;
  */
 public class AdminViewController implements Initializable
 {
+    AdminModel model;
+    
     @FXML
     private VBox hbxUserOverview;
     @FXML
@@ -40,6 +41,7 @@ public class AdminViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        model = new AdminModel();
         UserElement user1 = new UserElement("Bo John", "10", "89898989", "Bo@email.com");
         UserElement user2 = new UserElement("Jens John", "10", "11111111", "Jens@email.com");
         UserElement user3 = new UserElement("Gert John", "10", "12345678", "Gert@email.com");
@@ -54,21 +56,23 @@ public class AdminViewController implements Initializable
     }
     
     private void startLoginScreen() throws IOException {
-        Parent root1 = FXMLLoader.load(getClass().getResource("/attendancesystem/gui/admin/view/LoginScene.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("attendancesystem/gui/admin/view/LoginScene.fxml"));
+
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setAlwaysOnTop(true);
+        stage.setResizable(false);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(new Scene(root));
+        LoginSceneController controller = loader.getController();
+        controller.setModel(model);
+        controller.setStage(stage);
         
-        Scene loginscene = new Scene(root1);
+        
+        stage.showAndWait();
         
         
-        Stage loginStage = new Stage();
-        
-        
-        
-        loginStage.initStyle(StageStyle.TRANSPARENT);
-        loginStage.initModality(Modality.NONE);
-        
-        loginStage.setScene(loginscene);
-        loginStage.setAlwaysOnTop(true);
-        loginStage.show();
         
     }
 

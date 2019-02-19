@@ -5,8 +5,11 @@
  */
 package attendancesystem.bll;
 
+
+import attendancesystem.be.User;
 import attendancesystem.be.Student;
 import attendancesystem.be.Teacher;
+import attendancesystem.dal.UserDAO;
 import attendancesystem.dal.TeacherDAO;
 import java.util.List;
 
@@ -17,7 +20,14 @@ import java.util.List;
 public class BLLManager{
     
     TeacherDAO teachDAO = new TeacherDAO();
+    UserDAO userDao;
 
+    public BLLManager()
+    {
+        userDao = new UserDAO();
+    }
+    
+    
     
     public List<Student> getAllStudents() {
         return getAllStudents();
@@ -35,6 +45,16 @@ public class BLLManager{
     public Teacher generateTeachers() {
         return teachDAO.generateTeachers();
     }
+
+    public boolean handleLoginRequestMock(String username, String password)
+    {
+        return userDao.handleLoginRequest(username, password);
+    }
+    
+//    public User handleLoginRequestReal(String username, String password)
+//    {
+//        new UnsupportedOperationException("not supported yet");
+//    }
     
     
     

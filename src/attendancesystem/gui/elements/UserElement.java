@@ -70,7 +70,7 @@ public class UserElement
         this.userEmail = userEmail;
         apUser = new AnchorPane();
         apUser.setStyle("-fx-border-color:black");
-       apUser.setStyle("-fx-background-color:linear-gradient(#131313 0%, #424141 100%)");
+//        apUser.setStyle("-fx-background-color:linear-gradient(#131313 0%, #424141 100%)");
         setAnchorPaneSize(apUser, apUserPreviewWidth, apUserPreviewHeight);
 
         apMoreUserInfo = new AnchorPane();
@@ -100,6 +100,10 @@ public class UserElement
         setXnYKordinats(lblUserEmail, lblPreview_X, lblUserEmail_Y);
         
         btnMaximize = new JFXButton("Show More");
+        btnMaximize.setMaxSize(btnMaximizeWidth, btnMaximizeHeight);
+        btnMaximize.setMinSize(btnMaximizeWidth, btnMaximizeHeight);
+        btnMaximize.setPrefSize(btnMaximizeWidth, btnMaximizeHeight);
+                
         AnchorPane.setRightAnchor(btnMaximize, btnMaximize_RightAnchor);
         System.out.println("");
         System.out.println(btnMaximize_TopAnchor);
