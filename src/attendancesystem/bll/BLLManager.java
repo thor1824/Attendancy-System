@@ -7,6 +7,7 @@ package attendancesystem.bll;
 
 import attendancesystem.be.Student;
 import attendancesystem.be.Teacher;
+import attendancesystem.dal.AbsenceDAO;
 import attendancesystem.dal.TeacherDAO;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
 public class BLLManager{
     
     TeacherDAO teachDAO = new TeacherDAO();
-
+    AbsenceDAO absenceDAO = new AbsenceDAO();
     
     public List<Student> getAllStudents() {
         return getAllStudents();
@@ -36,6 +37,9 @@ public class BLLManager{
         return teachDAO.generateTeachers();
     }
     
+    public void getAbsencedModuls(){
+        absenceDAO.getget();
+    }
     
     
 }
