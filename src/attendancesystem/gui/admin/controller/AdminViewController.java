@@ -6,12 +6,21 @@
 package attendancesystem.gui.admin.controller;
 
 import attendancesystem.gui.elements.UserElement;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -38,6 +47,29 @@ public class AdminViewController implements Initializable
         
         spUsers.setFitToWidth(true);
 
+        try {
+            startLoginScreen();
+        } catch (IOException ex) {
+        }
+    }
+    
+    private void startLoginScreen() throws IOException {
+        Parent root1 = FXMLLoader.load(getClass().getResource("/attendancesystem/gui/admin/view/LoginScene.fxml"));
+        
+        Scene loginscene = new Scene(root1);
+        
+        
+        Stage loginStage = new Stage();
+        
+        
+        
+        loginStage.initStyle(StageStyle.TRANSPARENT);
+        loginStage.initModality(Modality.NONE);
+        
+        loginStage.setScene(loginscene);
+        loginStage.setAlwaysOnTop(true);
+        loginStage.show();
+        
     }
 
 
