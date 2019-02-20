@@ -10,16 +10,18 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 
 /**
  *
  * @author Thorbjørn Schultz Damkjær
  */
-public class UserElement
-{
+public class UserElement {
+
     private String userID;
     private String userFullName;
     private String userPhoneNr;
@@ -48,10 +50,10 @@ public class UserElement
     private double lblUserFullName_Y = (apUserPreviewHeight / numberOflblPreviews) * lblNameOrder - lblDisplacementModifier - lblSize;
     private double lblUserPhoneNr_Y = (apUserPreviewHeight / numberOflblPreviews) * lblPhoneOrder - lblDisplacementModifier - lblSize;
     private double lblUserEmail_Y = (apUserPreviewHeight / numberOflblPreviews) * lblEmailOrder - lblDisplacementModifier - lblSize;
-    private double btnMaximizeHeight = 25; 
+    private double btnMaximizeHeight = 25;
     private double btnMaximizeWidth = 80;
     private double btnMaximizeMargin = 15;
-    private double btnMaximize_TopAnchor =  apUserPreviewHeight - btnMaximizeHeight - btnMaximizeMargin;
+    private double btnMaximize_TopAnchor = apUserPreviewHeight - btnMaximizeHeight - btnMaximizeMargin;
     private double btnMaximize_RightAnchor = btnMaximizeMargin;
     private AnchorPane apUser;
     private AnchorPane apMoreUserInfo;
@@ -62,15 +64,21 @@ public class UserElement
     private Label lblUserEmail;
     private JFXButton btnMaximize;
 
-    public UserElement(String userFullName, String userID, String userPhoneNr, String userEmail)
-    {
+    public UserElement(String userFullName, String userID, String userPhoneNr, String userEmail) {
         this.userFullName = userFullName;
         this.userID = userID;
         this.userPhoneNr = userPhoneNr;
         this.userEmail = userEmail;
         apUser = new AnchorPane();
-        apUser.setStyle("-fx-border-color:black");
-       apUser.setStyle("-fx-background-color:linear-gradient(#131313 0%, #424141 100%)");
+        
+        DropShadow ds1 = new DropShadow();
+        ds1.setOffsetY(4.0f);
+        ds1.setOffsetX(4.0f);
+        ds1.setColor(new Color(0.183, 0.183, 0.149, 1.0));
+        
+        apUser.setStyle("-fx-background-color:#e0e0d1");
+        apUser.setEffect(ds1);
+        
         setAnchorPaneSize(apUser, apUserPreviewWidth, apUserPreviewHeight);
 
         apMoreUserInfo = new AnchorPane();
@@ -88,37 +96,36 @@ public class UserElement
         lblUserID = new Label("ID: " + userID);
 //        lblUserID.setStyle("-fx-text-fill:white");
         setXnYKordinats(lblUserID, lblPreview_X, lblUserID_Y);
-        
-        
+
         lblUserfullName = new Label("Name: " + userFullName);
         setXnYKordinats(lblUserfullName, lblPreview_X, lblUserFullName_Y);
-        
+
         lblUserPhoneNr = new Label("Phone Nr: " + userPhoneNr);
         setXnYKordinats(lblUserPhoneNr, lblPreview_X, lblUserPhoneNr_Y);
-        
+
         lblUserEmail = new Label("Email: " + userEmail);
         setXnYKordinats(lblUserEmail, lblPreview_X, lblUserEmail_Y);
-        
+
         btnMaximize = new JFXButton("Show More");
+        btnMaximize.setMaxSize(btnMaximizeWidth, btnMaximizeHeight);
+        btnMaximize.setMinSize(btnMaximizeWidth, btnMaximizeHeight);
+        btnMaximize.setPrefSize(btnMaximizeWidth, btnMaximizeHeight);
+
         AnchorPane.setRightAnchor(btnMaximize, btnMaximize_RightAnchor);
         System.out.println("");
         System.out.println(btnMaximize_TopAnchor);
         AnchorPane.setTopAnchor(btnMaximize, btnMaximize_TopAnchor);
-        
-        btnMaximize.setOnAction(new EventHandler<ActionEvent>()
-        {
+
+        btnMaximize.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event)
-            {
-                if (!previewMode)
-                {
+            public void handle(ActionEvent event) {
+                if (!previewMode) {
                     previewMode = true;
                     btnMaximize.setText("Show Less");
                     apUser.getChildren().add(apMoreUserInfo);
                     //add Diagram and Absence overview tha a place in the AnchorPane apMoreUserInfo
                     setAnchorPaneSize(apUser, apUserRealWidth, apUserRealHight);
-                } else
-                {
+                } else {
                     previewMode = false;
                     btnMaximize.setText("Show More");
                     apUser.getChildren().remove(apMoreUserInfo);
@@ -126,30 +133,25 @@ public class UserElement
                 }
             }
         });
-        
+
         setXnYKordinats(btnMaximize, btnMaximize_TopAnchor, btnMaximize_RightAnchor);
-        
+
         apUser.getChildren().addAll(lblUserfullName, lblUserID, lblUserEmail, lblUserPhoneNr, ivUser, btnMaximize);
     }
-    
-    public AnchorPane getUserPane()
-    {
+
+    public AnchorPane getUserPane() {
         return apUser;
     }
-    
-    private void setUserImage(Image image)
-    {
-        try
-        {
+
+    private void setUserImage(Image image) {
+        try {
             ivUser.setImage(image);
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("User: " + userFullName + " Has no Picture Yet");
         }
     }
-    
-    private void setAnchorPaneSize(AnchorPane ap, double width, double height)
-    {
+
+    private void setAnchorPaneSize(AnchorPane ap, double width, double height) {
         ap.setMinHeight(height);
         ap.setPrefHeight(height);
         ap.setMaxHeight(height);
@@ -158,8 +160,7 @@ public class UserElement
 //        ap.setPrefSize(width, height);
     }
 
-    private void setXnYKordinats(Node node, double X, double Y)
-    {
+    private void setXnYKordinats(Node node, double X, double Y) {
         node.setLayoutX(X);
         node.setLayoutY(Y);
     }

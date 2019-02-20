@@ -14,14 +14,12 @@ import javafx.beans.property.StringProperty;
  */
 public class Student {
 
-    private final StringProperty name = new SimpleStringProperty();
-    private final StringProperty schoolClass = new SimpleStringProperty();
-    private final StringProperty eMail = new SimpleStringProperty();
+    private StringProperty name;
+    private StringProperty schoolClass;
+    private StringProperty eMail;
 
-    public Student() {
-    }
     
-
+    
     public String geteMail() {
         return eMail.get();
     }

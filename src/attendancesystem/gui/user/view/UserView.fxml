@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendancesystem.gui.user.controller.UserViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendancesystem.gui.user.controller.UserViewController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="161.0" layoutY="-6.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fil: Black;" width="768.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e6e6e6" height="333.0" layoutX="32.0" layoutY="635.0" stroke="BLACK" strokeType="INSIDE" width="699.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="37.0" />
@@ -37,5 +37,6 @@
          <font>
             <Font size="20.0" />
          </font></JFXButton>
+      <Label fx:id="lblLoginMessage" layoutX="190.0" layoutY="403.0" />
    </children>
 </AnchorPane>

@@ -10,7 +10,6 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Calendar;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -27,12 +27,12 @@ import javafx.stage.StageStyle;
  *
  * @author Thorbjørn Schultz Damkjær
  */
-public class UserViewController implements Initializable
-{
+public class UserViewController implements Initializable {
 
     private static final String FAILED_FXML = "attendancesystem/gui/user/view/LoginFailed.fxml";
     private static final String LATE_FXML = "attendancesystem/gui/user/view/LoginLate.fxml";
     private static final String SUCCES_FXML = "attendancesystem/gui/user/view/LoginSucces.fxml";
+    private static final String MAIN_FXML = "attendancesystem/gui/user/view/StudentMain.fxml";
     private UserModel model;
 
     @FXML
@@ -47,19 +47,19 @@ public class UserViewController implements Initializable
     private JFXTextField txtUserName;
     @FXML
     private JFXPasswordField txtPassword;
+    @FXML
+    private Label lblLoginMessage;
 
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {
+    public void initialize(URL url, ResourceBundle rb) {
         model = new UserModel();
     }
 
     @FXML
-    private void btnSuccesPress(ActionEvent event) throws IOException
-    {
+    private void btnSuccesPress(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(SUCCES_FXML));
 
@@ -78,10 +78,9 @@ public class UserViewController implements Initializable
     }
 
     @FXML
-    private void btnLatePress(ActionEvent event) throws IOException
-    {
+    private void btnLatePress(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(LATE_FXML));
-        
+
         Parent root = loader.load();
         Stage stage = new Stage();
         stage.setAlwaysOnTop(true);
@@ -99,10 +98,9 @@ public class UserViewController implements Initializable
     }
 
     @FXML
-    private void btnFailedPress(ActionEvent event) throws IOException
-    {
+    private void btnFailedPress(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(FAILED_FXML));
-        
+
         Parent root = loader.load();
         Stage stage = new Stage();
         stage.setAlwaysOnTop(true);
@@ -119,8 +117,28 @@ public class UserViewController implements Initializable
     }
 
     @FXML
-    private void btnLoginPress(ActionEvent event)
-    {
+    private void btnLoginPress(ActionEvent event) throws IOException {
+        if (model.handleLoginRequestMock(txtUserName.getText(), txtPassword.getText())) {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(MAIN_FXML));
+
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setAlwaysOnTop(true);
+            stage.setResizable(false);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(root));
+            StudentMainController controller = loader.getController();
+            controller.setModel(model);
+            controller.setStage(stage);
+            stage.show();
+            
+
+        }
+        else
+        {
+            lblLoginMessage.setStyle("-fx-text-fill:red");
+            lblLoginMessage.setText("WRONG PASSWORD!!");
+        }
     }
 
 }
