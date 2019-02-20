@@ -9,43 +9,43 @@ package attendancesystem.be;
  *
  * @author Bruger
  */
-public class ModulFravær
+public class Modul
 {
     private boolean canceled;
     private String teacher;
     private String classStart;
     private String classEnded;
-    private String module;
+    private String subject;
     
     
-    public ModulFravær(boolean canceled, String teacher,String module, String classStart, String classEnded)
+    public Modul(boolean canceled, String teacher,String module, String classStart, String classEnded)
     {
         this.canceled = canceled;
         this.teacher = teacher;
-        this.module = module;
+        this.subject = module;
         this.classStart = classStart;
         this.classEnded = classEnded;
     }
     
     
     /**
-     * Get the value of module
+     * Get the value of subject
      *
-     * @return the value of module
+     * @return the value of subject
      */
-    public String getModule()
+    public String getSubject()
     {
-        return module;
+        return subject;
     }
 
     /**
-     * Set the value of module
+     * Set the value of subject
      *
-     * @param module new value of module
+     * @param module new value of subject
      */
-    public void setModule(String module)
+    public void setSubject(String module)
     {
-        this.module = module;
+        this.subject = module;
     }
 
     
@@ -125,7 +125,7 @@ public class ModulFravær
      *
      * @param canceled new value of canceledHour
      */
-    public void setCanceledHour(boolean canceled)
+    public void Canceled(boolean canceled)
     {
         this.canceled = canceled;
     }

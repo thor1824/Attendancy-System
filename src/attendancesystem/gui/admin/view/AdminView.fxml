@@ -7,13 +7,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="589.0" prefWidth="771.0" style="-fx-background-color: black;" stylesheets="@../../../../Resources/SuperiorWhite.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendancesystem.gui.admin.controller.AdminViewController">
+<AnchorPane id="AnchorPane" prefHeight="589.0" prefWidth="771.0" style="-fx-background-color: black;" stylesheets="@../../../../Resources/SuperiorWhite.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendancesystem.gui.admin.controller.AdminViewController">
    <children>
       <ScrollPane fx:id="spUsers" hbarPolicy="NEVER" layoutY="125.0" prefHeight="483.0" prefWidth="771.0" stylesheets="@../../../../Resources/SuperiorWhite.css" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="125.0">
          <content>
             <VBox fx:id="hbxUserOverview" prefHeight="194.0" prefWidth="691.0">
                <padding>
-                  <Insets bottom="-3.0" />
+                  <Insets right="5.0" top="5.0" />
                </padding>
             </VBox>
          </content>

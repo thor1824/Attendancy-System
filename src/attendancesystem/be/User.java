@@ -11,8 +11,12 @@ package attendancesystem.be;
  */
 public class User
 {
-    public static int CLEARANCE_STANDART = 1;
-    public static int CLEARANCE_TEACHER = 2;
-    public static int CLEARANCE_ADMIN = 3;
+    public static final int CLEARANCE_STUDENT = 1;
+    public static final int CLEARANCE_TEACHER = 2;
+    public static final int CLEARANCE_ADMIN = 3;
+    
+    private int userID;
+    private int userName;
+    
     
 }

@@ -5,6 +5,8 @@
  */
 package attendancesystem.dal;
 
+import attendancesystem.be.UndocumentetModulAbsence;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -22,6 +24,7 @@ public class AbsenceDAO {
         map2 = createModulHashMap("10", "3", "10", "STD", "Jehova");
         map3 = createModulHashMap("10", "5", "99", "SCO", "Leming");
         
+        mainMap = new HashMap<>();
         mainMap.put("ITO", map1);
         mainMap.put("STD", map2);
         mainMap.put("SCO", map3);
@@ -43,6 +46,17 @@ public class AbsenceDAO {
     public HashMap<String, HashMap> getget()
     {
     return mainMap;
+    }
+
+    public ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence() {
+        ArrayList<UndocumentetModulAbsence> undocumentet = new ArrayList<>();
+        UndocumentetModulAbsence mod1 = new UndocumentetModulAbsence("1", "02-22-2019", "SCO");
+        UndocumentetModulAbsence mod2 = new UndocumentetModulAbsence("2", "02-22-2019", "SCO");
+        UndocumentetModulAbsence mod3 = new UndocumentetModulAbsence("3", "02-22-2019", "SDE");
+        undocumentet.add(mod1);
+        undocumentet.add(mod2);
+        undocumentet.add(mod3);
+        return undocumentet;
     }
     
     

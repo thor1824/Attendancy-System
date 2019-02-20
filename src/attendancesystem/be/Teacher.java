@@ -14,10 +14,14 @@ import javafx.beans.property.StringProperty;
  */
 public class Teacher {
 
-    private final StringProperty name = new SimpleStringProperty();
-    private final StringProperty teacherID = new SimpleStringProperty();
-    private final StringProperty password = new SimpleStringProperty();
+    private StringProperty name = new SimpleStringProperty();
+    private StringProperty teacherID = new SimpleStringProperty();
+    private StringProperty password = new SimpleStringProperty();
 
+    public Teacher() {
+    }
+    
+    
     public String getPassword() {
         return password.get();
     }

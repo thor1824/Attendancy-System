@@ -46,6 +46,7 @@ public class AdminViewController implements Initializable
         UserElement user2 = new UserElement("Jens John", "10", "11111111", "Jens@email.com");
         UserElement user3 = new UserElement("Gert John", "10", "12345678", "Gert@email.com");
         hbxUserOverview.getChildren().addAll(user1.getUserPane(), user2.getUserPane(), user3.getUserPane());
+        hbxUserOverview.setSpacing(12);
         
         spUsers.setFitToWidth(true);
 

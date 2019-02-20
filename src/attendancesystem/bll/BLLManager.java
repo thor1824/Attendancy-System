@@ -9,9 +9,11 @@ package attendancesystem.bll;
 import attendancesystem.be.User;
 import attendancesystem.be.Student;
 import attendancesystem.be.Teacher;
+import attendancesystem.be.UndocumentetModulAbsence;
 import attendancesystem.dal.UserDAO;
 import attendancesystem.dal.AbsenceDAO;
 import attendancesystem.dal.TeacherDAO;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -62,6 +64,10 @@ public class BLLManager{
 
     public void getAbsencedModuls(){
         absenceDAO.getget();
+    }
+
+    public ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence() {
+        return absenceDAO.getUndocumentetAbsence(); 
     }
 
 
