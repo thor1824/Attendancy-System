@@ -6,16 +6,19 @@
 package attendancesystem.gui.user.model;
 
 import attendancesystem.be.Student;
+import attendancesystem.bll.BLLManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 
+ 
 /**
  *
  * @author Thorbjørn Schultz Damkjær
  */
 public class UserModel
 {
+    BLLManager bll;
 
 //    public String calculateDate()
 //    {
@@ -24,12 +27,14 @@ public class UserModel
 //    }
     
     
-    private PieChart buildPieChard(Student user){
-        ObservableList<PieChart.Data> pieChard = FXCollections.observableArrayList(
-        new PieChart.Data(""()),
-        new PieChart.Data("",()));
-       
-        PieChart pie = new PieChart(pieChard);
-        return pie;
-    }
+    
+//    
+//    private PieChart buildPieChard(Student user){
+//        ObservableList<PieChart.Data> pieChard = FXCollections.observableArrayList(
+//        new PieChart.Data(bll.getAbsencedModuls()
+//        new PieChart.Data("",()));
+//       
+//        PieChart pie = new PieChart(pieChard);
+//        return pie;
+//    }
 }
