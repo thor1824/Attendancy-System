@@ -5,6 +5,9 @@
  */
 package attendancesystem.gui.elements;
 
+import attendancesystem.be.Student;
+import attendancesystem.be.Teacher;
+import attendancesystem.be.User;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,6 +25,8 @@ import javafx.scene.paint.Color;
  */
 public class UserElement {
 
+    private Student testStudent;
+    private Teacher testTeacher;
     private String userID;
     private String userFullName;
     private String userPhoneNr;
@@ -76,7 +81,7 @@ public class UserElement {
         ds1.setOffsetX(4.0f);
         ds1.setColor(new Color(0.183, 0.183, 0.149, 1.0));
         
-        apUser.setStyle("-fx-background-color:#e0e0d1");
+        apUser.setStyle("-fx-background-color:#e6e6e6");
         apUser.setEffect(ds1);
         
         setAnchorPaneSize(apUser, apUserPreviewWidth, apUserPreviewHeight);
@@ -84,8 +89,7 @@ public class UserElement {
         apMoreUserInfo = new AnchorPane();
         setAnchorPaneSize(apMoreUserInfo, apUserRealWidth, apUserRealHight - apUserPreviewHeight);
         setXnYKordinats(apMoreUserInfo, 0, apUserPreviewHeight); // 0 so is allign with the parent AnchorPane
-        apMoreUserInfo.setStyle("-fx-border-color:black");
-
+        
         ivUser = new ImageView();
         ivUser.setImage(new Image(defaultUserImageURL));
         ivUser.setFitHeight(ivWitgh);
@@ -164,4 +168,28 @@ public class UserElement {
         node.setLayoutX(X);
         node.setLayoutY(Y);
     }
+    
+    public AnchorPane createInfo(User user)
+    {
+        if (user.getClass().equals(testStudent.getClass()))
+        {
+            return createStudentInfo(null);
+        }
+        if(user.getClass().equals(testTeacher.getClass()))
+        {
+            return createTeacherInfo(null);
+        }
+        else return null;
+    }
+    
+    private AnchorPane createStudentInfo(Student student)
+    {
+        return null;
+    }
+    private AnchorPane createTeacherInfo(Teacher teacher)
+    {
+        return null;
+    }
+    
+    
 }

@@ -15,23 +15,16 @@ import java.util.List;
  */
 public class StudentDAO {
     
-    List<Student> students = new ArrayList<>();
+    List<Student> students;
+
+    public StudentDAO()
+    {
+        students = new ArrayList<>();
+        //Create mockdata here
+    }
     
-    public List<Student> getAllStudents() {
-        
-        Student jens = new Student();
-        jens.setName("Jens");
-        jens.setSchoolClass("cs2018a");
-        jens.seteMail("jen213@easv.dk");
-        
-        Student per = new Student();
-        per.setName("Per");
-        per.setSchoolClass("cs2018b");
-        per.seteMail("per2319@easv.dk");
-        
-        
-        students.add(jens);
-        students.add(per);
+    public ArrayList<Student> getAllStudents() {
+        ArrayList<Student> students = new ArrayList<>();
         
         return students;
     }

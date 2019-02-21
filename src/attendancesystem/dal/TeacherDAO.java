@@ -6,8 +6,6 @@
 package attendancesystem.dal;
 
 import attendancesystem.be.Student;
-import attendancesystem.be.Teacher;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,20 +14,8 @@ import java.util.List;
  */
 public class TeacherDAO {
     
-    List<Student> students = new ArrayList<>();
-
     public List<Student> getAllStudents() {
         return getAllStudents();
     }
     
-    public Teacher generateTeachers() {
-        
-        Teacher henriksen = new Teacher();
-        henriksen.setName("Henriksen");
-        henriksen.setTeacherID("Henriksen");
-        henriksen.setPassword("Password");
-        
-        
-        return henriksen;
-    }
 }

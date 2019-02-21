@@ -5,8 +5,8 @@
  */
 package attendancesystem.gui.user.controller;
 
-import attendancesystem.be.Student;
 import attendancesystem.be.UndocumentetModulAbsence;
+import attendancesystem.be.User;
 import attendancesystem.gui.elements.AbsencentModulElement;
 import attendancesystem.gui.user.model.UserModel;
 import java.net.URL;
@@ -28,7 +28,7 @@ import javafx.stage.Stage;
  */
 public class StudentMainController implements Initializable {
 
-    private Student user;
+    private User user;
     private UserModel userModel;
     private Stage stage;
     private ArrayList<UndocumentetModulAbsence> undocumentetAbsences;
@@ -71,7 +71,7 @@ public class StudentMainController implements Initializable {
 
     private void generateAbsenceElements() {
         undocumentetAbsences = new ArrayList<>();
-        undocumentetAbsences = userModel.getUndocumentetAbsence();
+        undocumentetAbsences = userModel.getUndocumentetAbsence(user);
         AbsencentModulElement abModEle = new AbsencentModulElement();
         for (UndocumentetModulAbsence undocumentetModulAbsence : undocumentetAbsences) {
             System.out.println("hej");
@@ -79,7 +79,7 @@ public class StudentMainController implements Initializable {
         }
     }    
     
-    public void setUser(Student user){
+    public void setUser(User user){
         this.user = user;
     }
     

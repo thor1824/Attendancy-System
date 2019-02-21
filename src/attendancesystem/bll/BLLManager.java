@@ -35,39 +35,18 @@ public class BLLManager{
 
 
 
-    public List<Student> getAllStudents() {
+    public ArrayList<Student> getAllStudents() {
         return getAllStudents();
     }
 
-    public String getTeacherID(Teacher teacher) {
-        return teacher.getTeacherID();
-    }
 
-
-    public String getTeacherPassword(Teacher teacher) {
-        return teacher.getPassword();
-    }
-
-    public Teacher generateTeachers() {
-        return teachDAO.generateTeachers();
-    }
-
-    public boolean handleLoginRequestMock(String username, String password)
+    public User handleLoginRequest(String username, String password)
     {
         return userDao.handleLoginRequest(username, password);
     }
-
-//    public User handleLoginRequestReal(String username, String password)
-//    {
-//        new UnsupportedOperationException("not supported yet");
-//    }
-
-    public void getAbsencedModuls(){
-        absenceDAO.getget();
-    }
-
-    public ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence() {
-        return absenceDAO.getUndocumentetAbsence(); 
+    
+    public ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence(User user) {
+        return absenceDAO.getUndocumentetAbsence(user); 
     }
 
 

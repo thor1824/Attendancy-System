@@ -7,11 +7,9 @@ package attendancesystem.gui.user.model;
 
 import attendancesystem.be.Student;
 import attendancesystem.be.UndocumentetModulAbsence;
+import attendancesystem.be.User;
 import attendancesystem.bll.BLLManager;
 import java.util.ArrayList;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.chart.PieChart;
 
 /**
  *
@@ -43,12 +41,12 @@ public class UserModel
 //        return pie;
 //    }
     
-    public boolean handleLoginRequestMock(String username, String password)
+    public User handleLoginRequest(String username, String password)
     {
-        return bllMan.handleLoginRequestMock(username, password);
+        return bllMan.handleLoginRequest(username, password);
     }
 
-    public ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence() {
-        return bllMan.getUndocumentetAbsence();
+    public ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence(User user) {
+        return bllMan.getUndocumentetAbsence(user);
     }
 }

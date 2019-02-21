@@ -5,6 +5,8 @@
  */
 package attendancesystem.dal;
 
+import attendancesystem.be.Teacher;
+import attendancesystem.be.User;
 import java.util.HashMap;
 
 /**
@@ -13,36 +15,38 @@ import java.util.HashMap;
  */
 public class UserDAO
 {
-    HashMap<String, String> users; 
+    HashMap<String, User> users; 
     public UserDAO()
     {
         users = new HashMap<>();
-        users.put("bob", "6666");
-        users.put("john", "7777");
-        users.put("peter", "123123");
-        users.put("jeppe", "asdfg");
+        users.put("6666", new Teacher(1, "pet1111", "Peter Stegger", "Peter.Stegger@email.com", "2222222", "111111-1111"));
+        users.put("7777", new Teacher(2, "sti1111", "Stig Stegger", "Stig.Stegger@email.com", "3333333", "222222-2222"));
+        users.put("123123", new Teacher(3, "jeb1111", "Jebbe Stegger", "Jebbe.Stegger@email.com", "4444444", "333333-3333"));
+        users.put("asdfg", new Teacher(4, "tre1111", "Ties Stegger", "Ties.Stegger@email.com", "5555555", "444444-4444"));
+        users.put("1", new Teacher(5, "test", "test", "test@email.com", "5555555", "444444-4444"));
     }
     
     
-    public boolean handleLoginRequest(String username, String password)
+    public User handleLoginRequest(String username, String password)
     {
-       if (users.containsKey(username))
+        System.out.println("hej");
+       if (users.containsKey(password))
        {
-           String pw = users.get(username);
-           if (pw.equals(password))
+           User user = users.get(password);
+           if (username.equals(user.getUserName()))
            {
                
-               return true;
+               return user;
            }
            else
            {
                System.out.println("user exits but not the right password");
-               return false;
+               return null;
            }
        }
        else
        {
-           return false;
+           return null;
        }
     }
     
