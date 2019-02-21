@@ -66,6 +66,7 @@ public class StudentMainController implements Initializable {
         userModel = new UserModel();
         grid.setStyle("-fx-border-color:black");
         generateAbsenceElements();
+        
        
     }    
 
@@ -92,5 +93,8 @@ public class StudentMainController implements Initializable {
         this.stage = stage;
     }
     
+    public void setPie(){
+        pieChartAnchor.getChildren().add(userModel.buildPieChard());
+    }
     
 }
