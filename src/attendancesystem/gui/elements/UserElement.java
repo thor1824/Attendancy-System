@@ -18,6 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 /**
  *
@@ -114,6 +115,9 @@ public class UserElement {
         btnMaximize.setMaxSize(btnMaximizeWidth, btnMaximizeHeight);
         btnMaximize.setMinSize(btnMaximizeWidth, btnMaximizeHeight);
         btnMaximize.setPrefSize(btnMaximizeWidth, btnMaximizeHeight);
+        btnMaximize.setStyle("-fx-background-color:#4d79ff");
+        btnMaximize.setTextFill(new Color(1, 1, 1, 1.0));
+        
 
         AnchorPane.setRightAnchor(btnMaximize, btnMaximize_RightAnchor);
         System.out.println("");
