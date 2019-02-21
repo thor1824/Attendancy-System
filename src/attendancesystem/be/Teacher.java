@@ -5,59 +5,21 @@
  */
 package attendancesystem.be;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import java.util.ArrayList;
 
 /**
  *
  * @author Nijas Hansen
  */
-public class Teacher {
+public class Teacher extends User{
 
-    private StringProperty name = new SimpleStringProperty();
-    private StringProperty teacherID = new SimpleStringProperty();
-    private StringProperty password = new SimpleStringProperty();
-
-    public Teacher() {
+    ArrayList<String> subject;
+    
+    public Teacher(int userID, String userName, String fullName, String email, String phoneNr, String cpr)
+    {
+        super(userID, userName, fullName, email, phoneNr, cpr, User.CLEARANCE_TEACHER);
     }
     
     
-    public String getPassword() {
-        return password.get();
-    }
-
-    public void setPassword(String value) {
-        password.set(value);
-    }
-
-    public StringProperty passwordProperty() {
-        return password;
-    }
-    
-
-    public String getTeacherID() {
-        return teacherID.get();
-    }
-
-    public void setTeacherID(String value) {
-        teacherID.set(value);
-    }
-
-    public StringProperty teacherIDProperty() {
-        return teacherID;
-    }
-    
-    
-    public String getName() {
-        return name.get();
-    }
-
-    public void setName(String value) {
-        name.set(value);
-    }
-
-    public StringProperty nameProperty() {
-        return name;
-    }
     
 }

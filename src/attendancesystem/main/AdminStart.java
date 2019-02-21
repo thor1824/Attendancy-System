@@ -5,6 +5,7 @@
  */
 package attendancesystem.main;
 
+import attendancesystem.gui.admin.controller.LoginSceneController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,19 +20,23 @@ import javafx.stage.StageStyle;
  */
 public class AdminStart extends Application
 {
-    
+
     @Override
     public void start(Stage stage) throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource("/attendancesystem/gui/admin/view/AdminView.fxml"));
-        
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("attendancesystem/gui/admin/view/LoginScene.fxml"));
+
+        Parent root = loader.load();
         Scene scene = new Scene(root);
-        
-        stage.setMaximized(true);
+        LoginSceneController controller = loader.getController();
+
         stage.setScene(scene);
+        stage.setAlwaysOnTop(true);
+        stage.setResizable(false);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
-        
-        
+        controller.setStage(stage);
+
     }
 
     /**
@@ -41,5 +46,5 @@ public class AdminStart extends Application
     {
         launch(args);
     }
-    
+
 }

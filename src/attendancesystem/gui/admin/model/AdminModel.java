@@ -6,7 +6,6 @@
 package attendancesystem.gui.admin.model;
 
 import attendancesystem.be.Student;
-import attendancesystem.be.Teacher;
 import attendancesystem.be.User;
 import attendancesystem.bll.BLLManager;
 import java.util.List;
@@ -22,22 +21,10 @@ public class AdminModel {
     public List<Student> getAllStudents() {
         return bllMan.getAllStudents();
     }
-    
-    public String getTeacherID(Teacher teacher) {
-        return bllMan.getTeacherID(teacher);
-    }
-    
-    public String getTeacherPassword(Teacher teacher) {
-        return bllMan.getTeacherPassword(teacher);
-    }
-    
-    public Teacher generateTeachers() {
-        return bllMan.generateTeachers();
-    }
-    
-    public boolean handleLoginRequestMock(String username, String password)
+   
+    public User handleLoginRequestMock(String username, String password)
     {
-        return bllMan.handleLoginRequestMock(username, password);
+        return bllMan.handleLoginRequest(username, password);
     }
     
 //    public User handleLoginRequestReal(String username, String password)

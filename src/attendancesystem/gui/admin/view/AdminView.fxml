@@ -1,28 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="589.0" prefWidth="771.0" style="-fx-background-color: black;" stylesheets="@../../../../Resources/SuperiorWhite.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendancesystem.gui.admin.controller.AdminViewController">
+<AnchorPane id="AnchorPane" prefHeight="589.0" prefWidth="771.0" style="-fx-background-color: #595959;" stylesheets="@../../../../Resources/SuperiorWhite.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendancesystem.gui.admin.controller.AdminViewController">
    <children>
-      <ScrollPane fx:id="spUsers" hbarPolicy="NEVER" layoutY="125.0" prefHeight="483.0" prefWidth="771.0" stylesheets="@../../../../Resources/SuperiorWhite.css" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="125.0">
+      <ScrollPane fx:id="spUsers" hbarPolicy="NEVER" layoutX="130.0" layoutY="79.0" prefHeight="509.0" prefWidth="641.0" style="-fx-background-color: white;" stylesheets="@../../../../Resources/SuperiorWhite.css" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
          <content>
-            <VBox fx:id="hbxUserOverview" prefHeight="194.0" prefWidth="691.0">
-               <padding>
-                  <Insets right="5.0" top="5.0" />
-               </padding>
-            </VBox>
+            <AnchorPane prefHeight="509.0" prefWidth="652.0" style="-fx-background-color: white;">
+               <children>
+                  <VBox fx:id="hbxUserOverview" layoutY="24.0" prefHeight="194.0" prefWidth="719.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="20.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </VBox>
+               </children>
+            </AnchorPane>
          </content>
       </ScrollPane>
-      <ToolBar layoutY="90.0" prefHeight="35.0" prefWidth="771.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
-        <items>
-          <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" text="Button" />
-        </items>
-      </ToolBar>
+      <AnchorPane fx:id="apMenu" layoutY="79.0" prefHeight="509.0" prefWidth="121.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <JFXButton layoutX="1.0" layoutY="54.0" text="All Students" />
+            <JFXButton layoutX="1.0" layoutY="79.0" text="All My Studets" />
+            <JFXButton layoutX="2.0" layoutY="104.0" text="By Classes" />
+            <JFXComboBox layoutX="8.0" layoutY="15.0" prefHeight="25.0" prefWidth="105.0" promptText="Choose List" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="15.0" />
+            <JFXCheckBox layoutX="11.0" layoutY="129.0" prefHeight="25.0" prefWidth="121.0" text="SCO CSe2018A">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </JFXCheckBox>
+            <JFXCheckBox layoutX="11.0" layoutY="452.0" text="Ascending" />
+            <JFXCheckBox layoutX="11.0" layoutY="477.0" text="Descending" />
+            <AnchorPane layoutX="133.0" prefHeight="200.0" prefWidth="1.0" style="-fx-background-color: #595959;" AnchorPane.bottomAnchor="10.0" AnchorPane.topAnchor="10.0" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

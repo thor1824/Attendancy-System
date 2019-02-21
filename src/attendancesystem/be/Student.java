@@ -5,33 +5,22 @@
  */
 package attendancesystem.be;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
  *
  * @author Nijas Hansen
  */
-public class Student {
-
-    private StringProperty name;
+public class Student extends User{
+    
     private StringProperty schoolClass;
-    private StringProperty eMail;
-
     
-    
-    public String geteMail() {
-        return eMail.get();
-    }
 
-    public void seteMail(String value) {
-        eMail.set(value);
+    public Student(int userID, String userName, String fullName, String email, String phoneNr, String cpr)
+    {
+        super(userID, userName, fullName, email, phoneNr, cpr, User.CLEARANCE_STUDENT);
+        
     }
-
-    public StringProperty eMailProperty() {
-        return eMail;
-    }
-    
 
     public String getSchoolClass() {
         return schoolClass.get();
@@ -43,19 +32,6 @@ public class Student {
 
     public StringProperty schoolClassProperty() {
         return schoolClass;
-    }
-    
-
-    public String getName() {
-        return name.get();
-    }
-
-    public void setName(String value) {
-        name.set(value);
-    }
-
-    public StringProperty nameProperty() {
-        return name;
     }
     
 }
