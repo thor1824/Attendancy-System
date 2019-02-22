@@ -9,9 +9,12 @@ import attendancesystem.be.Student;
 import attendancesystem.be.Teacher;
 import attendancesystem.be.User;
 import com.jfoenix.controls.JFXButton;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -86,8 +89,14 @@ public class UserElement {
         apUser.setEffect(ds1);
         
         setAnchorPaneSize(apUser, apUserPreviewWidth, apUserPreviewHeight);
+        
+        ObservableList<PieChart.Data> pieChard = FXCollections.observableArrayList(
+                new PieChart.Data("Timer", 100),
+                new PieChart.Data("Fravær", 10));
 
-        apMoreUserInfo = new AnchorPane(new Label("more user data goes here"));
+        PieChart pie = new PieChart(pieChard);
+        
+        apMoreUserInfo = new AnchorPane(new Label("more user data goes here"), pie);
         setAnchorPaneSize(apMoreUserInfo, apUserRealWidth, apUserRealHight - apUserPreviewHeight);
         setXnYKordinats(apMoreUserInfo, 0, apUserPreviewHeight); // 0 so is allign with the parent AnchorPane
         
