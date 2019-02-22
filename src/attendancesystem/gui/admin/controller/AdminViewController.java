@@ -8,9 +8,11 @@ package attendancesystem.gui.admin.controller;
 import attendancesystem.be.User;
 import attendancesystem.gui.admin.model.AdminModel;
 import attendancesystem.gui.elements.UserElement;
+import com.jfoenix.controls.JFXCheckBox;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
@@ -23,8 +25,7 @@ import javafx.stage.Stage;
  *
  * @author Thorbjørn Schultz Damkjær
  */
-public class AdminViewController implements Initializable
-{
+public class AdminViewController implements Initializable {
 
     AdminModel model;
     User user;
@@ -36,38 +37,80 @@ public class AdminViewController implements Initializable
     private ScrollPane spUsers;
     @FXML
     private AnchorPane apMenu;
-    
+    @FXML
+    private JFXCheckBox check1;
+    @FXML
+    private JFXCheckBox chechAsc;
+    @FXML
+    private JFXCheckBox chechDesc;
+
+    UserElement user1 = new UserElement("Bo John", "10", "89898989", "Bo@email.com");
+    UserElement user2 = new UserElement("Jens John", "10", "11111111", "Jens@email.com");
+    UserElement user3 = new UserElement("Gert John", "10", "12345678", "Gert@email.com");
+
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {
-        
+    public void initialize(URL url, ResourceBundle rb) {
+
         model = new AdminModel();
-        UserElement user1 = new UserElement("Bo John", "10", "89898989", "Bo@email.com");
-        UserElement user2 = new UserElement("Jens John", "10", "11111111", "Jens@email.com");
-        UserElement user3 = new UserElement("Gert John", "10", "12345678", "Gert@email.com");
+
         ArrayList<UserElement> arr = new ArrayList<>();
-        
+        arr.add(user1);
+        arr.add(user2);
+        arr.add(user3);
+
         hbxUserOverview.getChildren().addAll(user1.getUserPane(), user2.getUserPane(), user3.getUserPane());
         hbxUserOverview.setSpacing(12);
 
         spUsers.setFitToWidth(true);
         spUsers.setFitToHeight(true);
-        
-        
 
     }
 
-    void setStage(Stage stage)
-    {
+    void setStage(Stage stage) {
         this.stage = stage;
     }
 
-    void setUser(User user)
-    {
+    void setUser(User user) {
         this.user = user;
+    }
+
+    @FXML
+    private void btnAll(ActionEvent event) {
+        hbxUserOverview.getChildren().clear();
+        hbxUserOverview.getChildren().addAll(user1.getUserPane(), user2.getUserPane(), user3.getUserPane());
+    }
+
+    @FXML
+    private void btnAllMy(ActionEvent event) {
+        hbxUserOverview.getChildren().clear();
+        hbxUserOverview.getChildren().addAll(user1.getUserPane(), user2.getUserPane());
+    }
+
+    @FXML
+    private void btnClass(ActionEvent event) {
+        hbxUserOverview.getChildren().clear();
+        hbxUserOverview.getChildren().addAll(user2.getUserPane(), user1.getUserPane());
+    }
+
+    @FXML
+    private void asc(ActionEvent event) {
+        hbxUserOverview.getChildren().clear();
+        hbxUserOverview.getChildren().addAll(user1.getUserPane(), user2.getUserPane(), user3.getUserPane());
+    }
+
+    @FXML
+    private void desc(ActionEvent event) {
+        hbxUserOverview.getChildren().clear();
+        hbxUserOverview.getChildren().addAll(user3.getUserPane(), user2.getUserPane(), user1.getUserPane());
+    }
+
+    @FXML
+    private void cehch1(ActionEvent event) {
+        hbxUserOverview.getChildren().clear();
+        hbxUserOverview.getChildren().addAll(user1.getUserPane());
     }
 
 }
