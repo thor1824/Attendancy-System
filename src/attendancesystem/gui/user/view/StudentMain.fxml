@@ -92,7 +92,7 @@
                               </GridPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="pieChartAnchor" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" stylesheets="@../../../../../../Fraværsdiagram/src/fraværsdiagram/pieChard.css" />
+                        <AnchorPane fx:id="pieChartAnchor" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
                      </items>
                   </SplitPane>
                </content>

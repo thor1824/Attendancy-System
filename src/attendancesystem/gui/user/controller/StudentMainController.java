@@ -66,6 +66,7 @@ public class StudentMainController implements Initializable {
         userModel = new UserModel();
         grid.setStyle("-fx-border-color:black");
         generateAbsenceElements();
+        setPie();
         
        
     }    

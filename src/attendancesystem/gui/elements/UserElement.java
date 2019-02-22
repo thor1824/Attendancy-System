@@ -87,7 +87,7 @@ public class UserElement {
         
         setAnchorPaneSize(apUser, apUserPreviewWidth, apUserPreviewHeight);
 
-        apMoreUserInfo = new AnchorPane();
+        apMoreUserInfo = new AnchorPane(new Label("more user data goes here"));
         setAnchorPaneSize(apMoreUserInfo, apUserRealWidth, apUserRealHight - apUserPreviewHeight);
         setXnYKordinats(apMoreUserInfo, 0, apUserPreviewHeight); // 0 so is allign with the parent AnchorPane
         
