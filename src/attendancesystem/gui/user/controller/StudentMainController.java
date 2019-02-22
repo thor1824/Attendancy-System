@@ -11,6 +11,7 @@ import attendancesystem.gui.elements.AbsencentModulElement;
 import attendancesystem.gui.user.model.UserModel;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -52,24 +53,29 @@ public class StudentMainController implements Initializable {
     private Label fraværTimer6;
     @FXML
     private AnchorPane pieChartAnchor;
-    
+
     @FXML
     private Tab tabAbsence;
     @FXML
     private VBox vBoxUndokumentet;
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         userModel = new UserModel();
+        addTohMap();
+        setPie();
         grid.setStyle("-fx-border-color:black");
         generateAbsenceElements();
+        addLabelsSub();
         setPie();
-        
-       
-    }    
+        //addLabelsHa();
+
+
+
+    }
 
     private void generateAbsenceElements() {
         undocumentetAbsences = new ArrayList<>();
@@ -79,23 +85,57 @@ public class StudentMainController implements Initializable {
             System.out.println("hej");
             abModEle.generateAbsenceElement(undocumentetModulAbsence, vBoxUndokumentet);
         }
-    }    
-    
+    }
+
     public void setUser(User user){
         this.user = user;
     }
-    
+
     public void setModel (UserModel userModel){
         this.userModel = userModel;
-        
+
     }
 
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-    
+
     public void setPie(){
-        pieChartAnchor.getChildren().add(userModel.buildPieChard());
+        pieChartAnchor.getChildren().add(userModel.bulidPieChred());
+
     }
-    
+
+    public HashMap<String, Integer> hMap = new HashMap<>();
+
+      public void addTohMap(){
+      hMap.put("ADD", 10);
+      hMap.put("STO", 5);
+      hMap.put("ADHD", 2);
+      hMap.put("STD", 6);
+      hMap.put("ITO", 20);
+      }
+
+
+          private void addLabelsSub(){
+          int start = 2;
+
+          for (String key : hMap.keySet()) {
+            Label label = new Label();
+           grid.add(label, 0, start) ;
+            label.setText((key));
+            start++;
+          }
+      }
+
+       private void addLabelsHa(){
+          int start = 2;
+          for (Integer ha: hMap.values()) {
+            Label label = new Label();
+           grid.add(label, 2, start) ;
+            label.setText((ha.toString()));
+            start++;
+          }
+       }
+
+
 }

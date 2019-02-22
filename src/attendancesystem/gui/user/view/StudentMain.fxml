@@ -85,9 +85,22 @@
                                     </Label>
                                     <Label fx:id="fraværTimer2" prefHeight="21.0" prefWidth="47.0" text="1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <Label fx:id="fraværTimer3" prefHeight="21.0" prefWidth="47.0" text="2" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <Label fx:id="fraværTimer4" prefHeight="21.0" prefWidth="47.0" text="3" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <Label fx:id="fraværTimer5" prefHeight="21.0" prefWidth="47.0" text="4" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <Label fx:id="fraværTimer4" prefHeight="21.0" prefWidth="47.0" text="2" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label fx:id="fraværTimer5" prefHeight="21.0" prefWidth="47.0" text="3" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                     <Label fx:id="fraværTimer6" prefHeight="21.0" prefWidth="47.0" text="20" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <Label text="30" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label text="100" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Label text="10" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <Label text="13" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                    <Label text="20" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                    <Label text="10" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                    <Label text="20" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                    <Label text="30%" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                    <Label text="1%" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                    <Label text="5.2%" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                    <Label text="1%" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                    <Label text="0,3%" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                                    <Label text="100%" GridPane.columnIndex="3" GridPane.rowIndex="6" />
                                  </children>
                               </GridPane>
                            </children>
