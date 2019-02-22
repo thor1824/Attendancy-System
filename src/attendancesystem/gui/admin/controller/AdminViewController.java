@@ -45,6 +45,7 @@ public class AdminViewController implements Initializable {
     @FXML
     private JFXCheckBox chechDesc;
 
+    @FXML
     private JFXComboBox<?> combBoxSort;
 
     UserElement user1 = new UserElement("Bo John", "10", "89898989", "Bo@email.com");
@@ -116,28 +117,12 @@ public class AdminViewController implements Initializable {
     private void cehch1(ActionEvent event) {
         hbxUserOverview.getChildren().clear();
         hbxUserOverview.getChildren().addAll(user1.getUserPane());
-
-        public ArrayList comboBox()
-        {
-            ArrayList coBox = new ArrayList();
-            coBox.add("First Name");
-            coBox.add("Last Name");
-            return coBox;
-        }
-
-        @FXML
-        private void btnAll(ActionEvent event)
-        {
-        }
-
-        @FXML
-        private void btnAllMy(ActionEvent event)
-        {
-        }
-
-        @FXML
-        private void btnClass(ActionEvent event)
-        {
     }
 
+    public ArrayList comboBox() {
+        ArrayList coBox = new ArrayList();
+        coBox.add("First Name");
+        coBox.add("Last Name");
+        return coBox;
+    }
 }

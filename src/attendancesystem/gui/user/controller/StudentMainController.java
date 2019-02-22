@@ -101,7 +101,7 @@ public class StudentMainController implements Initializable {
     }
 
     public void setPie(){
-        pieChartAnchor.getChildren().add(userModel.bulidPieChred());
+        pieChartAnchor.getChildren().add(userModel.buildPieChard());
 
     }
 
