@@ -8,9 +8,11 @@ package attendancesystem.gui.admin.controller;
 import attendancesystem.be.User;
 import attendancesystem.gui.admin.model.AdminModel;
 import attendancesystem.gui.elements.UserElement;
+import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
@@ -36,6 +38,8 @@ public class AdminViewController implements Initializable
     private ScrollPane spUsers;
     @FXML
     private AnchorPane apMenu;
+    @FXML
+    private JFXComboBox<?> combBoxSort;
     
     /**
      * Initializes the controller class.
@@ -56,7 +60,7 @@ public class AdminViewController implements Initializable
         spUsers.setFitToWidth(true);
         spUsers.setFitToHeight(true);
         
-        
+        combBoxSort.getItems().addAll(comboBox());
 
     }
 
@@ -68,6 +72,29 @@ public class AdminViewController implements Initializable
     void setUser(User user)
     {
         this.user = user;
+    }
+
+    public ArrayList comboBox()
+    {
+        ArrayList coBox = new ArrayList();
+        coBox.add("First Name");
+        coBox.add("Last Name");
+        return coBox;
+    }
+    
+    @FXML
+    private void btnAll(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void btnAllMy(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void btnClass(ActionEvent event)
+    {
     }
 
 }
