@@ -15,6 +15,9 @@ import attendancesystem.dal.AbsenceDAO;
 import attendancesystem.dal.TeacherDAO;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 
 /**
  *
@@ -47,6 +50,15 @@ public class BLLManager{
     
     public ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence(User user) {
         return absenceDAO.getUndocumentetAbsence(user); 
+    }
+
+    public PieChart buildPieChard() {
+        ObservableList<PieChart.Data> pieChard = FXCollections.observableArrayList(
+                new PieChart.Data("Timer", 100),
+                new PieChart.Data("Fravær", 10));
+
+        PieChart pie = new PieChart(pieChard);
+        return pie;
     }
 
 
