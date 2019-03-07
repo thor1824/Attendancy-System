@@ -59,8 +59,8 @@ public class UserElement {
     private double lblUserFullName_Y = (apUserPreviewHeight / numberOflblPreviews) * lblNameOrder - lblDisplacementModifier - lblSize;
     private double lblUserPhoneNr_Y = (apUserPreviewHeight / numberOflblPreviews) * lblPhoneOrder - lblDisplacementModifier - lblSize;
     private double lblUserEmail_Y = (apUserPreviewHeight / numberOflblPreviews) * lblEmailOrder - lblDisplacementModifier - lblSize;
-    private double btnMaximizeHeight = 25;
-    private double btnMaximizeWidth = 80;
+    private double btnMaximizeHeight = 35;
+    private double btnMaximizeWidth = 100;
     private double btnMaximizeMargin = 15;
     private double btnMaximize_TopAnchor = apUserPreviewHeight - btnMaximizeHeight - btnMaximizeMargin;
     private double btnMaximize_RightAnchor = btnMaximizeMargin;
