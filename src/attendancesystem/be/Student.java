@@ -16,7 +16,7 @@ public class Student extends User{
     private StringProperty schoolClass;
     
 
-    public Student(int userID, String userName, String fullName, String email, String phoneNr, String cpr)
+    public Student(int userID, String fullName, int StudentID, String userName, String LastName, String FirstName, String email, String phoneNr, String cpr, String Adress)
     {
         super(userID, userName, fullName, email, phoneNr, cpr, User.CLEARANCE_STUDENT);
         
@@ -33,5 +33,6 @@ public class Student extends User{
     public StringProperty schoolClassProperty() {
         return schoolClass;
     }
+    
     
 }
