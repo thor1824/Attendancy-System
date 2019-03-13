@@ -5,7 +5,7 @@
  */
 package attendancesystem.main;
 
-import attendancesystem.be.PasswordEncryptor;
+import attendancesystem.bll.PasswordEncryptor;
 import attendancesystem.gui.admin.controller.LoginSceneController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package attendancesystem.be;
+package attendancesystem.bll;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -14,9 +14,8 @@ import java.security.NoSuchAlgorithmException;
  */
 public class PasswordEncryptor {
     
-    public void encryptPassword() {
+    public String encryptPassword(String password) {
         
-        String password = "password";
         String hashedPassword = null;
         
         try {
@@ -40,6 +39,7 @@ public class PasswordEncryptor {
         }
         
         
+        return hashedPassword;
         
     }
     

@@ -8,13 +8,11 @@ package attendancesystem.bll;
 
 import attendancesystem.be.User;
 import attendancesystem.be.Student;
-import attendancesystem.be.Teacher;
 import attendancesystem.be.UndocumentetModulAbsence;
 import attendancesystem.dal.UserDAO;
 import attendancesystem.dal.AbsenceDAO;
 import attendancesystem.dal.TeacherDAO;
 import java.util.ArrayList;
-import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
@@ -28,12 +26,14 @@ public class BLLManager{
     TeacherDAO teachDAO;
     AbsenceDAO absenceDAO;
     UserDAO userDao;
+    PasswordEncryptor passEnc;
 
     public BLLManager()
     {
         userDao = new UserDAO();
         teachDAO = new TeacherDAO();
         absenceDAO = new AbsenceDAO();
+        passEnc = new PasswordEncryptor();
     }
 
 
@@ -45,7 +45,13 @@ public class BLLManager{
 
     public User handleLoginRequest(String username, String password)
     {
-        return userDao.handleLoginRequest(username, password);
+        String hashedPassword;
+        
+        hashedPassword = passEnc.encryptPassword(password);
+        
+        System.out.println(hashedPassword);
+        
+        return userDao.handleLoginRequest(username, hashedPassword);
     }
     
     public ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence(User user) {
