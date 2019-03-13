@@ -5,6 +5,7 @@
  */
 package attendancesystem.main;
 
+import attendancesystem.be.PasswordEncryptor;
 import attendancesystem.gui.admin.controller.LoginSceneController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -37,6 +38,7 @@ public class AdminStart extends Application
         stage.show();
         controller.setStage(stage);
 
+        
     }
 
     /**
