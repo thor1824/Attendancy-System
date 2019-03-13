@@ -46,10 +46,7 @@ public class BLLManager{
     public User handleLoginRequest(String username, String password)
     {
         String hashedPassword;
-        
         hashedPassword = passEnc.encryptPassword(password);
-        
-        System.out.println(hashedPassword);
         
         return userDao.handleLoginRequest(username, hashedPassword);
     }
