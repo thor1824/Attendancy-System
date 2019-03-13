@@ -14,6 +14,7 @@ import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,10 +33,9 @@ import javafx.stage.Stage;
  */
 public class LoginSceneController implements Initializable
 {
-    
+
     private final String MAIN_FXML = "attendancesystem/gui/admin/view/AdminView.fxml";
     private AdminModel model;
-    private Teacher teacher;
     private Stage stage;
 
     @FXML
@@ -48,6 +48,8 @@ public class LoginSceneController implements Initializable
     private JFXButton btnLogin;
     @FXML
     private Label lblLogMessage;
+    @FXML
+    private JFXButton btncancel;
 
     /**
      * Initializes the controller class.
@@ -55,7 +57,6 @@ public class LoginSceneController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        imgviewAvatar.setImage(new Image("Resources/Images/Login-avatar.png"));
         this.model = new AdminModel();
     }
 
@@ -64,30 +65,34 @@ public class LoginSceneController implements Initializable
     {
         String username = txtfldTeacherID.getText();
         String password = txtfldPassword.getText();
-        
+
         try
         {
             System.out.println("ho");
             User user = model.handleLoginRequestMock(username, password);
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(MAIN_FXML));
-            
-            Parent root = loader.load();
-            Stage newStage = new Stage();
-            newStage.setScene(new Scene(root));
-            AdminViewController controller = loader.getController();
-            controller.setStage(newStage);
-            controller.setUser(user);
-            newStage.setMaximized(true);
-            newStage.show();
-            stage.close();
-            
+            if (user != null)
+            {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(MAIN_FXML));
+
+                Parent root = loader.load();
+                Stage newStage = new Stage();
+                newStage.setScene(new Scene(root));
+                AdminViewController controller = loader.getController();
+                controller.setStage(newStage);
+                controller.setUser(user);
+                newStage.setMaximized(true);
+                newStage.show();
+                stage.close();
+            } else
+            {
+                lblLogMessage.setStyle("-fx-text-fill:red");
+                lblLogMessage.setText("WRONG PASSWORD OR USERNAME!!");
+            }
+
         } catch (NullPointerException e)
         {
             e.printStackTrace();
-            lblLogMessage.setStyle("-fx-text-fill:red");
-            lblLogMessage.setText("WRONG PASSWORD!!");
         }
-        
 
     }
 
@@ -99,5 +104,11 @@ public class LoginSceneController implements Initializable
     void setModel(AdminModel model)
     {
         this.model = model;
+    }
+
+    @FXML
+    private void cancel(ActionEvent event)
+    {
+        System.exit(0);
     }
 }

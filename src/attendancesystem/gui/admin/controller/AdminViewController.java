@@ -13,6 +13,8 @@ import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,9 +30,11 @@ import javafx.stage.Stage;
  */
 public class AdminViewController implements Initializable {
 
-    AdminModel model;
-    User user;
-    Stage stage;
+    private AdminModel model;
+    private User user;
+    private Stage stage;
+    private FilteredList<User> searchList;
+    private SortedList<User> sortedData;
 
     @FXML
     private VBox hbxUserOverview;
@@ -61,11 +65,12 @@ public class AdminViewController implements Initializable {
         model = new AdminModel();
 
         ArrayList<UserElement> arr = new ArrayList<>();
-        arr.add(user1);
-        arr.add(user2);
-        arr.add(user3);
+        for (int i = 0; i < 30; i++)
+        {
+            UserElement user1 = new UserElement("Bo John "+ i , "10", "89898989", "Bo@email.com");
+             hbxUserOverview.getChildren().add(user1.getUserPane());
+        }
 
-        hbxUserOverview.getChildren().addAll(user1.getUserPane(), user2.getUserPane(), user3.getUserPane());
         hbxUserOverview.setSpacing(12);
 
         spUsers.setFitToWidth(true);
@@ -125,4 +130,39 @@ public class AdminViewController implements Initializable {
         coBox.add("Last Name");
         return coBox;
     }
+//    private void setupSeachBar()
+//    {
+//        searchList = new FilteredList(mPlayer2.getActivelistOfSongs(), p -> true);
+//        txtSearch.textProperty().addListener((observable, oldValue, newValue)
+//                ->
+//        {
+//            searchList.setPredicate(song
+//                    ->
+//            {
+//                // If filter text is empty, display all Songs
+//                if (newValue == null || newValue.isEmpty())
+//                {
+//                    return true;
+//                }
+//
+//                // Compare Title, Artist and Genre of every Song with filter text.
+//                String lowerCaseFilter = newValue.toLowerCase();
+//
+//                if (song.getTitle().toLowerCase().contains(lowerCaseFilter))
+//                {
+//                    return true; // Filter matches Title.
+//                } else if (song.getArtist().toLowerCase().contains(lowerCaseFilter))
+//                {
+//                    return true; // Filter matches Artist.
+//                } else if (song.getGenre().toLowerCase().contains(lowerCaseFilter))
+//                {
+//                    return true; // Filter matches Genre.
+//                }
+//                return false; // Does not match.
+//            });
+//        });
+//        sortedData = new SortedList<>(searchList); // Wrap the FilteredList in a SortedList.
+//        sortedData.comparatorProperty().bind(tbvSongs.comparatorProperty()); // Bind the SortedList comparator to the TableView comparator.
+//        tbvSongs.setItems(sortedData);//Add sorted (and filtered) data to the table.
+//    }
 }
