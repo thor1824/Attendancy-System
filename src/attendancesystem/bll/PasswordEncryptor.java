@@ -14,11 +14,18 @@ import java.security.NoSuchAlgorithmException;
  */
 public class PasswordEncryptor {
     
-    public String encryptPassword(String password) {
+    /**
+     * takes a given password and encrypts it to MD5 format 
+     * then returns the formatted password
+     * @param password
+     * @return 
+     */
+    public static String encryptPassword(String password) {
         
         String hashedPassword = null;
         
         try {
+            //sets messagedigest to MD5
             MessageDigest md = MessageDigest.getInstance("MD5");
             
             md.update(password.getBytes());
@@ -27,12 +34,14 @@ public class PasswordEncryptor {
             
             
             StringBuilder sb = new StringBuilder();
+            //for each letter it replaces the character with a random HEX number
             for (int i = 0; i < bytes.length; i++) {
                 
                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100,
                         16).substring(1));
             }
             
+            //sets the string to be the formatted password
             hashedPassword = sb.toString();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

@@ -26,14 +26,14 @@ public class BLLManager{
     TeacherDAO teachDAO;
     AbsenceDAO absenceDAO;
     UserDAO userDao;
-    PasswordEncryptor passEnc;
+    
 
     public BLLManager()
     {
         userDao = new UserDAO();
         teachDAO = new TeacherDAO();
         absenceDAO = new AbsenceDAO();
-        passEnc = new PasswordEncryptor();
+        
     }
 
 
@@ -45,8 +45,7 @@ public class BLLManager{
 
     public User handleLoginRequest(String username, String password)
     {
-        String hashedPassword;
-        hashedPassword = passEnc.encryptPassword(password);
+        String hashedPassword = PasswordEncryptor.encryptPassword(password);
         
         return userDao.handleLoginRequest(username, hashedPassword);
     }
