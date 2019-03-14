@@ -72,6 +72,8 @@ public class UserElement {
     private Label lblUserPhoneNr;
     private Label lblUserEmail;
     private JFXButton btnMaximize;
+   
+    
 
     public UserElement(String userFullName, String userID, String userPhoneNr, String userEmail) {
         this.userFullName = userFullName;
@@ -90,15 +92,11 @@ public class UserElement {
         
         setAnchorPaneSize(apUser, apUserPreviewWidth, apUserPreviewHeight);
         
-        ObservableList<PieChart.Data> pieChard = FXCollections.observableArrayList(
-                new PieChart.Data("Timer", 100),
-                new PieChart.Data("Fravær", 10));
-
-        PieChart pie = new PieChart(pieChard);
         
-        apMoreUserInfo = new AnchorPane(new Label("more user data goes here"), pie);
-        setAnchorPaneSize(apMoreUserInfo, apUserRealWidth, apUserRealHight - apUserPreviewHeight);
-        setXnYKordinats(apMoreUserInfo, 0, apUserPreviewHeight); // 0 so is allign with the parent AnchorPane
+        
+        
+        ////////createInfo(testTeacher); med Student stu
+        
         
         ivUser = new ImageView();
         ivUser.setImage(new Image(defaultUserImageURL));
@@ -134,6 +132,7 @@ public class UserElement {
         AnchorPane.setTopAnchor(btnMaximize, btnMaximize_TopAnchor);
 
         btnMaximize.setOnAction(new EventHandler<ActionEvent>() {
+            
             @Override
             public void handle(ActionEvent event) {
                 if (!previewMode) {
@@ -202,6 +201,22 @@ public class UserElement {
     private AnchorPane createTeacherInfo(Teacher teacher)
     {
         return null;
+    }
+    
+    private void createMoreInfoBox(Student student)
+            
+    {
+        apMoreUserInfo = new AnchorPane(new Label("more user data goes here")); //,pie);
+        setAnchorPaneSize(apMoreUserInfo, apUserRealWidth, apUserRealHight - apUserPreviewHeight);
+        setXnYKordinats(apMoreUserInfo, 0, apUserPreviewHeight); // 0 so is allign with the parent AnchorPane
+        
+        name = new Label("Name "+ student);
+        
+        
+        
+        
+        
+        
     }
     
     
