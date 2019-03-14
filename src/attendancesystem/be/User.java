@@ -16,23 +16,63 @@ public abstract class User
     public static final int CLEARANCE_ADMIN = 3;
     
     private int userID;
-    private String userName;
-    private String fullName;
+    private String firstName;
+    private String lastName;
+    private String fullName = firstName + " " + lastName;
     private String email;
     private String phoneNr;
     private String cpr;
     private int clearanceTier;
+    private String Adresse;
+    private String zipCode;
 
-    public User(int userID, String userName, String fullName, String email, String phoneNr, String cpr, int clearanceTier)
+    public User(int userID, String firstName, String lastName, String email, String phoneNr, String cpr, int clearanceTier, String Adresse, String zipCode)
     {
         this.userID = userID;
-        this.userName = userName;
-        this.fullName = fullName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.phoneNr = phoneNr;
         this.cpr = cpr;
         this.clearanceTier = clearanceTier;
+        this.Adresse = Adresse;
+        this.zipCode = zipCode;
     }
+    
+    
+    
+
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName)
+    {
+        this.firstName = firstName;
+    }
+
+    public String getLastName()
+    {
+        return lastName;
+    }
+
+    public void setLastName(String LastName)
+    {
+        this.lastName = LastName;
+    }
+
+    public int getClearanceTier()
+    {
+        return clearanceTier;
+    }
+
+    public void setClearanceTier(int clearanceTier)
+    {
+        this.clearanceTier = clearanceTier;
+    }
+
+    
     
     /**
      * Get the value of clearanceTier
@@ -127,15 +167,6 @@ public abstract class User
         return fullName;
     }
 
-    /**
-     * Set the value of fullName
-     *
-     * @param fullName new value of fullName
-     */
-    public void setFullName(String fullName)
-    {
-        this.fullName = fullName;
-    }
 
 
     /**
