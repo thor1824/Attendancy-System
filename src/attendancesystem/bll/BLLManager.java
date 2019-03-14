@@ -9,13 +9,17 @@ package attendancesystem.bll;
 import attendancesystem.be.User;
 import attendancesystem.be.Student;
 import attendancesystem.be.UndocumentetModulAbsence;
-import attendancesystem.dal.UserDAO;
 import attendancesystem.dal.AbsenceDAO;
+import attendancesystem.dal.StudentDAO;
 import attendancesystem.dal.TeacherDAO;
+import attendancesystem.dal.UserDAO;
+import attendancesystem.dal.db.AbsenceDbDao;
+import attendancesystem.dal.db.StudentDbDao;
+import attendancesystem.dal.db.TeacherDbDao;
+import attendancesystem.dal.db.UserDbDao;
+import java.io.IOException;
+
 import java.util.ArrayList;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.chart.PieChart;
 
 /**
  *
@@ -23,17 +27,18 @@ import javafx.scene.chart.PieChart;
  */
 public class BLLManager{
 
-    TeacherDAO teachDAO;
-    AbsenceDAO absenceDAO;
-    UserDAO userDao;
+    private TeacherDAO teachDAO;
+    private StudentDAO studentDAO;
+    private AbsenceDAO absenceDAO;
+    private UserDAO userDao;
     
 
-    public BLLManager()
+    public BLLManager() throws IOException
     {
-        userDao = new UserDAO();
-        teachDAO = new TeacherDAO();
-        absenceDAO = new AbsenceDAO();
-        
+        userDao = new UserDbDao();
+        teachDAO = new TeacherDbDao();
+        absenceDAO = new AbsenceDbDao();
+        studentDAO = new StudentDbDao();
     }
 
 
@@ -57,15 +62,9 @@ public class BLLManager{
     public ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence(User user) {
         return absenceDAO.getUndocumentetAbsence(user); 
     }
-
-    public PieChart buildPieChard() {
-        ObservableList<PieChart.Data> pieChard = FXCollections.observableArrayList(
-                new PieChart.Data("Timer", 100),
-                new PieChart.Data("Fravær", 10));
-
-        PieChart pie = new PieChart(pieChard);
-        return pie;
+    
+    public javafx.scene.chart.PieChart getPieChart(User user)
+    {
+        return PieChart.buildPieChard(user, studentDAO);
     }
-
-
 }

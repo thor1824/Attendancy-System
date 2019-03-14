@@ -10,9 +10,12 @@ import attendancesystem.gui.admin.model.AdminModel;
 import attendancesystem.gui.elements.UserElement;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
@@ -62,7 +65,13 @@ public class AdminViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        model = new AdminModel();
+        try
+        {
+            model = new AdminModel();
+        } catch (IOException ex)
+        {
+            Logger.getLogger(AdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         ArrayList<UserElement> arr = new ArrayList<>();
         for (int i = 0; i < 30; i++)

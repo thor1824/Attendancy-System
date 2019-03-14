@@ -5,17 +5,23 @@
  */
 package attendancesystem.dal;
 
-import attendancesystem.be.Student;
-import java.util.List;
+import attendancesystem.be.User;
 
 /**
  *
- * @author Nijas Hansen
+ * @author Thorbjørn Schultz Damkjær
  */
-public class TeacherDAO {
-    
-    public List<Student> getAllStudents() {
-        return getAllStudents();
-    }
+public interface TeacherDAO
+{
+
+    void createTeacher(User user);
+
+    void deleteTeacher(User user);
+
+    void getAllTeachers();
+
+    void getTeacher(User user);
+
+    void updateTeacher(User user);
     
 }
