@@ -7,11 +7,10 @@ package attendancesystem.dal.Mock;
 
 import attendancesystem.dal.db.Server.ServerConnect;
 import attendancesystem.be.Student;
+import attendancesystem.be.User;
+import attendancesystem.dal.StudentDAO;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +19,7 @@ import java.util.List;
  *
  * @author Nijas Hansen
  */
-public class StudentMockDAO {
+public class StudentMockDAO implements StudentDAO{
     
     ServerConnect sc;
     List<Student> students;
@@ -42,4 +41,28 @@ public class StudentMockDAO {
 //        
 //        return students;
 //    }
+
+    @Override
+    public void createStudent(User user)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deleteStudent(User user)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void getStudent(User user)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void updateStudent(User user)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

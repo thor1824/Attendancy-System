@@ -7,13 +7,14 @@ package attendancesystem.dal.Mock;
 
 import attendancesystem.be.UndocumentetModulAbsence;
 import attendancesystem.be.User;
+import attendancesystem.dal.AbsenceDAO;
 import java.util.ArrayList;
 
 /**
  *
  * @author Christian
  */
-public class AbsenceMockDAO {
+public class AbsenceMockDAO implements AbsenceDAO{
     ArrayList<UndocumentetModulAbsence> undocumentet;
     public AbsenceMockDAO() {
         undocumentet = new ArrayList<>();
@@ -30,6 +31,36 @@ public class AbsenceMockDAO {
     public ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence(User user) {
         
         return undocumentet;
+    }
+
+    @Override
+    public void createAbsens()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deleteAbsens()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void getAllAbsens()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<UndocumentetModulAbsence> getDocumentetAbsence(User user)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void updateAbsens()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

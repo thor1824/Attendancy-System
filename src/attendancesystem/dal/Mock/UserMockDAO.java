@@ -8,13 +8,14 @@ package attendancesystem.dal.Mock;
 
 import attendancesystem.be.Teacher;
 import attendancesystem.be.User;
+import attendancesystem.dal.UserDAO;
 import java.util.HashMap;
 
 /**
  *
  * @author Thorbjørn Schultz Damkjær
  */
-public class UserMockDAO
+public class UserMockDAO implements UserDAO
 {
     HashMap<String, User> users; 
     public UserMockDAO()
