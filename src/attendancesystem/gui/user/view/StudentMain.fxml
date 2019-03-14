@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -137,7 +140,27 @@
             </Tab>
           <Tab fx:id="tabAbsence" text="Undokumentet Absence">
                <content>
-                  <VBox fx:id="vBoxUndokumentet" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox fx:id="vBoxUndokumentet" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <AnchorPane prefHeight="802.0" prefWidth="768.0">
+                           <children>
+                              <JFXListView fx:id="LstviewUndocAbslabe" layoutX="22.0" layoutY="60.0" prefHeight="514.0" prefWidth="347.0" />
+                              <Label layoutX="384.0" layoutY="22.0" text="Undocumentet Absence">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="22.0" layoutY="22.0" text="Dates:">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="384.0" layoutY="102.0" text="Why were you absent?" />
+                              <TextArea layoutX="384.0" layoutY="120.0" prefHeight="253.0" prefWidth="366.0" />
+                              <JFXButton layoutX="555.0" layoutY="548.0" text="Send to Teacher for approvement" />
+                           </children>
+                        </AnchorPane>
+                     </children></VBox>
                </content>
             </Tab>
         </tabs>

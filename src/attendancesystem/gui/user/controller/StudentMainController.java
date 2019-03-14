@@ -9,6 +9,7 @@ import attendancesystem.be.UndocumentetModulAbsence;
 import attendancesystem.be.User;
 import attendancesystem.gui.elements.AbsencentModulElement;
 import attendancesystem.gui.user.model.UserModel;
+import com.jfoenix.controls.JFXListView;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,6 +59,8 @@ public class StudentMainController implements Initializable {
     private Tab tabAbsence;
     @FXML
     private VBox vBoxUndokumentet;
+    @FXML
+    private JFXListView<?> LstviewUndocAbslabe;
 
     /**
      * Initializes the controller class.
