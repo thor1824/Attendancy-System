@@ -5,8 +5,6 @@
  */
 package attendancesystem.be;
 
-import javafx.beans.property.StringProperty;
-
 /**
  *
  * @author Nijas Hansen
@@ -15,9 +13,9 @@ public class Student extends User{
     
     private String picUrl;
     
-    public Student(int userID, String firstName, String lastName, String email, String phoneNr, String cpr, int clearanceTier, String Adresse, String zipCode)
+    public Student(int userID, String firstName, String lastName, String email, String phoneNr, String cpr, String Adresse, String zipCode)
     {
-        super(userID, firstName, lastName, email, phoneNr, cpr, clearanceTier, Adresse, zipCode);
+        super(userID, firstName, lastName, email, phoneNr, cpr, User.CLEARANCE_STUDENT, Adresse, zipCode);
     }
 
     public String getPicUrl()

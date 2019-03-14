@@ -169,25 +169,6 @@ public abstract class User
 
 
 
-    /**
-     * Get the value of userName
-     *
-     * @return the value of userName
-     */
-    public String getUserName()
-    {
-        return userName;
-    }
-
-    /**
-     * Set the value of userName
-     *
-     * @param UserName new value of userName
-     */
-    public void setUserName(String UserName)
-    {
-        this.userName = UserName;
-    }
 
 
     /**

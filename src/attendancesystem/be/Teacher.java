@@ -14,11 +14,12 @@ import java.util.ArrayList;
 public class Teacher extends User{
 
     ArrayList<String> subject;
-    
-    public Teacher(int userID, String userName, String fullName, String email, String phoneNr, String cpr)
+
+    public Teacher(int userID, String firstName, String lastName, String email, String phoneNr, String cpr, int clearanceTier, String Adresse, String zipCode)
     {
-        super(userID, userName, fullName, email, phoneNr, cpr, User.CLEARANCE_TEACHER);
+        super(userID, firstName, lastName, email, phoneNr, cpr, clearanceTier, Adresse, zipCode);
     }
+    
     
     
     

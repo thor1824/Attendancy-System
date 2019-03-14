@@ -64,7 +64,9 @@ public class StudentDbDao implements StudentDAO {
             
             
 
-            Student student = new Student(userId, StuLName, Stuid, StuFName, StuFName, StuFName, Email, PhoneNumber, Zip, Address);
+            
+            
+            Student student = new Student(userId, StuFName, StuLName, Email, PhoneNumber, Zip, Address, Zip);
 
             students.add(student);
 
