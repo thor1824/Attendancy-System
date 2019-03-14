@@ -8,6 +8,7 @@ package attendancesystem.gui.admin.model;
 import attendancesystem.be.Student;
 import attendancesystem.be.User;
 import attendancesystem.bll.BLLManager;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -16,7 +17,15 @@ import java.util.List;
  */
 public class AdminModel {
     
-    BLLManager bllMan = new BLLManager();
+    BLLManager bllMan;
+    
+
+    public AdminModel() throws IOException
+    {
+        bllMan = new BLLManager();
+    }
+    
+    
     
     public List<Student> getAllStudents() {
         return bllMan.getAllStudents();

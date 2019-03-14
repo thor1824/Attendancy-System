@@ -5,27 +5,25 @@
  */
 package attendancesystem.be;
 
-import javafx.beans.property.StringProperty;
-
 /**
  *
  * @author Nijas Hansen
  */
 public class Student extends User{
-    
+
     private StringProperty schoolClass;
     private String fullName;
-    private int StudentID; 
+    private int StudentID;
     private String LastName;
     private String FirstName;
     private String email;
     private String phoneNr;
     private String cpr;
     private String Adress;
-    
-    
+    private String picUrl;
 
-    public Student(int userID, String fullName, int StudentID, String userName, String LastName, String FirstName, String email, String phoneNr, String cpr, String Adress)
+
+    public Student(int userID, String firstName, String lastName, String email, String phoneNr, String cpr, String Adresse, String zipCode)
     {
         super(userID, userName, fullName, email, phoneNr, cpr, User.CLEARANCE_STUDENT);
         this.schoolClass = schoolClass;
@@ -37,27 +35,34 @@ public class Student extends User{
         this.phoneNr = phoneNr;
         this.cpr = cpr;
         this.Adress = Adress;
-    }
-    
-    
-    
-
-   
-    
-    
-
-    public String getSchoolClass() {
-        return schoolClass.get();
+        super(userID, firstName, lastName, email, phoneNr, cpr, User.CLEARANCE_STUDENT, Adresse, zipCode);
     }
 
-    public void setSchoolClass(String value) {
-        schoolClass.set(value);
+
+
+
+
+
+
+
+    public String getPicUrl()
+    {
+        return picUrl;
     }
 
-    public StringProperty schoolClassProperty() {
-        return schoolClass;
+    public void setPicUrl(String picUrl)
+    {
+        this.picUrl = picUrl;
     }
-    
+
+
+
+
+
+
+
+
+
     public String getStudentName(){
         return FirstName + LastName;
     }

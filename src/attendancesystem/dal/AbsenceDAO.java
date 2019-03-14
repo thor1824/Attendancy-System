@@ -11,27 +11,21 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Christian
+ * @author Thorbjørn Schultz Damkjær
  */
-public class AbsenceDAO {
-    ArrayList<UndocumentetModulAbsence> undocumentet;
-    public AbsenceDAO() {
-        undocumentet = new ArrayList<>();
-        UndocumentetModulAbsence mod1 = new UndocumentetModulAbsence("1", "02-22-2019", "SCO");
-        UndocumentetModulAbsence mod2 = new UndocumentetModulAbsence("2", "02-22-2019", "SCO");
-        UndocumentetModulAbsence mod3 = new UndocumentetModulAbsence("3", "02-22-2019", "SDE");
-        undocumentet.add(mod1);
-        undocumentet.add(mod2);
-        undocumentet.add(mod3);
-         
-    }
-    
+public interface AbsenceDAO
+{
 
-    public ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence(User user) {
-        
-        return undocumentet;
-    }
-    
-    
+    void createAbsens();
+
+    void deleteAbsens();
+
+    void getAllAbsens();
+
+    ArrayList<UndocumentetModulAbsence> getDocumentetAbsence(User user);
+
+    ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence(User user);
+
+    void updateAbsens();
     
 }

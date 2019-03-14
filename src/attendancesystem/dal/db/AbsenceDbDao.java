@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package attendancesystem.dal.folder;
+package attendancesystem.dal.db;
 
-import attendancesystem.dal.*;
+import attendancesystem.dal.db.Server.ServerConnect;
+import attendancesystem.dal.AbsenceDAO;
 import attendancesystem.be.UndocumentetModulAbsence;
 import attendancesystem.be.User;
 import java.io.IOException;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  *
  * @author Christian
  */
-public class AbsenceDbDao
+public class AbsenceDbDao implements AbsenceDAO
 {
 
     private static ServerConnect server;
@@ -26,6 +27,7 @@ public class AbsenceDbDao
         this.server = new ServerConnect();
     }
 
+    @Override
     public ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence(User user)
     {
 
@@ -39,6 +41,7 @@ public class AbsenceDbDao
         return null;
     }
 
+    @Override
     public ArrayList<UndocumentetModulAbsence> getDocumentetAbsence(User user)
     {
         
@@ -52,6 +55,7 @@ public class AbsenceDbDao
         return null;
     }
 
+    @Override
     public void getAllAbsens()
     {
         //to do
@@ -63,6 +67,7 @@ public class AbsenceDbDao
         //return list
     }
 
+    @Override
     public void deleteAbsens()
     {
         //to do
@@ -75,6 +80,7 @@ public class AbsenceDbDao
         
     }
 
+    @Override
     public void updateAbsens()
     {
         //to do
@@ -86,6 +92,7 @@ public class AbsenceDbDao
         //retrun true if updated false if not
     }
 
+    @Override
     public void createAbsens()
     {
         //to do

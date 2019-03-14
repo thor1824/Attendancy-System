@@ -6,35 +6,31 @@
 package attendancesystem.dal;
 
 import attendancesystem.be.Student;
+import attendancesystem.be.User;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  *
- * @author Nijas Hansen
+ * @author Thorbjørn Schultz Damkjær
  */
-public class StudentDAO {
-    
-    ServerConnect sc;
-    List<Student> students;
+public interface StudentDAO
+{
 
-  
+
 //    public List<Student> getAllStudents() throws SQLServerException, SQLException {
 //        List<Student> students = new ArrayList<>();
 //        Connection con = sc.getConnection();
 //        Statement st = con.createStatement();
-//        
+//
 //        String sql = "SELECT * FROM [Atendens].[dbo].[Student] VALUES (?)(?)(?)(?)(?)(?)(?)(?)(?)";
 //        PreparedStatement prSt = con.prepareStatement(sql);
 //        ResultSet rs = prSt.executeQuery();
-//        
+//
 //        while (rs.next()) {
 //            int userId = rs.getInt(1);
 //            int Stuid = rs.getInt(2);
@@ -45,8 +41,8 @@ public class StudentDAO {
 //            String Address = rs.getNString("Address");
 //            String Zip = rs.getNString("ZipCode");
 //            String picURL = rs.getNString("StuPicURL");
-//            
-//            
+//
+//
 //
 //            Student student = new Student(userId, StuLName, Stuid, StuFName, StuFName, StuFName, Email, PhoneNumber, Zip, Address);
 //
@@ -56,17 +52,22 @@ public class StudentDAO {
 //
 //        return students;
 //    }
-    
-    
+
+
     public StudentDAO()
     {
         students = new ArrayList<>();
         //Create mockdata here
     }
-    
-//    public ArrayList<Student> getAllStudents() {
-//        ArrayList<Student> students = new ArrayList<>();
-//        
-//        return students;
-//    }
+
+    void createStudent(User user);
+
+    void deleteStudent(User user);
+
+    List<Student> getAllStudents() throws SQLServerException, SQLException;
+
+    void getStudent(User user);
+
+    void updateStudent(User user);
+
 }

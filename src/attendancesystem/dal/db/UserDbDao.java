@@ -3,17 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package attendancesystem.dal.folder;
+package attendancesystem.dal.db;
 
+import attendancesystem.dal.UserDAO;
+import attendancesystem.dal.db.Server.ServerConnect;
 import attendancesystem.be.User;
-import attendancesystem.dal.ServerConnect;
 import java.io.IOException;
 
 /**
  *
  * @author Thorbjørn Schultz Damkjær
  */
-public class UserDbDao
+public class UserDbDao implements UserDAO
 {
     private static ServerConnect server;
     
@@ -23,6 +24,7 @@ public class UserDbDao
     }
     
     
+    @Override
     public User handleLoginRequest(String username, String password)
     {
         //to do

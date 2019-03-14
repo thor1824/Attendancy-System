@@ -3,21 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package attendancesystem.dal.folder;
+package attendancesystem.dal.db;
 
+import attendancesystem.dal.db.Server.ServerConnect;
+import attendancesystem.dal.TeacherDAO;
 import attendancesystem.be.User;
-import attendancesystem.dal.*;
 import java.io.IOException;
 
 /**
  *
  * @author Nijas Hansen
  */
-public class StudentDbDao {
+public class TeacherDbDao implements TeacherDAO {
     
     private static ServerConnect server;
 
-    public StudentDbDao() throws IOException
+    public TeacherDbDao() throws IOException
     {
 
         this.server = new ServerConnect();
@@ -25,57 +26,62 @@ public class StudentDbDao {
 
     
 
-    public void getAllStudents()
+    @Override
+    public void getAllTeachers()
     {
         //to do
         //create connection
         //create prepared Statement
-        //get all Students 
+        //get all Teachers 
         //put in list
         //close connection
         //return list
     }
 
-    public void deleteStudent(User user)
+    @Override
+    public void getTeacher(User user)
     {
         //to do
         //create connection
         //create prepared Statement
-        //delete Student where userID =="input users ID"
+        //get Teacher where userID =="input users ID"
+        //close connection
+        //retrun Teacher
+        
+    }
+    
+    @Override
+    public void deleteTeacher(User user)
+    {
+        //to do
+        //create connection
+        //create prepared Statement
+        //delete Teacher where userID =="input users ID"
         //check if entry was deletet
         //close connection
         //retrun true if deleted, false if not
         
     }
-    
-    public void getStudent(User user)
-    {
-        //to do
-        //create connection
-        //create prepared Statement
-        //get Student where userID =="input users ID"
-        //close connection
-        //retrun Student
-        
-    }
 
-    public void updateStudent(User user)
+    @Override
+    public void updateTeacher(User user)
     {
         //to do
         //create connection
         //create prepared Statement
-        //update Student where userID =="input users ID"
+        //update Teacher where userID =="input users ID"
         //check if entry was updated
         //close connection
         //retrun true if updated, false if not
     }
 
-    public void createStudent(User user)
+    @Override
+    public void createTeacher(User user)
     {
         //to do
         //create connection
         //create prepared Statement
-        //create Student
+        //create Teacher
         //check if entry was created
         //close connection
         //retrun true if created, false if not
