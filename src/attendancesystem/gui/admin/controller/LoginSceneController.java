@@ -57,7 +57,7 @@ public class LoginSceneController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        this.model = new AdminModel();
+        
     }
 
     @FXML

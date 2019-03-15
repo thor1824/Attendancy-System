@@ -8,10 +8,11 @@ package attendancesystem.gui.user.model;
 import attendancesystem.be.UndocumentetModulAbsence;
 import attendancesystem.be.User;
 import attendancesystem.bll.BLLManager;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 
 /**
@@ -25,7 +26,13 @@ public class UserModel {
     BLLManager bllMan;
 
     public UserModel() {
-        bllMan = new BLLManager();
+        try
+        {
+            bllMan = new BLLManager();
+        } catch (IOException ex)
+        {
+            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 //    public String calculateDate()
@@ -33,8 +40,8 @@ public class UserModel {
 //
 //        return date and time
 //    }
-    public PieChart buildPieChard() {
-        return bllMan.buildPieChard();
+    public PieChart getPieChard(User user) {
+        return bllMan.getPieChart(user);
     }
 
     public User handleLoginRequest(String username, String password) {

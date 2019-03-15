@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -14,7 +17,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="1024.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendancesystem.gui.user.controller.StudentMainController">
+<AnchorPane id="AnchorPane" prefHeight="1024.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendancesystem.gui.user.controller.StudentMainController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="195.0" stroke="BLACK" strokeType="INSIDE" width="768.0" />
       <ImageView fitHeight="195.0" fitWidth="267.0" pickOnBounds="true" preserveRatio="true" />
@@ -101,6 +104,31 @@
                                     <Label text="1%" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                                     <Label text="0,3%" GridPane.columnIndex="3" GridPane.rowIndex="5" />
                                     <Label text="100%" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                                    <Label text="SCO" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="SDE" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="DB/OS" GridPane.rowIndex="4">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="ITO" GridPane.rowIndex="5">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="CS2018 INFO" GridPane.rowIndex="6">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </GridPane>
                            </children>
@@ -112,7 +140,27 @@
             </Tab>
           <Tab fx:id="tabAbsence" text="Undokumentet Absence">
                <content>
-                  <VBox fx:id="vBoxUndokumentet" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox fx:id="vBoxUndokumentet" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <AnchorPane prefHeight="802.0" prefWidth="768.0">
+                           <children>
+                              <JFXListView fx:id="LstviewUndocAbslabe" layoutX="22.0" layoutY="60.0" prefHeight="514.0" prefWidth="347.0" />
+                              <Label layoutX="384.0" layoutY="22.0" text="Undocumentet Absence">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="22.0" layoutY="22.0" text="Dates:">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="384.0" layoutY="102.0" text="Why were you absent?" />
+                              <TextArea layoutX="384.0" layoutY="120.0" prefHeight="253.0" prefWidth="366.0" />
+                              <JFXButton layoutX="555.0" layoutY="548.0" text="Send to Teacher for approvement" />
+                           </children>
+                        </AnchorPane>
+                     </children></VBox>
                </content>
             </Tab>
         </tabs>
