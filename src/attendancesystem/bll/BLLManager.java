@@ -5,11 +5,11 @@
  */
 package attendancesystem.bll;
 
-
 import attendancesystem.be.User;
 import attendancesystem.be.Student;
 import attendancesystem.be.UndocumentetModulAbsence;
 import attendancesystem.dal.AbsenceDAO;
+import attendancesystem.dal.Mock.UserMockDAO;
 import attendancesystem.dal.StudentDAO;
 import attendancesystem.dal.TeacherDAO;
 import attendancesystem.dal.UserDAO;
@@ -25,46 +25,57 @@ import java.util.ArrayList;
  *
  * @author Nijas Hansen
  */
-public class BLLManager{
+public class BLLManager {
 
     private TeacherDAO teachDAO;
     private StudentDAO studentDAO;
     private AbsenceDAO absenceDAO;
     private UserDAO userDao;
-    
 
-    public BLLManager() throws IOException
-    {
-        userDao = new UserDbDao();
-        teachDAO = new TeacherDbDao();
-        absenceDAO = new AbsenceDbDao();
-        studentDAO = new StudentDbDao();
+    public BLLManager() throws IOException {
+        try {
+            userDao = new UserMockDAO();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            teachDAO = new TeacherDbDao();
+        } catch (IOException iOException) {
+            iOException.printStackTrace();
+        }
+
+        try {
+            absenceDAO = new AbsenceDbDao();
+        } catch (IOException iOException) {
+            iOException.printStackTrace();
+        }
+
+        try {
+            studentDAO = new StudentDbDao();
+        } catch (IOException iOException) {
+            iOException.printStackTrace();
+        }
     }
-
-
 
     public ArrayList<Student> getAllStudents() {
         return getAllStudents();
     }
 
-
-    public User handleLoginRequest(String username, String password)
-    {
-        if (username.toLowerCase().contains("admin"))
-        {
+    public User handleLoginRequest(String username, String password) {
+        if (username.toLowerCase().contains("admin")) {
             return userDao.handleLoginRequest("admin", "admin");
         }
         String hashedPassword = PasswordEncryptor.encryptPassword(password);
-        
+
         return userDao.handleLoginRequest(username, hashedPassword);
     }
-    
+
     public ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence(User user) {
-        return absenceDAO.getUndocumentetAbsence(user); 
+        return absenceDAO.getUndocumentetAbsence(user);
     }
-    
-    public javafx.scene.chart.PieChart getPieChart(User user)
-    {
+
+    public javafx.scene.chart.PieChart getPieChart(User user) {
         return PieChart.buildPieChard(user, studentDAO);
     }
 }

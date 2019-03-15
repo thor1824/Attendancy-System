@@ -38,6 +38,22 @@ public abstract class User
         this.Adresse = Adresse;
         this.zipCode = zipCode;
     }
+
+    public String getAdresse() {
+        return Adresse;
+    }
+
+    public void setAdresse(String Adresse) {
+        this.Adresse = Adresse;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
     
     
     
