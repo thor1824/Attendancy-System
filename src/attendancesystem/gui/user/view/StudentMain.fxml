@@ -31,7 +31,9 @@
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="143.20001220703125" minWidth="10.0" prefWidth="140.800048828125" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="164.80002441406248" minWidth="10.0" prefWidth="164.80002441406248" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="121.20001220703125" minWidth="10.0" prefWidth="83.5999755859375" />
                                  </columnConstraints>
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -43,17 +45,17 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Label text="Antal fraværstimer" GridPane.columnIndex="1">
+                                    <Label text="Dato" GridPane.columnIndex="1">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <Label text="Samlet Antal Timer" GridPane.columnIndex="2">
+                                    <Label text="Fag" GridPane.columnIndex="2">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <Label text="Fravær i Procent" GridPane.columnIndex="3">
+                                    <Label prefHeight="27.0" prefWidth="146.0" text="Fravær i Procent" GridPane.columnIndex="4">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -79,6 +81,16 @@
                                     <Label fx:id="fraværTimer5" prefHeight="21.0" prefWidth="47.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                     <Label fx:id="fraværTimer6" prefHeight="21.0" prefWidth="47.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                                     <Label GridPane.rowIndex="2">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Modul">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Fraværs timer" GridPane.columnIndex="3">
                                        <font>
                                           <Font size="18.0" />
                                        </font>

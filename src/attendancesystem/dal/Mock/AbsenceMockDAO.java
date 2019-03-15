@@ -18,9 +18,9 @@ public class AbsenceMockDAO implements AbsenceDAO{
     ArrayList<UndocumentetModulAbsence> undocumentet;
     public AbsenceMockDAO() {
         undocumentet = new ArrayList<>();
-        UndocumentetModulAbsence mod1 = new UndocumentetModulAbsence("1", "02-22-2019", "SCO");
-        UndocumentetModulAbsence mod2 = new UndocumentetModulAbsence("2", "02-22-2019", "SCO");
-        UndocumentetModulAbsence mod3 = new UndocumentetModulAbsence("3", "02-22-2019", "SDE");
+        UndocumentetModulAbsence mod1 = new UndocumentetModulAbsence("1", "02-22-2019", "ITO", "2", "4%");
+        UndocumentetModulAbsence mod2 = new UndocumentetModulAbsence("2", "02-22-2019", "SCO", "15", "30%");
+        UndocumentetModulAbsence mod3 = new UndocumentetModulAbsence("3", "02-22-2019", "SDE", "5", "10%");
         undocumentet.add(mod1);
         undocumentet.add(mod2);
         undocumentet.add(mod3);

@@ -122,17 +122,21 @@ public class StudentMainController implements Initializable {
 
     public void addTohMap() throws SQLException {
 
-//        liststudent.addAll(0, userModel.getAllStudents());
         ArrayList<UndocumentetModulAbsence> list = userModel.getUndocumentetAbsence(null);
         
         for (int i = 0; i < list.size(); i++) {
             Label modul = new Label(list.get(i).getModul());
             Label date = new Label(list.get(i).getDate());
             Label subject = new Label(list.get(i).getSubject());
+            Label absHours = new Label(list.get(i).getAbsenceHours());
+            Label absProcent = new Label(list.get(i).getAbsenceProcent());
+            
             
             grid.add(modul, 0, i + 1);
             grid.add(date, 1, i + 1);
             grid.add(subject, 2, i + 1);
+            grid.add(absHours, 3, i + 1);
+            grid.add(absProcent, 4, i + 1);
         }
     }
 
