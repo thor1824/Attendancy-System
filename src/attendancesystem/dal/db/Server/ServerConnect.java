@@ -19,7 +19,7 @@ import java.util.Properties;
 public class ServerConnect
 {
 
-    private static final String PROP_FILE = "src/attendancesystem/dal/database.settings";
+    private static final String PROP_FILE = "src/attendancesystem/dal/db/Server/database.settings";
     private SQLServerDataSource ds;
 
     public ServerConnect() throws IOException
