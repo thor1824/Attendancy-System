@@ -57,6 +57,9 @@ public abstract class User
     
     
     
+    public User getUser(User user){
+        return user;
+    }
 
     public String getFirstName()
     {

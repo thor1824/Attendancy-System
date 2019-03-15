@@ -38,6 +38,7 @@ public class AdminViewController implements Initializable {
     private Stage stage;
     private FilteredList<User> searchList;
     private SortedList<User> sortedData;
+    private int maxLoad = 30;
 
     @FXML
     private VBox hbxUserOverview;
@@ -74,18 +75,40 @@ public class AdminViewController implements Initializable {
         }
 
         ArrayList<UserElement> arr = new ArrayList<>();
-        for (int i = 0; i < 30; i++)
-        {
-            UserElement user1 = new UserElement("Bo John "+ i , "10", "89898989", "Bo@email.com");
-             hbxUserOverview.getChildren().add(user1.getUserPane());
-        }
 
+        //test ersattest med metode de gør med list<Student/user?>
+        for (int i = 0; i <= 55; i++) {
+            UserElement user = new UserElement("Bo John " + i, "10", "89898989", "Bo@email.com");
+            arr.add(user);
+        }
+        for (int i = 0; i <= maxLoad; i++) {
+            hbxUserOverview.getChildren().add(arr.get(i).getUserPane());
+        }
+        
         hbxUserOverview.setSpacing(12);
 
         spUsers.setFitToWidth(true);
         spUsers.setFitToHeight(true);
 
         combBoxSort.getItems().addAll(comboBox());
+
+        //scrollPane load incriments
+        spUsers.vvalueProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println(newValue);
+            System.out.println(spUsers.getVmax());
+            if (newValue.doubleValue() == spUsers.getVmax()) {
+                int loadIncriments = 10;
+                for (int i = maxLoad + 1; i <= maxLoad + loadIncriments; i++) {
+                    if (arr.get(i) != null) {
+                        hbxUserOverview.getChildren().add(arr.get(i).getUserPane());
+                    } else {
+                        break;
+                    }
+                }
+                maxLoad = maxLoad + loadIncriments;
+            }
+            
+        });
 
     }
 

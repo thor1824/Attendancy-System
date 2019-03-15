@@ -10,22 +10,59 @@ package attendancesystem.be;
  * @author Thorbjørn Schultz Damkjær
  */
 public class UndocumentetModulAbsence {
-    
-    
+
     private String Modul;
     private String timeOfArrival;
     private String date;
     private String explenation;
     private String subject;
-    
-    public UndocumentetModulAbsence(String Modul, String date, String subject) {
+    private String absenceHours;
+    private String absenceProcent;
+
+    public UndocumentetModulAbsence(String Modul, String date, String subject, String absenceHours, String absenceProcent) {
         this.Modul = Modul;
         this.date = date;
         this.subject = subject;
+        this.absenceHours = absenceHours;
+        this.absenceProcent = absenceProcent;
         this.timeOfArrival = "not Arrived";
     }
-    
-    
+
+    /**
+     * get the hours of absence
+     *
+     * @return
+     */
+    public String getAbsenceHours() {
+        return absenceHours;
+    }
+
+    /**
+     * sets the hours of absence
+     *
+     * @param absenceHours
+     */
+    public void setAbsenceHours(String absenceHours) {
+        this.absenceHours = absenceHours;
+    }
+
+    /**
+     * gets the procentage of absence
+     *
+     * @return
+     */
+    public String getAbsenceProcent() {
+        return absenceProcent;
+    }
+
+    /**
+     * sets the procentage of absence
+     *
+     * @param absenceProcent
+     */
+    public void setAbsenceProcent(String absenceProcent) {
+        this.absenceProcent = absenceProcent;
+    }
 
     /**
      * Get the value of subject
@@ -45,7 +82,6 @@ public class UndocumentetModulAbsence {
         this.subject = subject;
     }
 
-
     /**
      * Get the value of explenation
      *
@@ -63,7 +99,6 @@ public class UndocumentetModulAbsence {
     public void setExplenation(String explenation) {
         this.explenation = explenation;
     }
-
 
     /**
      * Get the value of date
@@ -83,7 +118,6 @@ public class UndocumentetModulAbsence {
         this.date = date;
     }
 
-
     /**
      * Get the value of timeOfArrival
      *
@@ -101,7 +135,6 @@ public class UndocumentetModulAbsence {
     public void setTimeOfArrival(String timeOfArrival) {
         this.timeOfArrival = timeOfArrival;
     }
-
 
     /**
      * Get the value of Modul

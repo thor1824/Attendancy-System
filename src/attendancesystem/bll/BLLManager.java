@@ -17,9 +17,15 @@ import attendancesystem.dal.db.AbsenceDbDao;
 import attendancesystem.dal.db.StudentDbDao;
 import attendancesystem.dal.db.TeacherDbDao;
 import attendancesystem.dal.db.UserDbDao;
+import attendancesystem.dal.Mock.AbsenceMockDAO;
+import attendancesystem.dal.Mock.StudentMockDAO;
+import attendancesystem.dal.Mock.TeacherMockDAO;
+import attendancesystem.dal.Mock.UserMockDAO;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -31,8 +37,16 @@ public class BLLManager {
     private StudentDAO studentDAO;
     private AbsenceDAO absenceDAO;
     private UserDAO userDao;
+    private TeacherMockDAO teachDAO;
+    private StudentMockDAO studentDAO;
+    private AbsenceMockDAO absenceDAO;
+    private UserMockDAO userDao;
 
     public BLLManager() throws IOException {
+      userDao = new UserMockDAO();
+      teachDAO = new TeacherMockDAO();
+      absenceDAO = new AbsenceMockDAO();
+      studentDAO = new StudentMockDAO();
         try {
             userDao = new UserMockDAO();
 
@@ -44,6 +58,7 @@ public class BLLManager {
         } catch (IOException iOException) {
             iOException.printStackTrace();
         }
+
 
         try {
             absenceDAO = new AbsenceDbDao();
@@ -58,8 +73,8 @@ public class BLLManager {
         }
     }
 
-    public ArrayList<Student> getAllStudents() {
-        return getAllStudents();
+    public List<Student> getAllStudents() throws SQLException {
+        return studentDAO.getAllStudents();
     }
 
     public User handleLoginRequest(String username, String password) {

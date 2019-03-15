@@ -5,11 +5,14 @@
  */
 package attendancesystem.gui.user.model;
 
+import attendancesystem.be.Student;
 import attendancesystem.be.UndocumentetModulAbsence;
 import attendancesystem.be.User;
 import attendancesystem.bll.BLLManager;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -51,5 +54,11 @@ public class UserModel {
     public ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence(User user) {
         return bllMan.getUndocumentetAbsence(user);
     }
+
+    public List<Student> getAllStudents() throws SQLException {
+        return bllMan.getAllStudents();
+    }
+    
+    
 
 }
