@@ -9,17 +9,15 @@ package attendancesystem.bll;
 import attendancesystem.be.User;
 import attendancesystem.be.Student;
 import attendancesystem.be.UndocumentetModulAbsence;
-import attendancesystem.dal.AbsenceDAO;
-import attendancesystem.dal.StudentDAO;
-import attendancesystem.dal.TeacherDAO;
-import attendancesystem.dal.UserDAO;
-import attendancesystem.dal.db.AbsenceDbDao;
-import attendancesystem.dal.db.StudentDbDao;
-import attendancesystem.dal.db.TeacherDbDao;
-import attendancesystem.dal.db.UserDbDao;
+import attendancesystem.dal.Mock.AbsenceMockDAO;
+import attendancesystem.dal.Mock.StudentMockDAO;
+import attendancesystem.dal.Mock.TeacherMockDAO;
+import attendancesystem.dal.Mock.UserMockDAO;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -27,24 +25,24 @@ import java.util.ArrayList;
  */
 public class BLLManager{
 
-    private TeacherDAO teachDAO;
-    private StudentDAO studentDAO;
-    private AbsenceDAO absenceDAO;
-    private UserDAO userDao;
+    private TeacherMockDAO teachDAO;
+    private StudentMockDAO studentDAO;
+    private AbsenceMockDAO absenceDAO;
+    private UserMockDAO userDao;
     
 
     public BLLManager() throws IOException
     {
-        userDao = new UserDbDao();
-        teachDAO = new TeacherDbDao();
-        absenceDAO = new AbsenceDbDao();
-        studentDAO = new StudentDbDao();
+        userDao = new UserMockDAO();
+        teachDAO = new TeacherMockDAO();
+        absenceDAO = new AbsenceMockDAO();
+        studentDAO = new StudentMockDAO();
     }
 
 
 
-    public ArrayList<Student> getAllStudents() {
-        return getAllStudents();
+    public List<Student> getAllStudents() throws SQLException {
+        return studentDAO.getAllStudents();
     }
 
 

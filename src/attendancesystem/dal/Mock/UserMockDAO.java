@@ -17,15 +17,16 @@ import java.util.HashMap;
  */
 public class UserMockDAO implements UserDAO
 {
-    HashMap<String, User> users; 
+    public HashMap<String, User> users; 
     public UserMockDAO()
     {
         users = new HashMap<>();
         users.put("admin", new Teacher(1, "admin", "Peter Stegger", "Peter.Stegger@email.com", "2222222", "111111-1111", 0, "ribe", "6666"));
         
+        
     }
     
-    
+    @Override
     public User handleLoginRequest(String username, String password)
     {
         System.out.println("hej");

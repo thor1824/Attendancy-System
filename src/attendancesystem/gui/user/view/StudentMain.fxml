@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXListView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -46,11 +43,6 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Label prefHeight="21.0" prefWidth="143.0" text="fraværs oversigt ">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
                                     <Label text="Antal fraværstimer" GridPane.columnIndex="1">
                                        <font>
                                           <Font size="18.0" />
@@ -62,11 +54,6 @@
                                        </font>
                                     </Label>
                                     <Label text="Fravær i Procent" GridPane.columnIndex="3">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="Alle Fag" GridPane.rowIndex="1">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -86,45 +73,12 @@
                                           <Insets left="101.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label fx:id="fraværTimer2" prefHeight="21.0" prefWidth="47.0" text="1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <Label fx:id="fraværTimer3" prefHeight="21.0" prefWidth="47.0" text="2" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <Label fx:id="fraværTimer4" prefHeight="21.0" prefWidth="47.0" text="2" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <Label fx:id="fraværTimer5" prefHeight="21.0" prefWidth="47.0" text="3" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                    <Label fx:id="fraværTimer6" prefHeight="21.0" prefWidth="47.0" text="20" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                    <Label text="30" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Label text="100" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                    <Label text="10" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                    <Label text="13" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                    <Label text="20" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                    <Label text="10" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                    <Label text="20" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                                    <Label text="30%" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                    <Label text="1%" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                    <Label text="5.2%" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                    <Label text="1%" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                    <Label text="0,3%" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                                    <Label text="100%" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-                                    <Label text="SCO" GridPane.rowIndex="2">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="SDE" GridPane.rowIndex="3">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="DB/OS" GridPane.rowIndex="4">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="ITO" GridPane.rowIndex="5">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="CS2018 INFO" GridPane.rowIndex="6">
+                                    <Label fx:id="fraværTimer2" prefHeight="21.0" prefWidth="47.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label fx:id="fraværTimer3" prefHeight="21.0" prefWidth="47.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label fx:id="fraværTimer4" prefHeight="21.0" prefWidth="47.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label fx:id="fraværTimer5" prefHeight="21.0" prefWidth="47.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <Label fx:id="fraværTimer6" prefHeight="21.0" prefWidth="47.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <Label GridPane.rowIndex="2">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -140,27 +94,7 @@
             </Tab>
           <Tab fx:id="tabAbsence" text="Undokumentet Absence">
                <content>
-                  <VBox fx:id="vBoxUndokumentet" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <AnchorPane prefHeight="802.0" prefWidth="768.0">
-                           <children>
-                              <JFXListView fx:id="LstviewUndocAbslabe" layoutX="22.0" layoutY="60.0" prefHeight="514.0" prefWidth="347.0" />
-                              <Label layoutX="384.0" layoutY="22.0" text="Undocumentet Absence">
-                                 <font>
-                                    <Font size="26.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="22.0" layoutY="22.0" text="Dates:">
-                                 <font>
-                                    <Font size="26.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="384.0" layoutY="102.0" text="Why were you absent?" />
-                              <TextArea layoutX="384.0" layoutY="120.0" prefHeight="253.0" prefWidth="366.0" />
-                              <JFXButton layoutX="555.0" layoutY="548.0" text="Send to Teacher for approvement" />
-                           </children>
-                        </AnchorPane>
-                     </children></VBox>
+                  <VBox fx:id="vBoxUndokumentet" prefHeight="200.0" prefWidth="100.0" />
                </content>
             </Tab>
         </tabs>
