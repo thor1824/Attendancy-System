@@ -64,6 +64,8 @@ public class UserElement {
     private double btnMaximizeMargin = 15;
     private double btnMaximize_TopAnchor = apUserPreviewHeight - btnMaximizeHeight - btnMaximizeMargin;
     private double btnMaximize_RightAnchor = btnMaximizeMargin;
+    private double leftLabelAncor = 15.0;
+    private double MoreLabelsToTop = 6.0;
     private AnchorPane apUser;
     private AnchorPane apMoreUserInfo;
     private ImageView ivUser;
@@ -72,6 +74,14 @@ public class UserElement {
     private Label lblUserPhoneNr;
     private Label lblUserEmail;
     private JFXButton btnMaximize;
+    private Label Cpr;
+    private Label adress;
+    private Label StudentID;
+    private Label schoolClass;
+    
+   // User user;
+    
+    
 
     public UserElement(String userFullName, String userID, String userPhoneNr, String userEmail) {
         this.userFullName = userFullName;
@@ -90,15 +100,11 @@ public class UserElement {
         
         setAnchorPaneSize(apUser, apUserPreviewWidth, apUserPreviewHeight);
         
-        ObservableList<PieChart.Data> pieChard = FXCollections.observableArrayList(
-                new PieChart.Data("Timer", 100),
-                new PieChart.Data("Fravær", 10));
-
-        PieChart pie = new PieChart(pieChard);
         
-        apMoreUserInfo = new AnchorPane(new Label("more user data goes here"), pie);
-        setAnchorPaneSize(apMoreUserInfo, apUserRealWidth, apUserRealHight - apUserPreviewHeight);
-        setXnYKordinats(apMoreUserInfo, 0, apUserPreviewHeight); // 0 so is allign with the parent AnchorPane
+        
+        
+        ////////createInfo(testTeacher); med Student stu
+        
         
         ivUser = new ImageView();
         ivUser.setImage(new Image(defaultUserImageURL));
@@ -132,8 +138,10 @@ public class UserElement {
         System.out.println("");
         System.out.println(btnMaximize_TopAnchor);
         AnchorPane.setTopAnchor(btnMaximize, btnMaximize_TopAnchor);
+        createMoreInfoBox(testStudent);
 
         btnMaximize.setOnAction(new EventHandler<ActionEvent>() {
+            
             @Override
             public void handle(ActionEvent event) {
                 if (!previewMode) {
@@ -142,6 +150,7 @@ public class UserElement {
                     apUser.getChildren().add(apMoreUserInfo);
                     //add Diagram and Absence overview tha a place in the AnchorPane apMoreUserInfo
                     setAnchorPaneSize(apUser, apUserRealWidth, apUserRealHight);
+                    
                 } else {
                     previewMode = false;
                     btnMaximize.setText("Show More");
@@ -203,6 +212,53 @@ public class UserElement {
     {
         return null;
     }
+    
+    private void createMoreInfoBox(Student student)
+            
+    {
+       
+        
+        ivUser = new ImageView();
+        ivUser.setImage(new Image(defaultUserImageURL));
+        ivUser.setFitHeight(ivWitgh);
+        ivUser.setFitWidth(ivHight);
+        ivUser.setX(ivMarginH);
+        ivUser.setY(ivMarginV);
+
+        lblUserID = new Label("ID: " + userID);
+//        lblUserID.setStyle("-fx-text-fill:white");
+        setXnYKordinats(lblUserID, lblPreview_X, lblUserID_Y);
+
+        lblUserfullName = new Label("Name: " + userFullName);
+        setXnYKordinats(lblUserfullName, lblPreview_X, lblUserFullName_Y);
+
+        lblUserPhoneNr = new Label("Phone Nr: " + userPhoneNr);
+        setXnYKordinats(lblUserPhoneNr, lblPreview_X, lblUserPhoneNr_Y);
+
+        lblUserEmail = new Label("Email: " + userEmail);
+        setXnYKordinats(lblUserEmail, lblPreview_X, lblUserEmail_Y);
+
+        Cpr = new Label("Cpr" );//+ student.getCpr());
+        AnchorPane.setTopAnchor(Cpr, MoreLabelsToTop+ 30);
+        AnchorPane.setLeftAnchor(Cpr, leftLabelAncor);
+         
+         
+         adress = new Label("Adress ");//+ student.getAdresse());
+         AnchorPane.setTopAnchor(adress, MoreLabelsToTop + 60);
+         AnchorPane.setLeftAnchor(adress, leftLabelAncor);
+         
+        schoolClass = new Label("Class ");// + student.getStudenClasses());
+        AnchorPane.setTopAnchor(schoolClass, MoreLabelsToTop);
+        AnchorPane.setLeftAnchor(schoolClass, leftLabelAncor);
+        
+        apMoreUserInfo = new AnchorPane(); //pie);
+        setAnchorPaneSize(apMoreUserInfo, apUserRealWidth, apUserRealHight - apUserPreviewHeight);
+        setXnYKordinats(apMoreUserInfo, 0, apUserPreviewHeight); // 0 so is allign with the parent AnchorPane
+        apMoreUserInfo.getChildren().setAll(Cpr, adress, schoolClass);
+        
+        
+    }
+    
     
     
 }

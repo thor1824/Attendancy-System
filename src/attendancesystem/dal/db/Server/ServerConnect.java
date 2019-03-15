@@ -32,12 +32,12 @@ public class ServerConnect
         ds.setUser(databaseProperties.getProperty("User"));
         ds.setPassword(databaseProperties.getProperty("Password"));
     }
-    
+
     /**
      * Get the Connection object to the server
-     * 
+     *
      * @return
-     * @throws SQLServerException 
+     * @throws SQLServerException
      */
     public Connection getConnection() throws SQLServerException
     {

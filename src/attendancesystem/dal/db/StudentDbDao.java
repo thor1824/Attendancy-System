@@ -46,29 +46,29 @@ public class StudentDbDao implements StudentDAO {
         //return list
         
         //christian
-        List<Student> students = new ArrayList<>();
-        Connection con = server.getConnection();
-        Statement st = con.createStatement();
-        ResultSet rs = st.executeQuery("SELECT * FROM [Atendens].[dbo].[Student]");
-        
-        while (rs.next()) {
-            int userId = rs.getInt("UserID");
-            int Stuid = rs.getInt("StuID");
-            String StuLName = rs.getNString("StuLName");
-            String StuFName = rs.getNString("StuFName");
-            String PhoneNumber = rs.getNString("Phone");
-            String Email= rs.getNString("Email");
-            String Address = rs.getNString("Address");
-            String Zip = rs.getNString("ZipCode");
-            String picURL = rs.getNString("StuPicURL");
+//        List<Student> students = new ArrayList<>();
+//        Connection con = server.getConnection();
+//        Statement st = con.createStatement();
+//        ResultSet rs = st.executeQuery("SELECT * FROM [Atendens].[dbo].[Student]");
+//        
+//        while (rs.next()) {
+//            int userId = rs.getInt("UserID");
+//            int Stuid = rs.getInt("StuID");
+//            String StuLName = rs.getNString("StuLName");
+//            String StuFName = rs.getNString("StuFName");
+//            String PhoneNumber = rs.getNString("Phone");
+//            String Email= rs.getNString("Email");
+//            String Address = rs.getNString("Address");
+//            String Zip = rs.getNString("ZipCode");
+//            String picURL = rs.getNString("StuPicURL");
             
             
 
             
             
-            Student student = new Student(userId, StuFName, StuLName, Email, PhoneNumber, Zip, Address, Zip);
+            //Student student = new Student(userId, StuFName, StuLName, Email, PhoneNumber, Zip, Address, Zip);
 
-            students.add(student);
+           // students.add(student);
 
         }
 
