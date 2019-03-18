@@ -27,20 +27,13 @@ import javafx.scene.paint.Paint;
  *
  * @author Thorbjørn Schultz Damkjær
  */
-public class UserElement {
+public class UserElement
+{
 
-    private Student testStudent;
-    private Teacher testTeacher;
-    private String userID;
-    private String userFullName;
-    private String userPhoneNr;
-    private String userEmail;
     private String defaultUserImageURL = "Resources/Images/deafultUserImage.png";
     private boolean previewMode = false;
     private int apUserPreviewHeight = 180;
-    private int apUserPreviewWidth = 600;
     private int apUserRealHight = 600;
-    private int apUserRealWidth = 600;
     private int ivMarginH = 15;
     private int ivMarginV = 15;
     private int ivWitgh = 150;
@@ -68,116 +61,97 @@ public class UserElement {
     private double MoreLabelsToTop = 6.0;
     private AnchorPane apUser;
     private AnchorPane apMoreUserInfo;
-    private ImageView ivUser;
-    private Label lblUserID;
-    private Label lblUserfullName;
-    private Label lblUserPhoneNr;
-    private Label lblUserEmail;
-    private JFXButton btnMaximize;
-    private Label Cpr;
-    private Label adress;
-    private Label StudentID;
-    private Label schoolClass;
-    
-   // User user;
-    
-    
 
-    public UserElement(String userFullName, String userID, String userPhoneNr, String userEmail) {
-        this.userFullName = userFullName;
-        this.userID = userID;
-        this.userPhoneNr = userPhoneNr;
-        this.userEmail = userEmail;
-        apUser = new AnchorPane();
-        
+    public UserElement(Student student)
+    {
+        //Setup UserElement
+        this.apUser = new AnchorPane();
+        apUser.setStyle("-fx-background-color:#e6e6e6");
+
+        //Create and add shadowEffect
         DropShadow ds1 = new DropShadow();
         ds1.setOffsetY(4.0f);
         ds1.setOffsetX(4.0f);
         ds1.setColor(new Color(0.183, 0.183, 0.149, 1.0));
-        
-        apUser.setStyle("-fx-background-color:#e6e6e6");
         apUser.setEffect(ds1);
-        
-        setAnchorPaneSize(apUser, apUserPreviewWidth, apUserPreviewHeight);
-        
-        
-        
-        
-        ////////createInfo(testTeacher); med Student stu
-        
-        
-        ivUser = new ImageView();
-        ivUser.setImage(new Image(defaultUserImageURL));
+
+        setAnchorPaneHeight(apUser, apUserPreviewHeight);
+
+        //setup User Image
+        ImageView ivUser = new ImageView();
+        try
+        {
+            ivUser.setImage(new Image(student.getPicUrl()));
+        } catch (Exception e)
+        {
+            ivUser.setImage(new Image(defaultUserImageURL));
+        }
         ivUser.setFitHeight(ivWitgh);
         ivUser.setFitWidth(ivHight);
         ivUser.setX(ivMarginH);
         ivUser.setY(ivMarginV);
 
-        lblUserID = new Label("ID: " + userID);
+        //create and adds Info Labels for the preview mode
+        Label lblUserID = new Label("ID: " + student.getUserID());
 //        lblUserID.setStyle("-fx-text-fill:white");
         setXnYKordinats(lblUserID, lblPreview_X, lblUserID_Y);
 
-        lblUserfullName = new Label("Name: " + userFullName);
+        Label lblUserfullName = new Label("Name: " + student.getFullName());
         setXnYKordinats(lblUserfullName, lblPreview_X, lblUserFullName_Y);
 
-        lblUserPhoneNr = new Label("Phone Nr: " + userPhoneNr);
+        Label lblUserPhoneNr = new Label("Phone Nr: " + student.getPhoneNr());
         setXnYKordinats(lblUserPhoneNr, lblPreview_X, lblUserPhoneNr_Y);
 
-        lblUserEmail = new Label("Email: " + userEmail);
+        Label lblUserEmail = new Label("Email: " + student.getEmail());
         setXnYKordinats(lblUserEmail, lblPreview_X, lblUserEmail_Y);
 
-        btnMaximize = new JFXButton("Show More");
+        //creates and adds the button to maximice det userElement
+        JFXButton btnMaximize = new JFXButton("Show More");
         btnMaximize.setMaxSize(btnMaximizeWidth, btnMaximizeHeight);
         btnMaximize.setMinSize(btnMaximizeWidth, btnMaximizeHeight);
         btnMaximize.setPrefSize(btnMaximizeWidth, btnMaximizeHeight);
         btnMaximize.setStyle("-fx-background-color:#4d79ff");
         btnMaximize.setTextFill(new Color(1, 1, 1, 1.0));
-        
-
         AnchorPane.setRightAnchor(btnMaximize, btnMaximize_RightAnchor);
-        System.out.println("");
-        System.out.println(btnMaximize_TopAnchor);
         AnchorPane.setTopAnchor(btnMaximize, btnMaximize_TopAnchor);
-        createMoreInfoBox(testStudent);
 
-        btnMaximize.setOnAction(new EventHandler<ActionEvent>() {
-            
+        createMoreInfoBox(student);
+
+        //creates the button action to expand and collapses the UserElement
+        btnMaximize.setOnAction(new EventHandler<ActionEvent>()
+        {
+
             @Override
-            public void handle(ActionEvent event) {
-                if (!previewMode) {
+            public void handle(ActionEvent event)
+            {
+                if (!previewMode)
+                {
                     previewMode = true;
                     btnMaximize.setText("Show Less");
                     apUser.getChildren().add(apMoreUserInfo);
                     //add Diagram and Absence overview tha a place in the AnchorPane apMoreUserInfo
-                    setAnchorPaneSize(apUser, apUserRealWidth, apUserRealHight);
-                    
-                } else {
+                    setAnchorPaneHeight(apUser, apUserRealHight);
+
+                } else
+                {
                     previewMode = false;
                     btnMaximize.setText("Show More");
                     apUser.getChildren().remove(apMoreUserInfo);
-                    setAnchorPaneSize(apUser, apUserPreviewWidth, apUserPreviewHeight);
+                    setAnchorPaneHeight(apUser, apUserPreviewHeight);
                 }
             }
         });
 
-        setXnYKordinats(btnMaximize, btnMaximize_TopAnchor, btnMaximize_RightAnchor);
-
         apUser.getChildren().addAll(lblUserfullName, lblUserID, lblUserEmail, lblUserPhoneNr, ivUser, btnMaximize);
     }
 
-    public AnchorPane getUserPane() {
+    public AnchorPane getUserPane()
+    {
         return apUser;
     }
 
-    private void setUserImage(Image image) {
-        try {
-            ivUser.setImage(image);
-        } catch (Exception e) {
-            System.out.println("User: " + userFullName + " Has no Picture Yet");
-        }
-    }
-
-    private void setAnchorPaneSize(AnchorPane ap, double width, double height) {
+    private void setAnchorPaneHeight(AnchorPane ap, double height)
+    {
         ap.setMinHeight(height);
         ap.setPrefHeight(height);
         ap.setMaxHeight(height);
@@ -186,79 +160,34 @@ public class UserElement {
 //        ap.setPrefSize(width, height);
     }
 
-    private void setXnYKordinats(Node node, double X, double Y) {
+    private void setXnYKordinats(Node node, double X, double Y)
+    {
         node.setLayoutX(X);
         node.setLayoutY(Y);
     }
-    
-    public AnchorPane createInfo(User user)
-    {
-        if (user.getClass().equals(testStudent.getClass()))
-        {
-            return createStudentInfo(null);
-        }
-        if(user.getClass().equals(testTeacher.getClass()))
-        {
-            return createTeacherInfo(null);
-        }
-        else return null;
-    }
-    
-    private AnchorPane createStudentInfo(Student student)
-    {
-        return null;
-    }
-    private AnchorPane createTeacherInfo(Teacher teacher)
-    {
-        return null;
-    }
-    
+
     private void createMoreInfoBox(Student student)
-            
     {
-       
+
+        Label cpr = new Label("Cpr: " + student.getCpr());
+        Label adress = new Label("Adress: " + student.getAdresse());
+        Label schoolClass = new Label("Class: " + student.getSchoolClass());
         
-        ivUser = new ImageView();
-        ivUser.setImage(new Image(defaultUserImageURL));
-        ivUser.setFitHeight(ivWitgh);
-        ivUser.setFitWidth(ivHight);
-        ivUser.setX(ivMarginH);
-        ivUser.setY(ivMarginV);
-
-        lblUserID = new Label("ID: " + userID);
-//        lblUserID.setStyle("-fx-text-fill:white");
-        setXnYKordinats(lblUserID, lblPreview_X, lblUserID_Y);
-
-        lblUserfullName = new Label("Name: " + userFullName);
-        setXnYKordinats(lblUserfullName, lblPreview_X, lblUserFullName_Y);
-
-        lblUserPhoneNr = new Label("Phone Nr: " + userPhoneNr);
-        setXnYKordinats(lblUserPhoneNr, lblPreview_X, lblUserPhoneNr_Y);
-
-        lblUserEmail = new Label("Email: " + userEmail);
-        setXnYKordinats(lblUserEmail, lblPreview_X, lblUserEmail_Y);
-
-        Cpr = new Label("Cpr" );//+ student.getCpr());
-        AnchorPane.setTopAnchor(Cpr, MoreLabelsToTop+ 30);
-        AnchorPane.setLeftAnchor(Cpr, leftLabelAncor);
-         
-         
-         adress = new Label("Adress ");//+ student.getAdresse());
-         AnchorPane.setTopAnchor(adress, MoreLabelsToTop + 60);
-         AnchorPane.setLeftAnchor(adress, leftLabelAncor);
-         
-        schoolClass = new Label("Class ");// + student.getStudenClasses());
+        
+        apMoreUserInfo = new AnchorPane(); //pie);
+        setAnchorPaneHeight(apMoreUserInfo, apUserRealHight - apUserPreviewHeight);
+        setXnYKordinats(apMoreUserInfo, 0, apUserPreviewHeight); // 0 so is allign with the parent AnchorPane
+        apMoreUserInfo.getChildren().addAll(cpr, adress, schoolClass);
         AnchorPane.setTopAnchor(schoolClass, MoreLabelsToTop);
         AnchorPane.setLeftAnchor(schoolClass, leftLabelAncor);
         
-        apMoreUserInfo = new AnchorPane(); //pie);
-        setAnchorPaneSize(apMoreUserInfo, apUserRealWidth, apUserRealHight - apUserPreviewHeight);
-        setXnYKordinats(apMoreUserInfo, 0, apUserPreviewHeight); // 0 so is allign with the parent AnchorPane
-        apMoreUserInfo.getChildren().setAll(Cpr, adress, schoolClass);
+        AnchorPane.setTopAnchor(adress, MoreLabelsToTop + 60);
+        AnchorPane.setLeftAnchor(adress, leftLabelAncor);
         
+        AnchorPane.setTopAnchor(cpr, MoreLabelsToTop + 30);
+        AnchorPane.setLeftAnchor(cpr, leftLabelAncor);
         
+
     }
-    
-    
-    
+
 }

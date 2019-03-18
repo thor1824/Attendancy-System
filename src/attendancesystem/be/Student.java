@@ -5,73 +5,40 @@
  */
 package attendancesystem.be;
 
-import javafx.beans.property.StringProperty;
-
 /**
  *
  * @author Nijas Hansen
  */
 public class Student extends User{
 
-    private StringProperty schoolClass;
-    private String fullName;
-    private String studentID;
-    private String LastName;
-    private String FirstName;
-    private String email;
-    private String phoneNr;
-    private String cpr;
-    private String Adress;
-    private String picUrl;
+    private String schoolClass;
+   
 
 
-    public Student(int userID, String firstName, String lastName, String email, String phoneNr, String cpr, String Adresse, String zipCode, String studentID, StringProperty schoolClass)
+    public Student(int StuID, String firstName, String lastName, String email, String phoneNr, String cpr, String Adresse, String zipCode, String schoolClass, String picUrl)
     {
-        super(userID, firstName, lastName, email, phoneNr, cpr, User.CLEARANCE_STUDENT, Adresse, zipCode);
+        super(StuID, firstName, lastName, email, phoneNr, cpr, User.CLEARANCE_STUDENT, Adresse, zipCode, picUrl);
         this.schoolClass = schoolClass;
-        this.fullName = fullName;
-        this.studentID = studentID;
-        this.LastName = LastName;
-        this.FirstName = FirstName;
-        this.email = email;
-        this.phoneNr = phoneNr;
-        this.cpr = cpr;
-        this.Adress = Adress;
+        
         
     }
 
-
-
-
-
-    public String getStudentID(){
-        return studentID;
-    }
-    
-    public StringProperty getStudenClasses(){
+    public String getSchoolClass()
+    {
         return schoolClass;
     }
 
-
-    public String getPicUrl()
+    public void setSchoolClass(String schoolClass)
     {
-        return picUrl;
+        this.schoolClass = schoolClass;
     }
 
-    public void setPicUrl(String picUrl)
+    @Override
+    public String toString()
     {
-        this.picUrl = picUrl;
+        return "Student{" + super.toString() + ", schoolClass=" + schoolClass + '}';
     }
 
+    
 
-
-
-
-
-
-
-
-    public String getStudentName(){
-        return FirstName + LastName;
-    }
 }

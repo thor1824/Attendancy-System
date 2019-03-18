@@ -21,6 +21,7 @@ import attendancesystem.dal.Mock.AbsenceMockDAO;
 import attendancesystem.dal.Mock.StudentMockDAO;
 import attendancesystem.dal.Mock.TeacherMockDAO;
 import attendancesystem.dal.Mock.UserMockDAO;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -37,10 +38,7 @@ public class BLLManager {
     private StudentDAO studentDAO;
     private AbsenceDAO absenceDAO;
     private UserDAO userDao;
-    private TeacherMockDAO teachDAO;
-    private StudentMockDAO studentDAO;
-    private AbsenceMockDAO absenceDAO;
-    private UserMockDAO userDao;
+    
 
     public BLLManager() throws IOException {
       userDao = new UserMockDAO();
@@ -73,7 +71,7 @@ public class BLLManager {
         }
     }
 
-    public List<Student> getAllStudents() throws SQLException {
+    public List<Student> getAllStudents() throws SQLException, SQLServerException, IOException {
         return studentDAO.getAllStudents();
     }
 

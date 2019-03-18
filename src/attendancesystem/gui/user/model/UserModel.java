@@ -9,6 +9,7 @@ import attendancesystem.be.Student;
 import attendancesystem.be.UndocumentetModulAbsence;
 import attendancesystem.be.User;
 import attendancesystem.bll.BLLManager;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -55,7 +56,7 @@ public class UserModel {
         return bllMan.getUndocumentetAbsence(user);
     }
 
-    public List<Student> getAllStudents() throws SQLException {
+    public List<Student> getAllStudents() throws SQLException, SQLServerException, IOException {
         return bllMan.getAllStudents();
     }
     

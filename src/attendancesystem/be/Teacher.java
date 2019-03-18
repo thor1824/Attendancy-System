@@ -5,19 +5,15 @@
  */
 package attendancesystem.be;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Nijas Hansen
  */
 public class Teacher extends User{
-
-    ArrayList<String> subject;
-
-    public Teacher(int userID, String firstName, String lastName, String email, String phoneNr, String cpr, int clearanceTier, String Adresse, String zipCode)
+    
+    public Teacher(int teachID, String firstName, String lastName, String email, String phoneNr, String cpr, int clearanceTier, String Adresse, String zipCode, String picUrl)
     {
-        super(userID, firstName, lastName, email, phoneNr, cpr, clearanceTier, Adresse, zipCode);
+        super(teachID, firstName, lastName, email, phoneNr, cpr, clearanceTier, Adresse, zipCode, picUrl);
     }
     
     

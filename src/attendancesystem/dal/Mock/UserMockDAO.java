@@ -21,7 +21,7 @@ public class UserMockDAO implements UserDAO
     public UserMockDAO()
     {
         users = new HashMap<>();
-        users.put("admin", new Teacher(1, "admin", "Peter Stegger", "Peter.Stegger@email.com", "2222222", "111111-1111", 0, "ribe", "6666"));
+        users.put("admin", new Teacher(1, "admin", "Peter Stegger", "Peter.Stegger@email.com", "2222222", "111111-1111", 0, "ribe", "6666", "pic"));
         
         
     }

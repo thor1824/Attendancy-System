@@ -8,6 +8,7 @@ package attendancesystem.gui.admin.model;
 import attendancesystem.be.Student;
 import attendancesystem.be.User;
 import attendancesystem.bll.BLLManager;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -28,7 +29,7 @@ public class AdminModel {
     
     
     
-    public List<Student> getAllStudents() throws SQLException {
+    public List<Student> getAllStudents() throws SQLException, SQLServerException, IOException {
         return bllMan.getAllStudents();
     }
    

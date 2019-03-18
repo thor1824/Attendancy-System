@@ -7,9 +7,10 @@ package attendancesystem.dal.Mock;
 
 import attendancesystem.dal.db.Server.ServerConnect;
 import attendancesystem.be.Student;
-import attendancesystem.be.User;
 import attendancesystem.dal.StudentDAO;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,26 +43,39 @@ public class StudentMockDAO implements StudentDAO{
 //        return students;
 //    }
 
+    
     @Override
-    public void createStudent(User user)
+    public List<Student> getStudentsFromClass(String className) throws SQLServerException, SQLException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void deleteStudent(User user)
+    public boolean createStudent(Student user, String username, String password) throws SQLServerException, SQLException, FileNotFoundException, IOException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void getStudent(User user)
+    public boolean deleteStudent(Student user) throws SQLServerException, SQLException, FileNotFoundException, IOException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void updateStudent(User user)
+    public Student getStudent(int id) throws SQLServerException, SQLException, FileNotFoundException, IOException
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean updateStudent(Student user) throws SQLServerException, SQLException, FileNotFoundException, IOException
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean setUserImage(Student user, String picURL) throws SQLServerException, SQLException, FileNotFoundException, IOException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

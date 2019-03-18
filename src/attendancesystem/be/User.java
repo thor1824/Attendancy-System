@@ -18,27 +18,41 @@ public abstract class User
     private int userID;
     private String firstName;
     private String lastName;
-    private String fullName = firstName + " " + lastName;
+    private String fullName;
     private String email;
     private String phoneNr;
     private String cpr;
     private int clearanceTier;
     private String Adresse;
     private String zipCode;
+    private String picUrl;
 
-    public User(int userID, String firstName, String lastName, String email, String phoneNr, String cpr, int clearanceTier, String Adresse, String zipCode)
+    public User(int userID, String firstName, String lastName, String email, String phoneNr, String cpr, int clearanceTier, String Adresse, String zipCode, String picUrl)
     {
         this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.fullName = firstName + " " + lastName;
         this.email = email;
         this.phoneNr = phoneNr;
         this.cpr = cpr;
         this.clearanceTier = clearanceTier;
         this.Adresse = Adresse;
         this.zipCode = zipCode;
+        this.picUrl = picUrl;
     }
 
+    public String getPicUrl()
+    {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl)
+    {
+        this.picUrl = picUrl;
+    }
+    
+    
     public String getAdresse() {
         return Adresse;
     }
@@ -53,6 +67,11 @@ public abstract class User
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public void setUserID(int userID)
+    {
+        this.userID = userID;
     }
     
     
@@ -200,6 +219,13 @@ public abstract class User
         return userID;
     }
 
+    @Override
+    public String toString()
+    {
+        return "userID=" + userID + ", firstName=" + firstName + ", lastName=" + lastName + ", fullName=" + fullName + ", email=" + email + ", phoneNr=" + phoneNr + ", cpr=" + cpr + ", clearanceTier=" + clearanceTier + ", Adresse=" + Adresse + ", zipCode=" + zipCode + ", picUrl=" + picUrl;
+    }
+    
+    
     
     
     

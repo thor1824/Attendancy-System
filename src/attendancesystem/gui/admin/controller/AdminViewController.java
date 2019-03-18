@@ -5,6 +5,7 @@
  */
 package attendancesystem.gui.admin.controller;
 
+import attendancesystem.be.Student;
 import attendancesystem.be.User;
 import attendancesystem.gui.admin.model.AdminModel;
 import attendancesystem.gui.elements.UserElement;
@@ -56,10 +57,7 @@ public class AdminViewController implements Initializable {
     @FXML
     private JFXComboBox<?> combBoxSort;
 
-    UserElement user1 = new UserElement("Bo John", "10", "89898989", "Bo@email.com");
-    UserElement user2 = new UserElement("Jens John", "10", "11111111", "Jens@email.com");
-    UserElement user3 = new UserElement("Gert John", "10", "12345678", "Gert@email.com");
-
+    
     /**
      * Initializes the controller class.
      */
@@ -78,7 +76,7 @@ public class AdminViewController implements Initializable {
 
         //test ersattest med metode de gør med list<Student/user?>
         for (int i = 0; i <= 55; i++) {
-            UserElement user = new UserElement("Bo John " + i, "10", "89898989", "Bo@email.com");
+            UserElement user = new UserElement(new Student(i, "FName"+i, "Lname"+i, "email"+i, "phoneNo"+i, "Cpr"+i, "adress"+i, "zip"+i, "class"+i, "Resources/Images/deafultUserImage.png"));
             arr.add(user);
         }
         for (int i = 0; i <= maxLoad; i++) {
@@ -122,38 +120,32 @@ public class AdminViewController implements Initializable {
 
     @FXML
     private void btnAll(ActionEvent event) {
-        hbxUserOverview.getChildren().clear();
-        hbxUserOverview.getChildren().addAll(user1.getUserPane(), user2.getUserPane(), user3.getUserPane());
+        
     }
 
     @FXML
     private void btnAllMy(ActionEvent event) {
-        hbxUserOverview.getChildren().clear();
-        hbxUserOverview.getChildren().addAll(user1.getUserPane(), user2.getUserPane());
+        
     }
 
     @FXML
     private void btnClass(ActionEvent event) {
-        hbxUserOverview.getChildren().clear();
-        hbxUserOverview.getChildren().addAll(user2.getUserPane(), user1.getUserPane());
+        
     }
 
     @FXML
     private void asc(ActionEvent event) {
-        hbxUserOverview.getChildren().clear();
-        hbxUserOverview.getChildren().addAll(user1.getUserPane(), user2.getUserPane(), user3.getUserPane());
+        
     }
 
     @FXML
     private void desc(ActionEvent event) {
-        hbxUserOverview.getChildren().clear();
-        hbxUserOverview.getChildren().addAll(user3.getUserPane(), user2.getUserPane(), user1.getUserPane());
+        
     }
 
     @FXML
     private void cehch1(ActionEvent event) {
-        hbxUserOverview.getChildren().clear();
-        hbxUserOverview.getChildren().addAll(user1.getUserPane());
+        
     }
 
     public ArrayList comboBox() {

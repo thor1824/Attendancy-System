@@ -8,6 +8,7 @@ package attendancesystem.dal.db.Server;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.Properties;
@@ -20,9 +21,15 @@ public class ServerConnect
 {
 
     private static final String PROP_FILE = "src/attendancesystem/dal/db/Server/database.settings";
-    private SQLServerDataSource ds;
-
-    public ServerConnect() throws IOException
+    private static SQLServerDataSource ds;
+   
+    /**
+     * Get the Connection object to the server
+     *
+     * @return
+     * @throws SQLServerException
+     */
+    public static Connection getConnection() throws SQLServerException, FileNotFoundException, IOException
     {
         Properties databaseProperties = new Properties();
         databaseProperties.load(new FileInputStream(PROP_FILE));
@@ -31,16 +38,6 @@ public class ServerConnect
         ds.setDatabaseName(databaseProperties.getProperty("Database"));
         ds.setUser(databaseProperties.getProperty("User"));
         ds.setPassword(databaseProperties.getProperty("Password"));
-    }
-
-    /**
-     * Get the Connection object to the server
-     *
-     * @return
-     * @throws SQLServerException
-     */
-    public Connection getConnection() throws SQLServerException
-    {
         return ds.getConnection();
     }
 

@@ -5,13 +5,11 @@
  */
 package attendancesystem.main;
 
-import attendancesystem.bll.PasswordEncryptor;
 import attendancesystem.gui.admin.controller.LoginSceneController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
