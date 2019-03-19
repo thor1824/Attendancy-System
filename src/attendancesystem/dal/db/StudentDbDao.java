@@ -24,15 +24,8 @@ import java.util.List;
  * @author Nijas Hansen
  */
 public class StudentDbDao implements StudentDAO
-{
-
-    private static ServerConnect server;
-
-    public StudentDbDao() throws IOException
-    {
-
-    }
-
+{   
+    
     @Override
     public List<Student> getAllStudents() throws SQLServerException, SQLException, IOException
     {
@@ -74,10 +67,12 @@ public class StudentDbDao implements StudentDAO
     {
         String sqlSetLogin = "INSERT INTO [Atendens].[dbo].[Login] (Username, Password) "
                 + "VALUES (?, ?);";
+        
         String sqlSetStudent = "INSERT INTO [Atendens].[dbo].[Student] (UserID, StuLName, StuFName, ClassID, Phone, Email, Adress, ZipCode, Cpr) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        
         String sqlGetClass = "SELECT ClassID FROM [Atendens].[dbo].[Class] "
-                + "WHERE ClassName = '" + student.getSchoolClass()+ "' ;";
+                + "WHERE ClassName = ?;";
 
         Connection con = ServerConnect.getConnection(); //create connection
 
@@ -88,6 +83,8 @@ public class StudentDbDao implements StudentDAO
         if (psLogin.executeUpdate() != 0)
         {
             PreparedStatement psClass = con.prepareStatement(sqlGetClass);
+            psClass.setNString(1, student.getSchoolClass());
+            
             ResultSet rsClass = psClass.executeQuery();
             if (rsClass.next())
             {
@@ -132,83 +129,123 @@ public class StudentDbDao implements StudentDAO
     @Override
     public boolean deleteStudent(Student student) throws SQLServerException, IOException, SQLException
     {
-        String sql = "";
-        Connection con = ServerConnect.getConnection();
-        PreparedStatement ps = con.prepareStatement(sql);
-        //to do
-        //create connection
-        //create prepared Statement
-        //delete Student where userID =="input users ID"
-        //check if entry was deletet
-        //close connection
+        String sql = "DELETE FROM [Atendens].[dbo].[Student] WHERE StuID = ?;";
         
-        int lineAffected = ps.executeUpdate();
-        con.close();
+        Connection con = ServerConnect.getConnection(); //create connection
+        
+        PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement
+        ps.setInt(1, student.getUserID());
+        
+        int lineAffected = ps.executeUpdate();//delete Student where userID =="input users ID"
+        
+        con.close(); //close connection
+        
         return lineAffected != 0; //return true if deleted, false if not
     }
 
     @Override
     public Student getStudent(int id) throws SQLServerException, IOException, SQLException
     {
-        String sql = "";
+        String sql = "SELECT * FROM [Atendens].[dbo].[Student] "
+                + "JOIN [Atendens].[dbo].[Class] "
+                + "ON Student.ClassID = Class.ClassID "
+                + "WHERE Student.StuID = ?;";
         Connection con = ServerConnect.getConnection(); //create connection
         PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement
+        ps.setInt(1, id);
+        
         ResultSet rs = ps.executeQuery(); //get Student where userID =="input users ID"
-
         while (rs.next()) //does not enter if no student is found
         {
-
-            con.close();
-            return new Student(id, sql, sql, sql, sql, sql, sql, sql, sql, sql);
+            String fname = rs.getNString("StuFName");
+            String lname = rs.getNString("StuLName");
+            String email = rs.getNString("Email");
+            String phone = rs.getNString("Phone");
+            String cpr = rs.getNString("Cpr");
+            String adress = rs.getNString("Adress");
+            String zipCode = rs.getNString("ZipCode");
+            String sClass = rs.getNString("ClassName");
+            String picUrl = rs.getNString("StuPicUrl");
+            
+            con.close(); //close connection
+            return new Student(id, fname, lname, email, phone, cpr, adress, zipCode, sClass, picUrl); //retrun Student
         }
-        con.close();
+        con.close(); //close connection
 
-        //close connection
-        //retrun Student
-        return null;
+        
+        
+        return null; //no Student was found so return null
     }
 
     @Override
     public boolean updateStudent(Student student) throws SQLServerException, IOException, SQLException
     {
         String sql = "";
-        Connection con = ServerConnect.getConnection();
-        PreparedStatement ps = con.prepareStatement(sql);
+        Connection con = ServerConnect.getConnection(); //create connection
+        PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement
         //to do
-        //create connection
-        //create prepared Statement
-        //update Student where userID =="input users ID"
-        //check if entry was updated
-        //close connection
-        //retrun true if updated, false if not
-        int lineAffected = ps.executeUpdate();
-        con.close();
-        return lineAffected != 0; //return true if deleted, false if not
+        //sql and set values
+        
+        
+        
+        
+        
+        int lineAffected = ps.executeUpdate(); //update Student where userID =="input users ID"
+        con.close(); //close connection
+        return lineAffected != 0; //return true if Updated, false if not
     }
 
     @Override
     public List<Student> getStudentsFromClass(String className) throws SQLServerException, IOException, SQLException
     {
-        String sql = "";
+        String sql = "SELECT * FROM [Atendens].[dbo].[Student] "
+                + "JOIN [Atendens].[dbo].[Class] "
+                + "ON Student.ClassID = Class.ClassID "
+                + "WHERE Class.ClassName = ?;";
+        
         Connection con = ServerConnect.getConnection(); //create connection
         PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement
-
+        ps.setNString(1, className);
+        
         ArrayList<Student> students = new ArrayList<>();
-
-        ResultSet rs = ps.executeQuery();
-
-        while (rs.next())
+        
+        ResultSet rs = ps.executeQuery(); //get Students where CLassName = "input Class Name"
+        while (rs.next()) //does not enter if no student is found
         {
-
+            int id = rs.getInt("StuID");
+            String fname = rs.getNString("StuFName");
+            String lname = rs.getNString("StuLName");
+            String email = rs.getNString("Email");
+            String phone = rs.getNString("Phone");
+            String cpr = rs.getNString("Cpr");
+            String adress = rs.getNString("Adress");
+            String zipCode = rs.getNString("ZipCode");
+            String sClass = rs.getNString("ClassName");
+            String picUrl = rs.getNString("StuPicUrl");
+            
+            
+            students.add(new Student(id, fname, lname, email, phone, cpr, adress, zipCode, sClass, picUrl)); //add Student to list
         }
-        con.close();
-        return students;
+        con.close(); //close connection
+        return students; // return list if list is empty no Students was found
     }
 
     @Override
     public boolean setUserImage(Student user, String picURL) throws SQLServerException, SQLException, FileNotFoundException, IOException
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "INSERT INTO [Atendens].[dbo].[Student] (StuPicURL) "
+                + "VALUES (?)"
+                + "WHERE StuID = ?;";
+
+        Connection con = ServerConnect.getConnection(); //create connection
+
+        PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement for Login
+        ps.setNString(1, picURL);
+        ps.setInt(2, user.getUserID());
+        
+        int lineAffected = ps.executeUpdate();
+        con.close();
+        return lineAffected != 0;
     }
 
 }

@@ -6,6 +6,7 @@
 package attendancesystem.gui.user.model;
 
 import attendancesystem.be.Student;
+import attendancesystem.be.Teacher;
 import attendancesystem.be.UndocumentetModulAbsence;
 import attendancesystem.be.User;
 import attendancesystem.bll.BLLManager;
@@ -48,8 +49,10 @@ public class UserModel {
         return bllMan.getPieChart(user);
     }
 
-    public User handleLoginRequest(String username, String password) {
-        return bllMan.handleLoginRequest(username, password);
+    public Student handleLoginRequestStudent(String username, String password) throws IOException, SQLException {
+        
+            return bllMan.handleLoginRequestStudent(username, password);
+        
     }
 
     public ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence(User user) {

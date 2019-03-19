@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package attendancesystem.dal;
+package attendancesystem.dal.db;
 
 import attendancesystem.bll.PasswordEncryptor;
 import attendancesystem.dal.db.Server.ServerConnect;

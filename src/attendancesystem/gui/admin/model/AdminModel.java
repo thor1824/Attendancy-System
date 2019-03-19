@@ -33,9 +33,9 @@ public class AdminModel {
         return bllMan.getAllStudents();
     }
    
-    public User handleLoginRequestMock(String username, String password)
+    public User handleLoginRequestTeacher(String username, String password) throws IOException, SQLException
     {
-        return bllMan.handleLoginRequest(username, password);
+        return bllMan.handleLoginRequestTeacher(username, password);
     }
     
 //    public User handleLoginRequestReal(String username, String password)

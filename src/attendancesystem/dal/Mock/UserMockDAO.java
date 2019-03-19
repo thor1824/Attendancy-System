@@ -6,16 +6,20 @@
 package attendancesystem.dal.Mock;
 
 
+import attendancesystem.be.Student;
 import attendancesystem.be.Teacher;
 import attendancesystem.be.User;
-import attendancesystem.dal.UserDAO;
+import attendancesystem.dal.LoginDAO;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 /**
  *
  * @author Thorbjørn Schultz Damkjær
  */
-public class UserMockDAO implements UserDAO
+public class UserMockDAO implements LoginDAO
 {
     public HashMap<String, User> users; 
     public UserMockDAO()
@@ -26,7 +30,7 @@ public class UserMockDAO implements UserDAO
         
     }
     
-    @Override
+    
     public User handleLoginRequest(String username, String password)
     {
         System.out.println("hej");
@@ -48,6 +52,16 @@ public class UserMockDAO implements UserDAO
        {
            return null;
        }
+    }
+
+    @Override
+    public Student handleLoginRequestStudent(String username, String encrypytedPassword) throws SQLServerException, IOException, SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Teacher handleLoginRequestTeacher(String username, String encrypytedPassword) throws SQLServerException, IOException, SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -74,8 +74,8 @@ public class LoginSceneController implements Initializable
 
         try
         {
-            System.out.println("ho");
-            User user = model.handleLoginRequestMock(username, password);
+            
+            User user = model.handleLoginRequestTeacher(username, password);
             if (user != null)
             {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(MAIN_FXML));
@@ -95,7 +95,7 @@ public class LoginSceneController implements Initializable
                 lblLogMessage.setText("WRONG PASSWORD OR USERNAME!!");
             }
 
-        } catch (NullPointerException e)
+        } catch (Exception e)
         {
             e.printStackTrace();
         }

@@ -5,7 +5,7 @@
  */
 package attendancesystem.gui.user.controller;
 
-import attendancesystem.be.User;
+import attendancesystem.be.Student;
 import attendancesystem.gui.user.model.UserModel;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -128,7 +128,7 @@ public class UserViewController implements Initializable
 
         try
         {
-            User user = model.handleLoginRequest(txtUserName.getText(), txtPassword.getText());
+            Student user = model.handleLoginRequestStudent(txtUserName.getText(), txtPassword.getText());
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(MAIN_FXML));
             
             Parent root = loader.load();
@@ -142,7 +142,7 @@ public class UserViewController implements Initializable
             controller.setStage(stage);
             controller.setUser(user);
             stage.show();
-        } catch (NullPointerException e)
+        } catch (Exception e)
         {
             lblLoginMessage.setStyle("-fx-text-fill:red");
             lblLoginMessage.setText("WRONG PASSWORD!!");
