@@ -7,20 +7,16 @@ package attendancesystem.bll;
 
 import attendancesystem.be.User;
 import attendancesystem.be.Student;
+import attendancesystem.be.Teacher;
 import attendancesystem.be.UndocumentetModulAbsence;
 import attendancesystem.dal.AbsenceDAO;
-import attendancesystem.dal.Mock.UserMockDAO;
 import attendancesystem.dal.StudentDAO;
 import attendancesystem.dal.TeacherDAO;
-import attendancesystem.dal.UserDAO;
-import attendancesystem.dal.db.AbsenceDbDao;
+import attendancesystem.dal.LoginDAO;
 import attendancesystem.dal.db.StudentDbDao;
-import attendancesystem.dal.db.TeacherDbDao;
-import attendancesystem.dal.db.UserDbDao;
 import attendancesystem.dal.Mock.AbsenceMockDAO;
-import attendancesystem.dal.Mock.StudentMockDAO;
 import attendancesystem.dal.Mock.TeacherMockDAO;
-import attendancesystem.dal.Mock.UserMockDAO;
+import attendancesystem.dal.db.LoginDbDao;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -37,28 +33,33 @@ public class BLLManager {
     private TeacherDAO teachDAO;
     private StudentDAO studentDAO;
     private AbsenceDAO absenceDAO;
-    private UserDAO userDao;
-    
+    private LoginDAO loginDao;
+
 
     public BLLManager() throws IOException {
-      userDao = new UserMockDAO();
+      loginDao = new LoginDbDao();
       teachDAO = new TeacherMockDAO();
       absenceDAO = new AbsenceMockDAO();
-      studentDAO = new StudentMockDAO();
-        
+      studentDAO = new StudentDbDao();
+
     }
 
     public List<Student> getAllStudents() throws SQLException, SQLServerException, IOException {
         return studentDAO.getAllStudents();
     }
 
-    public User handleLoginRequest(String username, String password) {
-        if (username.toLowerCase().contains("admin")) {
-            return userDao.handleLoginRequest("admin", "admin");
-        }
+    public Teacher handleLoginRequestTeacher(String username, String password) throws IOException, SQLException {
+
         String hashedPassword = PasswordEncryptor.encryptPassword(password);
 
-        return userDao.handleLoginRequest(username, hashedPassword);
+        return loginDao.handleLoginRequestTeacher(username, hashedPassword);
+    }
+
+    public Student handleLoginRequestStudent(String username, String password) throws IOException, SQLException {
+
+        String hashedPassword = PasswordEncryptor.encryptPassword(password);
+
+        return loginDao.handleLoginRequestStudent(username, hashedPassword);
     }
 
     public ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence(User user) {
@@ -68,7 +69,7 @@ public class BLLManager {
     public javafx.scene.chart.PieChart getPieChart(User user) {
         return PieChart.buildPieChard(user, studentDAO);
     }
-    
+
     public String sendToDb(String value){
         return value;
     }
