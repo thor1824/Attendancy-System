@@ -10,6 +10,7 @@ import attendancesystem.be.UndocumentetModulAbsence;
 import attendancesystem.be.User;
 import attendancesystem.gui.elements.AbsencentModulElement;
 import attendancesystem.gui.user.model.UserModel;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -64,6 +65,10 @@ public class StudentMainController implements Initializable {
     private VBox vBoxUndokumentet;
 
     public ArrayList<Student> liststudent;
+    @FXML
+    private AnchorPane apReason;
+    @FXML
+    private JFXTextField txtfldReason;
 
     /**
      * Initializes the controller class.
@@ -95,7 +100,7 @@ public class StudentMainController implements Initializable {
     private void generateAbsenceElements() {
         undocumentetAbsences = new ArrayList<>();
         undocumentetAbsences = userModel.getUndocumentetAbsence(user);
-        AbsencentModulElement abModEle = new AbsencentModulElement();
+        
 //        for (UndocumentetModulAbsence undocumentetModulAbsence : undocumentetAbsences) {
 //            System.out.println("hej");
 //            abModEle.generateAbsenceElement(undocumentetModulAbsence, vBoxUndokumentet);
@@ -123,20 +128,30 @@ public class StudentMainController implements Initializable {
     public void addTohMap() throws SQLException {
 
         ArrayList<UndocumentetModulAbsence> list = userModel.getUndocumentetAbsence(null);
+        int i = 0;
         
-        for (int i = 0; i < list.size(); i++) {
-            Label modul = new Label(list.get(i).getModul());
-            Label date = new Label(list.get(i).getDate());
-            Label subject = new Label(list.get(i).getSubject());
-            Label absHours = new Label(list.get(i).getAbsenceHours());
-            Label absProcent = new Label(list.get(i).getAbsenceProcent());
+        System.out.println(list);
+        
+        for (UndocumentetModulAbsence undocumentetModulAbsence : list) {
+            AbsencentModulElement ame = new AbsencentModulElement(undocumentetModulAbsence, vBoxUndokumentet, userModel);
+            
+            vBoxUndokumentet.getChildren().add(ame.getAnchorPane());
             
             
-            grid.add(modul, 0, i + 1);
-            grid.add(date, 1, i + 1);
-            grid.add(subject, 2, i + 1);
-            grid.add(absHours, 3, i + 1);
-            grid.add(absProcent, 4, i + 1);
+            
+//            Label modul = new Label(undocumentetModulAbsence.getModul());
+//            Label date = new Label(undocumentetModulAbsence.getDate());
+//            Label subject = new Label(undocumentetModulAbsence.getSubject());
+//            Label absHours = new Label(undocumentetModulAbsence.getAbsenceHours());
+//            Label absProcent = new Label(undocumentetModulAbsence.getAbsenceProcent());
+//            
+//            
+//            grid.add(modul, 0, i + 1);
+//            grid.add(date, 1, i + 1);
+//            grid.add(subject, 2, i + 1);
+//            grid.add(absHours, 3, i + 1);
+//            grid.add(absProcent, 4, i + 1);
+//            i++;
         }
     }
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="apReason" prefHeight="272.0" prefWidth="200.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendancesystem.gui.user.controller.ReasonForAbsenceController">
+   <children>
+      <JFXTextField fx:id="txtfldReason" layoutX="14.0" layoutY="44.0" prefHeight="246.0" prefWidth="246.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="35.0" />
+      <Label layoutX="14.0" layoutY="14.0" text="Write your reason for absence" />
+      <JFXButton fx:id="btnCancel" layoutX="138.0" layoutY="246.0" onMouseClicked="#handleCancelBtn" text="Cancel" AnchorPane.bottomAnchor="4.399999999999999" AnchorPane.rightAnchor="10.0" />
+      <JFXButton fx:id="btnSend" layoutX="94.0" layoutY="246.0" onMouseClicked="#handleSendBtn" text="Send" AnchorPane.bottomAnchor="4.39999999999997" AnchorPane.rightAnchor="66.0" />
+   </children>
+</AnchorPane>

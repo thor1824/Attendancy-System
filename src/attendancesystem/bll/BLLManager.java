@@ -45,30 +45,7 @@ public class BLLManager {
       teachDAO = new TeacherMockDAO();
       absenceDAO = new AbsenceMockDAO();
       studentDAO = new StudentMockDAO();
-        try {
-            userDao = new UserMockDAO();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            teachDAO = new TeacherDbDao();
-        } catch (IOException iOException) {
-            iOException.printStackTrace();
-        }
-
-
-        try {
-            absenceDAO = new AbsenceDbDao();
-        } catch (IOException iOException) {
-            iOException.printStackTrace();
-        }
-
-        try {
-            studentDAO = new StudentDbDao();
-        } catch (IOException iOException) {
-            iOException.printStackTrace();
-        }
+        
     }
 
     public List<Student> getAllStudents() throws SQLException, SQLServerException, IOException {
@@ -90,5 +67,9 @@ public class BLLManager {
 
     public javafx.scene.chart.PieChart getPieChart(User user) {
         return PieChart.buildPieChard(user, studentDAO);
+    }
+    
+    public String sendToDb(String value){
+        return value;
     }
 }
