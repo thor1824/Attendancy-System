@@ -13,7 +13,6 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,7 +67,7 @@ public class LoginSceneController implements Initializable
     }
 
     @FXML
-    private void handleLoginButton(MouseEvent event) throws IOException, SQLException, SQLException
+    private void handleLoginButton(MouseEvent event) throws IOException
     {
         String username = txtfldTeacherID.getText();
         String password = txtfldPassword.getText();
