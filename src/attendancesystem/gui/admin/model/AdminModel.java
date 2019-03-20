@@ -12,6 +12,8 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -35,7 +37,14 @@ public class AdminModel {
    
     public User handleLoginRequestMock(String username, String password)
     {
-        return bllMan.handleLoginRequest(username, password);
+        try {
+            return bllMan.handleLoginRequestTeacher(username, password);
+        } catch (IOException ex) {
+            Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     
 //    public User handleLoginRequestReal(String username, String password)

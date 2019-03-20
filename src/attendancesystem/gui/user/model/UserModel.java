@@ -49,7 +49,14 @@ public class UserModel {
     }
 
     public User handleLoginRequest(String username, String password) {
-        return bllMan.handleLoginRequest(username, password);
+        try {
+            return bllMan.handleLoginRequestStudent(username, password);
+        } catch (IOException ex) {
+            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence(User user) {
