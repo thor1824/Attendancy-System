@@ -25,6 +25,7 @@ public class ReasonForAbsenceController implements Initializable {
     
     private UserModel userModel;
     private Stage stage;
+    private String explanation;
 
     @FXML
     private AnchorPane apReason;
@@ -42,9 +43,12 @@ public class ReasonForAbsenceController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
-    
 
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
+    }
+    
+    
     public void setModel(UserModel userModel) {
         this.userModel = userModel;
 

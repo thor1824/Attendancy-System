@@ -58,7 +58,7 @@ public class AbsenceMockDAO implements AbsenceDAO{
     }
 
     @Override
-    public void updateAbsens()
+    public boolean updateAbsens()
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

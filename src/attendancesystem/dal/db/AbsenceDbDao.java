@@ -10,6 +10,8 @@ import attendancesystem.dal.AbsenceDAO;
 import attendancesystem.be.UndocumentetModulAbsence;
 import attendancesystem.be.User;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 /**
@@ -81,8 +83,24 @@ public class AbsenceDbDao implements AbsenceDAO
     }
 
     @Override
-    public void updateAbsens()
+    public boolean updateAbsens()
     {
+//        String sql = "UPDATE [Atendens].[dbo].[Absense] "
+//                + "SET ";
+//
+//        Connection con = ServerConnect.getConnection(); //create connection
+//
+//        PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement
+//        
+//        ps.setInt(0, 0);
+//        ps.setNString(0, sql);
+//        
+//        int linesAffected = ps.executeUpdate();
+//        
+//        con.close();
+//        
+//        return linesAffected != 0;
+        
         //to do
         //create connection
         //create prepared Statement
@@ -90,6 +108,8 @@ public class AbsenceDbDao implements AbsenceDAO
         //check if entry was updatet
         //close connection
         //retrun true if updated false if not
+        
+        return true;
     }
 
     @Override

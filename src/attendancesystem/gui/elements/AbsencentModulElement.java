@@ -75,6 +75,7 @@ public class AbsencentModulElement {
             String reason = "";
             if (comBox.getValue() == "Other") {
                 try {
+                    String explan = "";
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/attendancesystem/gui/user/view/ReasonForAbsence.fxml"));
                     
                     Parent root = loader.load();
@@ -87,8 +88,10 @@ public class AbsencentModulElement {
                     
                     controller.setModel(model);
                     controller.setStage(stage);
+                    controller.setExplanation(explan);
                     
                     stage.showAndWait();
+                    
                 } catch (IOException ex) {
                     Logger.getLogger(AbsencentModulElement.class.getName()).log(Level.SEVERE, null, ex);
                 }

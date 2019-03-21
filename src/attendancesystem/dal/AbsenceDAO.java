@@ -26,6 +26,6 @@ public interface AbsenceDAO
 
     ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence(User user);
 
-    void updateAbsens();
+    boolean updateAbsens() throws Exception;
     
 }
