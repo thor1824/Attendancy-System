@@ -6,15 +6,13 @@
 package attendancesystem.gui.user.controller;
 
 import attendancesystem.be.Student;
-import attendancesystem.be.UndocumentetModulAbsence;
-import attendancesystem.be.User;
+import attendancesystem.be.Absence;
 import attendancesystem.gui.elements.AbsencentModulElement;
 import attendancesystem.gui.user.model.UserModel;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,10 +32,10 @@ import javafx.stage.Stage;
  */
 public class StudentMainController implements Initializable {
 
-    private User user;
+    private Student user;
     private UserModel userModel;
     private Stage stage;
-    private ArrayList<UndocumentetModulAbsence> undocumentetAbsences;
+    private ArrayList<Absence> undocumentetAbsences;
     @FXML
     private GridPane grid;
     @FXML
@@ -75,40 +73,37 @@ public class StudentMainController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        liststudent = new ArrayList<>();
-        
-        userModel = new UserModel();
-        setPie();
-        
-        grid.setStyle("-fx-border-color:black");
-        generateAbsenceElements();
-        addLabelsSub();
-        setPie();
-       // addLabelsHa();
-        generateLabels();
         try {
-            addTohMap();
-        } catch (SQLException ex) {
+
+            grid.setStyle("-fx-border-color:black");
+            
+            System.out.println(userModel);
+            
+            this.user = userModel.getLogedInStudent();
+
+            //setPie();
+
+            addToHMap(user);
+
+        } catch (Exception ex) {
             Logger.getLogger(StudentMainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    private void generateLabels() {
-
-    }
-
-    private void generateAbsenceElements() {
+    private void generateAbsenceElements() throws Exception {
         undocumentetAbsences = new ArrayList<>();
         undocumentetAbsences = userModel.getUndocumentetAbsence(user);
-        
+
 //        for (UndocumentetModulAbsence undocumentetModulAbsence : undocumentetAbsences) {
 //            System.out.println("hej");
 //            abModEle.generateAbsenceElement(undocumentetModulAbsence, vBoxUndokumentet);
 //        }
     }
 
-    public void setUser(User user) {
+    public void setUser(Student user) throws Exception {
         this.user = user;
+        System.out.println(user);
+
     }
 
     public void setModel(UserModel userModel) {
@@ -125,20 +120,18 @@ public class StudentMainController implements Initializable {
 
     }
 
-    public void addTohMap() throws SQLException {
-
-        ArrayList<UndocumentetModulAbsence> list = userModel.getUndocumentetAbsence(null);
+    public void addToHMap(Student student) throws SQLException, Exception {
+        System.out.println(student);
+        ArrayList<Absence> list = userModel.getUndocumentetAbsence(student);
         int i = 0;
-        
+
         System.out.println(list);
-        
-        for (UndocumentetModulAbsence undocumentetModulAbsence : list) {
-            AbsencentModulElement ame = new AbsencentModulElement(undocumentetModulAbsence, vBoxUndokumentet, userModel);
-            
+
+        for (Absence absence : list) {
+            AbsencentModulElement ame = new AbsencentModulElement(vBoxUndokumentet, absence, userModel);
+
             vBoxUndokumentet.getChildren().add(ame.getAnchorPane());
-            
-            
-            
+
 //            Label modul = new Label(undocumentetModulAbsence.getModul());
 //            Label date = new Label(undocumentetModulAbsence.getDate());
 //            Label subject = new Label(undocumentetModulAbsence.getSubject());
@@ -155,19 +148,18 @@ public class StudentMainController implements Initializable {
         }
     }
 
-    private void addLabelsSub() {
-        int start = 2;
-
-        for (int i = 0; i < liststudent.size(); i++) {
-            Label label = new Label();
-            grid.add(label, 0, start);
-            label.setText(liststudent.get(i).toString());
-            start++;
-            
-        }
- 
-    }
-
+//    private void addLabelsSub() {
+//        int start = 2;
+//
+//        for (int i = 0; i < liststudent.size(); i++) {
+//            Label label = new Label();
+//            grid.add(label, 0, start);
+//            label.setText(liststudent.get(i).toString());
+//            start++;
+//            
+//        }
+// 
+//    }
 //    private void addLabelsHa() {
 //        int start = 2;
 //        for (Integer ha : hMap.values()) {
@@ -177,5 +169,4 @@ public class StudentMainController implements Initializable {
 //            start++;
 //        }
 //    }
-
 }

@@ -5,7 +5,8 @@
  */
 package attendancesystem.dal;
 
-import attendancesystem.be.UndocumentetModulAbsence;
+import attendancesystem.be.Absence;
+import attendancesystem.be.Student;
 import attendancesystem.be.User;
 import java.util.ArrayList;
 
@@ -22,10 +23,10 @@ public interface AbsenceDAO
 
     void getAllAbsens();
 
-    ArrayList<UndocumentetModulAbsence> getDocumentetAbsence(User user);
+    ArrayList<Absence> getDocumentetAbsence(User user);
 
-    ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence(User user);
+    ArrayList<Absence> getUndocumentetAbsence(Student user) throws Exception;
 
-    boolean updateAbsens() throws Exception;
+    boolean updateAbsens(Absence absence) throws Exception;
     
 }

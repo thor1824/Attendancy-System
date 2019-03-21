@@ -6,7 +6,7 @@
 package attendancesystem.gui.user.model;
 
 import attendancesystem.be.Student;
-import attendancesystem.be.UndocumentetModulAbsence;
+import attendancesystem.be.Absence;
 import attendancesystem.be.User;
 import attendancesystem.bll.BLLManager;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -28,6 +28,8 @@ public class UserModel {
     BLLManager bll;
 
     BLLManager bllMan;
+    
+    Student logedInStudent;
 
     public UserModel() {
         try
@@ -48,7 +50,7 @@ public class UserModel {
         return bllMan.getPieChart(user);
     }
 
-    public User handleLoginRequest(String username, String password) {
+    public Student handleLoginRequest(String username, String password) {
         try {
             return bllMan.handleLoginRequestStudent(username, password);
         } catch (IOException ex) {
@@ -59,13 +61,22 @@ public class UserModel {
         return null;
     }
 
-    public ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence(User user) {
+    public ArrayList<Absence> getUndocumentetAbsence(Student user) throws Exception {
         return bllMan.getUndocumentetAbsence(user);
     }
 
     public List<Student> getAllStudents() throws SQLException, SQLServerException, IOException {
         return bllMan.getAllStudents();
     }
+
+    public void setLogedInStudent(Student logedInStudent) {
+        this.logedInStudent = logedInStudent;
+    }
+
+    public Student getLogedInStudent() {
+        return logedInStudent;
+    }
+    
     
     
 

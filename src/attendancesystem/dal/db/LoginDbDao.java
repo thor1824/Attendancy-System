@@ -27,7 +27,9 @@ public class LoginDbDao implements LoginDAO
     public Student handleLoginRequestStudent(String username, String encrypytedPassword) throws SQLServerException, IOException, SQLException {
         String sql = "SELECT * FROM [Atendens].[dbo].[Login] "
                 + "JOIN [Atendens].[dbo].[Student] "
-                + "on Login.UserId = Student.UserID "
+                + "ON Login.UserId = Student.UserID "
+                + "JOIN [Atendens].[dbo].[Class] "
+                + "ON Student.ClassID = Class.ClassID "
                 + "WHERE Username = ? and Password = ?;";
         
         Connection con = ServerConnect.getConnection(); //create connection
