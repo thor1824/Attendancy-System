@@ -41,8 +41,11 @@ public class LoginDbDao implements LoginDAO
         
         if (rs.next()) {
             int id = rs.getInt("StuID");
+            System.out.println(id);
             String fname = rs.getNString("StuFName");
+            System.out.println(fname);
             String lname = rs.getNString("StuLName");
+            System.out.println(lname);
             String email = rs.getNString("Email");
             String phone = rs.getNString("Phone");
             String cpr = rs.getNString("Cpr");

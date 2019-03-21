@@ -128,25 +128,35 @@ public class UserViewController implements Initializable
 
         try
         {
+            System.out.println("hej");
             Student user = model.handleLoginRequest(txtUserName.getText(), txtPassword.getText());
-            
-            model.setLogedInStudent(user);
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(MAIN_FXML));
-            
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setAlwaysOnTop(true);
-            stage.setResizable(false);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setScene(new Scene(root));
-            StudentMainController controller = loader.getController();
-            controller.setModel(model);
-            controller.setStage(stage);
             System.out.println(user);
-            stage.show();
+            if (user != null)
+            {
+                System.out.println(user);
+                model.setLogedInStudent(user);
+                
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(MAIN_FXML));
+                
+                Parent root = loader.load();
+                Stage stage = new Stage();
+                stage.setAlwaysOnTop(true);
+                stage.setResizable(false);
+                stage.initStyle(StageStyle.UNDECORATED);
+                stage.setScene(new Scene(root));
+                StudentMainController controller = loader.getController();
+                controller.setModel(model);
+                controller.setStage(stage);
+                controller.setUser(user);
+                System.out.println(user);
+                stage.show();
+            } else
+            {
+                throw new Exception();
+            }
         } catch (NullPointerException e)
-        {
+        {   
+            e.printStackTrace();
             lblLoginMessage.setStyle("-fx-text-fill:red");
             lblLoginMessage.setText("WRONG PASSWORD!!");
         }

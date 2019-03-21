@@ -37,9 +37,9 @@ public class AbsenceDbDao implements AbsenceDAO {
     public ArrayList<Absence> getUndocumentetAbsence(Student user) throws SQLException, SQLServerException, IOException {
 
         String sql = "SELECT * FROM [Atendens].[dbo].[Absense] JOIN [Atendens].[dbo].[Subject] "
-                + "ON Subject.SubjectID = Absense.SubjectID"
-                + "JOIN [Atendens].[dbo].[Modul] ON Modul.ModulID = Absense.ModulID"
-                + "WHERE StudID = (?) AND Reason = (?)";
+                + "ON Subject.SubjectID = Absense.SubjectID "
+                + "JOIN [Atendens].[dbo].[Modul] ON Modul.ModulID = Absense.ModulID "
+                + "WHERE StudID = (?) AND Reason IS NULL";
 
         Connection con = ServerConnect.getConnection(); //create connection
 
@@ -48,8 +48,7 @@ public class AbsenceDbDao implements AbsenceDAO {
         System.out.println(user);
         
         ps.setInt(1, user.getUserID());
-        ps.setNull(2, Types.NVARCHAR);
-
+       
         ResultSet rs = ps.executeQuery();
 
         ArrayList<Absence> absenceList = new ArrayList<>();
@@ -57,12 +56,12 @@ public class AbsenceDbDao implements AbsenceDAO {
         while (rs.next()) {
 
             int studID = rs.getInt("StudID");
-            String subjectID = rs.getNString("SubjectName");
+            String subjectID = rs.getNString("Name");
             String toa = rs.getNString("TOA");
             String date = rs.getNString("Date");
             int absenceID = rs.getInt("AbsenceID");
             String modulStart = rs.getNString("Start");
-            String modulEnd = rs.getNString("[End]");
+            String modulEnd = rs.getNString("End");
 
             Absence ab = new Absence(studID, absenceID, subjectID, null, null, date, modulStart + " " + modulEnd);
             ab.setToa(toa);

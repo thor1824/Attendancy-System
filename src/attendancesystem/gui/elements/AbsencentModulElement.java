@@ -98,19 +98,15 @@ public class AbsencentModulElement {
             }
 
             absence.setDialogBox(explanation);
-            sendToDb(explanation);
             vBox.getChildren().remove(ap);
         });
-
+        vBox.getChildren().add(ap);
     }
 
     public AnchorPane getAnchorPane() {
         return ap;
     }
 
-    public String sendToDb(String value) {
-        return value;
-    }
     
 
     public void setModel(UserModel userModel) {

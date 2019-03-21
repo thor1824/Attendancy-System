@@ -76,33 +76,28 @@ public class StudentMainController implements Initializable {
         try {
 
             grid.setStyle("-fx-border-color:black");
+           
             
-            System.out.println(userModel);
             
-            this.user = userModel.getLogedInStudent();
+            
 
             //setPie();
 
-            addToHMap(user);
+            
 
         } catch (Exception ex) {
             Logger.getLogger(StudentMainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    private void generateAbsenceElements() throws Exception {
-        undocumentetAbsences = new ArrayList<>();
-        undocumentetAbsences = userModel.getUndocumentetAbsence(user);
-
-//        for (UndocumentetModulAbsence undocumentetModulAbsence : undocumentetAbsences) {
-//            System.out.println("hej");
-//            abModEle.generateAbsenceElement(undocumentetModulAbsence, vBoxUndokumentet);
-//        }
-    }
+  
 
     public void setUser(Student user) throws Exception {
         this.user = user;
         System.out.println(user);
+        System.out.println("hej");
+        generateAbsenceElements(user);
+        setPie();
 
     }
 
@@ -120,53 +115,21 @@ public class StudentMainController implements Initializable {
 
     }
 
-    public void addToHMap(Student student) throws SQLException, Exception {
+    public void generateAbsenceElements(Student student) throws SQLException, Exception {
         System.out.println(student);
         ArrayList<Absence> list = userModel.getUndocumentetAbsence(student);
-        int i = 0;
-
+        
+        
         System.out.println(list);
 
         for (Absence absence : list) {
+            System.out.println(absence.getAbsenceID());
             AbsencentModulElement ame = new AbsencentModulElement(vBoxUndokumentet, absence, userModel);
 
-            vBoxUndokumentet.getChildren().add(ame.getAnchorPane());
+            
 
-//            Label modul = new Label(undocumentetModulAbsence.getModul());
-//            Label date = new Label(undocumentetModulAbsence.getDate());
-//            Label subject = new Label(undocumentetModulAbsence.getSubject());
-//            Label absHours = new Label(undocumentetModulAbsence.getAbsenceHours());
-//            Label absProcent = new Label(undocumentetModulAbsence.getAbsenceProcent());
-//            
-//            
-//            grid.add(modul, 0, i + 1);
-//            grid.add(date, 1, i + 1);
-//            grid.add(subject, 2, i + 1);
-//            grid.add(absHours, 3, i + 1);
-//            grid.add(absProcent, 4, i + 1);
-//            i++;
         }
     }
 
-//    private void addLabelsSub() {
-//        int start = 2;
-//
-//        for (int i = 0; i < liststudent.size(); i++) {
-//            Label label = new Label();
-//            grid.add(label, 0, start);
-//            label.setText(liststudent.get(i).toString());
-//            start++;
-//            
-//        }
-// 
-//    }
-//    private void addLabelsHa() {
-//        int start = 2;
-//        for (Integer ha : hMap.values()) {
-//            Label label = new Label();
-//            grid.add(label, 2, start);
-//            label.setText((ha.toString()));
-//            start++;
-//        }
-//    }
+//    
 }
