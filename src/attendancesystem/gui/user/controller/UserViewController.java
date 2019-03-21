@@ -5,7 +5,7 @@
  */
 package attendancesystem.gui.user.controller;
 
-import attendancesystem.be.User;
+import attendancesystem.be.Student;
 import attendancesystem.gui.user.model.UserModel;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -123,12 +123,15 @@ public class UserViewController implements Initializable
     }
 
     @FXML
-    private void btnLoginPress(ActionEvent event) throws IOException
+    private void btnLoginPress(ActionEvent event) throws IOException, Exception
     {
 
         try
         {
-            User user = model.handleLoginRequest(txtUserName.getText(), txtPassword.getText());
+            Student user = model.handleLoginRequest(txtUserName.getText(), txtPassword.getText());
+            
+            model.setLogedInStudent(user);
+            
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(MAIN_FXML));
             
             Parent root = loader.load();
@@ -140,7 +143,7 @@ public class UserViewController implements Initializable
             StudentMainController controller = loader.getController();
             controller.setModel(model);
             controller.setStage(stage);
-            controller.setUser(user);
+            System.out.println(user);
             stage.show();
         } catch (NullPointerException e)
         {

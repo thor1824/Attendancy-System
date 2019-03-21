@@ -5,7 +5,8 @@
  */
 package attendancesystem.dal.Mock;
 
-import attendancesystem.be.UndocumentetModulAbsence;
+import attendancesystem.be.Absence;
+import attendancesystem.be.Student;
 import attendancesystem.be.User;
 import attendancesystem.dal.AbsenceDAO;
 import java.util.ArrayList;
@@ -14,55 +15,54 @@ import java.util.ArrayList;
  *
  * @author Christian
  */
-public class AbsenceMockDAO implements AbsenceDAO{
-    ArrayList<UndocumentetModulAbsence> undocumentet;
+public class AbsenceMockDAO implements AbsenceDAO {
+
+    ArrayList<Absence> undocumentet;
+
     public AbsenceMockDAO() {
         undocumentet = new ArrayList<>();
-        UndocumentetModulAbsence mod1 = new UndocumentetModulAbsence("1", "02-22-2019", "ITO", "2", "4%");
-        UndocumentetModulAbsence mod2 = new UndocumentetModulAbsence("2", "02-22-2019", "SCO", "15", "30%");
-        UndocumentetModulAbsence mod3 = new UndocumentetModulAbsence("3", "02-22-2019", "SDE", "5", "10%");
+        Absence mod1 = new Absence(0, 0, "subjectID", "reason", "dialogBox", "date", "modulTimePeriod");
+        Absence mod2 = new Absence(0, 0, "subjectID", "reason", "dialogBox", "date", "modulTimePeriod");
+        Absence mod3 = new Absence(0, 0, "subjectID", "reason", "dialogBox", "date", "modulTimePeriod");
         undocumentet.add(mod1);
         undocumentet.add(mod2);
         undocumentet.add(mod3);
-         
-    }
-    
 
-    public ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence(User user) {
-        
+    }
+
+    public ArrayList<Absence> getUndocumentetAbsence(User user) {
+
         return undocumentet;
     }
 
     @Override
-    public void createAbsens()
-    {
+    public void createAbsens() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void deleteAbsens()
-    {
+    public void deleteAbsens() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void getAllAbsens()
-    {
+    public void getAllAbsens() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ArrayList<UndocumentetModulAbsence> getDocumentetAbsence(User user)
-    {
+    public ArrayList<Absence> getDocumentetAbsence(User user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean updateAbsens()
-    {
+    public ArrayList<Absence> getUndocumentetAbsence(Student user) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    
+
+    @Override
+    public boolean updateAbsens(Absence absence) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

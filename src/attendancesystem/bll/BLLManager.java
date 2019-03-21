@@ -8,14 +8,14 @@ package attendancesystem.bll;
 import attendancesystem.be.User;
 import attendancesystem.be.Student;
 import attendancesystem.be.Teacher;
-import attendancesystem.be.UndocumentetModulAbsence;
+import attendancesystem.be.Absence;
 import attendancesystem.dal.AbsenceDAO;
 import attendancesystem.dal.StudentDAO;
 import attendancesystem.dal.TeacherDAO;
 import attendancesystem.dal.LoginDAO;
 import attendancesystem.dal.db.StudentDbDao;
-import attendancesystem.dal.Mock.AbsenceMockDAO;
 import attendancesystem.dal.Mock.TeacherMockDAO;
+import attendancesystem.dal.db.AbsenceDbDao;
 import attendancesystem.dal.db.LoginDbDao;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
@@ -39,7 +39,7 @@ public class BLLManager {
     public BLLManager() throws IOException {
       loginDao = new LoginDbDao();
       teachDAO = new TeacherMockDAO();
-      absenceDAO = new AbsenceMockDAO();
+      absenceDAO = new AbsenceDbDao();
       studentDAO = new StudentDbDao();
 
     }
@@ -62,7 +62,7 @@ public class BLLManager {
         return loginDao.handleLoginRequestStudent(username, hashedPassword);
     }
 
-    public ArrayList<UndocumentetModulAbsence> getUndocumentetAbsence(User user) {
+    public ArrayList<Absence> getUndocumentetAbsence(Student user) throws Exception {
         return absenceDAO.getUndocumentetAbsence(user);
     }
 

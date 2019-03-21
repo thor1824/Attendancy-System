@@ -5,7 +5,7 @@
  */
 package attendancesystem.gui.elements;
 
-import attendancesystem.be.UndocumentetModulAbsence;
+import attendancesystem.be.Absence;
 import attendancesystem.be.User;
 import attendancesystem.gui.user.controller.ReasonForAbsenceController;
 import attendancesystem.gui.user.model.UserModel;
@@ -43,12 +43,12 @@ public class AbsencentModulElement {
     private int lblY = 4;
     private AnchorPane ap;
 
-    public AbsencentModulElement(UndocumentetModulAbsence modAbsence, VBox vBox, UserModel model) {
+    public AbsencentModulElement(VBox vBox, Absence absence, UserModel model) {
 
         
-        Label lblDato = new Label(modAbsence.getDate());
-        Label lblFag = new Label(modAbsence.getSubject());
-        Label lblModul = new Label(modAbsence.getModul());
+        Label lblDato = new Label(absence.getDate());
+        Label lblFag = new Label(absence.getSubjectID());
+        Label lblModul = new Label(absence.getModulTimePeriod());
         ap = new AnchorPane();
 
         ObservableList element = FXCollections.observableArrayList(
@@ -97,7 +97,7 @@ public class AbsencentModulElement {
                 }
             }
 
-            modAbsence.setExplenation(explanation);
+            absence.setDialogBox(explanation);
             sendToDb(explanation);
             vBox.getChildren().remove(ap);
         });
