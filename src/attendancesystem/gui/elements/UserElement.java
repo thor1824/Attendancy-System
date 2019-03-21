@@ -79,6 +79,8 @@ public class UserElement
 
         //setup User Image
         ImageView ivUser = new ImageView();
+        
+        
         try
         {
             ivUser.setImage(new Image(student.getPicUrl()));

@@ -93,7 +93,6 @@ public class UserViewController implements Initializable
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(new Scene(root));
         LoginLateController controller = loader.getController();
-        controller.setModel(model);
         controller.setStage(stage);
         controller.setDate();
         stage.showAndWait();
