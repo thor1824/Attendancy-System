@@ -7,11 +7,14 @@ package attendancesystem.gui.user.controller;
 
 import attendancesystem.gui.user.model.UserModel;
 import java.net.URL;
+import java.util.Calendar;
 import java.util.ResourceBundle;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -20,32 +23,36 @@ import javafx.stage.Stage;
  */
 public class LoginLateController implements Initializable
 {
-
+    Stage stage;
+    UserModel model;
     @FXML
     private Label lblArrivalTime;
-
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
-    }    
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
+        delay.setOnFinished(event -> stage.close());
+        delay.play();
+    }
 
     void setModel(UserModel model)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.model = model;
     }
-
+    
     void setStage(Stage stage)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.stage = stage;
     }
 
     void setDate()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       Calendar cal = Calendar.getInstance();
+       lblArrivalTime.setText("Time of Arrival: " + cal.getTime().toString());
     }
     
 }

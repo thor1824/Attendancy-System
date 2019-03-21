@@ -51,6 +51,7 @@ public class UserViewController implements Initializable
     private JFXPasswordField txtPassword;
     @FXML
     private Label lblLoginMessage;
+    private Stage currentStage;
 
     /**
      * Initializes the controller class.
@@ -98,7 +99,7 @@ public class UserViewController implements Initializable
         stage.showAndWait();
 
 //        controller.setModel(model);
-//        controller.setStage(stage);
+//        controller.setStage(currentStage);
     }
 
     @FXML
@@ -113,12 +114,11 @@ public class UserViewController implements Initializable
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(new Scene(root));
         LoginFailedController controller = loader.getController();
-        controller.setModel(model);
         controller.setStage(stage);
         stage.showAndWait();
 
 //        controller.setModel(model);
-//        controller.setStage(stage);
+//        controller.setStage(currentStage);
     }
 
     @FXML
@@ -127,7 +127,7 @@ public class UserViewController implements Initializable
 
         try
         {
-            System.out.println("hej");
+            
             Student user = model.handleLoginRequest(txtUserName.getText(), txtPassword.getText());
             System.out.println(user);
             if (user != null)
@@ -149,6 +149,7 @@ public class UserViewController implements Initializable
                 controller.setUser(user);
                 System.out.println(user);
                 stage.show();
+                currentStage.close();
             } else
             {
                 throw new Exception();
@@ -160,6 +161,11 @@ public class UserViewController implements Initializable
             lblLoginMessage.setText("WRONG PASSWORD!!");
         }
 
+    }
+    
+    public void setStage(Stage stage)
+    {
+        this.currentStage = stage;
     }
 
 }

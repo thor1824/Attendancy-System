@@ -5,11 +5,13 @@
  */
 package attendancesystem.main;
 
+import attendancesystem.gui.user.controller.UserViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -21,11 +23,17 @@ public class UserStart extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource("/attendancesystem/gui/user/view/UserView.fxml"));
         
-        Scene scene = new Scene(root);
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("attendancesystem/gui/user/view/UserView.fxml"));
+
+        Parent root = loader.load();
         
-        stage.setScene(scene);
+        
+        stage.setResizable(false);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setScene(new Scene(root));
+        UserViewController controller = loader.getController();
+        controller.setStage(stage);
         stage.show();
     }
 

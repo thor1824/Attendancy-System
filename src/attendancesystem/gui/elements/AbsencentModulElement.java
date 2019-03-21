@@ -43,7 +43,7 @@ public class AbsencentModulElement {
     private int lblY = 4;
     private AnchorPane ap;
 
-    public AbsencentModulElement(VBox vBox, Absence absence, UserModel model) {
+    public AbsencentModulElement(Absence absence, VBox vBox) {
 
         
         Label lblDato = new Label(absence.getDate());
@@ -71,34 +71,42 @@ public class AbsencentModulElement {
         comBox.setLayoutY(lblVeticalMargin + ((comBox.getHeight() - lblHeight) / 2));
 
         comBox.setOnAction((Event event) -> {
-            String explanation = comBox.getValue().toString();
-            String reason = "";
-            if (comBox.getValue() == "Other") {
-                try {
-                    String explan = "";
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/attendancesystem/gui/user/view/ReasonForAbsence.fxml"));
-                    
-                    Parent root = loader.load();
-                    Stage stage = new Stage();
-                    stage.setAlwaysOnTop(true);
-                    stage.setResizable(false);
-                    stage.initStyle(StageStyle.UNDECORATED);
-                    stage.setScene(new Scene(root));
-                    ReasonForAbsenceController controller = loader.getController();
-                    
-                    controller.setModel(model);
-                    controller.setStage(stage);
-                    controller.setExplanation(explan);
-                    
-                    stage.showAndWait();
-                    
-                } catch (IOException ex) {
-                    Logger.getLogger(AbsencentModulElement.class.getName()).log(Level.SEVERE, null, ex);
+            try
+            {
+                String reason = comBox.getValue().toString();
+                
+                if (comBox.getValue() == "Other") {
+                    try {
+                        String explan = "";
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/attendancesystem/gui/user/view/ReasonForAbsence.fxml"));
+                        
+                        Parent root = loader.load();
+                        Stage stage = new Stage();
+                        stage.setAlwaysOnTop(true);
+                        stage.setResizable(false);
+                        stage.initStyle(StageStyle.UNDECORATED);
+                        stage.setScene(new Scene(root));
+                        ReasonForAbsenceController controller = loader.getController();
+                        
+                        controller.setModel(userModel);
+                        controller.setStage(stage);
+                        controller.setExplanation(explan);
+                        
+                        stage.showAndWait();
+                        
+                    } catch (IOException ex) {
+                        Logger.getLogger(AbsencentModulElement.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
+                
+                absence.setReason(reason);
+                System.out.println(userModel);
+                userModel.updateAbsence(absence);
+                vBox.getChildren().remove(ap);
+            } catch (Exception ex)
+            {
+                Logger.getLogger(AbsencentModulElement.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-            absence.setDialogBox(explanation);
-            vBox.getChildren().remove(ap);
         });
         vBox.getChildren().add(ap);
     }

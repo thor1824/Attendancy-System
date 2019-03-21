@@ -8,8 +8,10 @@ package attendancesystem.gui.user.controller;
 import attendancesystem.gui.user.model.UserModel;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.animation.PauseTransition;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -18,6 +20,7 @@ import javafx.stage.Stage;
  */
 public class LoginFailedController implements Initializable
 {
+    Stage stage;
 
     /**
      * Initializes the controller class.
@@ -25,17 +28,15 @@ public class LoginFailedController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
-    }    
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
+        delay.setOnFinished(event -> stage.close());
+        delay.play();
+    }   
 
-    void setModel(UserModel model)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     void setStage(Stage stage)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.stage = stage;
     }
     
 }

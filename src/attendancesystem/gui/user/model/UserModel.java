@@ -72,6 +72,10 @@ public class UserModel {
     public void setLogedInStudent(Student logedInStudent) {
         this.logedInStudent = logedInStudent;
     }
+    
+    public boolean updateAbsence(Absence absence) throws Exception{
+        return bllMan.updateAbsence(absence);
+    }
 
     public Student getLogedInStudent() {
         return logedInStudent;

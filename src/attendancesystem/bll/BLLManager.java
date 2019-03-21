@@ -69,7 +69,11 @@ public class BLLManager {
     public javafx.scene.chart.PieChart getPieChart(User user) {
         return PieChart.buildPieChard(user, studentDAO);
     }
-
+    
+    public boolean updateAbsence(Absence absence) throws Exception{
+        return absenceDAO.updateAbsens(absence);
+    }
+    
     public String sendToDb(String value){
         return value;
     }

@@ -30,7 +30,8 @@ import javafx.stage.Stage;
  *
  * @author Christian
  */
-public class StudentMainController implements Initializable {
+public class StudentMainController implements Initializable
+{
 
     private Student user;
     private UserModel userModel;
@@ -72,62 +73,57 @@ public class StudentMainController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        try {
+    public void initialize(URL url, ResourceBundle rb)
+    {
+        try
+        {
 
             grid.setStyle("-fx-border-color:black");
-           
-            
-            
-            
 
             //setPie();
-
-            
-
-        } catch (Exception ex) {
+        } catch (Exception ex)
+        {
             Logger.getLogger(StudentMainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-  
-
-    public void setUser(Student user) throws Exception {
+    public void setUser(Student user) throws Exception
+    {
         this.user = user;
-        System.out.println(user);
-        System.out.println("hej");
         generateAbsenceElements(user);
         setPie();
 
     }
 
-    public void setModel(UserModel userModel) {
+    public void setModel(UserModel userModel)
+    {
         this.userModel = userModel;
 
     }
 
-    public void setStage(Stage stage) {
+    public void setStage(Stage stage)
+    {
         this.stage = stage;
     }
 
-    public void setPie() {
+    public void setPie()
+    {
         pieChartAnchor.getChildren().add(userModel.getPieChard(user));
 
     }
 
-    public void generateAbsenceElements(Student student) throws SQLException, Exception {
+    public void generateAbsenceElements(Student student) throws SQLException, Exception
+    {
         System.out.println(student);
         ArrayList<Absence> list = userModel.getUndocumentetAbsence(student);
-        
-        
+
         System.out.println(list);
 
-        for (Absence absence : list) {
-            System.out.println(absence.getAbsenceID());
-            AbsencentModulElement ame = new AbsencentModulElement(vBoxUndokumentet, absence, userModel);
+        for (Absence absence : list)
+        {
 
-            
-
+            AbsencentModulElement ame = new AbsencentModulElement(absence, vBoxUndokumentet);
+            ame.setModel(userModel);
         }
     }
 
