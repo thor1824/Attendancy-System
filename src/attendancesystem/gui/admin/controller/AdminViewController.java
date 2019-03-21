@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,7 +36,8 @@ import javafx.stage.Stage;
  *
  * @author Thorbjørn Schultz Damkjær
  */
-public class AdminViewController implements Initializable {
+public class AdminViewController implements Initializable
+{
 
     private AdminModel model;
     private User user;
@@ -44,8 +46,9 @@ public class AdminViewController implements Initializable {
     private FilteredList<User> searchList;
     private SortedList<User> sortedData;
     private int maxLoad = 30;
-    ArrayList<Student> students;
+    List<Student> students;
     ArrayList<UserElement> arr;
+    List<Student> Students;
 
     @FXML
     private VBox hbxUserOverview;
@@ -63,18 +66,16 @@ public class AdminViewController implements Initializable {
     @FXML
     private JFXComboBox<?> combBoxSort;
 
-    
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        
+    public void initialize(URL url, ResourceBundle rb)
+    {
 
         try
         {
-            
-            
+
             try
             {
                 model = new AdminModel();
@@ -82,126 +83,138 @@ public class AdminViewController implements Initializable {
             {
                 Logger.getLogger(AdminViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             ArrayList<UserElement> arr = new ArrayList<>();
-            
+
             ArrayList<Student> lessStudents = new ArrayList<>();
-            
-           Instant start = Instant.now();
-            
-            for (int i = 0; i < 55; i++) {
-                lessStudents.add((Student) model.getAllStudents().get(i));
+            students = model.getAllStudents();
+            Instant start = Instant.now();
+
+            for (int i = 0; i < maxLoad; i++)
+            {
                 
+                createAndAddUserElement(students.get(i), arr);
+
             }
-            
+
             Instant finish = Instant.now();
-        
-        long elapsedTime = Duration.between(start, finish).toMillis();
-        
-        System.out.println(elapsedTime + " ms");
-        
+
+            long elapsedTime = Duration.between(start, finish).toMillis();
+
+            System.out.println(elapsedTime + " ms");
+
             //test ersattest med metode de gør med list<Student/user?>
-            for (Student student : lessStudents) {
-               UserElement user2 = new UserElement(student);
-                
-                arr.add(user2);   
-            }
+            
+
             
             
-            Instant start1 = Instant.now();
-           ArrayList<Student> allStudents = new ArrayList<>();
-           allStudents = (ArrayList<Student>) model.getAllStudents();
-                
-              
-                
-            
-            for (int i = 0; i <= maxLoad; i++) {
-                hbxUserOverview.getChildren().add(arr.get(i).getUserPane());
-            }
-            
+
+           
+
             hbxUserOverview.setSpacing(12);
-            
+
             spUsers.setFitToWidth(true);
             spUsers.setFitToHeight(true);
-            
+
             combBoxSort.getItems().addAll(comboBox());
-            
+
             //scrollPane load incriments
-            spUsers.vvalueProperty().addListener((observable, oldValue, newValue) -> {
+            spUsers.vvalueProperty().addListener((observable, oldValue, newValue) ->
+            {
                 System.out.println(newValue);
                 System.out.println(spUsers.getVmax());
-                if (newValue.doubleValue() == spUsers.getVmax()) {
+                if (newValue.doubleValue() == spUsers.getVmax())
+                {
                     int loadIncriments = 10;
-                    for (int i = maxLoad + 1; i <= maxLoad + loadIncriments; i++) {
-                        if (arr.get(i) != null) {
-                            hbxUserOverview.getChildren().add(arr.get(i).getUserPane());
-                        } else {
+                    for (int i = maxLoad + 1; i <= maxLoad + loadIncriments; i++)
+                    {
+                        if (students.get(i) != null)
+                        {
+                            createAndAddUserElement(students.get(i), arr);
+                            
+                        } else
+                        {
                             break;
                         }
                     }
                     maxLoad = maxLoad + loadIncriments;
                 }
-                
+
             });
-            
+
         } catch (SQLException ex)
         {
             Logger.getLogger(AdminViewController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             Logger.getLogger(AdminViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    void setStage(Stage stage) {
+    private void createAndAddUserElement(Student student, ArrayList<UserElement> arr1)
+    {
+        UserElement user2 = new UserElement(student);
+        hbxUserOverview.getChildren().add(user2.getUserPane());
+    }
+
+    void setStage(Stage stage)
+    {
         this.stage = stage;
     }
 
-    void setUser(User user) {
+    void setUser(User user)
+    {
         this.user = user;
     }
 
     @FXML
-    private void btnAll(ActionEvent event) {
-        
+    private void btnAll(ActionEvent event)
+    {
+
     }
 
     @FXML
-    private void btnAllMy(ActionEvent event) {
-        
+    private void btnAllMy(ActionEvent event)
+    {
+
     }
 
     @FXML
-    private void btnClass(ActionEvent event) {
-        
+    private void btnClass(ActionEvent event)
+    {
+
     }
 
     @FXML
-    private void asc(ActionEvent event) {
-        
+    private void asc(ActionEvent event)
+    {
+
     }
 
     @FXML
-    private void desc(ActionEvent event) {
-        
+    private void desc(ActionEvent event)
+    {
+
     }
 
     @FXML
-    private void cehch1(ActionEvent event) {
-        
+    private void cehch1(ActionEvent event)
+    {
+
     }
 
-    public ArrayList comboBox() {
+    public ArrayList comboBox()
+    {
         ArrayList coBox = new ArrayList();
         coBox.add("First Name");
         coBox.add("Last Name");
         return coBox;
     }
-    
-    
-    private void setUserAncor(){
-        
-        
+
+    private void setUserAncor()
+    {
+
     }
 //    private void setupSeachBar()
 //    {
