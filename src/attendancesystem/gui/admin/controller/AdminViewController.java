@@ -13,6 +13,9 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -36,10 +39,13 @@ public class AdminViewController implements Initializable {
 
     private AdminModel model;
     private User user;
+    private Student studen;
     private Stage stage;
     private FilteredList<User> searchList;
     private SortedList<User> sortedData;
     private int maxLoad = 30;
+    ArrayList<Student> students;
+    ArrayList<UserElement> arr;
 
     @FXML
     private VBox hbxUserOverview;
@@ -63,50 +69,87 @@ public class AdminViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
 
         try
         {
-            model = new AdminModel();
-        } catch (IOException ex)
-        {
-            Logger.getLogger(AdminViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        ArrayList<UserElement> arr = new ArrayList<>();
-
-        //test ersattest med metode de gør med list<Student/user?>
-        for (int i = 0; i <= 55; i++) {
-            UserElement user = new UserElement(new Student(i, "FName"+i, "Lname"+i, "email"+i, "phoneNo"+i, "Cpr"+i, "adress"+i, "zip"+i, "class"+i, "Resources/Images/deafultUserImage.png"));
-            arr.add(user);
-        }
-        for (int i = 0; i <= maxLoad; i++) {
-            hbxUserOverview.getChildren().add(arr.get(i).getUserPane());
-        }
-        
-        hbxUserOverview.setSpacing(12);
-
-        spUsers.setFitToWidth(true);
-        spUsers.setFitToHeight(true);
-
-        combBoxSort.getItems().addAll(comboBox());
-
-        //scrollPane load incriments
-        spUsers.vvalueProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println(newValue);
-            System.out.println(spUsers.getVmax());
-            if (newValue.doubleValue() == spUsers.getVmax()) {
-                int loadIncriments = 10;
-                for (int i = maxLoad + 1; i <= maxLoad + loadIncriments; i++) {
-                    if (arr.get(i) != null) {
-                        hbxUserOverview.getChildren().add(arr.get(i).getUserPane());
-                    } else {
-                        break;
-                    }
-                }
-                maxLoad = maxLoad + loadIncriments;
+            
+            
+            try
+            {
+                model = new AdminModel();
+            } catch (IOException ex)
+            {
+                Logger.getLogger(AdminViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-        });
+            ArrayList<UserElement> arr = new ArrayList<>();
+            
+            ArrayList<Student> lessStudents = new ArrayList<>();
+            
+           Instant start = Instant.now();
+            
+            for (int i = 0; i < 55; i++) {
+                lessStudents.add((Student) model.getAllStudents().get(i));
+                
+            }
+            
+            Instant finish = Instant.now();
+        
+        long elapsedTime = Duration.between(start, finish).toMillis();
+        
+        System.out.println(elapsedTime + " ms");
+        
+            //test ersattest med metode de gør med list<Student/user?>
+            for (Student student : lessStudents) {
+               UserElement user2 = new UserElement(student);
+                
+                arr.add(user2);   
+            }
+            
+            
+            Instant start1 = Instant.now();
+           ArrayList<Student> allStudents = new ArrayList<>();
+           allStudents = (ArrayList<Student>) model.getAllStudents();
+                
+              
+                
+            
+            for (int i = 0; i <= maxLoad; i++) {
+                hbxUserOverview.getChildren().add(arr.get(i).getUserPane());
+            }
+            
+            hbxUserOverview.setSpacing(12);
+            
+            spUsers.setFitToWidth(true);
+            spUsers.setFitToHeight(true);
+            
+            combBoxSort.getItems().addAll(comboBox());
+            
+            //scrollPane load incriments
+            spUsers.vvalueProperty().addListener((observable, oldValue, newValue) -> {
+                System.out.println(newValue);
+                System.out.println(spUsers.getVmax());
+                if (newValue.doubleValue() == spUsers.getVmax()) {
+                    int loadIncriments = 10;
+                    for (int i = maxLoad + 1; i <= maxLoad + loadIncriments; i++) {
+                        if (arr.get(i) != null) {
+                            hbxUserOverview.getChildren().add(arr.get(i).getUserPane());
+                        } else {
+                            break;
+                        }
+                    }
+                    maxLoad = maxLoad + loadIncriments;
+                }
+                
+            });
+            
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(AdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -153,6 +196,12 @@ public class AdminViewController implements Initializable {
         coBox.add("First Name");
         coBox.add("Last Name");
         return coBox;
+    }
+    
+    
+    private void setUserAncor(){
+        
+        
     }
 //    private void setupSeachBar()
 //    {
