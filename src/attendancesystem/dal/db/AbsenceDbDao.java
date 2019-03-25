@@ -35,7 +35,7 @@ public class AbsenceDbDao implements AbsenceDAO {
 
     @Override
     public ArrayList<Absence> getUndocumentetAbsence(Student user) throws SQLException, SQLServerException, IOException {
-
+  //
         String sql = "SELECT * FROM [Atendens].[dbo].[Absense] JOIN [Atendens].[dbo].[Subject] "
                 + "ON Subject.SubjectID = Absense.SubjectID "
                 + "JOIN [Atendens].[dbo].[Modul] ON Modul.ModulID = Absense.ModulID "
@@ -87,16 +87,16 @@ public class AbsenceDbDao implements AbsenceDAO {
         return null;
     }
 
-    @Override
-    public void getAllAbsens() {
-        //to do
-        //create connection
-        //create prepared Statement
-        //get all absens where userID =="input users ID"
-        //put in list
-        //close connection
-        //return list
-    }
+//    @Override
+//    public void getAllAbsens(User user) throws SQLServerException, IOException {
+//        //to do
+//         Connection con = ServerConnect.getConnection();
+//        String sql = "SELECT * FROM [Atendens].[dbo].[Absense]  "
+//        //get all absens where userID =="input users ID"
+//        //put in list
+//        //close connection
+//        //return list
+//    }
 
     @Override
     public void deleteAbsens() {
@@ -148,6 +148,11 @@ public class AbsenceDbDao implements AbsenceDAO {
         //check if entry was created
         //close connection
         //retrun true if created false if not
+    }
+
+    @Override
+    public void getAllAbsens() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

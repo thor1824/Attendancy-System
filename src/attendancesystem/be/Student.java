@@ -12,13 +12,15 @@ package attendancesystem.be;
 public class Student extends User{
 
     private String schoolClass;
+    
    
 
 
-    public Student(int StuID, String firstName, String lastName, String email, String phoneNr, String cpr, String Adresse, String zipCode, String schoolClass, String picUrl)
+    public Student(int StuID, String firstName, String lastName, String email, String phoneNr, String cpr, String Adresse, String zipCode, String schoolClass, String picUrl, int Days_of_classes)
     {
         super(StuID, firstName, lastName, email, phoneNr, cpr, User.CLEARANCE_STUDENT, Adresse, zipCode, picUrl);
         this.schoolClass = schoolClass;
+        
         
         
     }

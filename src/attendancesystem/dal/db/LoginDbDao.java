@@ -53,7 +53,8 @@ public class LoginDbDao implements LoginDAO
             String zipCode = rs.getNString("ZipCode");
             String sClass = rs.getNString("ClassName");
             String picUrl = rs.getNString("StuPicUrl");
-            return new Student(id, fname, lname, email, phone, cpr, adress, zipCode, sClass, picUrl);
+            int days_of_classes = rs.getInt("Days_of_classes");
+            return new Student(id, fname, lname, email, phone, cpr, adress, zipCode, sClass, picUrl, days_of_classes);
         }
         return null;
     }
