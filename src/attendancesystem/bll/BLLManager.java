@@ -77,4 +77,8 @@ public class BLLManager {
     public String sendToDb(String value){
         return value;
     }
+    
+    public void getAllAbsence(Student student) {
+        absenceDAO.getAllAbsence();
+    }
 }
