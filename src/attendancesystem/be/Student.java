@@ -12,6 +12,7 @@ package attendancesystem.be;
 public class Student extends User{
 
     private String schoolClass;
+    private int StuID;
     
    
 
@@ -20,9 +21,18 @@ public class Student extends User{
     {
         super(StuID, firstName, lastName, email, phoneNr, cpr, User.CLEARANCE_STUDENT, Adresse, zipCode, picUrl);
         this.schoolClass = schoolClass;
+        this.StuID = StuID; 
         
         
         
+    }
+
+    public int getStuID() {
+        return StuID;
+    }
+
+    public void setStuID(int StuID) {
+        this.StuID = StuID;
     }
 
     public String getSchoolClass()

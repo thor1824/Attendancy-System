@@ -98,11 +98,16 @@ public class AbsenceDbDao implements AbsenceDAO {
 //        //return list
 //    }
 
-    @Override
-    public void deleteAbsens() {
+    
+    public void deleteAbsens(Absence absence) throws SQLException, SQLServerException, IOException {
         //to do
-        //create connection
-        //create prepared Statement
+        Connection con = ServerConnect.getConnection();
+        String sql = "DELETE FROM [Atendens].[dbo].[Absense] "
+                + "WHERE Absense.AbsenceID = (?)";
+        PreparedStatement ps = con.prepareStatement(sql);
+        
+        ps.setInt(1, absence.getAbsenceID());
+        
         //delete absens where userID =="input users ID"
         //check if entry was deletet
         //close connection
@@ -150,9 +155,46 @@ public class AbsenceDbDao implements AbsenceDAO {
         //retrun true if created false if not
     }
 
+     public ArrayList<Absence> getAllAbsens(Student studnt) throws IOException, SQLServerException, SQLException {
+         Connection con = ServerConnect.getConnection();
+         String sql = "SELECT * FROM [Atendens].[dbo].[Absense] WHERE StudID = (?)";
+         
+          PreparedStatement ps = con.prepareStatement(sql);
+          ps.setInt(1, studnt.getStuID());
+          
+          ResultSet rs = ps.executeQuery();
+          
+          ArrayList<Absence> listOfAbsens = new ArrayList<>();
+          
+           while (rs.next()) {
+           
+               int studID = rs.getInt("StudID");
+               int absenceID = rs.getInt("AbsenceID");
+               String date = rs.getNString("Date");
+               
+               
+                Absence absence = new Absence(studID, absenceID, null, null, date);
+               
+                listOfAbsens.add(absence);
+                
+                
+               
+           }
+          con.close();
+          
+          return listOfAbsens;
+        
+    }
+
+    @Override
+    public void deleteAbsens() {
+        
+    }
+
     @Override
     public void getAllAbsens() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
+
 
 }
