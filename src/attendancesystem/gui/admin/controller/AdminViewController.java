@@ -5,10 +5,12 @@
  */
 package attendancesystem.gui.admin.controller;
 
+import attendancesystem.be.Absence;
 import attendancesystem.be.Student;
 import attendancesystem.be.User;
 import attendancesystem.gui.admin.model.AdminModel;
 import attendancesystem.gui.elements.UserElement;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import java.io.IOException;
@@ -25,11 +27,16 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -42,7 +49,7 @@ public class AdminViewController implements Initializable
     private AdminModel model;
     private User user;
     private Student studen;
-    private Stage stage;
+    private Stage currentStage;
     private FilteredList<User> searchList;
     private SortedList<User> sortedData;
     private int maxLoad = 30;
@@ -65,6 +72,10 @@ public class AdminViewController implements Initializable
 
     @FXML
     private JFXComboBox<?> combBoxSort;
+    @FXML
+    private JFXButton btnAbsReq;
+    @FXML
+    private Label lblReqCount;
 
     /**
      * Initializes the controller class.
@@ -92,7 +103,7 @@ public class AdminViewController implements Initializable
 
             for (int i = 0; i < maxLoad; i++)
             {
-                
+
                 createAndAddUserElement(students.get(i), arr);
 
             }
@@ -104,13 +115,6 @@ public class AdminViewController implements Initializable
             System.out.println(elapsedTime + " ms");
 
             //test ersattest med metode de gør med list<Student/user?>
-            
-
-            
-            
-
-           
-
             hbxUserOverview.setSpacing(12);
 
             spUsers.setFitToWidth(true);
@@ -131,7 +135,7 @@ public class AdminViewController implements Initializable
                         if (students.get(i) != null)
                         {
                             createAndAddUserElement(students.get(i), arr);
-                            
+
                         } else
                         {
                             break;
@@ -160,7 +164,7 @@ public class AdminViewController implements Initializable
 
     void setStage(Stage stage)
     {
-        this.stage = stage;
+        this.currentStage = stage;
     }
 
     void setUser(User user)
@@ -251,4 +255,25 @@ public class AdminViewController implements Initializable
 //        sortedData.comparatorProperty().bind(tbvSongs.comparatorProperty()); // Bind the SortedList comparator to the TableView comparator.
 //        tbvSongs.setItems(sortedData);//Add sorted (and filtered) data to the table.
 //    }
+
+    @FXML
+    private void OpenRequests(ActionEvent event) throws IOException
+    {
+        List<Absence> bob = new ArrayList<>();
+        bob.add(new Absence(maxLoad, maxLoad, "subjectID", "reason", "dialogBox", "date", "modulTimePeriod"));
+
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("attendancesystem/gui/admin/view/AdminAbsenceHandler.fxml"));
+
+        Parent root = loader.load();
+        Stage newStage = new Stage();
+        newStage.setResizable(false);
+        newStage.initStyle(StageStyle.UNDECORATED);
+        newStage.setScene(new Scene(root, 515.0, 650.0));
+        AdminAbsenceHandlerController controller = loader.getController();
+        controller.setStage(newStage);
+        controller.setAbsences(bob);
+        
+        newStage.showAndWait();
+
+    }
 }

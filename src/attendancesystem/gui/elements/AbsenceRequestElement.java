@@ -9,6 +9,7 @@ import attendancesystem.be.Absence;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
@@ -44,18 +45,19 @@ public class AbsenceRequestElement {
         ds1.setColor(new Color(0.183, 0.183, 0.149, 1.0));
         
         ap = new AnchorPane();
-        ap.setMaxSize(AP_HIGHT, AP_WIDTH);
-        ap.setMinSize(AP_HIGHT, AP_WIDTH);
-        ap.setPrefSize(AP_HIGHT, AP_WIDTH);
+        ap.setMaxSize(AP_WIDTH, AP_HIGHT);
+        ap.setMinSize(AP_WIDTH, AP_HIGHT);
+        ap.setPrefSize(AP_WIDTH, AP_HIGHT);
         ap.setEffect(ds1);
         ap.setStyle("-fx-background-color:lightgray");
+        
 
     }
 
     private void genrateButtons() {
         JFXButton btnAccept = new JFXButton("Accept");
         btnAccept.setStyle("-fx-background-color:#4d79ff");
-        btnAccept.setStyle("-fx-text-fill:White");
+        btnAccept.setTextFill(new Color(1, 1, 1, 1.0));
         
         btnAccept.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -71,7 +73,7 @@ public class AbsenceRequestElement {
         
         JFXButton btnDecline = new JFXButton("Decline");
         btnDecline.setStyle("-fx-background-color:#4d79ff");
-        btnDecline.setStyle("-fx-text-fill:White");
+        btnDecline.setTextFill(new Color(1, 1, 1, 1.0));
         btnDecline.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

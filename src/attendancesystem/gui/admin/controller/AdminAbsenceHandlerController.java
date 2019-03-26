@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package attendancesystem.gui.admin.view;
+package attendancesystem.gui.admin.controller;
 
 import attendancesystem.be.Absence;
 import attendancesystem.gui.elements.AbsenceRequestElement;
@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -35,6 +36,7 @@ public class AdminAbsenceHandlerController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        vbAbsence.setPadding(new Insets(5, 5, 5, 5));
         
     }    
 

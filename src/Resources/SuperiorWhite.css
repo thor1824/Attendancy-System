@@ -48,3 +48,8 @@
     -fx-background-insets : 2.0, 0.0, 0.0;
     -fx-background-radius : 0.0em;
 }
+
+#btnAbsReq {
+    -fx-background-color: gray;
+    -fx-text-fill: white;
+}

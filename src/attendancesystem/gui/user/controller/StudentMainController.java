@@ -77,7 +77,7 @@ public class StudentMainController implements Initializable
     {
         try
         {
-
+            
             grid.setStyle("-fx-border-color:black");
 
             //setPie();
