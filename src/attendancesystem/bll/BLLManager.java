@@ -79,6 +79,6 @@ public class BLLManager {
     }
     
     public void getAllAbsence(Student student) {
-        absenceDAO.getAllAbsence();
+        absenceDAO.getAllAbsence(student);
     }
 }

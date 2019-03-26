@@ -21,7 +21,7 @@ public interface AbsenceDAO
 
     void deleteAbsens();
 
-    void getAllAbsence();
+    ArrayList<Absence> getAllAbsence(Student student);
 
     ArrayList<Absence> getDocumentetAbsence(User user);
 

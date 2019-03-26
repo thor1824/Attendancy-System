@@ -6,7 +6,6 @@
 package attendancesystem.gui.admin.controller;
 
 import attendancesystem.be.Student;
-import attendancesystem.be.User;
 import attendancesystem.gui.admin.model.AdminModel;
 import java.io.IOException;
 import java.net.URL;
@@ -29,7 +28,6 @@ public class SpecificStudentInfoController implements Initializable {
 
     private AdminModel adminmodel;
     private Student student;
-    private User user;
 
     /**
      * Initializes the controller class.
@@ -45,7 +43,10 @@ public class SpecificStudentInfoController implements Initializable {
     }
 
     public void setupVBox() {
-
+        getInfo(student);
+        
+        
+        
     }
 
     public void getInfo(Student student) {

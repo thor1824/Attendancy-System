@@ -16,9 +16,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -35,7 +35,7 @@ public class AbsenceDbDao implements AbsenceDAO {
 
     @Override
     public ArrayList<Absence> getUndocumentetAbsence(Student user) throws SQLException, SQLServerException, IOException {
-  //
+        //
         String sql = "SELECT * FROM [Atendens].[dbo].[Absense] JOIN [Atendens].[dbo].[Subject] "
                 + "ON Subject.SubjectID = Absense.SubjectID "
                 + "JOIN [Atendens].[dbo].[Modul] ON Modul.ModulID = Absense.ModulID "
@@ -46,9 +46,9 @@ public class AbsenceDbDao implements AbsenceDAO {
         PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement
 
         System.out.println(user);
-        
+
         ps.setInt(1, user.getUserID());
-       
+
         ResultSet rs = ps.executeQuery();
 
         ArrayList<Absence> absenceList = new ArrayList<>();
@@ -97,22 +97,19 @@ public class AbsenceDbDao implements AbsenceDAO {
 //        //close connection
 //        //return list
 //    }
-
-    
     public void deleteAbsens(Absence absence) throws SQLException, SQLServerException, IOException {
         //to do
         Connection con = ServerConnect.getConnection();
         String sql = "DELETE FROM [Atendens].[dbo].[Absense] "
                 + "WHERE Absense.AbsenceID = (?)";
         PreparedStatement ps = con.prepareStatement(sql);
-        
+
         ps.setInt(1, absence.getAbsenceID());
-        
+
         //delete absens where userID =="input users ID"
         //check if entry was deletet
         //close connection
         //retrun true if deleted false if not
-
     }
 
     @Override
@@ -155,46 +152,48 @@ public class AbsenceDbDao implements AbsenceDAO {
         //retrun true if created false if not
     }
 
-     public ArrayList<Absence> getAllAbsens(Student student) throws IOException, SQLServerException, SQLException {
-         Connection con = ServerConnect.getConnection();
-         String sql = "SELECT * FROM [Atendens].[dbo].[Absense] WHERE StudID = (?)";
-         
-          PreparedStatement ps = con.prepareStatement(sql);
-          ps.setInt(1, student.getStuID());
-          
-          ResultSet rs = ps.executeQuery();
-          
-          ArrayList<Absence> listOfAbsens = new ArrayList<>();
-          
-           while (rs.next()) {
-           
-               int studID = rs.getInt("StudID");
-               int absenceID = rs.getInt("AbsenceID");
-               String date = rs.getNString("Date");
-               
-               
-                Absence absence = new Absence(studID, absenceID, null, null, date);
-               
-                listOfAbsens.add(absence);
-                
-                
-               
-           }
-          con.close();
-          
-          return listOfAbsens;
-        
-    }
-
     @Override
     public void deleteAbsens() {
-        
+
     }
 
     @Override
-    public void getAllAbsence() {
-        
-    }
+    public ArrayList<Absence> getAllAbsence(Student student) {
+        try {
+            Connection con = ServerConnect.getConnection();
+            String sql = "SELECT * FROM [Atendens].[dbo].[Absense] WHERE StudID = (?)";
 
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, student.getStuID());
+
+            ResultSet rs = ps.executeQuery();
+
+            ArrayList<Absence> listOfAbsens = new ArrayList<>();
+
+            while (rs.next()) {
+
+                int studID = rs.getInt("StudID");
+                int absenceID = rs.getInt("AbsenceID");
+                String date = rs.getNString("Date");
+
+                Absence absence = new Absence(studID, absenceID, null, null, date);
+
+                listOfAbsens.add(absence);
+
+            }
+            con.close();
+
+            return listOfAbsens;
+
+        } catch (SQLServerException ex) {
+            Logger.getLogger(AbsenceDbDao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AbsenceDbDao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AbsenceDbDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
 
 }
