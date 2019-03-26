@@ -81,8 +81,8 @@ public class UserModel {
     }
     
     
-    public ArrayList<Absence> getAllAbsence() throws IOException, SQLException{
-        return aDD.getAllAbsens(logedInStudent);
+    public ArrayList<Absence> getAllAbsence(Student student) throws IOException, SQLException{
+        return aDD.getAllAbsens(student);
     }
     
     

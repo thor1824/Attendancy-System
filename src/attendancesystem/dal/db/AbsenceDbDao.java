@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -186,7 +187,7 @@ public class AbsenceDbDao implements AbsenceDAO {
             String sql = "SELECT * FROM [Atendens].[dbo].[Absense] WHERE StudID = (?)";
 
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, student.getStuID());
+            ps.setInt(1, student.getStuedentId());
 
             ResultSet rs = ps.executeQuery();
 
@@ -216,6 +217,11 @@ public class AbsenceDbDao implements AbsenceDAO {
         }
         return null;
 
+    }
+
+    @Override
+    public ArrayList<Absence> getDocumentetAbsence(User user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

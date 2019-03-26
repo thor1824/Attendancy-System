@@ -9,6 +9,9 @@ import attendancesystem.be.Absence;
 import attendancesystem.be.Student;
 import attendancesystem.be.User;
 import attendancesystem.dal.AbsenceDAO;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -70,6 +73,11 @@ public class AbsenceMockDAO implements AbsenceDAO {
 
     @Override
     public ArrayList<Absence> getAllAbsence(Student student) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Absence> getAllAbsens(Student student) throws IOException, SQLServerException, SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
