@@ -27,6 +27,10 @@ public class AdminModel {
     public AdminModel() throws IOException {
         bllMan = new BLLManager();
     }
+    
+    public void getAllAbsence(Student student) {
+        bllMan.getAllAbsence(student);
+    }
 
     public List<Student> getAllStudents() throws SQLException, SQLServerException, IOException {
         if (students == null) {

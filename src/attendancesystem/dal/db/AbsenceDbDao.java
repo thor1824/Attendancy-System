@@ -155,12 +155,12 @@ public class AbsenceDbDao implements AbsenceDAO {
         //retrun true if created false if not
     }
 
-     public ArrayList<Absence> getAllAbsens(Student studnt) throws IOException, SQLServerException, SQLException {
+     public ArrayList<Absence> getAllAbsens(Student student) throws IOException, SQLServerException, SQLException {
          Connection con = ServerConnect.getConnection();
          String sql = "SELECT * FROM [Atendens].[dbo].[Absense] WHERE StudID = (?)";
          
           PreparedStatement ps = con.prepareStatement(sql);
-          ps.setInt(1, studnt.getStuID());
+          ps.setInt(1, student.getStuID());
           
           ResultSet rs = ps.executeQuery();
           
@@ -192,7 +192,7 @@ public class AbsenceDbDao implements AbsenceDAO {
     }
 
     @Override
-    public void getAllAbsens() {
+    public void getAllAbsence() {
         
     }
 
