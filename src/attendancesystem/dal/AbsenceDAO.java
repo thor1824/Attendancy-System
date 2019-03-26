@@ -24,6 +24,8 @@ public interface AbsenceDAO
 
     void deleteAbsens();
 
+    ArrayList<Absence> getAllAbsence(Student student);
+
     ArrayList<Absence> getDocumentetAbsence(User user);
 
     ArrayList<Absence> getUndocumentetAbsence(Student user) throws Exception;
@@ -31,5 +33,5 @@ public interface AbsenceDAO
     boolean updateAbsens(Absence absence) throws Exception;
 
     public ArrayList<Absence> getAllAbsens(Student student) throws IOException, SQLServerException, SQLException;
-    
+
 }
