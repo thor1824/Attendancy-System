@@ -9,6 +9,7 @@ import attendancesystem.be.Student;
 import attendancesystem.be.Absence;
 import attendancesystem.be.User;
 import attendancesystem.bll.BLLManager;
+import attendancesystem.dal.db.AbsenceDbDao;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -28,6 +29,8 @@ public class UserModel {
     BLLManager bll;
 
     BLLManager bllMan;
+    
+    AbsenceDbDao aDD;
     
     Student logedInStudent;
 
@@ -72,15 +75,15 @@ public class UserModel {
     public void setLogedInStudent(Student logedInStudent) {
         this.logedInStudent = logedInStudent;
     }
-    
-    public boolean updateAbsence(Absence absence) throws Exception{
-        return bllMan.updateAbsence(absence);
-    }
 
     public Student getLogedInStudent() {
         return logedInStudent;
     }
     
+    
+    public ArrayList<Absence> getAllAbsence() throws IOException, SQLException{
+        return aDD.getAllAbsens(logedInStudent);
+    }
     
     
 

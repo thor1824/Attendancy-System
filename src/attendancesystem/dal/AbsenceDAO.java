@@ -8,6 +8,9 @@ package attendancesystem.dal;
 import attendancesystem.be.Absence;
 import attendancesystem.be.Student;
 import attendancesystem.be.User;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -21,12 +24,12 @@ public interface AbsenceDAO
 
     void deleteAbsens();
 
-    void getAllAbsence();
-
     ArrayList<Absence> getDocumentetAbsence(User user);
 
     ArrayList<Absence> getUndocumentetAbsence(Student user) throws Exception;
 
     boolean updateAbsens(Absence absence) throws Exception;
+
+    public ArrayList<Absence> getAllAbsens(Student student) throws IOException, SQLServerException, SQLException;
     
 }
