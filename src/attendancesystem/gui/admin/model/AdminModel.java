@@ -20,23 +20,23 @@ import java.util.logging.Logger;
  * @author Nijas Hansen
  */
 public class AdminModel {
-    
-    BLLManager bllMan;
-    
 
-    public AdminModel() throws IOException
-    {
+    private BLLManager bllMan;
+    List<Student> students;
+
+    public AdminModel() throws IOException {
         bllMan = new BLLManager();
     }
-    
-    
-    
+
     public List<Student> getAllStudents() throws SQLException, SQLServerException, IOException {
-        return bllMan.getAllStudents();
+        if (students == null) {
+            students = bllMan.getAllStudents();
+        }
+
+        return students;
     }
-   
-    public User handleLoginRequestMock(String username, String password)
-    {
+
+    public User handleLoginRequestMock(String username, String password) {
         try {
             return bllMan.handleLoginRequestTeacher(username, password);
         } catch (IOException ex) {
@@ -46,11 +46,10 @@ public class AdminModel {
         }
         return null;
     }
-    
+
 //    public User handleLoginRequestReal(String username, String password)
 //    {
 //        User user = bllMan.handleLoginRequestReal(username, password);
 //        return User;
 //    }
-    
 }

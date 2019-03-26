@@ -7,11 +7,13 @@ package attendancesystem.dal;
 
 import attendancesystem.bll.PasswordEncryptor;
 import attendancesystem.dal.db.Server.ServerConnect;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Random;
@@ -21,15 +23,13 @@ import java.util.Random;
  * @author Thorbjørn Schultz Damkjær
  */
 public class DataToServerMigration {
-    
 
     private static ServerConnect sc;
     private static String[] classes = {"CSa2018", "CSb2018", "EEa2018", "EEb2018", "MEa2018", "MEb2018", "MDa2018", "MDb2018", "EZa2018", "EZb2018"};
     private static String[] Zip = {"6760", "6700", "6715", "6705", "6630"};
-    private static String[][] startEND = {{"09:00", "11:30"}, {"12:00","13:30"}};
+    private static String[][] startEND = {{"09:00", "11:30"}, {"12:00", "13:30"}};
 
-    
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SQLException {
         sc = new ServerConnect();
         //System.out.println(PasswordEncryptor.encryptPassword("testelev"));
         ////mitigateClasses();
@@ -37,7 +37,8 @@ public class DataToServerMigration {
         ////mitigateStudent();
         ////mitigateTeacher();
         ////mitigateSubjects();
-        
+        daysOfClass();
+
     }
 
     public static void mitigateStudent() throws IOException {
@@ -70,7 +71,7 @@ public class DataToServerMigration {
 
                         statement.execute("INSERT INTO [Atendens].[dbo].[Student] "
                                 + "(UserID, StuLName, StuFName, ClassID, Phone, Email, Adress, ZipCode, Cpr, StuPicUrl) "
-                                + "VALUES (" + UserID + ", '" + lName + "', '" + fName + "', " + classid + ", '" + phone + "', '" + email + "', '" + adresse+ "', '" + zipCode + "', '"+ cpr + "', '" +picURL +"');");
+                                + "VALUES (" + UserID + ", '" + lName + "', '" + fName + "', " + classid + ", '" + phone + "', '" + email + "', '" + adresse + "', '" + zipCode + "', '" + cpr + "', '" + picURL + "');");
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -82,7 +83,7 @@ public class DataToServerMigration {
             ex.printStackTrace();
         }
     }
-    
+
     public static void mitigateTeacher() throws IOException {
         String userSauce = "src/MockData/TeacherMockData.txt";
         try (Connection con = sc.getConnection()) {
@@ -112,7 +113,7 @@ public class DataToServerMigration {
 
                         statement.execute("INSERT INTO [Atendens].[dbo].[Teacher] "
                                 + "(UserID, TeachLName, TeachFName, Phone, Email, Adress, ZipCode, Cpr, TeachPicUrl, AccesLvl) "
-                                + "VALUES (" + UserID + ", '" + lName + "', '" + fName  + "', '" + phone + "', '" + email + "', '" + adresse+ "', '" + zipCode + "', '"+ cpr + "', '" +picURL + "', " + "2" +");");
+                                + "VALUES (" + UserID + ", '" + lName + "', '" + fName + "', '" + phone + "', '" + email + "', '" + adresse + "', '" + zipCode + "', '" + cpr + "', '" + picURL + "', " + "2" + ");");
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -124,7 +125,7 @@ public class DataToServerMigration {
             ex.printStackTrace();
         }
     }
-    
+
     public static void mitigateUsers() throws IOException {
         String userSauce = "src/MockData/UserMockDATA.txt";
         try (Connection con = sc.getConnection()) {
@@ -141,7 +142,6 @@ public class DataToServerMigration {
                     try {
                         String[] arrUser = line.split(",");
 
-                        
                         String userName = arrUser[0];
                         String Password = arrUser[1];
                         String encryptedPassword = PasswordEncryptor.encryptPassword(Password);
@@ -160,7 +160,21 @@ public class DataToServerMigration {
             ex.printStackTrace();
         }
     }
-    
+
+    public static void daysOfClass() throws SQLException, SQLServerException, IOException {
+
+        for (int i = 0; i < 348; i++) {
+            Connection con = sc.getConnection();
+            String Sql = "Update [Atendens].[dbo].[Student] "
+                    + "set Days_of_classes = 100 "
+                    + "WHERE Student.StuID = ?;";
+            PreparedStatement ps = con.prepareStatement(Sql);
+            ps.setInt(1, i);
+            ps.execute();
+        }
+        
+    }
+
     public static void mitigateSubjects() throws IOException {
         String userSauce = "src/MockData/SubjectMockData.txt";
         try (Connection con = sc.getConnection()) {
@@ -177,7 +191,6 @@ public class DataToServerMigration {
                     try {
                         String[] arrUser = line.split(",");
 
-                        
                         String teachID = arrUser[0];
                         String name = arrUser[1];
                         String classID = arrUser[2];
@@ -209,7 +222,6 @@ public class DataToServerMigration {
             e.printStackTrace();
         }
     }
-
 
     public static void mitigateAbsense() throws IOException {
         String userSauce = "";
@@ -275,7 +287,7 @@ public class DataToServerMigration {
                 cpr += tmp_String;
             }
         }
-        
+
         cpr += String.valueOf(rng.nextInt((90 - 40) + 1) + 40);
         cpr += "-" + String.valueOf(rng.nextInt((9999 - 1000) + 1) + 1000);
         return cpr;

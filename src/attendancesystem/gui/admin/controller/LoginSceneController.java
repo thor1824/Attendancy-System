@@ -5,7 +5,6 @@
  */
 package attendancesystem.gui.admin.controller;
 
-import attendancesystem.be.Teacher;
 import attendancesystem.be.User;
 import attendancesystem.gui.admin.model.AdminModel;
 import com.jfoenix.controls.JFXButton;
@@ -23,7 +22,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
