@@ -47,6 +47,7 @@ public class StudentDbDao implements StudentDAO
         while (rs.next())
         {
             int stuID = rs.getInt("StuID");
+            int Days_of_classes = rs.getInt("Days_of_classes");
             String stuLName = rs.getNString("StuLName");
             String stuFName = rs.getNString("StuFName");
             String stuClass = rs.getNString("ClassName");
@@ -56,8 +57,9 @@ public class StudentDbDao implements StudentDAO
             String stuZip = rs.getNString("ZipCode");
             String stuCPR = rs.getNString("Cpr");
             String stuPicUrl = rs.getNString("StuPicURL");
+            
 
-            Student stu = new Student(stuID, stuFName, stuLName, stuEmail, stuPhone, stuCPR, stuAdress, stuZip, stuClass, stuPicUrl);
+            Student stu = new Student(stuID, stuFName, stuLName, stuEmail, stuPhone, stuCPR, stuAdress, stuZip, stuClass, stuPicUrl, Days_of_classes);
             //put Student in list
             students.add(stu);
         }
@@ -151,6 +153,7 @@ public class StudentDbDao implements StudentDAO
     public Student getStudent(int id) throws SQLServerException, IOException, SQLException
     {
         String sql = "";
+        int days_of_classes = 0;
         Connection con = ServerConnect.getConnection(); //create connection
         PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement
         ResultSet rs = ps.executeQuery(); //get Student where userID =="input users ID"
@@ -159,7 +162,7 @@ public class StudentDbDao implements StudentDAO
         {
 
             con.close();
-            return new Student(id, sql, sql, sql, sql, sql, sql, sql, sql, sql);
+            return new Student(id, sql, sql, sql, sql, sql, sql, sql, sql, sql, days_of_classes);
         }
         con.close();
 

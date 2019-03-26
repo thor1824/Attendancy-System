@@ -35,7 +35,7 @@ public class AbsenceDbDao implements AbsenceDAO {
 
     @Override
     public ArrayList<Absence> getUndocumentetAbsence(Student user) throws SQLException, SQLServerException, IOException {
-
+  //
         String sql = "SELECT * FROM [Atendens].[dbo].[Absense] JOIN [Atendens].[dbo].[Subject] "
                 + "ON Subject.SubjectID = Absense.SubjectID "
                 + "JOIN [Atendens].[dbo].[Modul] ON Modul.ModulID = Absense.ModulID "
@@ -87,22 +87,27 @@ public class AbsenceDbDao implements AbsenceDAO {
         return null;
     }
 
-    @Override
-    public void getAllAbsens() {
-        //to do
-        //create connection
-        //create prepared Statement
-        //get all absens where userID =="input users ID"
-        //put in list
-        //close connection
-        //return list
-    }
+//    @Override
+//    public void getAllAbsens(User user) throws SQLServerException, IOException {
+//        //to do
+//         Connection con = ServerConnect.getConnection();
+//        String sql = "SELECT * FROM [Atendens].[dbo].[Absense]  "
+//        //get all absens where userID =="input users ID"
+//        //put in list
+//        //close connection
+//        //return list
+//    }
 
-    @Override
-    public void deleteAbsens() {
+    
+    public void deleteAbsens(Absence absence) throws SQLException, SQLServerException, IOException {
         //to do
-        //create connection
-        //create prepared Statement
+        Connection con = ServerConnect.getConnection();
+        String sql = "DELETE FROM [Atendens].[dbo].[Absense] "
+                + "WHERE Absense.AbsenceID = (?)";
+        PreparedStatement ps = con.prepareStatement(sql);
+        
+        ps.setInt(1, absence.getAbsenceID());
+        
         //delete absens where userID =="input users ID"
         //check if entry was deletet
         //close connection
@@ -149,5 +154,47 @@ public class AbsenceDbDao implements AbsenceDAO {
         //close connection
         //retrun true if created false if not
     }
+
+     public ArrayList<Absence> getAllAbsens(Student studnt) throws IOException, SQLServerException, SQLException {
+         Connection con = ServerConnect.getConnection();
+         String sql = "SELECT * FROM [Atendens].[dbo].[Absense] WHERE StudID = (?)";
+         
+          PreparedStatement ps = con.prepareStatement(sql);
+          ps.setInt(1, studnt.getStuID());
+          
+          ResultSet rs = ps.executeQuery();
+          
+          ArrayList<Absence> listOfAbsens = new ArrayList<>();
+          
+           while (rs.next()) {
+           
+               int studID = rs.getInt("StudID");
+               int absenceID = rs.getInt("AbsenceID");
+               String date = rs.getNString("Date");
+               
+               
+                Absence absence = new Absence(studID, absenceID, null, null, date);
+               
+                listOfAbsens.add(absence);
+                
+                
+               
+           }
+          con.close();
+          
+          return listOfAbsens;
+        
+    }
+
+    @Override
+    public void deleteAbsens() {
+        
+    }
+
+    @Override
+    public void getAllAbsens() {
+        
+    }
+
 
 }

@@ -31,6 +31,10 @@ public class Absence {
         this.modulTimePeriod = modulTimePeriod;
     }
 
+    public Absence(int studID, int absenceID, Object object, Object object0, String date) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getStudID() {
         return studID;
     }

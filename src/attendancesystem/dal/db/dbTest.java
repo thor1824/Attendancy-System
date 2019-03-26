@@ -20,7 +20,7 @@ public class dbTest
     public static void main(String[] args) throws IOException, SQLException
     {
         StudentDAO sd = new StudentDbDao();
-        Student test = new Student(0, "test", "test", "test", "test", "test", "test", "test", "CSa2018", "test");
+        Student test = new Student(0, "test", "test", "test", "test", "test", "test", "test", "CSa2018", "test", 0);
         
         System.out.println(sd.createStudent(test, "test", PasswordEncryptor.encryptPassword("test")));
         
