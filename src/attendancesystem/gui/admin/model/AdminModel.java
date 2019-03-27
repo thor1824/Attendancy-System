@@ -5,12 +5,14 @@
  */
 package attendancesystem.gui.admin.model;
 
+import attendancesystem.be.Absence;
 import attendancesystem.be.Student;
 import attendancesystem.be.User;
 import attendancesystem.bll.BLLManager;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,8 +30,8 @@ public class AdminModel {
         bllMan = new BLLManager();
     }
     
-    public void getAllAbsence(Student student) {
-        bllMan.getAllAbsence(student);
+    public ArrayList<Absence> getAllAbsence(Student student) {
+        return bllMan.getAllAbsence(student);
     }
 
     public List<Student> getAllStudents() throws SQLException, SQLServerException, IOException {
