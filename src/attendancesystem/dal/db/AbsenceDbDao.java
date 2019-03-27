@@ -9,6 +9,7 @@ import attendancesystem.dal.db.Server.ServerConnect;
 import attendancesystem.dal.AbsenceDAO;
 import attendancesystem.be.Absence;
 import attendancesystem.be.Student;
+import attendancesystem.be.Teacher;
 import attendancesystem.be.User;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
@@ -89,7 +90,7 @@ public class AbsenceDbDao implements AbsenceDAO {
          String sql = "SELECT * FROM [Atendens].[dbo].[Absense] WHERE StudID = (?)";
 
           PreparedStatement ps = con.prepareStatement(sql);
-          ps.setInt(1, studnt.getStuedentId());
+          ps.setInt(1, studnt.getStuID());
 
           ResultSet rs = ps.executeQuery();
 
@@ -127,7 +128,7 @@ public class AbsenceDbDao implements AbsenceDAO {
           int linesAffected = ps.executeUpdate();
 
          ps.setInt(1, absence.getAbsenceID());
-         ps.setInt(2, student.getStuedentId());
+         ps.setInt(2, student.getStuID());
 
          con.close();
 
@@ -187,7 +188,7 @@ public class AbsenceDbDao implements AbsenceDAO {
             String sql = "SELECT * FROM [Atendens].[dbo].[Absense] WHERE StudID = (?)";
 
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, student.getStuedentId());
+            ps.setInt(1, student.getStuID());
 
             ResultSet rs = ps.executeQuery();
 
@@ -221,6 +222,11 @@ public class AbsenceDbDao implements AbsenceDAO {
 
     @Override
     public ArrayList<Absence> getDocumentetAbsence(User user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Absence> getAllRequestAbence(Teacher teacher) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

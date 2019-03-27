@@ -7,6 +7,7 @@ package attendancesystem.gui.admin.controller;
 
 import attendancesystem.be.Absence;
 import attendancesystem.be.Student;
+import attendancesystem.be.Teacher;
 import attendancesystem.be.User;
 import attendancesystem.gui.admin.model.AdminModel;
 import attendancesystem.gui.elements.UserElement;
@@ -23,6 +24,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
@@ -53,10 +55,12 @@ public class AdminViewController implements Initializable
     private FilteredList<User> searchList;
     private SortedList<User> sortedData;
     private int maxLoad = 30;
-    List<Student> students;
-    ArrayList<UserElement> arr;
-    List<Student> Students;
-
+    private List<Student> students;
+    private ArrayList<UserElement> arr;
+    private List<Student> Students;
+    private List<Absence> requestAbsense;
+    private Teacher loggedInTeacher;
+    
     @FXML
     private VBox hbxUserOverview;
     @FXML
@@ -76,6 +80,7 @@ public class AdminViewController implements Initializable
     private JFXButton btnAbsReq;
     @FXML
     private Label lblReqCount;
+    
 
     /**
      * Initializes the controller class.
@@ -90,15 +95,14 @@ public class AdminViewController implements Initializable
             try
             {
                 model = new AdminModel();
+                students = model.getAllStudents();
             } catch (IOException ex)
             {
                 Logger.getLogger(AdminViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+            setUpAbsenceRequest();
             ArrayList<UserElement> arr = new ArrayList<>();
-
-            ArrayList<Student> lessStudents = new ArrayList<>();
-            students = model.getAllStudents();
+            
             Instant start = Instant.now();
 
             for (int i = 0; i < maxLoad; i++)
@@ -109,12 +113,10 @@ public class AdminViewController implements Initializable
             }
 
             Instant finish = Instant.now();
-
             long elapsedTime = Duration.between(start, finish).toMillis();
-
             System.out.println(elapsedTime + " ms");
 
-            //test ersattest med metode de gør med list<Student/user?>
+            
             hbxUserOverview.setSpacing(12);
 
             spUsers.setFitToWidth(true);
@@ -147,9 +149,6 @@ public class AdminViewController implements Initializable
             });
 
         } catch (SQLException ex)
-        {
-            Logger.getLogger(AdminViewController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex)
         {
             Logger.getLogger(AdminViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -275,5 +274,10 @@ public class AdminViewController implements Initializable
         
         newStage.showAndWait();
 
+    }
+
+    private void setUpAbsenceRequest() {
+//        ObservableList<Absence> bob =  
+//                = model.getAllRequestAbence(loggedInTeacher);
     }
 }

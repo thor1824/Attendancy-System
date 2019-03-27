@@ -7,6 +7,7 @@ package attendancesystem.gui.admin.model;
 
 import attendancesystem.be.Absence;
 import attendancesystem.be.Student;
+import attendancesystem.be.Teacher;
 import attendancesystem.be.User;
 import attendancesystem.bll.BLLManager;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -24,7 +25,8 @@ import java.util.logging.Logger;
 public class AdminModel {
 
     private BLLManager bllMan;
-    List<Student> students;
+    private List<Student> students;
+    private List<Absence> requestAbsences;
 
     public AdminModel() throws IOException {
         bllMan = new BLLManager();
@@ -32,6 +34,14 @@ public class AdminModel {
     
     public ArrayList<Absence> getAllAbsence(Student student) {
         return bllMan.getAllAbsence(student);
+    }
+    
+    public List<Absence> getAllRequestAbence(Teacher teacher)
+    {
+        if (requestAbsences == null) {
+            requestAbsences = bllMan.getAllRequestAbence(teacher);
+        }
+        return requestAbsences;
     }
 
     public List<Student> getAllStudents() throws SQLException, SQLServerException, IOException {

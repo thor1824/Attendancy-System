@@ -7,11 +7,13 @@ package attendancesystem.dal;
 
 import attendancesystem.be.Absence;
 import attendancesystem.be.Student;
+import attendancesystem.be.Teacher;
 import attendancesystem.be.User;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -33,5 +35,7 @@ public interface AbsenceDAO
     boolean updateAbsens(Absence absence) throws Exception;
 
     public ArrayList<Absence> getAllAbsens(Student student) throws IOException, SQLServerException, SQLException;
+
+    public List<Absence> getAllRequestAbence(Teacher teacher);
 
 }
