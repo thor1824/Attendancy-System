@@ -39,10 +39,16 @@ public class AbsenceDbDao implements AbsenceDAO {
     @Override
     public ArrayList<Absence> getUndocumentetAbsence(Student user) throws SQLException, SQLServerException, IOException {
 
-        String sql = "SELECT * FROM [Atendens].[dbo].[Absense] JOIN [Atendens].[dbo].[Subject] "
-                + "ON Subject.SubjectID = Absense.SubjectID"
-                + "JOIN [Atendens].[dbo].[Modul] ON Modul.ModulID = Absense.ModulID"
-                + "WHERE StudID = (?) AND Reason = (?)";
+        String sql = "SELECT * FROM [Atendens].[dbo].[Absense] WHERE StudID = (?) " +
+                    "AND DialogBox IS NULL" +
+                    "AND Reason IS NULL";
+                
+                
+               
+//                + "JOIN [Atendens].[dbo].[Subject] "
+//                + "ON Subject.SubjectID = Absense.SubjectID"
+//                + "JOIN [Atendens].[dbo].[Modul] ON Modul.ModulID = Absense.ModulID"
+//                + "WHERE StudID = (?) AND Reason = (?)";
 
         Connection con = ServerConnect.getConnection(); //create connection
 
@@ -51,7 +57,7 @@ public class AbsenceDbDao implements AbsenceDAO {
         System.out.println(user);
 
         ps.setInt(1, user.getUserID());
-        ps.setNull(2, Types.NVARCHAR);
+       // ps.setNull(2, Types.NVARCHAR);
 
         ResultSet rs = ps.executeQuery();
 
@@ -60,13 +66,12 @@ public class AbsenceDbDao implements AbsenceDAO {
         while (rs.next()) {
 
             int studID = rs.getInt("StudID");
-            String toa = rs.getNString("TOA");
             String date = rs.getNString("Date");
             int absenceID = rs.getInt("AbsenceID");
 
 
-            Absence ab = new Absence(studID, absenceID, null, null, date);
-            ab.setToa(toa);
+            Absence ab = new Absence(studID, absenceID, date, null, null);
+           
 
             absenceList.add(ab);
         }
@@ -221,14 +226,45 @@ public class AbsenceDbDao implements AbsenceDAO {
     }
 
     @Override
-    public ArrayList<Absence> getDocumentetAbsence(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<Absence> getDocumentetAbsence(Student student) throws SQLException, SQLServerException, IOException{
+        Connection con = ServerConnect.getConnection();
+            String sql = "SELECT * FROM [Atendens].[dbo].[Absense] WHERE StudID = (?) " +
+                    "AND DialogBox IS NOT NULL" +
+                    "AND Reason IS NOT NULL";
+                    //"AND approved IS NOT NULL"; +
+//                    "AND WHERE approved > (?)";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, student.getStuID());
+            //ps.setInt(2, 0);
+            
+             ResultSet rs = ps.executeQuery();
+             
+             ArrayList<Absence> listOfDocumentetAbsence = new ArrayList<>();
+             
+             while (rs.next()) {
+                
+                int studID = rs.getInt("StudID");
+                int absenceID = rs.getInt("AbsenceID");
+                String date = rs.getNString("Date");
+                //String reason = rs.getNString("Reason");
+                //String dialogBox = rs.getNString("DialogBox");
+                
+                Absence absence = new Absence(studID, absenceID, date, null, null);
+                
+                listOfDocumentetAbsence.add(absence);
+                 
+             }
+            
+           return listOfDocumentetAbsence;
     }
 
     @Override
     public List<Absence> getAllRequestAbence(Teacher teacher) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+   
 
 
 

@@ -28,7 +28,7 @@ public interface AbsenceDAO
 
     ArrayList<Absence> getAllAbsence(Student student);
 
-    ArrayList<Absence> getDocumentetAbsence(User user);
+    ArrayList<Absence> getDocumentetAbsence(Student student) throws Exception;
 
     ArrayList<Absence> getUndocumentetAbsence(Student user) throws Exception;
 
