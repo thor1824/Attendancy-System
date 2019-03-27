@@ -49,7 +49,7 @@ public class UserModel {
 //
 //        return date and time
 //    }
-    public PieChart getPieChard(User user) {
+    public PieChart getPieChard(User user) throws SQLException, SQLServerException, IOException {
         return bllMan.getPieChart(user);
     }
 
