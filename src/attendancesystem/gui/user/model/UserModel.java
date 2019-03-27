@@ -30,7 +30,7 @@ public class UserModel {
 
     BLLManager bllMan;
     
-    AbsenceDbDao aDD;
+    AbsenceDbDao absenceDbDao;
     
     Student logedInStudent;
 
@@ -82,8 +82,13 @@ public class UserModel {
     
     
     public ArrayList<Absence> getAllAbsence(Student student) throws IOException, SQLException{
-        return aDD.getAllAbsens(student);
+        return absenceDbDao.getAllAbsens(student);
     }
+    
+    public boolean updateAbsence(Absence absnece) throws IOException, SQLException{
+        return absenceDbDao.updateAbsens(absnece);
+    }
+   
     
     
 

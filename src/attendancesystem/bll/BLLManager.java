@@ -30,22 +30,22 @@ import java.util.List;
  */
 public class BLLManager {
 
-    private TeacherDAO teachDAO;
-    private StudentDAO studentDAO;
-    private AbsenceDAO absenceDAO;
+    private TeacherDAO teachDao;
+    private StudentDAO studentDao;
+    private AbsenceDAO absenceDao;
     private LoginDAO loginDao;
 
 
     public BLLManager() throws IOException {
       loginDao = new LoginDbDao();
-      teachDAO = new TeacherMockDAO();
-      absenceDAO = new AbsenceDbDao();
-      studentDAO = new StudentDbDao();
+      teachDao = new TeacherMockDAO();
+      absenceDao = new AbsenceDbDao();
+      studentDao = new StudentDbDao();
 
     }
 
     public List<Student> getAllStudents() throws SQLException, SQLServerException, IOException {
-        return studentDAO.getAllStudents();
+        return studentDao.getAllStudents();
     }
 
     public Teacher handleLoginRequestTeacher(String username, String password) throws IOException, SQLException {
@@ -63,15 +63,15 @@ public class BLLManager {
     }
 
     public ArrayList<Absence> getUndocumentetAbsence(Student user) throws Exception {
-        return absenceDAO.getUndocumentetAbsence(user);
+        return absenceDao.getUndocumentetAbsence(user);
     }
 
     public javafx.scene.chart.PieChart getPieChart(User user) {
-        return PieChart.buildPieChard(user, studentDAO);
+        return PieChart.buildPieChard(user, studentDao);
     }
     
     public boolean updateAbsence(Absence absence) throws Exception{
-        return absenceDAO.updateAbsens(absence);
+        return absenceDao.updateAbsens(absence);
     }
     
     public String sendToDb(String value){
@@ -79,6 +79,10 @@ public class BLLManager {
     }
     
     public void getAllAbsence(Student student) {
-        absenceDAO.getAllAbsence(student);
+        absenceDao.getAllAbsence(student);
+    }
+
+    public List<Absence> getAllRequestAbence(Teacher teacher) {
+        return absenceDao.getAllRequestAbence(teacher);
     }
 }
