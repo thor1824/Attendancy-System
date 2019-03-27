@@ -213,5 +213,19 @@ public class StudentDbDao implements StudentDAO
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public int daysOfClass(Student student) throws SQLServerException, IOException, SQLException{
+     
+        String sql = "SELECT Days_of_classes FROM [Atendens].[dbo].[Student] WHERE StudID = (?)";
+        Connection con = ServerConnect.getConnection(); 
+        PreparedStatement ps = con.prepareStatement(sql); 
+        
+         ps.setInt(1, student.getStuID());
+        int daysofclass = Integer.parseInt(sql);
+        
+        return daysofclass;
+    }
+    
+    
 
 }
