@@ -64,7 +64,7 @@ public class UserModel {
         return null;
     }
 
-    public ArrayList<Absence> getUndocumentetAbsence(Student user) throws Exception {
+    public List<Absence> getUndocumentetAbsence(Student user) throws Exception {
         return bllMan.getUndocumentetAbsence(user);
     }
 
@@ -81,7 +81,7 @@ public class UserModel {
     }
     
     
-    public ArrayList<Absence> getAllAbsence(Student student) throws IOException, SQLException{
+    public List<Absence> getAllAbsence(Student student) throws IOException, SQLException{
         return absenceDbDao.getAllAbsence(student);
     }
     

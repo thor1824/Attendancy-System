@@ -20,8 +20,6 @@ import attendancesystem.dal.db.LoginDbDao;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
 import java.sql.SQLException;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -62,7 +60,7 @@ public class BLLManager {
         return loginDao.handleLoginRequestStudent(username, hashedPassword);
     }
 
-    public ArrayList<Absence> getUndocumentetAbsence(Student user) throws Exception {
+    public List<Absence> getUndocumentetAbsence(Student user) throws Exception {
         return absenceDao.getUndocumentetAbsence(user);
     }
 
@@ -78,7 +76,7 @@ public class BLLManager {
         return value;
     }
 
-    public ArrayList<Absence> getAllAbsence(Student student) throws Exception {
+    public List<Absence> getAllAbsence(Student student) throws Exception {
         return absenceDao.getAllAbsence(student);
     }
 

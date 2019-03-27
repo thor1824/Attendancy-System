@@ -11,50 +11,23 @@ package attendancesystem.be;
  */
 public class Absence {
 
-    private int studID;
+    private String stuFullName;
     private int absenceID;
-    private String subjectID;
-    private String toa;
+    private String stuClass;
     private String reason;
-    private String dialogBox;
+    private String explanation;
     private String date;
-    private String modulTimePeriod;
+    
 
-    public Absence(int studID, int absenceID, String subjectID, String reason, String dialogBox, String date, String modulTimePeriod) {
-        this.studID = studID;
+    public Absence(String StuFullName, int absenceID, String stuClass, String reason, String explanation, String date) {
+        this.stuFullName = stuFullName;
         this.absenceID = absenceID;
-        this.subjectID = subjectID;
-        this.toa = "not arrived";
+        this.stuClass = stuClass;
         this.reason = reason;
-        this.dialogBox = dialogBox;
+        this.explanation = explanation;
         this.date = date;
-        this.modulTimePeriod = modulTimePeriod;
     }
-
-    public Absence(int studID, int absenceID, Object object, Object object0, String date) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public int getStudID() {
-        return studID;
-    }
-
-    public String getSubjectID() {
-        return subjectID;
-    }
-
-    public void setSubjectID(String subjectID) {
-        this.subjectID = subjectID;
-    }
-
-    public String getToa() {
-        return toa;
-    }
-
-    public void setToa(String toa) {
-        this.toa = toa;
-    }
-
+    
     public String getReason() {
         return reason;
     }
@@ -63,12 +36,12 @@ public class Absence {
         this.reason = reason;
     }
 
-    public String getDialogBox() {
-        return dialogBox;
+    public String getExplanation() {
+        return explanation;
     }
 
-    public void setDialogBox(String dialogBox) {
-        this.dialogBox = dialogBox;
+    public void setExplanation(String dialogBox) {
+        this.explanation = dialogBox;
     }
 
     public String getDate() {
@@ -79,16 +52,30 @@ public class Absence {
         this.date = date;
     }
 
-    public String getModulTimePeriod() {
-        return modulTimePeriod;
-    }
-
-    public void setModulTimePeriod(String modulTimePeriod) {
-        this.modulTimePeriod = modulTimePeriod;
-    }
 
     public int getAbsenceID() {
         return absenceID;
+    }
+
+    public String getStuFullName() {
+        return stuFullName;
+    }
+
+    public void setStuFullName(String stuFullName) {
+        this.stuFullName = stuFullName;
+    }
+
+    public String getStuClass() {
+        return stuClass;
+    }
+
+    public void setStuClass(String stuClass) {
+        this.stuClass = stuClass;
+    }
+
+    @Override
+    public String toString() {
+        return stuFullName + "  "  + stuClass + "  " + reason + "  " + explanation + "  " + date;
     }
 
     

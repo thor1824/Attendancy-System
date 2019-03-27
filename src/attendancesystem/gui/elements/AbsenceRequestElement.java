@@ -88,7 +88,7 @@ public class AbsenceRequestElement {
     }
 
     private void generateLabels() {
-        Label lblName = new Label(""+absence.getStudID());
+        Label lblName = new Label(""+absence.getStuFullName());
         lblName.setWrapText(true);
         lblName.setAlignment(Pos.CENTER_LEFT);
         
@@ -97,7 +97,7 @@ public class AbsenceRequestElement {
         AnchorPane.setBottomAnchor(lblName, 0.0);
         AnchorPane.setLeftAnchor(lblName, 10.0);
         
-        Label lblClass = new Label(""+absence.getSubjectID());
+        Label lblClass = new Label(""+absence.getStuClass());
         ap.getChildren().add(lblClass);
         AnchorPane.setBottomAnchor(lblClass, LBL_HIGHT);
         AnchorPane.setLeftAnchor(lblClass, 110.0);

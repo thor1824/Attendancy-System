@@ -47,8 +47,7 @@ public class AbsencentModulElement {
 
         
         Label lblDato = new Label(absence.getDate());
-        Label lblFag = new Label(absence.getSubjectID());
-        Label lblModul = new Label(absence.getModulTimePeriod());
+        Label lblFag = new Label(absence.getStuClass());
         ap = new AnchorPane();
 
         ObservableList element = FXCollections.observableArrayList(
@@ -59,15 +58,13 @@ public class AbsencentModulElement {
         JFXComboBox comBox = new JFXComboBox(element);
         comBox.setPromptText("Vælg fraværsårsag:");
 
-        ap.getChildren().addAll(lblDato, lblFag, lblModul, comBox);
+        ap.getChildren().addAll(lblDato, lblFag, comBox);
         ap.setStyle("-fx-border-color:black");
         lblDato.setLayoutX(lbl3);
         lblFag.setLayoutX(lbl1);
-        lblModul.setLayoutX(lbl2);
         comBox.setLayoutX(comboBox);
         lblDato.setLayoutY(lblVeticalMargin);
         lblFag.setLayoutY(lblVeticalMargin);
-        lblModul.setLayoutY(lblVeticalMargin);
         comBox.setLayoutY(lblVeticalMargin + ((comBox.getHeight() - lblHeight) / 2));
 
         comBox.setOnAction((Event event) -> {

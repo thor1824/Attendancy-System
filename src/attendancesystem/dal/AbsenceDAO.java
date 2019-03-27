@@ -27,13 +27,13 @@ public interface AbsenceDAO
     boolean deleteAbsence() throws Exception;
 
 
-    ArrayList<Absence> getDocumentetAbsence(Student student) throws Exception;
+    public List<Absence> getDocumentetAbsence(Student student) throws Exception;
 
-    ArrayList<Absence> getUndocumentetAbsence(Student user) throws Exception;
+    public List<Absence> getUndocumentetAbsence(Student user) throws Exception;
 
     boolean updateAbsence(Absence absence) throws Exception;
 
-    public ArrayList<Absence> getAllAbsence(Student student) throws Exception;
+    public List<Absence> getAllAbsence(Student student) throws Exception;
 
     public List<Absence> getAllRequestAbence(Teacher teacher) throws Exception;
 
