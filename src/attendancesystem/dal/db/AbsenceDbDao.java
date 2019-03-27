@@ -167,10 +167,7 @@ public class AbsenceDbDao implements AbsenceDAO {
 
     }
 
-    @Override
-    public ArrayList<Absence> getDocumentetAbsence(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 
     @Override
     public List<Absence> getAllRequestAbence(Teacher teacher) {
