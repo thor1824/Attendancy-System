@@ -42,9 +42,9 @@ public class AbsenceDbDao implements AbsenceDAO {
         String sql = "SELECT * FROM [Atendens].[dbo].[Absense] WHERE StudID = (?) " +
                     "AND DialogBox IS NULL" +
                     "AND Reason IS NULL";
-                
-                
-               
+
+
+
 //                + "JOIN [Atendens].[dbo].[Subject] "
 //                + "ON Subject.SubjectID = Absense.SubjectID"
 //                + "JOIN [Atendens].[dbo].[Modul] ON Modul.ModulID = Absense.ModulID"
@@ -71,7 +71,7 @@ public class AbsenceDbDao implements AbsenceDAO {
 
 
             Absence ab = new Absence(studID, absenceID, date, null, null);
-           
+
 
             absenceList.add(ab);
         }
@@ -90,7 +90,7 @@ public class AbsenceDbDao implements AbsenceDAO {
      * @throws SQLException
      */
     @Override
-    public ArrayList<Absence> getAllAbsens(Student studnt) throws IOException, SQLServerException, SQLException {
+    public ArrayList<Absence> getAllAbsence(Student studnt) throws IOException, SQLServerException, SQLException {
          Connection con = ServerConnect.getConnection();
          String sql = "SELECT * FROM [Atendens].[dbo].[Absense] WHERE StudID = (?)";
 
@@ -146,7 +146,7 @@ public class AbsenceDbDao implements AbsenceDAO {
     }
 
     @Override
-    public boolean updateAbsens(Absence absence) throws SQLException, SQLServerException, IOException {
+    public boolean updateAbsence(Absence absence) throws SQLException, SQLServerException, IOException {
         String sql = "UPDATE [Atendens].[dbo].[Absense] "
                 + "SET Reason = (?), DialogBox = (?)"
                 + "WHERE AbsenceID = (?)";
@@ -168,61 +168,13 @@ public class AbsenceDbDao implements AbsenceDAO {
     }
 
     @Override
-    public void createAbsens() {
-        //to do
-        //create connection
-        //create prepared Statement
-        //create absens where userID =="input users ID"
-        //check if entry was created
-        //close connection
-        //retrun true if created false if not
-    }
-
-    @Override
-    public void deleteAbsens() {
+    public ArrayList<Absence> getDocumentetAbsence(User user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-
-
-
     @Override
-    public ArrayList<Absence> getAllAbsence(Student student) {
-        try {
-            Connection con = ServerConnect.getConnection();
-            String sql = "SELECT * FROM [Atendens].[dbo].[Absense] WHERE StudID = (?)";
-
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, student.getStuID());
-
-            ResultSet rs = ps.executeQuery();
-
-            ArrayList<Absence> listOfAbsens = new ArrayList<>();
-
-            while (rs.next()) {
-
-                int studID = rs.getInt("StudID");
-                int absenceID = rs.getInt("AbsenceID");
-                String date = rs.getNString("Date");
-
-                Absence absence = new Absence(studID, absenceID, null, null, date);
-
-                listOfAbsens.add(absence);
-
-            }
-            con.close();
-
-            return listOfAbsens;
-
-        } catch (SQLServerException ex) {
-            Logger.getLogger(AbsenceDbDao.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(AbsenceDbDao.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(AbsenceDbDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-
+    public List<Absence> getAllRequestAbence(Teacher teacher) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -237,34 +189,39 @@ public class AbsenceDbDao implements AbsenceDAO {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, student.getStuID());
             //ps.setInt(2, 0);
-            
+
              ResultSet rs = ps.executeQuery();
-             
+
              ArrayList<Absence> listOfDocumentetAbsence = new ArrayList<>();
-             
+
              while (rs.next()) {
-                
+
                 int studID = rs.getInt("StudID");
                 int absenceID = rs.getInt("AbsenceID");
                 String date = rs.getNString("Date");
                 //String reason = rs.getNString("Reason");
                 //String dialogBox = rs.getNString("DialogBox");
-                
+
                 Absence absence = new Absence(studID, absenceID, date, null, null);
-                
+
                 listOfDocumentetAbsence.add(absence);
-                 
+
              }
-            
+
            return listOfDocumentetAbsence;
+
+         }
+
+         public boolean createAbsence() throws Exception {
+             throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public List<Absence> getAllRequestAbence(Teacher teacher) {
+    public boolean deleteAbsence() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-   
+
+
 
 
 

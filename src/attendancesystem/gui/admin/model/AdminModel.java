@@ -32,14 +32,24 @@ public class AdminModel {
         bllMan = new BLLManager();
     }
     
-    public ArrayList<Absence> getAllAbsence(Student student) {
-        return bllMan.getAllAbsence(student);
+    public List<Absence> getAllAbsence(Student student) {
+        List<Absence> studentAbsences = null; 
+        try {
+            studentAbsences = bllMan.getAllAbsence(student);
+        } catch (Exception ex) {
+            Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return studentAbsences;
     }
     
     public List<Absence> getAllRequestAbence(Teacher teacher)
     {
         if (requestAbsences == null) {
-            requestAbsences = bllMan.getAllRequestAbence(teacher);
+            try {
+                requestAbsences = bllMan.getAllRequestAbence(teacher);
+            } catch (Exception ex) {
+                Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return requestAbsences;
     }
