@@ -78,8 +78,8 @@ public class BLLManager {
         return value;
     }
 
-    public void getAllAbsence(Student student) {
-        absenceDao.getAllAbsence(student);
+    public ArrayList<Absence> getAllAbsence(Student student) {
+        return absenceDao.getAllAbsence(student);
     }
 
     public List<Absence> getAllRequestAbence(Teacher teacher) {
