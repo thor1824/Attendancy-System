@@ -82,11 +82,11 @@ public class UserModel {
     
     
     public ArrayList<Absence> getAllAbsence(Student student) throws IOException, SQLException{
-        return absenceDbDao.getAllAbsens(student);
+        return absenceDbDao.getAllAbsence(student);
     }
     
     public boolean updateAbsence(Absence absnece) throws IOException, SQLException{
-        return absenceDbDao.updateAbsens(absnece);
+        return absenceDbDao.updateAbsence(absnece);
     }
    
     

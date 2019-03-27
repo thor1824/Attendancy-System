@@ -22,20 +22,19 @@ import java.util.List;
 public interface AbsenceDAO
 {
 
-    void createAbsens();
+    boolean createAbsence() throws Exception;
 
-    void deleteAbsens();
+    boolean deleteAbsence() throws Exception;
 
-    ArrayList<Absence> getAllAbsence(Student student);
 
-    ArrayList<Absence> getDocumentetAbsence(User user);
+    ArrayList<Absence> getDocumentetAbsence(User user) throws Exception;
 
     ArrayList<Absence> getUndocumentetAbsence(Student user) throws Exception;
 
-    boolean updateAbsens(Absence absence) throws Exception;
+    boolean updateAbsence(Absence absence) throws Exception;
 
-    public ArrayList<Absence> getAllAbsens(Student student) throws IOException, SQLServerException, SQLException;
+    public ArrayList<Absence> getAllAbsence(Student student) throws Exception;
 
-    public List<Absence> getAllRequestAbence(Teacher teacher);
+    public List<Absence> getAllRequestAbence(Teacher teacher) throws Exception;
 
 }
