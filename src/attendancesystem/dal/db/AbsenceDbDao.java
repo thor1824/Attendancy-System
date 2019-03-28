@@ -38,7 +38,7 @@ public class AbsenceDbDao implements AbsenceDAO {
         String sql = "SELECT * FROM [Atendens].[dbo].[Student] AS a "
                 + "JOIN [Atendens].[dbo].[Class] AS b ON a.ClassID = b.ClassID "
                 + "JOIN [Atendens].[dbo].[Absense] AS c ON a.StuID = c.StuID "
-                + "WHERE StuID = (?) "
+                + "WHERE a.StuID = (?) "
                 + "AND Reason IS NULL";
         Connection con = ServerConnect.getConnection(); //create connection
 
@@ -84,7 +84,7 @@ public class AbsenceDbDao implements AbsenceDAO {
         String sql = "SELECT * FROM [Atendens].[dbo].[Student] AS a "
                 + "JOIN [Atendens].[dbo].[Class] AS b ON a.ClassID = b.ClassID "
                 + "JOIN [Atendens].[dbo].[Absense] AS c ON a.StuID = c.StuID "
-                + "WHERE StuID = (?);";
+                + "WHERE a.StuID = (?);";
 
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, student.getStuID());
@@ -171,7 +171,11 @@ public class AbsenceDbDao implements AbsenceDAO {
 
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            String stuFullName = rs.getString("StuFName") + " " + rs.getString("StuLName");
+            String stuFName = rs.getString("StuFName");
+            
+            String stuLName = rs.getString("StuLName");
+            String stuFullName = stuFName + " " + stuLName;
+            System.out.println(stuFullName);
             String stuClass = rs.getString("ClassName");
             String date = rs.getString("Date");
             String reason = rs.getString("Reason");
@@ -180,7 +184,7 @@ public class AbsenceDbDao implements AbsenceDAO {
             int stuClassID = rs.getInt("ClassID");
 
             absences.add(new Absence(stuFullName, stuClassID, absenceID, stuClass, reason, explenation, date));
-
+            System.out.println(absences.get(0));
         }
 
         return absences;
@@ -194,7 +198,7 @@ public class AbsenceDbDao implements AbsenceDAO {
         String sql = "SELECT * FROM [Atendens].[dbo].[Student] AS a "
                 + "JOIN [Atendens].[dbo].[Class] AS b ON a.ClassID = b.ClassID "
                 + "JOIN [Atendens].[dbo].[Absense] AS c ON a.StuID = c.StuID "
-                + "WHERE StuID = (?) "
+                + "WHERE a.StuID = (?) "
                 + "AND Reason IS NOT NULL;";
 
         PreparedStatement ps = con.prepareStatement(sql);

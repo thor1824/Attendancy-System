@@ -6,14 +6,15 @@
 package attendancesystem.gui.elements;
 
 import attendancesystem.be.Absence;
+import attendancesystem.gui.admin.model.AdminModel;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 /**
@@ -30,8 +31,13 @@ public class AbsenceRequestElement {
     private final double BTN_HIGHT = 15.0;
     private AnchorPane ap;
     private final Absence absence;
-    public AbsenceRequestElement(Absence absence) {
+    private AdminModel model;
+    private VBox vbox;
+    
+    public AbsenceRequestElement(Absence absence, AdminModel model, VBox vbox) {
         this.absence = absence;
+        this.model = model;
+        this.vbox = vbox;
         generateAnchorPane();
         generateLabels();
         genrateButtons();
@@ -62,7 +68,8 @@ public class AbsenceRequestElement {
         btnAccept.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Accepted");
+                model.approveRequest(absence);
+                vbox.getChildren().remove(ap);
             }
         });
         
@@ -77,7 +84,8 @@ public class AbsenceRequestElement {
         btnDecline.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Declined");
+                model.declineAbsenceRequest(absence);
+                vbox.getChildren().remove(ap);
             }
         });
         
@@ -88,7 +96,7 @@ public class AbsenceRequestElement {
     }
 
     private void generateLabels() {
-        Label lblName = new Label(""+absence.getStuFullName());
+        Label lblName = new Label(absence.getStuFullName());
         lblName.setWrapText(true);
         lblName.setAlignment(Pos.CENTER_LEFT);
         

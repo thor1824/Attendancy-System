@@ -8,12 +8,10 @@ package attendancesystem.gui.admin.model;
 import attendancesystem.be.Absence;
 import attendancesystem.be.Student;
 import attendancesystem.be.Teacher;
-import attendancesystem.be.User;
 import attendancesystem.bll.BLLManager;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,9 +29,9 @@ public class AdminModel {
     public AdminModel() throws IOException {
         bllMan = new BLLManager();
     }
-    
+
     public List<Absence> getAllAbsence(Student student) {
-        List<Absence> studentAbsences = null; 
+        List<Absence> studentAbsences = null;
         try {
             studentAbsences = bllMan.getAllAbsence(student);
         } catch (Exception ex) {
@@ -41,9 +39,8 @@ public class AdminModel {
         }
         return studentAbsences;
     }
-    
-    public List<Absence> getAllRequestAbence(Teacher teacher)
-    {
+
+    public List<Absence> getAllRequestAbence(Teacher teacher) {
         if (requestAbsences == null) {
             try {
                 requestAbsences = bllMan.getAllRequestAbence(teacher);
@@ -74,7 +71,7 @@ public class AdminModel {
         
     }
 
-    public User handleLoginRequestMock(String username, String password) {
+    public Teacher handleLoginRequestTeacher(String username, String password) {
         try {
             return bllMan.handleLoginRequestTeacher(username, password);
         } catch (IOException ex) {
@@ -85,9 +82,22 @@ public class AdminModel {
         return null;
     }
 
-//    public User handleLoginRequestReal(String username, String password)
-//    {
-//        User user = bllMan.handleLoginRequestReal(username, password);
-//        return User;
-//    }
+    public boolean approveRequest(Absence absence) {
+        try {
+            return bllMan.approveRequest(absence);
+        } catch (Exception ex) {
+            Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public boolean declineAbsenceRequest(Absence absence) {
+        try {
+            return bllMan.declineAbsenceRequest(absence);
+        } catch (Exception ex) {
+            Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
 }

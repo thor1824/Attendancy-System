@@ -87,4 +87,12 @@ public class BLLManager {
     public boolean makeAbsenceRequest(Absence absence) throws Exception {
         return absenceDao.makeAbsenceRequest(absence);
     }
+    
+    public boolean approveRequest(Absence absence) throws Exception {
+        return absenceDao.approveRequest(absence);
+    }
+    
+    public boolean declineAbsenceRequest(Absence absence) throws Exception {
+        return absenceDao.declineAbsenceRequest(absence);
+    }
 }

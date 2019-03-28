@@ -6,6 +6,7 @@
 package attendancesystem.gui.admin.controller;
 
 import attendancesystem.be.Absence;
+import attendancesystem.gui.admin.model.AdminModel;
 import attendancesystem.gui.elements.AbsenceRequestElement;
 import java.net.URL;
 import java.util.List;
@@ -26,6 +27,7 @@ public class AdminAbsenceHandlerController implements Initializable {
     
     Stage stage;
     List<Absence> absences;
+    AdminModel model;
     
     @FXML
     private VBox vbAbsence;
@@ -37,6 +39,7 @@ public class AdminAbsenceHandlerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         vbAbsence.setPadding(new Insets(5, 5, 5, 5));
+        vbAbsence.setSpacing(10);
         
     }    
 
@@ -58,9 +61,14 @@ public class AdminAbsenceHandlerController implements Initializable {
         this.absences = absences;
         
         for (Absence absence : absences) {
-            AbsenceRequestElement are = new AbsenceRequestElement(absence);
+            System.out.println(absence);
+            AbsenceRequestElement are = new AbsenceRequestElement(absence, model, );
             vbAbsence.getChildren().add(are.getAnchorPane());
         }
+    }
+
+    public void setModel(AdminModel model) {
+        this.model = model;
     }
     
     

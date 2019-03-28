@@ -26,8 +26,6 @@ import javafx.scene.chart.PieChart;
  */
 public class UserModel {
 
-    BLLManager bll;
-
     BLLManager bllMan;
 
     AbsenceDbDao absenceDbDao;
@@ -79,15 +77,15 @@ public class UserModel {
     }
 
     public List<Absence> getAllAbsence(Student student) throws Exception {
-        return bll.getAllAbsence(student);
+        return bllMan.getAllAbsence(student);
     }
 
     public boolean updateAbsence(Absence absnece) throws Exception {
-        return bll.updateAbsence(absnece);
+        return bllMan.updateAbsence(absnece);
     }
 
     public boolean makeAbsenceRequest(Absence absence) throws Exception {
-        return bll.makeAbsenceRequest(absence);
+        return bllMan.makeAbsenceRequest(absence);
     }
 
 }

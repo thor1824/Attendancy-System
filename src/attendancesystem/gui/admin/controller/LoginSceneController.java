@@ -5,7 +5,7 @@
  */
 package attendancesystem.gui.admin.controller;
 
-import attendancesystem.be.User;
+import attendancesystem.be.Teacher;
 import attendancesystem.gui.admin.model.AdminModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
@@ -72,18 +72,18 @@ public class LoginSceneController implements Initializable
 
         try
         {
-            System.out.println("ho");
-            User user = model.handleLoginRequestMock(username, password);
-            if (user != null)
+            Teacher teacher  = model.handleLoginRequestTeacher(username, password);
+            if (teacher != null)
             {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(MAIN_FXML));
-
+                System.out.println(teacher);
+                AdminViewController.setLoggedInTeacher(teacher);
+                
                 Parent root = loader.load();
                 Stage newStage = new Stage();
                 newStage.setScene(new Scene(root));
                 AdminViewController controller = loader.getController();
                 controller.setStage(newStage);
-                controller.setUser(user);
                 newStage.setMaximized(true);
                 newStage.show();
                 stage.close();

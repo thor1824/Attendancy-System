@@ -21,7 +21,7 @@ public class Absence {
 
 
     public Absence(String StuFullName, int stuClassID, int absenceID, String stuClass, String reason, String explanation, String date) {
-        this.stuFullName = stuFullName;
+        this.stuFullName = StuFullName;
         this.absenceID = absenceID;
         this.stuClassName = stuClass;
         this.reason = reason;
@@ -84,7 +84,7 @@ public class Absence {
         return stuFullName + "  "  + stuClassName + "  " + reason + "  " + explanation + "  " + date;
     }
 
-    
+
 
 
 
