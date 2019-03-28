@@ -66,23 +66,23 @@ public class BLLManager {
         return absenceDao.getUndocumentetAbsence(user);
     }
 
-    public javafx.scene.chart.PieChart getPieChart(User user) {
-        return PieChart.buildPieChard(user, studentDao);
+    public javafx.scene.chart.PieChart getPieChart(User user) throws SQLException, SQLServerException, IOException {
+        return PieChart.buildPieChard(user, (AbsenceDbDao) absenceDao);
     }
 
     public boolean updateAbsence(Absence absence) throws Exception{
-        return absenceDao.updateAbsens(absence);
+        return absenceDao.updateAbsence(absence);
     }
 
     public String sendToDb(String value){
         return value;
     }
 
-    public ArrayList<Absence> getAllAbsence(Student student) {
+    public ArrayList<Absence> getAllAbsence(Student student) throws Exception {
         return absenceDao.getAllAbsence(student);
     }
 
-    public List<Absence> getAllRequestAbence(Teacher teacher) {
+    public List<Absence> getAllRequestAbence(Teacher teacher) throws Exception {
         return absenceDao.getAllRequestAbence(teacher);
     }
 }

@@ -10,6 +10,8 @@ import attendancesystem.be.Absence;
 import attendancesystem.gui.elements.AbsencentModulElement;
 import attendancesystem.gui.user.model.UserModel;
 import com.jfoenix.controls.JFXTextField;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.AnchorPane;
@@ -35,6 +38,7 @@ public class StudentMainController implements Initializable
 
     private Student user;
     private UserModel userModel;
+    private PieChart pieChart;
     private Stage stage;
     private ArrayList<Absence> undocumentetAbsences;
     @FXML
@@ -98,7 +102,7 @@ public class StudentMainController implements Initializable
     public void setModel(UserModel userModel)
     {
         this.userModel = userModel;
-
+        
     }
 
     public void setStage(Stage stage)
@@ -106,7 +110,7 @@ public class StudentMainController implements Initializable
         this.stage = stage;
     }
 
-    public void setPie()
+    public void setPie() throws SQLException, SQLServerException, IOException
     {
         pieChartAnchor.getChildren().add(userModel.getPieChard(user));
 
@@ -124,6 +128,7 @@ public class StudentMainController implements Initializable
 
             AbsencentModulElement ame = new AbsencentModulElement(absence, vBoxUndokumentet);
             ame.setModel(userModel);
+            
         }
     }
 

@@ -49,7 +49,7 @@ public class UserModel {
 //
 //        return date and time
 //    }
-    public PieChart getPieChard(User user) {
+    public PieChart getPieChard(User user) throws SQLException, SQLServerException, IOException {
         return bllMan.getPieChart(user);
     }
 
@@ -82,11 +82,11 @@ public class UserModel {
     
     
     public ArrayList<Absence> getAllAbsence(Student student) throws IOException, SQLException{
-        return absenceDbDao.getAllAbsens(student);
+        return absenceDbDao.getAllAbsence(student);
     }
     
     public boolean updateAbsence(Absence absnece) throws IOException, SQLException{
-        return absenceDbDao.updateAbsens(absnece);
+        return absenceDbDao.updateAbsence(absnece);
     }
    
     
