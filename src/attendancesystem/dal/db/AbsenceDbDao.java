@@ -248,9 +248,9 @@ public class AbsenceDbDao implements AbsenceDAO {
         PreparedStatement upPs = con.prepareStatement(updateSql);
         upPs.setBoolean(1, true);
         upPs.setInt(2, absence.getAbsenceID());
-        
+
         int linesAffectedUP = upPs.executeUpdate();
-        
+
         if (linesAffectedUP != 0) {
 
             PreparedStatement delPs = con.prepareStatement(deleteSql);
@@ -270,9 +270,9 @@ public class AbsenceDbDao implements AbsenceDAO {
         PreparedStatement upPs = con.prepareStatement(updateSql);
         upPs.setBoolean(1, false);
         upPs.setInt(2, absence.getAbsenceID());
-        
+
         int linesAffectedUP = upPs.executeUpdate();
-        
+
         if (linesAffectedUP != 0) {
 
             PreparedStatement delPs = con.prepareStatement(deleteSql);

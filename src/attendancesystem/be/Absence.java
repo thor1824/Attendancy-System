@@ -18,7 +18,7 @@ public class Absence {
     private String reason;
     private String explanation;
     private String date;
-    
+
 
     public Absence(String StuFullName, int stuClassID, int absenceID, String stuClass, String reason, String explanation, String date) {
         this.stuFullName = stuFullName;
@@ -33,7 +33,7 @@ public class Absence {
     public int getStuClassID() {
         return stuClassID;
     }
-    
+
     public String getReason() {
         return reason;
     }
@@ -84,7 +84,13 @@ public class Absence {
         return stuFullName + "  "  + stuClassName + "  " + reason + "  " + explanation + "  " + date;
     }
 
-    
-    
+    @Override
+    public String toString() {
+        return "Absence:" + "studID=" + studID + ", absenceID=" + absenceID + ", toa=" + toa + ", reason=" + reason + ", dialogBox=" + dialogBox + ", date=" + date;
+    }
+
+
+
+
 
 }

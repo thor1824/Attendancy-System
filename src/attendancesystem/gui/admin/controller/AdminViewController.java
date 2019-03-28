@@ -91,13 +91,13 @@ public class AdminViewController implements Initializable {
 
             model = new AdminModel();
             students = model.getAllStudents();
-            
+
             SetUpUserElements();
-            
+
             setUpScrollPane();
-            
+
             setUpAbsenceRequest();
-            
+
             hbxUserOverview.setSpacing(12);
             combBoxSort.getItems().addAll(comboBox());
 
@@ -109,13 +109,13 @@ public class AdminViewController implements Initializable {
 
     private void SetUpUserElements() {
         Instant start = Instant.now();
-        
+
         for (int i = 0; i < maxLoad; i++) {
-            
+
             createAndAddUserElement(students.get(i));
-            
+
         }
-        
+
         Instant finish = Instant.now();
         long elapsedTime = Duration.between(start, finish).toMillis();
         System.out.println(elapsedTime + " ms");
@@ -253,7 +253,7 @@ public class AdminViewController implements Initializable {
     }
 
     private void setUpAbsenceRequest() {
-        
+
         lblReqCount.setOpacity(0);
         ObservableList<Absence> requests = FXCollections.observableArrayList();
 
