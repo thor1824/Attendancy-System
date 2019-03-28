@@ -62,7 +62,7 @@ public class AdminAbsenceHandlerController implements Initializable {
         
         for (Absence absence : absences) {
             System.out.println(absence);
-            AbsenceRequestElement are = new AbsenceRequestElement(absence, model, );
+            AbsenceRequestElement are = new AbsenceRequestElement(absence, model, vbAbsence);
             vbAbsence.getChildren().add(are.getAnchorPane());
         }
     }
