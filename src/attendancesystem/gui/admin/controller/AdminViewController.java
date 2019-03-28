@@ -259,7 +259,7 @@ public class AdminViewController implements Initializable
     private void OpenRequests(ActionEvent event) throws IOException
     {
         List<Absence> bob = new ArrayList<>();
-        bob.add(new Absence(maxLoad, maxLoad, "subjectID", "reason", "dialogBox", "date", "modulTimePeriod"));
+        bob.add(new Absence(maxLoad, maxLoad, "reason", "dialogBox", "date"));
 
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("attendancesystem/gui/admin/view/AdminAbsenceHandler.fxml"));
 

@@ -185,7 +185,7 @@ public class AbsenceDbDao implements AbsenceDAO {
     public ArrayList<Absence> getAllAbsence(Student student) {
         try {
             Connection con = ServerConnect.getConnection();
-            String sql = "SELECT * FROM [Atendens].[dbo].[Absense] WHERE StudID = (?)";
+            String sql = "SELECT * FROM [Atendens].[dbo].[Absense] WHERE StuID = (?)";
 
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, student.getStuID());
@@ -196,7 +196,7 @@ public class AbsenceDbDao implements AbsenceDAO {
 
             while (rs.next()) {
 
-                int studID = rs.getInt("StudID");
+                int studID = rs.getInt("StuID");
                 int absenceID = rs.getInt("AbsenceID");
                 String date = rs.getNString("Date");
 

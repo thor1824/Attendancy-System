@@ -26,12 +26,12 @@ public class AbsenceMockDAO implements AbsenceDAO {
 
     public AbsenceMockDAO() {
         undocumentet = new ArrayList<>();
-        Absence mod1 = new Absence(0, 0, "subjectID", "reason", "dialogBox", "date", "modulTimePeriod");
-        Absence mod2 = new Absence(0, 0, "subjectID", "reason", "dialogBox", "date", "modulTimePeriod");
-        Absence mod3 = new Absence(0, 0, "subjectID", "reason", "dialogBox", "date", "modulTimePeriod");
-        undocumentet.add(mod1);
-        undocumentet.add(mod2);
-        undocumentet.add(mod3);
+//        Absence mod1 = new Absence(0, 0, "subjectID", "reason", "dialogBox", "date", "modulTimePeriod");
+//        Absence mod2 = new Absence(0, 0, "subjectID", "reason", "dialogBox", "date", "modulTimePeriod");
+//        Absence mod3 = new Absence(0, 0, "subjectID", "reason", "dialogBox", "date", "modulTimePeriod");
+//        undocumentet.add(mod1);
+//        undocumentet.add(mod2);
+//        undocumentet.add(mod3);
 
     }
 

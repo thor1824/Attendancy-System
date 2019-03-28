@@ -20,19 +20,15 @@ public class Absence {
     private String date;
     private String modulTimePeriod;
 
-    public Absence(int studID, int absenceID, String subjectID, String reason, String dialogBox, String date, String modulTimePeriod) {
+    public Absence(int studID, int absenceID, String reason, String dialogBox, String date) {
         this.studID = studID;
         this.absenceID = absenceID;
-        this.subjectID = subjectID;
+
         this.toa = "not arrived";
         this.reason = reason;
         this.dialogBox = dialogBox;
         this.date = date;
-        this.modulTimePeriod = modulTimePeriod;
-    }
 
-    public Absence(int studID, int absenceID, Object object, Object object0, String date) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getStudID() {
@@ -91,6 +87,12 @@ public class Absence {
         return absenceID;
     }
 
+    @Override
+    public String toString() {
+        return "Absence:" + "studID=" + studID + ", absenceID=" + absenceID + ", toa=" + toa + ", reason=" + reason + ", dialogBox=" + dialogBox + ", date=" + date;
+    }
+
+    
     
     
 

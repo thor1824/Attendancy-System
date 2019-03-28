@@ -6,16 +6,26 @@
 package attendancesystem.gui.elements;
 
 import attendancesystem.be.Student;
+import attendancesystem.gui.admin.controller.SpecificStudentInfoController;
 import com.jfoenix.controls.JFXButton;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -55,30 +65,31 @@ public class UserElement
     private double MoreLabelsToTop = 6.0;
     private AnchorPane apUser;
     private AnchorPane apMoreUserInfo;
+    private final Student student;
 
     public UserElement(Student student)
     {
+        this.student = student;
+        
+        createPreviewPane();
+    }
+
+    private void createPreviewPane() {
         //Setup UserElement
         this.apUser = new AnchorPane();
         apUser.setStyle("-fx-background-color:#e6e6e6");
-
         //Create and add shadowEffect
         DropShadow ds1 = new DropShadow();
         ds1.setOffsetY(4.0f);
         ds1.setOffsetX(4.0f);
         ds1.setColor(new Color(0.183, 0.183, 0.149, 1.0));
         apUser.setEffect(ds1);
-
         setAnchorPaneHeight(apUser, apUserPreviewHeight);
-
         //setup User Image
         ImageView ivUser = new ImageView();
-        
-        
-        try
-        {
+        try {
             ivUser.setImage(new Image(student.getPicUrl()));
-        } catch (Exception e)
+        }catch (Exception e)
         {
             ivUser.setImage(new Image(defaultUserImageURL));
         }
@@ -86,21 +97,16 @@ public class UserElement
         ivUser.setFitWidth(ivHight);
         ivUser.setX(ivMarginH);
         ivUser.setY(ivMarginV);
-
         //create and adds Info Labels for the preview mode
         Label lblUserID = new Label("ID: " + student.getUserID());
-//        lblUserID.setStyle("-fx-text-fill:white");
+        //        lblUserID.setStyle("-fx-text-fill:white");
         setXnYKordinats(lblUserID, lblPreview_X, lblUserID_Y);
-
         Label lblUserfullName = new Label("Name: " + student.getFullName());
         setXnYKordinats(lblUserfullName, lblPreview_X, lblUserFullName_Y);
-
         Label lblUserPhoneNr = new Label("Phone Nr: " + student.getPhoneNr());
         setXnYKordinats(lblUserPhoneNr, lblPreview_X, lblUserPhoneNr_Y);
-
         Label lblUserEmail = new Label("Email: " + student.getEmail());
         setXnYKordinats(lblUserEmail, lblPreview_X, lblUserEmail_Y);
-
         //creates and adds the button to maximice det userElement
         JFXButton btnMaximize = new JFXButton("Show More");
         btnMaximize.setMaxSize(btnMaximizeWidth, btnMaximizeHeight);
@@ -110,9 +116,7 @@ public class UserElement
         btnMaximize.setTextFill(new Color(1, 1, 1, 1.0));
         AnchorPane.setRightAnchor(btnMaximize, btnMaximize_RightAnchor);
         AnchorPane.setTopAnchor(btnMaximize, btnMaximize_TopAnchor);
-
-        createMoreInfoBox(student);
-
+        createMoreInfoBox();
         //creates the button action to expand and collapses the UserElement
         btnMaximize.setOnAction(new EventHandler<ActionEvent>()
         {
@@ -137,7 +141,6 @@ public class UserElement
                 }
             }
         });
-
         apUser.getChildren().addAll(lblUserfullName, lblUserID, lblUserEmail, lblUserPhoneNr, ivUser, btnMaximize);
     }
 
@@ -162,7 +165,7 @@ public class UserElement
         node.setLayoutY(Y);
     }
 
-    private void createMoreInfoBox(Student student)
+    private void createMoreInfoBox()
     {
 
         Label cpr = new Label("Cpr: " + student.getCpr());
@@ -182,6 +185,38 @@ public class UserElement
         
         AnchorPane.setTopAnchor(cpr, MoreLabelsToTop + 30);
         AnchorPane.setLeftAnchor(cpr, leftLabelAncor);
+        
+        JFXButton btnShowStudentInfo = new JFXButton("Show Absence");
+        apMoreUserInfo.getChildren().add(btnShowStudentInfo);
+        AnchorPane.setBottomAnchor(btnShowStudentInfo, 30.0);
+        AnchorPane.setRightAnchor(btnShowStudentInfo, 70.0);
+        btnShowStudentInfo.setStyle("-fx-background-color:#4d79ff");
+        btnShowStudentInfo.setTextFill(new Color(1, 1, 1, 1.0));
+        
+        
+        
+        btnShowStudentInfo.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("attendancesystem/gui/admin/view/SpecificStudentInfo.fxml"));
+                    
+                    Parent root = loader.load();
+                    Stage newStage = new Stage();
+                    newStage.setResizable(false);
+                    newStage.initStyle(StageStyle.DECORATED);
+                    newStage.setScene(new Scene(root, 700.0, 650.0));
+                    SpecificStudentInfoController controller = loader.getController();
+                    controller.setStage(newStage);
+                    controller.setStudent(student);
+                    
+                    
+                    newStage.showAndWait();
+                } catch (IOException ex) {
+                    Logger.getLogger(UserElement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
         
 
     }
