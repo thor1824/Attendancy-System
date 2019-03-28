@@ -49,7 +49,6 @@ import javafx.stage.StageStyle;
 public class AdminViewController implements Initializable {
 
     private AdminModel model;
-    private User user;
     private Student studen;
     private Stage currentStage;
     private FilteredList<User> searchList;
@@ -58,9 +57,9 @@ public class AdminViewController implements Initializable {
     private List<Student> students;
     private ArrayList<UserElement> arr;
     private List<Student> Students;
-    private List<Absence> requestAbsense;
-    private Teacher loggedInTeacher;
-
+    private static Teacher loggedInTeacher;
+    private ObservableList<Absence> requests;
+    
     @FXML
     private VBox hbxUserOverview;
     @FXML
@@ -88,7 +87,7 @@ public class AdminViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         try {
-
+            System.out.println("2");
             model = new AdminModel();
             students = model.getAllStudents();
 
@@ -149,10 +148,6 @@ public class AdminViewController implements Initializable {
 
     void setStage(Stage stage) {
         this.currentStage = stage;
-    }
-
-    void setUser(User user) {
-        this.user = user;
     }
 
     @FXML
@@ -233,10 +228,6 @@ public class AdminViewController implements Initializable {
 
     @FXML
     private void OpenRequests(ActionEvent event) throws IOException {
-        List<Absence> bob = new ArrayList<>();
-        bob.add(new Absence("StuFullName", 10, maxLoad, "stuClass", "reason", "explanation", "date"));
-        bob.add(new Absence("StuFullName", 11, maxLoad, "stuClass", "reason", "explanation", "date"));
-
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("attendancesystem/gui/admin/view/AdminAbsenceHandler.fxml"));
 
         Parent root = loader.load();
@@ -246,17 +237,18 @@ public class AdminViewController implements Initializable {
         newStage.setScene(new Scene(root, 515.0, 650.0));
         AdminAbsenceHandlerController controller = loader.getController();
         controller.setStage(newStage);
-        controller.setAbsences(bob);
+        controller.setModel(model);
+        controller.setAbsences(requests);
 
         newStage.showAndWait();
 
     }
 
     private void setUpAbsenceRequest() {
-
+        System.out.println("3");
         lblReqCount.setOpacity(0);
-        ObservableList<Absence> requests = FXCollections.observableArrayList();
-
+        requests = FXCollections.observableArrayList();
+        
         requests.setAll(model.getAllRequestAbence(loggedInTeacher));
         if (requests.size() >= 1) {
             lblReqCount.setOpacity(1.0);
@@ -267,4 +259,10 @@ public class AdminViewController implements Initializable {
             }
         }
     }
+
+    public static void setLoggedInTeacher(Teacher loggedInTeacher) {
+        System.out.println("1");
+        AdminViewController.loggedInTeacher = loggedInTeacher;
+    }
+
 }

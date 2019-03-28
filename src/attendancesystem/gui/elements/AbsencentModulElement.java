@@ -98,6 +98,7 @@ public class AbsencentModulElement {
                 
                 if (comBox.getValue() != "Other") {
                 absence.setReason(reason);
+                    userModel.makeAbsenceRequest(absence);
                 
                 userModel.updateAbsence(absence);
                 vBox.getChildren().remove(ap);
