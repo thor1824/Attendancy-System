@@ -45,8 +45,8 @@ public class UserModel {
 //
 //        return date and time
 //    }
-    public PieChart getPieChard(User user) throws SQLException, SQLServerException, IOException {
-        return bllMan.getPieChart(user);
+    public PieChart getPieChard(Student student) throws SQLException, SQLServerException, IOException {
+        return bllMan.getPieChart(student);
     }
 
     public Student handleLoginRequest(String username, String password) {

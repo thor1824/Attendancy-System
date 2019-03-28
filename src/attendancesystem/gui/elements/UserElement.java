@@ -7,7 +7,9 @@ package attendancesystem.gui.elements;
 
 import attendancesystem.be.Student;
 import attendancesystem.bll.BLLManager;
+import attendancesystem.bll.PieChart;
 import attendancesystem.gui.admin.controller.SpecificStudentInfoController;
+import attendancesystem.gui.admin.model.AdminModel;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -67,7 +69,7 @@ public class UserElement
     private AnchorPane apUser;
     private AnchorPane apMoreUserInfo;
     private final Student student;
-    private 
+    private AdminModel adminModel;
 
     public UserElement(Student student)
     {
@@ -195,7 +197,14 @@ public class UserElement
         btnShowStudentInfo.setStyle("-fx-background-color:#4d79ff");
         btnShowStudentInfo.setTextFill(new Color(1, 1, 1, 1.0));
         
-        apMoreUserInfo.getChildren().add(.getPieChart(student));
+        javafx.scene.chart.PieChart pie = adminModel.getPieChart(student);
+        AnchorPane.setTopAnchor(pie, MoreLabelsToTop + 80);
+        AnchorPane.setRightAnchor(pie, leftLabelAncor);
+        
+        pie.setMinSize(200, 200);
+        pie.setMaxSize(200, 200);
+        apMoreUserInfo.getChildren().add(pie);
+        
         
         
         
