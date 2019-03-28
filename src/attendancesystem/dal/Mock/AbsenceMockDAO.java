@@ -25,13 +25,7 @@ public class AbsenceMockDAO implements AbsenceDAO {
     ArrayList<Absence> undocumentet;
 
     public AbsenceMockDAO() {
-        undocumentet = new ArrayList<>();
-        Absence mod1 = new Absence(0, 0, "subjectID", "reason", "dialogBox", "date", "modulTimePeriod");
-        Absence mod2 = new Absence(0, 0, "subjectID", "reason", "dialogBox", "date", "modulTimePeriod");
-        Absence mod3 = new Absence(0, 0, "subjectID", "reason", "dialogBox", "date", "modulTimePeriod");
-        undocumentet.add(mod1);
-        undocumentet.add(mod2);
-        undocumentet.add(mod3);
+
 
     }
 
@@ -44,7 +38,7 @@ public class AbsenceMockDAO implements AbsenceDAO {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-   
+
 
     @Override
     public ArrayList<Absence> getUndocumentetAbsence(Student user) throws Exception {
@@ -84,6 +78,21 @@ public class AbsenceMockDAO implements AbsenceDAO {
 
     @Override
     public ArrayList<Absence> getDocumentetAbsence(Student student) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean makeAbsenceRequest(Absence absence) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean approveRequest(Absence absence) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean declineAbsenceRequest(Absence absence) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

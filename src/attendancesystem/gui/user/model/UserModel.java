@@ -29,17 +29,15 @@ public class UserModel {
     BLLManager bll;
 
     BLLManager bllMan;
-    
+
     AbsenceDbDao absenceDbDao;
-    
+
     Student logedInStudent;
 
     public UserModel() {
-        try
-        {
+        try {
             bllMan = new BLLManager();
-        } catch (IOException ex)
-        {
+        } catch (IOException ex) {
             Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -64,7 +62,7 @@ public class UserModel {
         return null;
     }
 
-    public ArrayList<Absence> getUndocumentetAbsence(Student user) throws Exception {
+    public List<Absence> getUndocumentetAbsence(Student user) throws Exception {
         return bllMan.getUndocumentetAbsence(user);
     }
 
@@ -79,17 +77,17 @@ public class UserModel {
     public Student getLogedInStudent() {
         return logedInStudent;
     }
-    
-    
-    public ArrayList<Absence> getAllAbsence(Student student) throws IOException, SQLException{
-        return absenceDbDao.getAllAbsence(student);
+
+    public List<Absence> getAllAbsence(Student student) throws Exception {
+        return bll.getAllAbsence(student);
     }
-    
-    public boolean updateAbsence(Absence absnece) throws IOException, SQLException{
-        return absenceDbDao.updateAbsence(absnece);
+
+    public boolean updateAbsence(Absence absnece) throws Exception {
+        return bll.updateAbsence(absnece);
     }
-   
-    
-    
+
+    public boolean makeAbsenceRequest(Absence absence) throws Exception {
+        return bll.makeAbsenceRequest(absence);
+    }
 
 }

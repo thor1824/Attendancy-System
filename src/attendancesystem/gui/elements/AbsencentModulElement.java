@@ -47,8 +47,7 @@ public class AbsencentModulElement {
 
         
         Label lblDato = new Label(absence.getDate());
-        Label lblFag = new Label(absence.getSubjectID());
-        Label lblModul = new Label(absence.getModulTimePeriod());
+        Label lblFag = new Label(absence.getStuClass());
         ap = new AnchorPane();
 
         ObservableList element = FXCollections.observableArrayList(
@@ -59,25 +58,23 @@ public class AbsencentModulElement {
         JFXComboBox comBox = new JFXComboBox(element);
         comBox.setPromptText("Vælg fraværsårsag:");
 
-        ap.getChildren().addAll(lblDato, lblFag, lblModul, comBox);
+        ap.getChildren().addAll(lblDato, lblFag, comBox);
         ap.setStyle("-fx-border-color:black");
         lblDato.setLayoutX(lbl3);
         lblFag.setLayoutX(lbl1);
-        lblModul.setLayoutX(lbl2);
         comBox.setLayoutX(comboBox);
         lblDato.setLayoutY(lblVeticalMargin);
         lblFag.setLayoutY(lblVeticalMargin);
-        lblModul.setLayoutY(lblVeticalMargin);
         comBox.setLayoutY(lblVeticalMargin + ((comBox.getHeight() - lblHeight) / 2));
 
         comBox.setOnAction((Event event) -> {
             try
             {
                 String reason = comBox.getValue().toString();
-                
+                Label lblExplanation = new Label();
                 if (comBox.getValue() == "Other") {
                     try {
-                        String explan = "";
+                        
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/attendancesystem/gui/user/view/ReasonForAbsence.fxml"));
                         
                         Parent root = loader.load();
@@ -90,7 +87,7 @@ public class AbsencentModulElement {
                         
                         controller.setModel(userModel);
                         controller.setStage(stage);
-                        controller.setExplanation(explan);
+                        controller.setExplanation(lblExplanation);
                         
                         stage.showAndWait();
                         
@@ -99,10 +96,19 @@ public class AbsencentModulElement {
                     }
                 }
                 
+                if (comBox.getValue() != "Other") {
                 absence.setReason(reason);
-                System.out.println(userModel);
+                
                 userModel.updateAbsence(absence);
                 vBox.getChildren().remove(ap);
+                }
+                if (comBox.getValue() == "Other" && !lblExplanation.getText().isEmpty()) {
+                    absence.setReason(reason);
+                    absence.setExplanation(lblExplanation.getText());
+                    //userModel.updateAbsence(absence);
+                    userModel.makeAbsenceRequest(absence);
+                    vBox.getChildren().remove(ap);
+                }
             } catch (Exception ex)
             {
                 Logger.getLogger(AbsencentModulElement.class.getName()).log(Level.SEVERE, null, ex);

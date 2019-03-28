@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -45,8 +46,7 @@ import javafx.stage.StageStyle;
  *
  * @author Thorbjørn Schultz Damkjær
  */
-public class AdminViewController implements Initializable
-{
+public class AdminViewController implements Initializable {
 
     private AdminModel model;
     private User user;
@@ -60,7 +60,7 @@ public class AdminViewController implements Initializable
     private List<Student> Students;
     private List<Absence> requestAbsense;
     private Teacher loggedInTeacher;
-    
+
     @FXML
     private VBox hbxUserOverview;
     @FXML
@@ -80,143 +80,119 @@ public class AdminViewController implements Initializable
     private JFXButton btnAbsReq;
     @FXML
     private Label lblReqCount;
-    
 
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {
+    public void initialize(URL url, ResourceBundle rb) {
 
-        try
-        {
+        try {
 
-            try
-            {
-                model = new AdminModel();
-                students = model.getAllStudents();
-            } catch (IOException ex)
-            {
-                Logger.getLogger(AdminViewController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            model = new AdminModel();
+            students = model.getAllStudents();
+
+            SetUpUserElements();
+
+            setUpScrollPane();
+
             setUpAbsenceRequest();
-            ArrayList<UserElement> arr = new ArrayList<>();
-            
-            Instant start = Instant.now();
 
-            for (int i = 0; i < maxLoad; i++)
-            {
-
-                createAndAddUserElement(students.get(i), arr);
-
-            }
-
-            Instant finish = Instant.now();
-            long elapsedTime = Duration.between(start, finish).toMillis();
-            System.out.println(elapsedTime + " ms");
-
-            
             hbxUserOverview.setSpacing(12);
-
-            spUsers.setFitToWidth(true);
-            spUsers.setFitToHeight(true);
-
             combBoxSort.getItems().addAll(comboBox());
 
-            //scrollPane load incriments
-            spUsers.vvalueProperty().addListener((observable, oldValue, newValue) ->
-            {
-                System.out.println(newValue);
-                System.out.println(spUsers.getVmax());
-                if (newValue.doubleValue() == spUsers.getVmax())
-                {
-                    int loadIncriments = 10;
-                    for (int i = maxLoad + 1; i <= maxLoad + loadIncriments; i++)
-                    {
-                        if (students.get(i) != null)
-                        {
-                            createAndAddUserElement(students.get(i), arr);
-
-                        } else
-                        {
-                            break;
-                        }
-                    }
-                    maxLoad = maxLoad + loadIncriments;
-                }
-
-            });
-
-        } catch (SQLException ex)
-        {
+        } catch (SQLException | IOException ex) {
             Logger.getLogger(AdminViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    private void createAndAddUserElement(Student student, ArrayList<UserElement> arr1)
-    {
+    private void SetUpUserElements() {
+        Instant start = Instant.now();
+
+        for (int i = 0; i < maxLoad; i++) {
+
+            createAndAddUserElement(students.get(i));
+
+        }
+
+        Instant finish = Instant.now();
+        long elapsedTime = Duration.between(start, finish).toMillis();
+        System.out.println(elapsedTime + " ms");
+    }
+
+    private void setUpScrollPane() {
+        spUsers.setFitToWidth(true);
+        spUsers.setFitToHeight(true);
+        //scrollPane load incriments
+        spUsers.vvalueProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println(newValue);
+            System.out.println(spUsers.getVmax());
+            if (newValue.doubleValue() == spUsers.getVmax()) {
+                int loadIncriments = 10;
+                for (int i = maxLoad + 1; i <= maxLoad + loadIncriments; i++) {
+                    if (students.get(i) != null) {
+                        createAndAddUserElement(students.get(i));
+                    } else {
+                        break;
+                    }
+                }
+                maxLoad = maxLoad + loadIncriments;
+            }
+        });
+    }
+
+    private void createAndAddUserElement(Student student) {
         UserElement user2 = new UserElement(student);
         hbxUserOverview.getChildren().add(user2.getUserPane());
     }
 
-    void setStage(Stage stage)
-    {
+    void setStage(Stage stage) {
         this.currentStage = stage;
     }
 
-    void setUser(User user)
-    {
+    void setUser(User user) {
         this.user = user;
     }
 
     @FXML
-    private void btnAll(ActionEvent event)
-    {
+    private void btnAll(ActionEvent event) {
 
     }
 
     @FXML
-    private void btnAllMy(ActionEvent event)
-    {
+    private void btnAllMy(ActionEvent event) {
 
     }
 
     @FXML
-    private void btnClass(ActionEvent event)
-    {
+    private void btnClass(ActionEvent event) {
 
     }
 
     @FXML
-    private void asc(ActionEvent event)
-    {
+    private void asc(ActionEvent event) {
 
     }
 
     @FXML
-    private void desc(ActionEvent event)
-    {
+    private void desc(ActionEvent event) {
 
     }
 
     @FXML
-    private void cehch1(ActionEvent event)
-    {
+    private void cehch1(ActionEvent event) {
 
     }
 
-    public ArrayList comboBox()
-    {
+    public ArrayList comboBox() {
         ArrayList coBox = new ArrayList();
         coBox.add("First Name");
         coBox.add("Last Name");
         return coBox;
     }
 
-    private void setUserAncor()
-    {
+    private void setUserAncor() {
 
     }
 //    private void setupSeachBar()
@@ -256,10 +232,10 @@ public class AdminViewController implements Initializable
 //    }
 
     @FXML
-    private void OpenRequests(ActionEvent event) throws IOException
-    {
+    private void OpenRequests(ActionEvent event) throws IOException {
         List<Absence> bob = new ArrayList<>();
-        bob.add(new Absence(maxLoad, maxLoad, "subjectID", "reason", "dialogBox", "date", "modulTimePeriod"));
+        bob.add(new Absence("StuFullName", 10, maxLoad, "stuClass", "reason", "explanation", "date"));
+        bob.add(new Absence("StuFullName", 11, maxLoad, "stuClass", "reason", "explanation", "date"));
 
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("attendancesystem/gui/admin/view/AdminAbsenceHandler.fxml"));
 
@@ -271,13 +247,24 @@ public class AdminViewController implements Initializable
         AdminAbsenceHandlerController controller = loader.getController();
         controller.setStage(newStage);
         controller.setAbsences(bob);
-        
+
         newStage.showAndWait();
 
     }
 
     private void setUpAbsenceRequest() {
-//        ObservableList<Absence> bob =  
-//                = model.getAllRequestAbence(loggedInTeacher);
+
+        lblReqCount.setOpacity(0);
+        ObservableList<Absence> requests = FXCollections.observableArrayList();
+
+        requests.setAll(model.getAllRequestAbence(loggedInTeacher));
+        if (requests.size() >= 1) {
+            lblReqCount.setOpacity(1.0);
+            if (requests.size() >= 100) {
+                lblReqCount.setText("99+");
+            } else {
+                lblReqCount.setText("" + requests.size());
+            }
+        }
     }
 }

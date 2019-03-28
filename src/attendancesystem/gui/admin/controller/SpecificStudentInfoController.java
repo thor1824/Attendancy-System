@@ -5,16 +5,26 @@
  */
 package attendancesystem.gui.admin.controller;
 
+import attendancesystem.be.Absence;
 import attendancesystem.be.Student;
 import attendancesystem.gui.admin.model.AdminModel;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXListView;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -23,11 +33,14 @@ import javafx.scene.layout.VBox;
  */
 public class SpecificStudentInfoController implements Initializable {
 
-    @FXML
-    private VBox vboxStudentInfo;
-
     private AdminModel adminmodel;
     private Student student;
+    private Stage stage;
+    @FXML
+    private ListView<Absence> lstviewAbsenceInfo;
+    private AnchorPane ap;
+    @FXML
+    private JFXButton btnCancel;
 
     /**
      * Initializes the controller class.
@@ -36,37 +49,37 @@ public class SpecificStudentInfoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             adminmodel = new AdminModel();
+            makeButton();
+
         } catch (IOException ex) {
             Logger.getLogger(SpecificStudentInfoController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        setupVBox();
     }
-
-    public void setupVBox() {
-        getInfo(student);
+    
+    private void makeButton() {
+        btnCancel.setText("Cancel");
+        AnchorPane.setBottomAnchor(btnCancel, 30.0);
+        AnchorPane.setRightAnchor(btnCancel, 70.0);
+        btnCancel.setStyle("-fx-background-color:#4d79ff");
+        btnCancel.setTextFill(new Color(1, 1, 1, 1.0));
         
-        
-        
+        btnCancel.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                stage.close();
+            }
+        });
     }
 
-    public void getInfo(Student student) {
-        adminmodel.getAllAbsence(student);
+    public void setStudent(Student student) {
+        this.student = student;
+        List<Absence> absences = adminmodel.getAllAbsence(student);
+
+        lstviewAbsenceInfo.getItems().addAll(absences);
     }
 
-    public VBox getVboxStudentInfo() {
-        return vboxStudentInfo;
-    }
-
-    public void setVboxStudentInfo(VBox vboxStudentInfo) {
-        this.vboxStudentInfo = vboxStudentInfo;
-    }
-
-    public AdminModel getAdminmodel() {
-        return adminmodel;
-    }
-
-    public void setAdminmodel(AdminModel adminmodel) {
-        this.adminmodel = adminmodel;
+    public void setStage(Stage newStage) {
+        this.stage = newStage;
     }
 
 }

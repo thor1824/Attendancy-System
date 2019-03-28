@@ -36,13 +36,13 @@ public class StudentDbDao implements StudentDAO
     @Override
     public List<Student> getAllStudents() throws SQLServerException, SQLException, IOException
     {
-        String sql = "SELECT * "
-                + "FROM [Atendens].[dbo].[Student] join [Atendens].[dbo].[Class] on Class.ClassID = Student.ClassID;";
+        String sql = "SELECT * FROM [Atendens].[dbo].[Student] "
+                + "join [Atendens].[dbo].[Class] on Class.ClassID = Student.ClassID;";
 
         Connection con = ServerConnect.getConnection(); //create connection
 
         PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement
-        ResultSet rs = ps.executeQuery(); //get all Students 
+        ResultSet rs = ps.executeQuery(); //get all Students
         ArrayList<Student> students = new ArrayList<>();
         while (rs.next())
         {
@@ -57,7 +57,7 @@ public class StudentDbDao implements StudentDAO
             String stuZip = rs.getNString("ZipCode");
             String stuCPR = rs.getNString("Cpr");
             String stuPicUrl = rs.getNString("StuPicURL");
-            
+
 
             Student stu = new Student(stuID, stuFName, stuLName, stuEmail, stuPhone, stuCPR, stuAdress, stuZip, stuClass, stuPicUrl, Days_of_classes);
             //put Student in list
@@ -110,11 +110,11 @@ public class StudentDbDao implements StudentDAO
                 psStudent.setNString(7, student.getAdresse());
                 psStudent.setNString(8, student.getZipCode());
                 psStudent.setNString(9, student.getCpr());
-                
+
                 int lineAffected = psStudent.executeUpdate();
-                
+
                 ResultSet rsStuID = psStudent.getGeneratedKeys();
-                
+
                 if (rsStuID.next())
                 {
                     student.setUserID(rsStuID.getInt(1));
@@ -143,7 +143,7 @@ public class StudentDbDao implements StudentDAO
         //delete Student where userID =="input users ID"
         //check if entry was deletet
         //close connection
-        
+
         int lineAffected = ps.executeUpdate();
         con.close();
         return lineAffected != 0; //return true if deleted, false if not
@@ -213,28 +213,28 @@ public class StudentDbDao implements StudentDAO
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     public int daysOfClass(Student student) throws SQLServerException, IOException, SQLException{
-     
+
         int daysofclass = 0;
-        
+
         String sql = "SELECT Days_of_classes, StuID FROM [Atendens].[dbo].[Student] WHERE StuID = (?)";
-        Connection con = ServerConnect.getConnection(); 
+        Connection con = ServerConnect.getConnection();
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, student.getStuID());
-        
+
         ResultSet rs = ps.executeQuery();
-        
+
         while (rs.next()){
            
             daysofclass = rs.getInt(1);
-            
+
         }
-       
-        
+
+
         return daysofclass;
     }
-    
-    
+
+
 
 }

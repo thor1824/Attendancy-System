@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -119,7 +120,7 @@ public class StudentMainController implements Initializable
     public void generateAbsenceElements(Student student) throws SQLException, Exception
     {
         System.out.println(student);
-        ArrayList<Absence> list = userModel.getUndocumentetAbsence(student);
+        List<Absence> list = userModel.getUndocumentetAbsence(student);
 
         System.out.println(list);
 
