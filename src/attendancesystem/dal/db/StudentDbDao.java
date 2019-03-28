@@ -216,12 +216,21 @@ public class StudentDbDao implements StudentDAO
     
     public int daysOfClass(Student student) throws SQLServerException, IOException, SQLException{
      
-        String sql = "SELECT Days_of_classes FROM [Atendens].[dbo].[Student] WHERE StudID = (?)";
-        Connection con = ServerConnect.getConnection(); 
-        PreparedStatement ps = con.prepareStatement(sql); 
+        int daysofclass = 0;
         
-         ps.setInt(1, student.getStuID());
-        int daysofclass = Integer.parseInt(sql);
+        String sql = "SELECT Days_of_classes, StuID FROM [Atendens].[dbo].[Student] WHERE StuID = (?)";
+        Connection con = ServerConnect.getConnection(); 
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, student.getStuID());
+        
+        ResultSet rs = ps.executeQuery();
+        
+        while (rs.next()){
+           
+            daysofclass = rs.getInt(1);
+            
+        }
+       
         
         return daysofclass;
     }
