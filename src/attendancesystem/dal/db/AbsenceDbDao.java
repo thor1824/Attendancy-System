@@ -68,6 +68,44 @@ public class AbsenceDbDao implements AbsenceDAO {
 
         return absences;
     }
+    
+    public int linesIngetUndocumentetAbsence(Student student) throws SQLException, SQLServerException, IOException{
+        String sql = "SELECT COUNT(*) FROM [Atendens].[dbo].[Absense] WHERE StuID = (?) AND Reason IS NULL";
+        int rowCount = -1;
+        Connection con = ServerConnect.getConnection(); //create connection
+
+        PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement
+        
+        ps.setInt(1, student.getStuID());
+        
+        ResultSet rs = ps.executeQuery();
+        
+        rs.next();
+        rowCount = rs.getInt(1);
+        
+        con.close();
+        
+        return rowCount;
+    }
+    
+    public int linesIngetDocumentetAbsence(Student student) throws SQLException, SQLServerException, IOException{
+        String sql = "SELECT COUNT(*) FROM [Atendens].[dbo].[Absense] WHERE StuID = (?) AND Reason IS NOT NULL";
+        int rowCount = -1;
+        Connection con = ServerConnect.getConnection(); //create connection
+
+        PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement
+        
+        ps.setInt(1, student.getStuID());
+        
+        ResultSet rs = ps.executeQuery();
+        
+        rs.next();
+        rowCount = rs.getInt(1);
+        
+        con.close();
+        
+        return rowCount;
+    }
 
     /**
      *

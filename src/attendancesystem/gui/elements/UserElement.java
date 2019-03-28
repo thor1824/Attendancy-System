@@ -162,6 +162,18 @@ public class UserElement
 //        ap.setMinSize(width, height);
 //        ap.setPrefSize(width, height);
     }
+    
+    private javafx.scene.chart.PieChart getPie(){
+        javafx.scene.chart.PieChart pie = adminModel.getPieChart(student);
+        AnchorPane.setTopAnchor(pie, MoreLabelsToTop + 80);
+        AnchorPane.setRightAnchor(pie, leftLabelAncor);
+        
+        pie.setMinSize(200, 200);
+        pie.setMaxSize(200, 200);
+        apMoreUserInfo.getChildren().add(pie);
+        
+        return pie;
+    }
 
     private void setXnYKordinats(Node node, double X, double Y)
     {
@@ -196,14 +208,8 @@ public class UserElement
         AnchorPane.setRightAnchor(btnShowStudentInfo, 70.0);
         btnShowStudentInfo.setStyle("-fx-background-color:#4d79ff");
         btnShowStudentInfo.setTextFill(new Color(1, 1, 1, 1.0));
+        //getPie();
         
-        javafx.scene.chart.PieChart pie = adminModel.getPieChart(student);
-        AnchorPane.setTopAnchor(pie, MoreLabelsToTop + 80);
-        AnchorPane.setRightAnchor(pie, leftLabelAncor);
-        
-        pie.setMinSize(200, 200);
-        pie.setMaxSize(200, 200);
-        apMoreUserInfo.getChildren().add(pie);
         
         
         

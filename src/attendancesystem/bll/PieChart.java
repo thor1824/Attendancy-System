@@ -29,9 +29,9 @@ public class PieChart
         StudentDbDao db = new StudentDbDao();
         
         ObservableList<javafx.scene.chart.PieChart.Data> pieChard = FXCollections.observableArrayList(
-                new javafx.scene.chart.PieChart.Data("Undocumentet Absence", aDao.getUndocumentetAbsence((Student) student).size()),
-                new javafx.scene.chart.PieChart.Data("Fravær", aDao.getDocumentetAbsence((Student) student).size()),
-                new javafx.scene.chart.PieChart.Data("Antalet af dage", db.daysOfClass((Student) student)));
+                new javafx.scene.chart.PieChart.Data("Udokementeret fravær", aDao.linesIngetUndocumentetAbsence(student)),
+                new javafx.scene.chart.PieChart.Data(" Dokumenteret fravær", aDao.linesIngetDocumentetAbsence(student)),
+                new javafx.scene.chart.PieChart.Data("Antalet af dage", db.daysOfClass(student)));
                 
 
        
