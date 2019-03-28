@@ -64,8 +64,8 @@ public class BLLManager {
         return absenceDao.getUndocumentetAbsence(user);
     }
 
-    public javafx.scene.chart.PieChart getPieChart(User user) throws SQLException, SQLServerException, IOException {
-        return PieChart.buildPieChard(user, (AbsenceDbDao) absenceDao);
+    public javafx.scene.chart.PieChart getPieChart(Student student) throws SQLException, SQLServerException, IOException {
+        return PieChart.buildPieChard(student, (AbsenceDbDao) absenceDao);
     }
 
     public boolean updateAbsence(Absence absence) throws Exception{

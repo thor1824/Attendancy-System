@@ -25,16 +25,20 @@ public class PieChart
 {
     
     
-    public static javafx.scene.chart.PieChart buildPieChard(User user, AbsenceDbDao aDao) throws SQLException, SQLServerException, IOException {
+    public static javafx.scene.chart.PieChart buildPieChard(Student student, AbsenceDbDao aDao) throws SQLException, SQLServerException, IOException {
         StudentDbDao db = new StudentDbDao();
         
         ObservableList<javafx.scene.chart.PieChart.Data> pieChard = FXCollections.observableArrayList(
-                new javafx.scene.chart.PieChart.Data("Undocumentet Absence", aDao.getUndocumentetAbsence((Student) user).size()),
-                new javafx.scene.chart.PieChart.Data("Fravær", aDao.getDocumentetAbsence((Student) user).size()),
-                new javafx.scene.chart.PieChart.Data("Antalet af dage", db.daysOfClass((Student) user)));
+                new javafx.scene.chart.PieChart.Data("Undocumentet Absence", aDao.getUndocumentetAbsence((Student) student).size()),
+                new javafx.scene.chart.PieChart.Data("Fravær", aDao.getDocumentetAbsence((Student) student).size()),
+                new javafx.scene.chart.PieChart.Data("Antalet af dage", db.daysOfClass((Student) student)));
                 
 
+       
         javafx.scene.chart.PieChart pie = new javafx.scene.chart.PieChart(pieChard);
+        pie.setTitle("Diagram over fravær");
+        pie.setStartAngle(10);
+       
         return pie;
     }
 }
