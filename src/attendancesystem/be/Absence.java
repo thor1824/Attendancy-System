@@ -84,11 +84,7 @@ public class Absence {
         return stuFullName + "  "  + stuClassName + "  " + reason + "  " + explanation + "  " + date;
     }
 
-    @Override
-    public String toString() {
-        return "Absence:" + "studID=" + studID + ", absenceID=" + absenceID + ", toa=" + toa + ", reason=" + reason + ", dialogBox=" + dialogBox + ", date=" + date;
-    }
-
+    
 
 
 

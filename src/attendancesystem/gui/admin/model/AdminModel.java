@@ -61,6 +61,18 @@ public class AdminModel {
 
         return students;
     }
+    
+    public javafx.scene.chart.PieChart getPieChart(Student student){
+        try {
+            return bllMan.getPieChart(student);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+        
+    }
 
     public User handleLoginRequestMock(String username, String password) {
         try {

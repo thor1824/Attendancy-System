@@ -6,6 +6,7 @@
 package attendancesystem.gui.elements;
 
 import attendancesystem.be.Student;
+import attendancesystem.bll.BLLManager;
 import attendancesystem.gui.admin.controller.SpecificStudentInfoController;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
@@ -66,6 +67,7 @@ public class UserElement
     private AnchorPane apUser;
     private AnchorPane apMoreUserInfo;
     private final Student student;
+    private 
 
     public UserElement(Student student)
     {
@@ -192,6 +194,11 @@ public class UserElement
         AnchorPane.setRightAnchor(btnShowStudentInfo, 70.0);
         btnShowStudentInfo.setStyle("-fx-background-color:#4d79ff");
         btnShowStudentInfo.setTextFill(new Color(1, 1, 1, 1.0));
+        
+        apMoreUserInfo.getChildren().add(.getPieChart(student));
+        
+        
+        
         
         
         
