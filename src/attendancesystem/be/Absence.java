@@ -13,19 +13,25 @@ public class Absence {
 
     private String stuFullName;
     private int absenceID;
-    private String stuClass;
+    private String stuClassName;
+    private int stuClassID;
     private String reason;
     private String explanation;
     private String date;
     
 
-    public Absence(String StuFullName, int absenceID, String stuClass, String reason, String explanation, String date) {
+    public Absence(String StuFullName, int stuClassID, int absenceID, String stuClass, String reason, String explanation, String date) {
         this.stuFullName = stuFullName;
         this.absenceID = absenceID;
-        this.stuClass = stuClass;
+        this.stuClassName = stuClass;
         this.reason = reason;
         this.explanation = explanation;
         this.date = date;
+        this.stuClassID = stuClassID;
+    }
+
+    public int getStuClassID() {
+        return stuClassID;
     }
     
     public String getReason() {
@@ -66,16 +72,16 @@ public class Absence {
     }
 
     public String getStuClass() {
-        return stuClass;
+        return stuClassName;
     }
 
     public void setStuClass(String stuClass) {
-        this.stuClass = stuClass;
+        this.stuClassName = stuClass;
     }
 
     @Override
     public String toString() {
-        return stuFullName + "  "  + stuClass + "  " + reason + "  " + explanation + "  " + date;
+        return stuFullName + "  "  + stuClassName + "  " + reason + "  " + explanation + "  " + date;
     }
 
     

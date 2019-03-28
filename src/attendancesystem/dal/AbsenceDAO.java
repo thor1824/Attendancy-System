@@ -37,4 +37,10 @@ public interface AbsenceDAO
 
     public List<Absence> getAllRequestAbence(Teacher teacher) throws Exception;
 
+    public boolean makeAbsenceRequest(Absence absence) throws Exception;
+    
+    public boolean approveRequest(Absence absence) throws Exception;
+    
+    public boolean declineAbsenceRequest(Absence absence) throws Exception;
+
 }

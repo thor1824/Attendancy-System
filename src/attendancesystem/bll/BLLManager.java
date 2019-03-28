@@ -83,4 +83,8 @@ public class BLLManager {
     public List<Absence> getAllRequestAbence(Teacher teacher) throws Exception {
         return absenceDao.getAllRequestAbence(teacher);
     }
+
+    public boolean makeAbsenceRequest(Absence absence) throws Exception {
+        return absenceDao.makeAbsenceRequest(absence);
+    }
 }

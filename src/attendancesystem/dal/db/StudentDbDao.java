@@ -36,8 +36,8 @@ public class StudentDbDao implements StudentDAO
     @Override
     public List<Student> getAllStudents() throws SQLServerException, SQLException, IOException
     {
-        String sql = "SELECT * "
-                + "FROM [Atendens].[dbo].[Student] join [Atendens].[dbo].[Class] on Class.ClassID = Student.ClassID;";
+        String sql = "SELECT * FROM [Atendens].[dbo].[Student] "
+                + "join [Atendens].[dbo].[Class] on Class.ClassID = Student.ClassID;";
 
         Connection con = ServerConnect.getConnection(); //create connection
 
@@ -216,7 +216,7 @@ public class StudentDbDao implements StudentDAO
     
     public int daysOfClass(Student student) throws SQLServerException, IOException, SQLException{
      
-        String sql = "SELECT Days_of_classes FROM [Atendens].[dbo].[Student] WHERE StudID = (?)";
+        String sql = "SELECT Days_of_classes FROM [Atendens].[dbo].[Student] WHERE StuID = (?)";
         Connection con = ServerConnect.getConnection(); 
         PreparedStatement ps = con.prepareStatement(sql); 
         

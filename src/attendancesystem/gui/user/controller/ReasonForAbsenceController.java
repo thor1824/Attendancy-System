@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -44,8 +45,8 @@ public class ReasonForAbsenceController implements Initializable {
         // TODO
     }    
 
-    public void setExplanation(String explanation) {
-        this.explanation = explanation;
+    public void setExplanation(Label explanation) {
+        explanation.textProperty().bind(txtfldReason.textProperty());
     }
     
     
