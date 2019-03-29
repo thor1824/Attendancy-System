@@ -42,5 +42,9 @@ public interface AbsenceDAO
     public boolean approveRequest(Absence absence) throws Exception;
     
     public boolean declineAbsenceRequest(Absence absence) throws Exception;
+    
+    public int linesIngetDocumentetAbsence(Student student) throws Exception;
+    
+    public int linesIngetUndocumentetAbsence(Student student) throws Exception;
 
 }

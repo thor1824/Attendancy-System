@@ -69,6 +69,7 @@ public class AbsenceDbDao implements AbsenceDAO {
         return absences;
     }
     
+    @Override
     public int linesIngetUndocumentetAbsence(Student student) throws SQLException, SQLServerException, IOException{
         String sql = "SELECT COUNT(*) FROM [Atendens].[dbo].[Absense] WHERE StuID = (?) AND Reason IS NULL";
         int rowCount = -1;
@@ -88,6 +89,7 @@ public class AbsenceDbDao implements AbsenceDAO {
         return rowCount;
     }
     
+    @Override
     public int linesIngetDocumentetAbsence(Student student) throws SQLException, SQLServerException, IOException{
         String sql = "SELECT COUNT(*) FROM [Atendens].[dbo].[Absense] WHERE StuID = (?) AND Reason IS NOT NULL";
         int rowCount = -1;

@@ -57,9 +57,11 @@ public class LoginSceneController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        try {
-           model = new AdminModel();
-        } catch (IOException ex) {
+        try
+        {
+            model = new AdminModel();
+        } catch (IOException ex)
+        {
             Logger.getLogger(LoginSceneController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -72,13 +74,13 @@ public class LoginSceneController implements Initializable
 
         try
         {
-            Teacher teacher  = model.handleLoginRequestTeacher(username, password);
+            Teacher teacher = model.handleLoginRequestTeacher(username, password);
             if (teacher != null)
             {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(MAIN_FXML));
-                System.out.println(teacher);
+
                 AdminViewController.setLoggedInTeacher(teacher);
-                
+
                 Parent root = loader.load();
                 Stage newStage = new Stage();
                 newStage.setScene(new Scene(root));

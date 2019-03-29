@@ -88,7 +88,7 @@ public class AdminViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         try {
-            System.out.println("2");
+            
             model = new AdminModel();
             students = model.getAllStudents();
 
@@ -125,9 +125,7 @@ public class AdminViewController implements Initializable {
         spUsers.setFitToWidth(true);
         spUsers.setFitToHeight(true);
         //scrollPane load incriments
-        spUsers.vvalueProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println(newValue);
-            System.out.println(spUsers.getVmax());
+        spUsers.vvalueProperty().addListener((observable, oldValue, newValue) -> {           
             if (newValue.doubleValue() == spUsers.getVmax()) {
                 int loadIncriments = 10;
                 for (int i = maxLoad + 1; i <= maxLoad + loadIncriments; i++) {
@@ -143,7 +141,7 @@ public class AdminViewController implements Initializable {
     }
 
     private void createAndAddUserElement(Student student) {
-        UserElement user2 = new UserElement(student);
+        UserElement user2 = new UserElement(student, model);
         hbxUserOverview.getChildren().add(user2.getUserPane());
     }
 
@@ -246,7 +244,7 @@ public class AdminViewController implements Initializable {
     }
 
     private void setUpAbsenceRequest() {
-        System.out.println("3");
+        
         lblReqCount.setOpacity(0);
         requests = FXCollections.observableArrayList();
         
@@ -262,7 +260,7 @@ public class AdminViewController implements Initializable {
     }
 
     public static void setLoggedInTeacher(Teacher loggedInTeacher) {
-        System.out.println("1");
+        
         AdminViewController.loggedInTeacher = loggedInTeacher;
     }
 

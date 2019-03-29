@@ -96,4 +96,16 @@ public class AbsenceMockDAO implements AbsenceDAO {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public int linesIngetDocumentetAbsence(Student student) throws Exception
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int linesIngetUndocumentetAbsence(Student student) throws Exception
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

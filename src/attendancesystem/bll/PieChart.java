@@ -6,13 +6,9 @@
 package attendancesystem.bll;
 
 import attendancesystem.be.Student;
-import attendancesystem.be.User;
+import attendancesystem.dal.AbsenceDAO;
 import attendancesystem.dal.StudentDAO;
-import attendancesystem.dal.db.AbsenceDbDao;
 import attendancesystem.dal.db.StudentDbDao;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
-import java.io.IOException;
-import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -25,18 +21,18 @@ public class PieChart
 {
     
     
-    public static javafx.scene.chart.PieChart buildPieChard(Student student, AbsenceDbDao aDao) throws SQLException, SQLServerException, IOException {
+    public static javafx.scene.chart.PieChart buildPieChard(Student student, AbsenceDAO absenceDao, StudentDAO studenDao ) throws Exception {
         StudentDbDao db = new StudentDbDao();
         
         ObservableList<javafx.scene.chart.PieChart.Data> pieChard = FXCollections.observableArrayList(
-                new javafx.scene.chart.PieChart.Data("Udokementeret fravær", aDao.linesIngetUndocumentetAbsence(student)),
-                new javafx.scene.chart.PieChart.Data(" Dokumenteret fravær", aDao.linesIngetDocumentetAbsence(student)),
-                new javafx.scene.chart.PieChart.Data("Antalet af dage", db.daysOfClass(student)));
+                new javafx.scene.chart.PieChart.Data("Undocumentet Absence", absenceDao.linesIngetUndocumentetAbsence(student)),
+                new javafx.scene.chart.PieChart.Data("Documentet Absence", absenceDao.linesIngetDocumentetAbsence(student)),
+                new javafx.scene.chart.PieChart.Data("Days of Precense", db.daysOfClass(student)));
                 
 
        
         javafx.scene.chart.PieChart pie = new javafx.scene.chart.PieChart(pieChard);
-        pie.setTitle("Diagram over fravær");
+        pie.setTitle("Absence");
         pie.setStartAngle(10);
        
         return pie;

@@ -6,8 +6,6 @@
 package attendancesystem.gui.elements;
 
 import attendancesystem.be.Student;
-import attendancesystem.bll.BLLManager;
-import attendancesystem.bll.PieChart;
 import attendancesystem.gui.admin.controller.SpecificStudentInfoController;
 import attendancesystem.gui.admin.model.AdminModel;
 import com.jfoenix.controls.JFXButton;
@@ -20,7 +18,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -71,8 +68,9 @@ public class UserElement
     private final Student student;
     private AdminModel adminModel;
 
-    public UserElement(Student student)
+    public UserElement(Student student, AdminModel adminModel)
     {
+        this.adminModel = adminModel;
         this.student = student;
         
         createPreviewPane();
@@ -133,6 +131,9 @@ public class UserElement
                     previewMode = true;
                     btnMaximize.setText("Show Less");
                     apUser.getChildren().add(apMoreUserInfo);
+                    AnchorPane.setLeftAnchor(apMoreUserInfo, 0.0);
+                    AnchorPane.setBottomAnchor(apMoreUserInfo, 0.0);
+                    AnchorPane.setRightAnchor(apMoreUserInfo, 0.0);
                     //add Diagram and Absence overview tha a place in the AnchorPane apMoreUserInfo
                     setAnchorPaneHeight(apUser, apUserRealHight);
 
@@ -165,8 +166,6 @@ public class UserElement
     
     private javafx.scene.chart.PieChart getPie(){
         javafx.scene.chart.PieChart pie = adminModel.getPieChart(student);
-        AnchorPane.setTopAnchor(pie, MoreLabelsToTop + 80);
-        AnchorPane.setRightAnchor(pie, leftLabelAncor);
         
         pie.setMinSize(200, 200);
         pie.setMaxSize(200, 200);
@@ -189,33 +188,35 @@ public class UserElement
         Label schoolClass = new Label("Class: " + student.getSchoolClass());
         
         
-        apMoreUserInfo = new AnchorPane(); //pie);
+        apMoreUserInfo = new AnchorPane(); 
         setAnchorPaneHeight(apMoreUserInfo, apUserRealHight - apUserPreviewHeight);
         setXnYKordinats(apMoreUserInfo, 0, apUserPreviewHeight); // 0 so is allign with the parent AnchorPane
         apMoreUserInfo.getChildren().addAll(cpr, adress, schoolClass);
-        AnchorPane.setTopAnchor(schoolClass, MoreLabelsToTop);
-        AnchorPane.setLeftAnchor(schoolClass, leftLabelAncor);
         
-        AnchorPane.setTopAnchor(adress, MoreLabelsToTop + 60);
-        AnchorPane.setLeftAnchor(adress, leftLabelAncor);
+        AnchorPane.setTopAnchor(schoolClass, 50.0);
+        AnchorPane.setLeftAnchor(schoolClass, 415.0);
         
-        AnchorPane.setTopAnchor(cpr, MoreLabelsToTop + 30);
-        AnchorPane.setLeftAnchor(cpr, leftLabelAncor);
+        AnchorPane.setTopAnchor(adress, 90.0);
+        AnchorPane.setLeftAnchor(adress, 415.0);
+        
+        AnchorPane.setTopAnchor(cpr, 130.0);
+        AnchorPane.setLeftAnchor(cpr, 415.0);
         
         JFXButton btnShowStudentInfo = new JFXButton("Show Absence");
         apMoreUserInfo.getChildren().add(btnShowStudentInfo);
-        AnchorPane.setBottomAnchor(btnShowStudentInfo, 30.0);
-        AnchorPane.setRightAnchor(btnShowStudentInfo, 70.0);
+        AnchorPane.setBottomAnchor(btnShowStudentInfo, 25.0);
+        AnchorPane.setRightAnchor(btnShowStudentInfo, 40.0);
         btnShowStudentInfo.setStyle("-fx-background-color:#4d79ff");
         btnShowStudentInfo.setTextFill(new Color(1, 1, 1, 1.0));
-        //getPie();
         
         
+        javafx.scene.chart.PieChart pie = adminModel.getPieChart(student);
+        pie.setMinSize(200, 200);
+        pie.setMaxSize(200, 200);
+        apMoreUserInfo.getChildren().add(pie);
         
-        
-        
-        
-        
+        AnchorPane.setTopAnchor(pie, 50.0);
+        AnchorPane.setLeftAnchor(pie, 50.0);
         
         btnShowStudentInfo.setOnAction(new EventHandler<ActionEvent>() {
             @Override
