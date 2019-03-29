@@ -4,7 +4,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendancesystem.gui.admin.controller.SpecificStudentInfoController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../../Resources/SuperiorWhite.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendancesystem.gui.admin.controller.SpecificStudentInfoController">
    <children>
       <ListView fx:id="lstviewAbsenceInfo" layoutX="78.0" layoutY="65.0" prefHeight="301.0" prefWidth="600.0" AnchorPane.bottomAnchor="99.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <JFXButton fx:id="btnCancel" layoutX="535.0" layoutY="360.0" text="Cancel" />

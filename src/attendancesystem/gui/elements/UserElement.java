@@ -216,7 +216,9 @@ public class UserElement
         
         
         
-        
+        /**
+         * sets the action on showStudentInfo button to open a new fxml file
+         */
         btnShowStudentInfo.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -226,8 +228,8 @@ public class UserElement
                     Parent root = loader.load();
                     Stage newStage = new Stage();
                     newStage.setResizable(false);
-                    newStage.initStyle(StageStyle.DECORATED);
-                    newStage.setScene(new Scene(root, 700.0, 650.0));
+                    newStage.initStyle(StageStyle.UNDECORATED);
+                    newStage.setScene(new Scene(root, 500.0, 650.0));
                     SpecificStudentInfoController controller = loader.getController();
                     controller.setStage(newStage);
                     controller.setStudent(student);
