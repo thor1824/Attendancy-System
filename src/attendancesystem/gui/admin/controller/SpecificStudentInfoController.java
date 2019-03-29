@@ -9,7 +9,6 @@ import attendancesystem.be.Absence;
 import attendancesystem.be.Student;
 import attendancesystem.gui.admin.model.AdminModel;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListView;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -22,7 +21,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -36,9 +34,9 @@ public class SpecificStudentInfoController implements Initializable {
     private AdminModel adminmodel;
     private Student student;
     private Stage stage;
+
     @FXML
     private ListView<Absence> lstviewAbsenceInfo;
-    private AnchorPane ap;
     @FXML
     private JFXButton btnCancel;
 
@@ -55,14 +53,17 @@ public class SpecificStudentInfoController implements Initializable {
             Logger.getLogger(SpecificStudentInfoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    /**
+     * Making Cancel button in the stage + handles the cancel button
+     */
     private void makeButton() {
         btnCancel.setText("Cancel");
-        AnchorPane.setBottomAnchor(btnCancel, 30.0);
-        AnchorPane.setRightAnchor(btnCancel, 70.0);
+        AnchorPane.setBottomAnchor(btnCancel, 20.0);
+        AnchorPane.setRightAnchor(btnCancel, 20.0);
         btnCancel.setStyle("-fx-background-color:#4d79ff");
         btnCancel.setTextFill(new Color(1, 1, 1, 1.0));
-        
+
         btnCancel.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -71,6 +72,11 @@ public class SpecificStudentInfoController implements Initializable {
         });
     }
 
+    /**
+     * sets the student and puts the absence in the list view
+     *
+     * @param student
+     */
     public void setStudent(Student student) {
         this.student = student;
         List<Absence> absences = adminmodel.getAllAbsence(student);
@@ -78,6 +84,11 @@ public class SpecificStudentInfoController implements Initializable {
         lstviewAbsenceInfo.getItems().addAll(absences);
     }
 
+    /**
+     * sets the stage
+     *
+     * @param newStage
+     */
     public void setStage(Stage newStage) {
         this.stage = newStage;
     }

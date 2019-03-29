@@ -72,7 +72,7 @@ public class UserElement
     {
         this.adminModel = adminModel;
         this.student = student;
-        
+
         createPreviewPane();
     }
 
@@ -163,14 +163,14 @@ public class UserElement
 //        ap.setMinSize(width, height);
 //        ap.setPrefSize(width, height);
     }
-    
+
     private javafx.scene.chart.PieChart getPie(){
         javafx.scene.chart.PieChart pie = adminModel.getPieChart(student);
-        
+
         pie.setMinSize(200, 200);
         pie.setMaxSize(200, 200);
         apMoreUserInfo.getChildren().add(pie);
-        
+
         return pie;
     }
 
@@ -186,61 +186,61 @@ public class UserElement
         Label cpr = new Label("Cpr: " + student.getCpr());
         Label adress = new Label("Adress: " + student.getAdresse());
         Label schoolClass = new Label("Class: " + student.getSchoolClass());
-        
-        
-        apMoreUserInfo = new AnchorPane(); 
+
+
+        apMoreUserInfo = new AnchorPane();
         setAnchorPaneHeight(apMoreUserInfo, apUserRealHight - apUserPreviewHeight);
         setXnYKordinats(apMoreUserInfo, 0, apUserPreviewHeight); // 0 so is allign with the parent AnchorPane
         apMoreUserInfo.getChildren().addAll(cpr, adress, schoolClass);
-        
+
         AnchorPane.setTopAnchor(schoolClass, 50.0);
         AnchorPane.setLeftAnchor(schoolClass, 415.0);
         
         AnchorPane.setTopAnchor(adress, 90.0);
         AnchorPane.setLeftAnchor(adress, 415.0);
-        
+
         AnchorPane.setTopAnchor(cpr, 130.0);
         AnchorPane.setLeftAnchor(cpr, 415.0);
-        
+
         JFXButton btnShowStudentInfo = new JFXButton("Show Absence");
         apMoreUserInfo.getChildren().add(btnShowStudentInfo);
         AnchorPane.setBottomAnchor(btnShowStudentInfo, 25.0);
         AnchorPane.setRightAnchor(btnShowStudentInfo, 40.0);
         btnShowStudentInfo.setStyle("-fx-background-color:#4d79ff");
         btnShowStudentInfo.setTextFill(new Color(1, 1, 1, 1.0));
-        
-        
+
+
         javafx.scene.chart.PieChart pie = adminModel.getPieChart(student);
         pie.setMinSize(200, 200);
         pie.setMaxSize(200, 200);
         apMoreUserInfo.getChildren().add(pie);
-        
+
         AnchorPane.setTopAnchor(pie, 50.0);
         AnchorPane.setLeftAnchor(pie, 50.0);
-        
+
         btnShowStudentInfo.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("attendancesystem/gui/admin/view/SpecificStudentInfo.fxml"));
-                    
+
                     Parent root = loader.load();
                     Stage newStage = new Stage();
                     newStage.setResizable(false);
-                    newStage.initStyle(StageStyle.DECORATED);
-                    newStage.setScene(new Scene(root, 700.0, 650.0));
+                    newStage.initStyle(StageStyle.UNDECORATED);
+                    newStage.setScene(new Scene(root, 500.0, 650.0));
                     SpecificStudentInfoController controller = loader.getController();
                     controller.setStage(newStage);
                     controller.setStudent(student);
-                    
-                    
+
+
                     newStage.showAndWait();
                 } catch (IOException ex) {
                     Logger.getLogger(UserElement.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
-        
+
 
     }
 
