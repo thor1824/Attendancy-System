@@ -7,9 +7,10 @@ package attendancesystem.gui.user.controller;
 
 import attendancesystem.gui.user.model.UserModel;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXTextArea;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -26,12 +27,12 @@ public class ReasonForAbsenceController implements Initializable {
     
     private UserModel userModel;
     private Stage stage;
-    private String explanation;
+    private Label label;
 
     @FXML
     private AnchorPane apReason;
     @FXML
-    private JFXTextField txtfldReason;
+    private JFXTextArea txtfldReason;
     @FXML
     private JFXButton btnCancel;
     @FXML
@@ -42,11 +43,23 @@ public class ReasonForAbsenceController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        btnSend.setDisable(true);
+        
+        label = new Label();
+        
+        txtfldReason.textProperty().addListener((obs, oldV, newV) -> {
+        
+            if (txtfldReason.getText().length() > 10)
+            {
+                btnSend.setDisable(false);
+            }
+            
+        });
     }    
 
     public void setExplanation(Label explanation) {
-        explanation.textProperty().bind(txtfldReason.textProperty());
+        explanation.textProperty().bind(label.textProperty());
+        
     }
     
     
@@ -59,14 +72,22 @@ public class ReasonForAbsenceController implements Initializable {
         this.stage = stage;
     }
 
-    @FXML
     private void handleCancelBtn(MouseEvent event) {
-         stage.close();
+         
+    }
+
+
+    @FXML
+    private void handleCancelBtn(ActionEvent event)
+    {
+        stage.close();
     }
 
     @FXML
-    private void handleSendBtn(MouseEvent event) {
-        
+    private void handleSendBtn(ActionEvent event)
+    {
+        label.setText(txtfldReason.getText());
+        stage.close();
     }
     
 }

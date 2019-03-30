@@ -1,0 +1,1 @@
+Update Absense set Reason = NULL, DialogBox = NULL, Approved = NULL, Pending = NULL;

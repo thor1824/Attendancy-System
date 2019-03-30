@@ -129,14 +129,11 @@ public class UserViewController implements Initializable
         {
             
             Student user = model.handleLoginRequest(txtUserName.getText(), txtPassword.getText());
-            System.out.println(user);
+            
             if (user != null)
             {
-                System.out.println(user);
                 model.setLogedInStudent(user);
-                
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(MAIN_FXML));
-                
                 Parent root = loader.load();
                 Stage stage = new Stage();
                 stage.setAlwaysOnTop(true);
@@ -147,7 +144,6 @@ public class UserViewController implements Initializable
                 controller.setModel(model);
                 controller.setStage(stage);
                 controller.setUser(user);
-                System.out.println(user);
                 stage.show();
                 currentStage.close();
             } else

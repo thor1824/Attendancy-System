@@ -6,10 +6,6 @@
 package attendancesystem.dal;
 
 import attendancesystem.be.Student;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -18,18 +14,20 @@ import java.util.List;
  */
 public interface StudentDAO
 {
-    boolean createStudent(Student user, String username, String password) throws SQLServerException, SQLException, FileNotFoundException, IOException;
+    boolean createStudent(Student user, String username, String password) throws Exception;
 
-    boolean deleteStudent(Student user) throws SQLServerException, SQLException, FileNotFoundException, IOException;
+    boolean deleteStudent(Student user)  throws Exception;
 
-    List<Student> getAllStudents() throws SQLServerException, SQLException, FileNotFoundException, IOException;
+    List<Student> getAllStudents()  throws Exception;
     
-    List<Student> getStudentsFromClass(String className) throws SQLServerException, SQLException, FileNotFoundException, IOException;
+    List<Student> getStudentsFromClass(String className)  throws Exception;
 
-    Student getStudent(int id) throws SQLServerException, SQLException, FileNotFoundException, IOException;
+    Student getStudent(int id)  throws Exception;
 
-    boolean updateStudent(Student user) throws SQLServerException, SQLException, FileNotFoundException, IOException;
+    boolean updateStudent(Student user)  throws Exception;
     
-    boolean setUserImage(Student user, String picURL) throws SQLServerException, SQLException, FileNotFoundException, IOException;
+    int daysOfClass(Student user) throws Exception;
+    
+    boolean setUserImage(Student user, String picURL)  throws Exception;
 
 }

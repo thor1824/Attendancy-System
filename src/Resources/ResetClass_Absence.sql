@@ -1,0 +1,1 @@
+Delete from Class_Absense;

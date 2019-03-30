@@ -101,7 +101,7 @@ public class AdminViewController implements Initializable {
             hbxUserOverview.setSpacing(12);
             combBoxSort.getItems().addAll(comboBox());
 
-        } catch (SQLException | IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(AdminViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
 

@@ -79,11 +79,6 @@ public class UserModel
         return bllMan.getUndocumentetAbsence(user);
     }
 
-    public List<Student> getAllStudents() throws SQLException, SQLServerException, IOException
-    {
-        return bllMan.getAllStudents();
-    }
-
     public void setLogedInStudent(Student logedInStudent)
     {
         this.logedInStudent = logedInStudent;
@@ -107,6 +102,11 @@ public class UserModel
     public boolean makeAbsenceRequest(Absence absence) throws Exception
     {
         return bllMan.makeAbsenceRequest(absence);
+    }
+
+    public List<Absence> getDocumentetAbsence(Student student) throws Exception
+    {
+       return bllMan.getDocumentetAbsence(student);
     }
 
 }

@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="apReason" prefHeight="272.0" prefWidth="200.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendancesystem.gui.user.controller.ReasonForAbsenceController">
+<AnchorPane fx:id="apReason" prefHeight="395.0" prefWidth="316.0" style="-fx-background-color: lightgray;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendancesystem.gui.user.controller.ReasonForAbsenceController">
    <children>
-      <JFXTextField fx:id="txtfldReason" layoutX="14.0" layoutY="44.0" prefHeight="246.0" prefWidth="246.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="35.0" />
-      <Label layoutX="14.0" layoutY="14.0" text="Write your reason for absence" />
-      <JFXButton fx:id="btnCancel" layoutX="138.0" layoutY="246.0" onMouseClicked="#handleCancelBtn" text="Cancel" AnchorPane.bottomAnchor="4.399999999999999" AnchorPane.rightAnchor="10.0" />
-      <JFXButton fx:id="btnSend" layoutX="94.0" layoutY="246.0" onMouseClicked="#handleSendBtn" text="Send" AnchorPane.bottomAnchor="4.39999999999997" AnchorPane.rightAnchor="66.0" />
+      <Label alignment="CENTER" layoutY="12.0" prefHeight="20.0" prefWidth="288.0" stylesheets="@../../../../Resources/SuperiorWhite.css" text="Write your reason for absence" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+      <JFXButton fx:id="btnCancel" layoutX="138.0" layoutY="246.0" onAction="#handleCancelBtn" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: gray;" text="Cancel" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="20.0">
+         <font>
+            <Font size="13.0" />
+         </font></JFXButton>
+      <JFXButton fx:id="btnSend" layoutX="161.0" layoutY="320.0" onAction="#handleSendBtn" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: gray;" text="Send" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="90.0">
+         <font>
+            <Font size="13.0" />
+         </font></JFXButton>
+      <JFXTextArea fx:id="txtfldReason" layoutX="20.0" layoutY="70.0" prefHeight="252.0" prefWidth="258.0" style="-fx-background-color: white; -fx-background-radius: 0;" wrapText="true" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
+         <effect>
+            <InnerShadow color="#6f6d6d" offsetX="3.0" offsetY="3.0" radius="10.25" width="22.0" />
+         </effect>
+      </JFXTextArea>
    </children>
 </AnchorPane>

@@ -9,7 +9,8 @@ package attendancesystem.be;
  *
  * @author Thorbjørn Schultz Damkjær
  */
-public class Absence {
+public class Absence
+{
 
     private String stuFullName;
     private int absenceID;
@@ -18,9 +19,11 @@ public class Absence {
     private String reason;
     private String explanation;
     private String date;
+    private boolean approved;
+    private boolean pending;
 
-
-    public Absence(String StuFullName, int stuClassID, int absenceID, String stuClass, String reason, String explanation, String date) {
+    public Absence(String StuFullName, int stuClassID, int absenceID, String stuClass, String reason, String explanation, String date, boolean approved, boolean pending)
+    {
         this.stuFullName = StuFullName;
         this.absenceID = absenceID;
         this.stuClassName = stuClass;
@@ -28,65 +31,96 @@ public class Absence {
         this.explanation = explanation;
         this.date = date;
         this.stuClassID = stuClassID;
+        this.approved = approved;
+        this.pending = pending;
     }
 
-    public int getStuClassID() {
+    public boolean isPending()
+    {
+        return pending;
+    }
+
+    public void setPending(boolean pending)
+    {
+        this.pending = pending;
+    }
+    
+    
+    
+    public Boolean isApproved()
+    {
+        return approved;
+    }
+
+    public void setApproved(Boolean approved)
+    {
+        this.approved = approved;
+    }
+    
+    public int getStuClassID()
+    {
         return stuClassID;
     }
 
-    public String getReason() {
+    public String getReason()
+    {
         return reason;
     }
 
-    public void setReason(String reason) {
+    public void setReason(String reason)
+    {
         this.reason = reason;
     }
 
-    public String getExplanation() {
+    public String getExplanation()
+    {
         return explanation;
     }
 
-    public void setExplanation(String dialogBox) {
+    public void setExplanation(String dialogBox)
+    {
         this.explanation = dialogBox;
     }
 
-    public String getDate() {
+    public String getDate()
+    {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(String date)
+    {
         this.date = date;
     }
 
-
-    public int getAbsenceID() {
+    public int getAbsenceID()
+    {
         return absenceID;
     }
 
-    public String getStuFullName() {
+    public String getStuFullName()
+    {
         return stuFullName;
     }
 
-    public void setStuFullName(String stuFullName) {
+    public void setStuFullName(String stuFullName)
+    {
         this.stuFullName = stuFullName;
     }
 
-    public String getStuClass() {
+    public String getStuClass()
+    {
         return stuClassName;
     }
 
-    public void setStuClass(String stuClass) {
+    public void setStuClass(String stuClass)
+    {
         this.stuClassName = stuClass;
     }
 
     @Override
-    public String toString() {
-        return stuFullName + "  "  + stuClassName + "  " + reason + "  " + explanation + "  " + date;
+    public String toString()
+    {
+        return stuFullName + "  " + stuClassName + "  " + reason + "  " + explanation + "  " + date;
     }
-
-
-
-
-
 
 }

@@ -23,14 +23,14 @@
 
 }
 
- .scroll-bar .increment-arrow,
- .scroll-bar .decrement-arrow{
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow{
     -fx-shape : " ";    
     -fx-padding :0.15em 0.0;
 }
 
- .scroll-bar:vertical .increment-arrow,
- .scroll-bar:vertical .decrement-arrow{
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow{
     -fx-shape : " ";    
     -fx-padding :0.0 0.15em;
 }
@@ -52,4 +52,28 @@
 #btnAbsReq {
     -fx-background-color: gray;
     -fx-text-fill: white;
+}
+
+#absenceAp {
+    -fx-padding: 5px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}
+
+#btnSend {
+    -fx-background-color: gray;
+    -fx-text-fill: white;
+
+}
+
+#btnCancel
+{
+    -fx-background-color: gray;
+    -fx-text-fill: white;   
+
+}
+
+#absCombo .text-field {
+    -fx-promt-font-size:17;
+
 }

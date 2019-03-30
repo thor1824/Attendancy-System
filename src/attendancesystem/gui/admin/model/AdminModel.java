@@ -51,21 +51,25 @@ public class AdminModel {
         return requestAbsences;
     }
 
-    public List<Student> getAllStudents() throws SQLException, SQLServerException, IOException {
+    public List<Student> getAllStudents() {
         if (students == null) {
-            students = bllMan.getAllStudents();
+            try
+            {
+                students = bllMan.getAllStudents();
+            } catch (Exception ex)
+            {
+                Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         return students;
     }
     
-    public javafx.scene.chart.PieChart getPieChart(Student student){
+    public javafx.scene.chart.PieChart getPieChart(Student student) {
         try {
             return bllMan.getPieChart(student);
-        } catch (SQLException ex) {
-            Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, e);
         }
         return null;
         
