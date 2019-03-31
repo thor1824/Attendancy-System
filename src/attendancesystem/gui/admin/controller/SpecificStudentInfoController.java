@@ -9,6 +9,7 @@ import attendancesystem.be.Absence;
 import attendancesystem.be.Student;
 import attendancesystem.gui.admin.model.AdminModel;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXListView;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -19,7 +20,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -36,7 +36,7 @@ public class SpecificStudentInfoController implements Initializable {
     private Stage stage;
 
     @FXML
-    private ListView<Absence> lstviewAbsenceInfo;
+    private JFXListView<Absence> lstviewAbsenceInfo;
     @FXML
     private JFXButton btnCancel;
 

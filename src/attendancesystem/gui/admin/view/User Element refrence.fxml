@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane maxWidth="1.7976931348623157E308" minHeight="600.0" prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: lightgray;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="14.0" layoutY="20.0" stroke="BLACK" strokeType="INSIDE" width="150.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="360.0" layoutX="35.0" layoutY="218.0" stroke="BLACK" strokeType="INSIDE" width="360.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="220.0" />
+      <Line endX="948.0" layoutX="145.0" layoutY="180.0" startX="-145.00003051757812" />
+      <Label alignment="CENTER_RIGHT" layoutX="180.0" layoutY="15.0" prefHeight="17.0" prefWidth="45.0" text="Name:" />
+      <Label alignment="CENTER_RIGHT" layoutX="180.0" layoutY="60.0" prefHeight="17.0" prefWidth="46.0" text="Class:" />
+      <Label alignment="CENTER_RIGHT" layoutX="180.0" layoutY="105.0" prefHeight="17.0" prefWidth="46.0" text="Email:" />
+      <Label layoutX="705.0" layoutY="230.0" text="Phone: " />
+      <Label layoutX="719.0" layoutY="272.0" text="Cpr: " />
+      <Label layoutX="703.0" layoutY="313.0" text="Adress: " />
+      <Label layoutX="783.0" layoutY="232.0" text="12345687" />
+      <Label layoutX="784.0" layoutY="272.0" text="123456-1234" />
+      <Label layoutX="786.0" layoutY="313.0" text="Ribevej 73 6630" />
+      <Label layoutX="467.0" layoutY="230.0" text="Days present:" />
+      <Label layoutX="410.0" layoutY="275.0" text="Undocumentet Absence:" />
+      <Label layoutX="424.0" layoutY="320.0" text="Documentet Absence:" />
+      <Label layoutX="575.0" layoutY="230.0" text="100" />
+      <Label layoutX="580.0" layoutY="275.0" prefHeight="17.0" prefWidth="13.0" text="20" />
+      <Label layoutX="580.0" layoutY="320.0" text="10" />
+      <Label layoutX="425.0" layoutY="443.0" text="absences procentage:" />
+      <Label layoutX="607.0" layoutY="230.0" text="Days" />
+      <Label layoutX="607.0" layoutY="275.0" text="Days" />
+      <Label layoutX="607.0" layoutY="320.0" text="Days" />
+      <Label layoutX="584.0" layoutY="443.0" text="3.88" />
+      <Label layoutX="621.0" layoutY="443.0" text="\%" />
+      <Button layoutX="1028.0" layoutY="140.0" mnemonicParsing="false" text="Button" />
+      <Button layoutX="1028.0" layoutY="555.0" mnemonicParsing="false" text="Button" />
+      <Label layoutX="265.0" layoutY="15.0" text="Tom Daniels" />
+      <Label layoutX="265.0" layoutY="60.0" text="CSe2018" />
+      <Label layoutX="265.0" layoutY="105.0" text="thor1824@gmail.com" />
+   </children>
+</AnchorPane>

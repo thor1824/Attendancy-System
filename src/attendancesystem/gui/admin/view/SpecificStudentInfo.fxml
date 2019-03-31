@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.ListView?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../../Resources/SuperiorWhite.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendancesystem.gui.admin.controller.SpecificStudentInfoController">
+<AnchorPane id="AnchorPane" prefHeight="486.0" prefWidth="408.0" style="-fx-background-color: lightgray;" stylesheets="@../../../../Resources/SuperiorWhite.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendancesystem.gui.admin.controller.SpecificStudentInfoController">
    <children>
-      <ListView fx:id="lstviewAbsenceInfo" layoutX="78.0" layoutY="65.0" prefHeight="301.0" prefWidth="600.0" AnchorPane.bottomAnchor="99.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <JFXButton fx:id="btnCancel" layoutX="535.0" layoutY="360.0" text="Cancel" />
+      <JFXButton fx:id="btnCancel" buttonType="RAISED" layoutX="315.0" layoutY="471.0" text="Cancel" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="40.0" />
+      <JFXListView fx:id="lstviewAbsenceInfo" layoutX="44.0" layoutY="38.0" prefHeight="400.0" prefWidth="323.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+         <effect>
+            <DropShadow color="#949191" offsetX="4.0" offsetY="4.0" />
+         </effect>
+      </JFXListView>
    </children>
 </AnchorPane>

@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -9,7 +10,7 @@
 
 <AnchorPane fx:id="apReason" prefHeight="395.0" prefWidth="316.0" style="-fx-background-color: lightgray;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendancesystem.gui.user.controller.ReasonForAbsenceController">
    <children>
-      <Label alignment="CENTER" layoutY="12.0" prefHeight="20.0" prefWidth="288.0" stylesheets="@../../../../Resources/SuperiorWhite.css" text="Write your reason for absence" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
+      <Label alignment="CENTER" layoutY="12.0" prefHeight="20.0" prefWidth="288.0" stylesheets="@../../../../Resources/SuperiorWhite.css" text="Why were you Absencend?" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
          <font>
             <Font size="17.0" />
          </font></Label>
@@ -21,10 +22,13 @@
          <font>
             <Font size="13.0" />
          </font></JFXButton>
-      <JFXTextArea fx:id="txtfldReason" layoutX="20.0" layoutY="70.0" prefHeight="252.0" prefWidth="258.0" style="-fx-background-color: white; -fx-background-radius: 0;" wrapText="true" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
+      <JFXTextArea fx:id="txtfldReason" layoutX="20.0" layoutY="70.0" prefHeight="252.0" prefWidth="258.0" promptText="write you answer here......" style="-fx-background-color: white; -fx-background-radius: 0;" wrapText="true" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
          <effect>
             <InnerShadow color="#6f6d6d" offsetX="3.0" offsetY="3.0" radius="10.25" width="22.0" />
          </effect>
+         <padding>
+            <Insets bottom="5.0" left="15.0" right="5.0" top="15.0" />
+         </padding>
       </JFXTextArea>
    </children>
 </AnchorPane>
