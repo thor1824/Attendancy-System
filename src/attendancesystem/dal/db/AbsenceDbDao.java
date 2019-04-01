@@ -278,8 +278,11 @@ public class AbsenceDbDao implements AbsenceDAO {
 
     }
 
-    public boolean createAbsence() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet.");
+   public boolean createAbsence(Absence absence) throws Exception {
+        return false;
+//        Connection con = ServerConnect.getConnection();
+//        String sql = "INSERT INTO [Atendens].[dbo].Absense
+//        
     }
 
     @Override
@@ -343,6 +346,11 @@ public class AbsenceDbDao implements AbsenceDAO {
             return linesAffectedDel != 0;
         }
         return linesAffectedUP != 0;
+    }
+
+    @Override
+    public boolean createAbsence() throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
