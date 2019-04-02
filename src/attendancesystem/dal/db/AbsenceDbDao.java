@@ -140,7 +140,7 @@ public class AbsenceDbDao implements AbsenceDAO {
         ps.setInt(1, student.getStuID());
 
         ResultSet rs = ps.executeQuery();
-
+        
         while (rs.next()) {
             String stuFullName = rs.getString("StuFName") + " " + rs.getString("StuLName");
             String stuClass = rs.getString("ClassName");
