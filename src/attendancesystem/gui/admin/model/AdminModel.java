@@ -9,9 +9,9 @@ import attendancesystem.be.Absence;
 import attendancesystem.be.Student;
 import attendancesystem.be.Teacher;
 import attendancesystem.bll.BLLManager;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -102,6 +102,20 @@ public class AdminModel {
             Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    public List<String> getSchoolClasses(Teacher teacher)
+    {
+       List<String> classes = new ArrayList<>();
+       
+        try
+        {
+            classes = bllMan.getSchoolClasses(teacher);
+        } catch (Exception ex)
+        {
+            Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return classes;
     }
     
 }

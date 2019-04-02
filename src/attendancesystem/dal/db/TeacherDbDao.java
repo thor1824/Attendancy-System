@@ -5,10 +5,18 @@
  */
 package attendancesystem.dal.db;
 
+import attendancesystem.be.Absence;
+import attendancesystem.be.Teacher;
 import attendancesystem.dal.db.Server.ServerConnect;
 import attendancesystem.dal.TeacherDAO;
 import attendancesystem.be.User;
+import attendancesystem.dal.db.Server.ConnectionPool;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -73,6 +81,7 @@ public class TeacherDbDao implements TeacherDAO {
         //check if entry was updated
         //close connection
         //retrun true if updated, false if not
+        
     }
 
     @Override
@@ -85,5 +94,29 @@ public class TeacherDbDao implements TeacherDAO {
         //check if entry was created
         //close connection
         //retrun true if created, false if not
+        
+    }
+
+    @Override
+    public List<String> getSchoolClasses(Teacher teacher) throws Exception
+    {
+       List<String> classes = new ArrayList<>();
+       ConnectionPool cp= ConnectionPool.getInstance();
+        Connection con = cp.getConnection(); //create connection
+        String sql = "SELECT * FROM [Atendens].[dbo].[Teacher_Class] AS a "
+                + "JOIN [Atendens].[dbo].[Class] AS b ON a.ClassID = b.ClassID "
+                + "WHERE a.TeachID = (?);";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, teacher.getUserID());
+
+        ResultSet rs = ps.executeQuery();
+        
+        while (rs.next()) {
+            classes.add(rs.getString("ClassName"));
+        }
+        cp.releaseConnection(con);
+        
+        return classes;
     }
 }

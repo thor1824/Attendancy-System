@@ -5,7 +5,9 @@
  */
 package attendancesystem.dal;
 
+import attendancesystem.be.Teacher;
 import attendancesystem.be.User;
+import java.util.List;
 
 /**
  *
@@ -23,5 +25,7 @@ public interface TeacherDAO
     void getTeacher(User user);
 
     void updateTeacher(User user);
+
+    public List<String> getSchoolClasses(Teacher teacher) throws Exception;
     
 }

@@ -49,18 +49,19 @@ public class UserElement extends AnchorPane {
     public UserElement(Student student, AdminModel adminModel) {
         this.adminModel = adminModel;
         this.student = student;
-
+        
         createPreviewPane();
+        
         createUserInfoPane();
     }
 
     private void createPreviewPane() {
         setupAnchorPanePreview();
-
+        
         setupImageView();
-
+        
         setupLabelsPreview();
-
+       
         setupShowMoreBtn();
     }
 
@@ -177,11 +178,14 @@ public class UserElement extends AnchorPane {
     private void setupImageView() {
         //setup User Image
         ImageView ivUser = new ImageView();
-        try {
-            ivUser.setImage(new Image(student.getPicUrl()));
-        } catch (Exception e) {
-            ivUser.setImage(new Image(defaultUserImageURL));
-        }
+//        try {
+//            ivUser.setImage(new Image(student.getPicUrl()));
+//        } catch (Exception e) {
+//            ivUser.setImage(new Image(defaultUserImageURL));
+//        }
+        
+        ivUser.setImage(new Image(defaultUserImageURL));
+        
         ivUser.setFitHeight(150);
         ivUser.setFitWidth(150);
         super.getChildren().add(ivUser);
