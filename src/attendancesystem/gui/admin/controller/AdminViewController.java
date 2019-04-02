@@ -268,9 +268,8 @@ public class AdminViewController implements Initializable
 
             // Compare Title, Artist and Genre of every Song with filter text.
             String lowerCaseFilter = newValue.toLowerCase();
-            Boolean bob = null;
-            System.out.println(!activeFilters.isEmpty());
-            System.out.println(activeFilters);
+            Boolean onFilterlist = null;
+            
             if (!activeFilters.isEmpty())
             {
                 for (String activeFilter : activeFilters)
@@ -279,16 +278,16 @@ public class AdminViewController implements Initializable
                     if (activeFilter.toLowerCase().contains(node.getSchoolClass().toLowerCase()))
                     {
                         
-                        bob = true;
+                        onFilterlist = true;
                         break;
                     } else
                     {
-                        bob = false;
+                        onFilterlist = false;
                     }
                 }
             }
 
-            if (node.getFullName().toLowerCase().contains(lowerCaseFilter) && (bob == true || bob == null))
+            if (node.getFullName().toLowerCase().contains(lowerCaseFilter) && (onFilterlist == true || onFilterlist == null))
             {
                 return true; // Filter matches Title.
             }
