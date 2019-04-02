@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package attendancesystem.gui.admin;
+package attendancesystem.gui.admin.tasks;
 
 import attendancesystem.be.Student;
 import attendancesystem.gui.admin.model.AdminModel;
@@ -41,6 +41,7 @@ public class UserElementLoader extends Task<UserElement> {
         Instant finish = Instant.now();
         long elapsedTime = Duration.between(begin, finish).toMillis();
         System.out.println(elapsedTime + " ms");
+        
         return ue;
     }
 

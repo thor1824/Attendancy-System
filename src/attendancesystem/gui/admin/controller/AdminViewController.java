@@ -8,9 +8,9 @@ package attendancesystem.gui.admin.controller;
 import attendancesystem.be.Absence;
 import attendancesystem.be.Student;
 import attendancesystem.be.Teacher;
-import attendancesystem.gui.admin.UserElementLoader;
+import attendancesystem.gui.admin.tasks.UserElementLoader;
 import attendancesystem.gui.admin.model.AdminModel;
-import attendancesystem.gui.admin.view.UserElementIncrementLoader;
+import attendancesystem.gui.admin.tasks.UserElementIncrementLoader;
 import attendancesystem.gui.elements.UserElement;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
@@ -28,15 +28,16 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -45,18 +46,20 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
  *
  * @author Thorbjørn Schultz Damkjær
  */
-public class AdminViewController implements Initializable {
+public class AdminViewController implements Initializable
+{
 
     private AdminModel model;
     private Student studen;
     private Stage currentStage;
-    ObservableList<Student> bob;
+    ObservableList<Student> obsStudents;
     private FilteredList<UserElement> searchListEle;
     private SortedList<UserElement> sortedDataEle;
 
@@ -97,15 +100,20 @@ public class AdminViewController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
 
-        try {
+        try
+        {
 
             model = new AdminModel();
             students = model.getAllStudents();
-            bob = FXCollections.observableArrayList();
-            bob.setAll(students);
-            executor = Executors.newFixedThreadPool(10);
+            obsStudents = FXCollections.observableArrayList();
+            obsStudents.setAll(students);
+            setupSeachBarStu();
+            sortedData = new SortedList<>(searchList); // Wrap the FilteredList in a SortedList.
+
+            executor = Executors.newFixedThreadPool(1);
             SetUpUserElements();
 
             setUpScrollPane();
@@ -114,38 +122,23 @@ public class AdminViewController implements Initializable {
 
             hbxUserOverview.setSpacing(12);
 
-            setupSeachBarStu();
-//            txtSeach.textProperty().addListener((obs, oldV, newV) -> {
-//                hbxUserOverview.getChildren().filtered(new Predicate<Node>() {
-//                    @Override
-//                    public boolean test(Node t) {
-//                        if (!txtSeach.getText().isEmpty()) {
-//                            UserElement temp = (UserElement) t;
-//                            if (temp.getStudent().getFullName().contains(newV)) {
-//                                return true;
-//                            }
-//
-//                            return false;
-//                        }
-//                        return true;
-//                    }
-//                });
-//            });
-
             combBoxSort.getItems().addAll(comboBox());
 
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             Logger.getLogger(AdminViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    private void SetUpUserElements() {
+    private void SetUpUserElements()
+    {
         Instant start = Instant.now();
 
-        for (int i = 0; i < maxLoad; i++) {
-            
-            createAndAddUserElement(students.get(i));
+        for (int i = 0; i < maxLoad; i++)
+        {
+
+            createAndAddUserElement(sortedData.get(i));
 
         }
 
@@ -154,151 +147,164 @@ public class AdminViewController implements Initializable {
         System.out.println("createAndAddUserElement: " + elapsedTime + " ms");
     }
 
-    private void setUpScrollPane() {
+    private void setUpScrollPane()
+    {
         spUsers.setFitToWidth(true);
         spUsers.setFitToHeight(true);
         //scrollPane load incriments
-        spUsers.vvalueProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.doubleValue() == spUsers.getVmax()) {
-                int loadIncriments = 10;
-                for (int i = maxLoad + 1; i <= maxLoad + loadIncriments; i++) {
-                    if (students.get(i) != null) {
-                        createAndAddUserElement(students.get(i));
-                    } else {
-                        break;
+        spUsers.vvalueProperty().addListener((observable, oldValue, newValue) ->
+        {
+            if (newValue.doubleValue() == spUsers.getVmax())
+            {
+                if (maxLoad != sortedData.size())
+                {
+                    int loadIncriments = 10;
+                    int oldMax = maxLoad;
+                    int newMax = maxLoad + loadIncriments;
+                    if (sortedData.size() > newMax)
+                    {
+                        for (int i = maxLoad + 1; i <= maxLoad + loadIncriments; i++)
+                        {
+                            createAndAddUserElement(sortedData.get(i));
+                        }
+                        maxLoad = newMax;
+                    } else
+                    {
+                        for (int i = oldMax; i < sortedData.size(); i++)
+                        {
+                            createAndAddUserElement(sortedData.get(i));
+                        }
+                        maxLoad = sortedData.size();
                     }
                 }
-                maxLoad = maxLoad + loadIncriments;
             }
         });
     }
 
-    private void createAndAddUserElement(Student student) {
+    private void createAndAddUserElement(Student student)
+    {
         UserElement user2 = new UserElement(student, model);
         hbxUserOverview.getChildren().add(user2);
     }
 
-    void setStage(Stage stage) {
+    void setStage(Stage stage)
+    {
         this.currentStage = stage;
+        currentStage.setOnCloseRequest(new EventHandler<WindowEvent>()
+        {
+            @Override
+            public void handle(WindowEvent e)
+            {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
     }
 
     @FXML
-    private void btnAll(ActionEvent event) {
-
-    }
-
-    @FXML
-    private void btnAllMy(ActionEvent event) {
-
-    }
-
-    @FXML
-    private void btnClass(ActionEvent event) {
-
-    }
-
-    @FXML
-    private void asc(ActionEvent event) {
+    private void btnAll(ActionEvent event)
+    {
 
     }
 
     @FXML
-    private void desc(ActionEvent event) {
+    private void btnAllMy(ActionEvent event)
+    {
 
     }
 
     @FXML
-    private void cehch1(ActionEvent event) {
+    private void btnClass(ActionEvent event)
+    {
 
     }
 
-    public ArrayList comboBox() {
+    @FXML
+    private void asc(ActionEvent event)
+    {
+
+    }
+
+    @FXML
+    private void desc(ActionEvent event)
+    {
+
+    }
+
+    @FXML
+    private void cehch1(ActionEvent event)
+    {
+
+    }
+
+    public ArrayList comboBox()
+    {
         ArrayList coBox = new ArrayList();
         coBox.add("First Name");
         coBox.add("Last Name");
         return coBox;
     }
 
-    private void setUserAncor() {
+    private void setUserAncor()
+    {
 
     }
 
-    private void setupSeachBarEle() {
-        searchListEle = new FilteredList(hbxUserOverview.getChildren(), p -> true);
-        txtSeach.textProperty().addListener((observable, oldValue, newValue) -> {
-            searchListEle.setPredicate(node -> {
+    private void setupSeachBarStu()
+    {
+        searchList = new FilteredList(obsStudents, p -> true);
+        txtSeach.textProperty().addListener((observable, oldValue, newValue) ->
+        {
+            searchList.setPredicate(node ->
+            {
                 // If filter text is empty, display all Songs
-                if (newValue == null || newValue.isEmpty()) {
+                if (newValue == null || newValue.isEmpty())
+                {
                     return true;
                 }
 
                 // Compare Title, Artist and Genre of every Song with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (node.getStudent().getFullName().toLowerCase().contains(lowerCaseFilter)) {
-                    System.out.println(node.getStudent().getFullName());
-                    return true; // Filter matches Title.
-                }
-                return false; // Does not match.
-            });
-            sortedDataEle = new SortedList<>(searchListEle); // Wrap the FilteredList in a SortedList.
-            hbxUserOverview.getChildren().setAll(sortedDataEle);//Add sorted (and filtered) data to the table.
-        });
-//
-//        hbxUserOverview.getChildren().setAll(searchList);//Add sorted (and filtered) data to the table.
-
-    }
-
-    private void setupSeachBarStu() {
-        searchList = new FilteredList(bob, p -> true);
-        txtSeach.textProperty().addListener((observable, oldValue, newValue) -> {
-            searchList.setPredicate(node -> {
-                // If filter text is empty, display all Songs
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-
-                // Compare Title, Artist and Genre of every Song with filter text.
-                String lowerCaseFilter = newValue.toLowerCase();
-
-                if (node.getFullName().toLowerCase().contains(lowerCaseFilter)) {
+                if (node.getFullName().toLowerCase().contains(lowerCaseFilter))
+                {
                     return true; // Filter matches Title.
                 }
 
                 return false; // Does not match.
             });
-            sortedData = new SortedList<>(searchList); // Wrap the FilteredList in a SortedList.
-            
-//            if (sortedData.size() >= maxLoad) {
-//                for (int i = 0; i < maxLoad; i++) {
-//                    UserElementLoader uLoader = new UserElementLoader(sortedData.get(i), model);
-//                    executor.submit(uLoader);
-//                    uLoader.valueProperty().addListener((obv, oldV, newV) -> {
-//                        hbxUserOverview.getChildren().add(newV);
-//                    });
-//
-//                }
-//
-//            } else {
-//                for (Student student : sortedData) {
-//                    UserElementLoader uLoader = new UserElementLoader(student, model);
-//                    executor.submit(uLoader);
-//                    uLoader.valueProperty().addListener((obv, oldV, newV) -> {
-//                        hbxUserOverview.getChildren().add(newV);
-//                    });
-//                }
-//
-//            }
-            if (sortedData.size() >= maxLoad) {
+
+            if (sortedData.size() >= maxLoad)
+            {
                 UserElementIncrementLoader uLoader = new UserElementIncrementLoader(sortedData, model, 0, maxLoad, executor);
                 executor.submit(uLoader);
-                uLoader.valueProperty().addListener((obv, oldV, newV) -> {
+                uLoader.valueProperty().addListener((obv, oldV, newV) ->
+                {
+
+                    newV.sort(new Comparator<UserElement>()
+                    {
+                        @Override
+                        public int compare(UserElement o1, UserElement o2)
+                        {
+                            return o1.getStudent().getStuID() - o2.getStudent().getStuID();
+                        }
+                    });
                     hbxUserOverview.getChildren().setAll(newV);
                 });
-            } else {
+            } else
+            {
                 UserElementIncrementLoader uLoader = new UserElementIncrementLoader(sortedData, model, 0, sortedData.size(), executor);
                 executor.submit(uLoader);
-                uLoader.valueProperty().addListener((obv, oldV, newV) -> {
+                uLoader.valueProperty().addListener((obv, oldV, newV) ->
+                {
+                    newV.sort(new Comparator<UserElement>()
+                    {
+                        @Override
+                        public int compare(UserElement o1, UserElement o2)
+                        {
+                            return o1.getStudent().getStuID() - o2.getStudent().getStuID();
+                        }
+                    });
                     hbxUserOverview.getChildren().setAll(newV);
                 });
 
@@ -309,7 +315,8 @@ public class AdminViewController implements Initializable {
     }
 
     @FXML
-    private void OpenRequests(ActionEvent event) throws IOException {
+    private void OpenRequests(ActionEvent event) throws IOException
+    {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("attendancesystem/gui/admin/view/AdminAbsenceHandler.fxml"));
 
         Parent root = loader.load();
@@ -326,24 +333,29 @@ public class AdminViewController implements Initializable {
 
     }
 
-    private void setUpAbsenceRequest() {
+    private void setUpAbsenceRequest()
+    {
 
         lblReqCount.setOpacity(0);
         requests = FXCollections.observableArrayList();
 
         requests.setAll(model.getAllRequestAbence(loggedInTeacher));
-        if (requests.size() >= 1) {
+        if (requests.size() >= 1)
+        {
             lblReqCount.setOpacity(1.0);
-            if (requests.size() >= 100) {
+            if (requests.size() >= 100)
+            {
                 lblReqCount.setText("99+");
-            } else {
+            } else
+            {
                 lblReqCount.setText("" + requests.size());
             }
         }
 
     }
 
-    public static void setLoggedInTeacher(Teacher loggedInTeacher) {
+    public static void setLoggedInTeacher(Teacher loggedInTeacher)
+    {
 
         AdminViewController.loggedInTeacher = loggedInTeacher;
     }
