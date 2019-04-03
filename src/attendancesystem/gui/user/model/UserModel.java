@@ -33,6 +33,8 @@ public class UserModel
     AbsenceDbDao absenceDbDao;
 
     Student logedInStudent;
+    
+    LoginSimolator loginsim;
 
     public UserModel()
     {

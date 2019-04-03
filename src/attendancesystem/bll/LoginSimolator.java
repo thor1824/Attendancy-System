@@ -16,9 +16,11 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -72,7 +74,7 @@ public class LoginSimolator {
 
         Random rand = new Random();
         int randomNumber = rand.nextInt(5);
-        LocalDate locDate = LocalDate.now();
+      
 
         User user = simStudents.get(randomNumber);
         
@@ -93,14 +95,20 @@ public class LoginSimolator {
         
     }
     
-    public void studentsPresend() throws IOException, SQLException{
+    public void studentsPresend() {
         for (Student student : presend) {
-            studentDb.addDaysOfClass(student);
+            try {
+                studentDb.addDaysOfClass(student);
+            } catch (IOException ex) {
+                Logger.getLogger(LoginSimolator.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(LoginSimolator.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
         }
     }
     
-    public void setAbsendStudentToPresent(Student student){
+    public void setStudentToPresent(Student student){
         simStudents.remove(student.getStuID());
         presend.add(student);
     }
@@ -111,4 +119,20 @@ public class LoginSimolator {
 
         return dateFormat.format(date);
     }
+    
+        public void runOnTime(){
+     Timer timer = new Timer();
+    Calendar dato = Calendar.getInstance();
+    dato.set(
+            Calendar.MONDAY,
+            Calendar.TUESDAY,
+            Calendar.WEDNESDAY,
+            Calendar.THURSDAY,
+            Calendar.FRIDAY);
+    dato.set(Calendar.HOUR, 0);
+    dato.set(Calendar.MINUTE, 0);
+    dato.set(Calendar.SECOND, 0);
+    dato.set(Calendar.MILLISECOND, 0);
+    timer.schedule(new TimeKeeper(),dato.getTime(), 1000 * 60 * 60 * 24 * 7);
+            }
 }
