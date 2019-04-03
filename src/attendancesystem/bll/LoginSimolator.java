@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -36,9 +37,13 @@ public class LoginSimolator {
     public User setUserByTime() {
         //todo
 
+        Random rand = new Random();
+        int randomNumber = rand.nextInt(5);
         LocalDate locDate = LocalDate.now();
 
-        simStudents.get(0);
+        User user = simStudents.get(randomNumber);
+        
+        
 
         return null;
     }
