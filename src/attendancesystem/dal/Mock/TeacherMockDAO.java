@@ -6,6 +6,7 @@
 package attendancesystem.dal.Mock;
 
 import attendancesystem.be.Student;
+import attendancesystem.be.Teacher;
 import attendancesystem.be.User;
 import attendancesystem.dal.TeacherDAO;
 import java.util.List;
@@ -46,6 +47,12 @@ public class TeacherMockDAO implements TeacherDAO{
 
     @Override
     public void updateTeacher(User user)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<String> getSchoolClasses(Teacher teacher) throws Exception
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

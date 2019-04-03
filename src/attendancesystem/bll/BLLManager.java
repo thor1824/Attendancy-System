@@ -5,7 +5,6 @@
  */
 package attendancesystem.bll;
 
-import attendancesystem.be.User;
 import attendancesystem.be.Student;
 import attendancesystem.be.Teacher;
 import attendancesystem.be.Absence;
@@ -14,10 +13,9 @@ import attendancesystem.dal.StudentDAO;
 import attendancesystem.dal.TeacherDAO;
 import attendancesystem.dal.LoginDAO;
 import attendancesystem.dal.db.StudentDbDao;
-import attendancesystem.dal.Mock.TeacherMockDAO;
 import attendancesystem.dal.db.AbsenceDbDao;
 import attendancesystem.dal.db.LoginDbDao;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
+import attendancesystem.dal.db.TeacherDbDao;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -37,7 +35,7 @@ public class BLLManager
     public BLLManager() throws IOException
     {
         loginDao = new LoginDbDao();
-        teachDao = new TeacherMockDAO();
+        teachDao = new TeacherDbDao();
         absenceDao = new AbsenceDbDao();
         studentDao = new StudentDbDao();
 
@@ -112,5 +110,10 @@ public class BLLManager
     public boolean declineAbsenceRequest(Absence absence) throws Exception
     {
         return absenceDao.declineAbsenceRequest(absence);
+    }
+
+    public List<String> getSchoolClasses(Teacher teacher) throws Exception
+    {
+        return teachDao.getSchoolClasses(teacher);
     }
 }
