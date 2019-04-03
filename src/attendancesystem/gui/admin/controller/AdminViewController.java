@@ -286,8 +286,8 @@ public class AdminViewController implements Initializable
                     }
                 }
             }
-
-            if (node.getFullName().toLowerCase().contains(lowerCaseFilter) && (onFilterlist == true || onFilterlist == null))
+            System.out.println(node);
+            if (node.getFullName().toLowerCase().contains(lowerCaseFilter) && (onFilterlist == null || onFilterlist == true))
             {
                 return true; // Filter matches Title.
             }

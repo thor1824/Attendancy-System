@@ -24,17 +24,17 @@ public class ConnectionPool
     private ConnectionPool() throws SQLServerException, IOException
     {
         cPool = new ArrayDeque<>();
-        cPool.add(ServerConnect.getConnection());
-        cPool.add(ServerConnect.getConnection());
-        cPool.add(ServerConnect.getConnection());
-        cPool.add(ServerConnect.getConnection());
-        cPool.add(ServerConnect.getConnection());
-        cPool.add(ServerConnect.getConnection());
-        cPool.add(ServerConnect.getConnection());
-        cPool.add(ServerConnect.getConnection());
-        cPool.add(ServerConnect.getConnection());
-        cPool.add(ServerConnect.getConnection());
-        cPool.add(ServerConnect.getConnection());
+//        cPool.add(ServerConnect.getConnection());
+//        cPool.add(ServerConnect.getConnection());
+//        cPool.add(ServerConnect.getConnection());
+//        cPool.add(ServerConnect.getConnection());
+//        cPool.add(ServerConnect.getConnection());
+//        cPool.add(ServerConnect.getConnection());
+//        cPool.add(ServerConnect.getConnection());
+//        cPool.add(ServerConnect.getConnection());
+//        cPool.add(ServerConnect.getConnection());
+//        cPool.add(ServerConnect.getConnection());
+//        cPool.add(ServerConnect.getConnection());
     }
 
     public static ConnectionPool getInstance() throws SQLServerException, IOException
@@ -47,7 +47,7 @@ public class ConnectionPool
     }
     
 
-    public Connection getConnection() throws SQLServerException, IOException
+    public synchronized Connection getConnection() throws SQLServerException, IOException
     {
 
         if (cPool.isEmpty())
@@ -60,7 +60,7 @@ public class ConnectionPool
         
     }
 
-    public void releaseConnection(Connection con)
+    public synchronized void releaseConnection(Connection con)
     {
 
         cPool.push(con);
