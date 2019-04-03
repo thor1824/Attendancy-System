@@ -74,6 +74,11 @@ public class LoginSimolator {
             
         }
     }
+    
+    public void setAbsendStudentToPresent(Student student){
+        absend.remove(student.getStuID());
+        presend.add(student);
+    }
 
     public String getDate() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
