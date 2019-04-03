@@ -10,20 +10,24 @@ import attendancesystem.dal.AbsenceDAO;
 import attendancesystem.be.Absence;
 import attendancesystem.be.Student;
 import attendancesystem.be.Teacher;
+import attendancesystem.bll.LoginSimolator;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  *
  * @author Christian
  */
 public class AbsenceDbDao implements AbsenceDAO {
+    public LoginSimolator loginSim;
 
     private static ServerConnect server;
 
@@ -277,13 +281,10 @@ public class AbsenceDbDao implements AbsenceDAO {
         return listOfDocumentetAbsence;
 
     }
-
-   public boolean createAbsence(Absence absence) throws Exception {
-        return false;
-//        Connection con = ServerConnect.getConnection();
-//        String sql = "INSERT INTO [Atendens].[dbo].Absense
-//        
-    }
+     
+        
+        
+    
 
     @Override
     public boolean deleteAbsence() throws Exception {
@@ -349,8 +350,42 @@ public class AbsenceDbDao implements AbsenceDAO {
     }
 
     @Override
-    public boolean createAbsence() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public boolean createAbsence(Absence absence, Student student) throws Exception {
+        
+        Connection con = ServerConnect.getConnection();
+        String sql = "INSERT INTO [Atendens].[dbo].[Absense]"//+"AS a" 
+                //+ "JOIN [Atendens].[dbo].[Class_Absense]"
+                + "(StuID ,Reason, DialogBox, Date, Approved, Pending, ) VALUES (?, ?, ?, ?, ?, ?); ";
+        
+        PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ResultSet rs = ps.getGeneratedKeys();
+        int id = 0;
+        
+        if (rs.next()) {
+        id = rs.getInt(1);
+        absence.setID(id);
+        
+       
 
+        }
+        ps.setInt(1, student.getStuID());
+        ps.setNString(2, null);
+        ps.setNString(3, null);
+        ps.setNString(4, loginSim.getDate());
+        ps.setObject(5, false);
+        ps.setObject(6, true);
+        
+       int affectedRows = ps.executeUpdate();
+       
+      
+        if (affectedRows == 0) {
+            return false;
+        }
+        else
+            
+            return true;
+       }
+
+   
+   
 }

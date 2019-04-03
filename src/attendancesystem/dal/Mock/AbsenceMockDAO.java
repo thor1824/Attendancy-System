@@ -61,10 +61,7 @@ public class AbsenceMockDAO implements AbsenceDAO {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public boolean createAbsence() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     @Override
     public boolean deleteAbsence() throws Exception {
@@ -105,6 +102,11 @@ public class AbsenceMockDAO implements AbsenceDAO {
     @Override
     public int linesIngetUndocumentetAbsence(Student student) throws Exception
     {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean createAbsence(Absence absence, Student student) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

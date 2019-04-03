@@ -22,7 +22,7 @@ import java.util.List;
 public interface AbsenceDAO
 {
 
-    boolean createAbsence() throws Exception;
+    boolean createAbsence(Absence absence, Student student) throws Exception;
 
     boolean deleteAbsence() throws Exception;
 

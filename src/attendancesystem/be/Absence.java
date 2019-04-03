@@ -45,8 +45,6 @@ public class Absence
         this.pending = pending;
     }
     
-    
-    
     public Boolean isApproved()
     {
         return approved;
@@ -95,6 +93,10 @@ public class Absence
     public int getAbsenceID()
     {
         return absenceID;
+    }
+    
+    public void setID(int absenceID){
+        this.absenceID = absenceID;
     }
 
     public String getStuFullName()
