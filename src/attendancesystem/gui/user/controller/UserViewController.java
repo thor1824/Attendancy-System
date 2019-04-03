@@ -66,7 +66,7 @@ public class UserViewController implements Initializable
     private void btnSuccesPress(ActionEvent event) throws IOException
     {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(SUCCES_FXML));
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(MAIN_FXML));
 
         Parent root = loader.load();
         Stage stage = new Stage();
@@ -74,10 +74,9 @@ public class UserViewController implements Initializable
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(new Scene(root));
-        LoginSuccesController controller = loader.getController();
+        StudentMainController controller = loader.getController();
         controller.setModel(model);
         controller.setStage(stage);
-        controller.setDate();
         stage.showAndWait();
 
     }

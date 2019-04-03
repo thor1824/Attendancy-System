@@ -7,9 +7,10 @@ package attendancesystem.gui.user.model;
 
 import attendancesystem.be.Student;
 import attendancesystem.be.Absence;
+import attendancesystem.be.User;
 import attendancesystem.bll.BLLManager;
+import attendancesystem.bll.LoginSimolator;
 import attendancesystem.dal.db.AbsenceDbDao;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -26,6 +27,8 @@ public class UserModel
 {
 
     BLLManager bllMan;
+    
+    LoginSimolator loginSim;
 
     AbsenceDbDao absenceDbDao;
 
@@ -107,6 +110,10 @@ public class UserModel
     public List<Absence> getDocumentetAbsence(Student student) throws Exception
     {
        return bllMan.getDocumentetAbsence(student);
+    }
+    
+    public User getRandomStudent() {
+        return loginSim.getRandomStudent();
     }
 
 }

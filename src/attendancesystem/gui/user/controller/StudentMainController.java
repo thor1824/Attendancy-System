@@ -7,6 +7,7 @@ package attendancesystem.gui.user.controller;
 
 import attendancesystem.be.Student;
 import attendancesystem.be.Absence;
+import attendancesystem.be.User;
 import attendancesystem.gui.elements.AbsencentModulElement;
 import attendancesystem.gui.user.model.UserModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -147,6 +148,16 @@ public class StudentMainController implements Initializable
             ame.setModel(userModel);
             vBoxUndokumentet.getChildren().add(ame.getAnchorPane());
         }
+    }
+    
+    public void loginRandomStudent() {
+        //Todo
+        User user = userModel.getRandomStudent();
+        
+        
+        
+        
+        
     }
 
 //    

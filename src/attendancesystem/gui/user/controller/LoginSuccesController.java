@@ -51,10 +51,6 @@ public class LoginSuccesController implements Initializable
         this.stage = stage;
     }
 
-    void setDate()
-    {
-       Calendar cal = Calendar.getInstance();
-       lblArrivalTime.setText("Time of Arrival: " + cal.getTime().toString());
-    }
+    
 
 }

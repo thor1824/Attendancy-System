@@ -35,11 +35,36 @@ public class LoginSimolator {
     List<Student> absend;
     List<Student> presend;
 
+    public LoginSimolator(StudentDbDao studentDb, AbsenceDbDao ab, List<Student> simStudents, List<Student> absend, List<Student> presend) {
+        this.studentDb = studentDb;
+        this.ab = ab;
+        this.simStudents = simStudents;
+        this.absend = absend;
+        this.presend = presend;
+    }
+    
+    
+
     public List addStudentToList() throws SQLException, SQLServerException, IOException {
 
         simStudents = studentDb.getAllStudents().subList(0, 4);
 
         return simStudents;
+    }
+    
+    
+    
+    /**
+     * 
+     * @returns a random student from the sublist simStudents 
+     */
+    public User getRandomStudent() {
+        Random random = new Random();
+        int randomNumber = random.nextInt(5);
+        
+        User student = simStudents.get(randomNumber);
+        
+        return student;
     }
 
     public User setUserByTime() {
@@ -76,7 +101,7 @@ public class LoginSimolator {
     }
     
     public void setAbsendStudentToPresent(Student student){
-        absend.remove(student.getStuID());
+        simStudents.remove(student.getStuID());
         presend.add(student);
     }
 
