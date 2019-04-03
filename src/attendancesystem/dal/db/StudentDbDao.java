@@ -214,7 +214,8 @@ public class StudentDbDao implements StudentDAO
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public int daysOfClass(Student student) throws SQLServerException, IOException, SQLException{
+    @Override
+    public int getDaysOfClass(Student student) throws SQLServerException, IOException, SQLException{
 
         int daysofclass = 0;
 
@@ -231,9 +232,33 @@ public class StudentDbDao implements StudentDAO
 
         }
 
-
+        con.close();
         return daysofclass;
+        
     }
+    
+    public boolean addDaysOfClass(Student student) throws SQLServerException, IOException, SQLException{
+        
+       
+       String sql = "UPDATE [Atendens].[dbo].[Student] SET Days_of_classes = Days_of_classes +1  WHERE StuID = (?)";
+        Connection con = ServerConnect.getConnection();
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, student.getStuID());
+
+       int rowsAffected = ps.executeUpdate();
+        if (rowsAffected == 1) {
+            return true;
+        }
+        
+        con.close();
+        
+        return false;
+       
+       
+
+        } 
+        
+    
 
 
 

@@ -19,7 +19,7 @@ public class PieChart {
 
     public static javafx.scene.chart.PieChart buildPieChard(Student student, AbsenceDAO absenceDao, StudentDAO studenDao) throws Exception {
         ObservableList<javafx.scene.chart.PieChart.Data> pieChard = FXCollections.observableArrayList(
-                new javafx.scene.chart.PieChart.Data("Days of Precense", studenDao.daysOfClass(student)),
+                new javafx.scene.chart.PieChart.Data("Days of Precense", studenDao.getDaysOfClass(student)),
                 new javafx.scene.chart.PieChart.Data("Undocumentet Absence", absenceDao.linesIngetUndocumentetAbsence(student)),
                 new javafx.scene.chart.PieChart.Data("Documentet Absence", absenceDao.linesIngetDocumentetAbsence(student))
         );

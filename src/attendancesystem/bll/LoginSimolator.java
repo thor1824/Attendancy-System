@@ -5,8 +5,10 @@
  */
 package attendancesystem.bll;
 
+import attendancesystem.be.Absence;
 import attendancesystem.be.Student;
 import attendancesystem.be.User;
+import attendancesystem.dal.db.AbsenceDbDao;
 import attendancesystem.dal.db.StudentDbDao;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
@@ -17,6 +19,8 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,7 +29,11 @@ import java.util.Random;
 public class LoginSimolator {
 
     public StudentDbDao studentDb;
+    public AbsenceDbDao ab;
+    
     List<Student> simStudents;
+    List<Student> absend;
+    List<Student> presend;
 
     public List addStudentToList() throws SQLException, SQLServerException, IOException {
 
@@ -43,9 +51,28 @@ public class LoginSimolator {
 
         User user = simStudents.get(randomNumber);
         
-        
-
         return null;
+    }
+    
+    public void absentStudents(Absence absence){
+        
+        for (Student student : absend) {
+            try {
+                ab.createAbsence(absence, student);
+                studentDb.addDaysOfClass(student);
+            } catch (Exception ex) {
+                Logger.getLogger(LoginSimolator.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+        
+    }
+    
+    public void studentsPresend() throws IOException, SQLException{
+        for (Student student : presend) {
+            studentDb.addDaysOfClass(student);
+            
+        }
     }
 
     public String getDate() {

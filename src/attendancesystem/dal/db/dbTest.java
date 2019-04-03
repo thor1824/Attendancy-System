@@ -21,11 +21,13 @@ public class dbTest
     {
         StudentDAO sd = new StudentDbDao();
         StudentDbDao sdb = new StudentDbDao();
+        AbsenceDbDao ab = new AbsenceDbDao();
         Student test = new Student(1, "test", "test", "test", "test", "test", "test", "test", "CSa2018", "test", 0);
         
         //System.out.println(sd.createStudent(test, "test", PasswordEncryptor.encryptPassword("test")));
         
-        System.out.println(sdb.daysOfClass(test));
+        System.out.println(ab.linesIngetDocumentetAbsence(test));
+        sdb.addDaysOfClass(test);
     }
 
 }

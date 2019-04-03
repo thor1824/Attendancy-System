@@ -26,7 +26,7 @@ public interface StudentDAO
 
     boolean updateStudent(Student user)  throws Exception;
     
-    int daysOfClass(Student user) throws Exception;
+    int getDaysOfClass(Student user) throws Exception;
     
     boolean setUserImage(Student user, String picURL)  throws Exception;
 

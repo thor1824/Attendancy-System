@@ -81,7 +81,7 @@ public class StudentMockDAO implements StudentDAO{
     }
 
     @Override
-    public int daysOfClass(Student user) throws Exception
+    public int getDaysOfClass(Student user) throws Exception
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
