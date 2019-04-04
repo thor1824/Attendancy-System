@@ -13,7 +13,7 @@ import java.util.TimerTask;
  * @author onech
  */
 public class TimeKeeper extends TimerTask{
-    LoginSimolator loginSim;
+    NFCScanner loginSim;
     Absence absence;
 
     @Override

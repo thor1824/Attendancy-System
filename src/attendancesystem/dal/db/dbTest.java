@@ -7,7 +7,7 @@ package attendancesystem.dal.db;
 
 import attendancesystem.be.Student;
 import attendancesystem.bll.CalenderOrganiser;
-import attendancesystem.bll.LoginSimolator;
+import attendancesystem.bll.NFCScanner;
 import attendancesystem.dal.StudentDAO;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -23,12 +23,9 @@ public class dbTest {
         StudentDAO sd = new StudentDbDao();
         StudentDbDao sdb = new StudentDbDao();
         AbsenceDbDao ab = new AbsenceDbDao();
-        LoginSimolator logSim = new LoginSimolator();
+        NFCScanner logSim = new NFCScanner();
         Student test = new Student(1, "test", "test", "test", "test", "test", "test", "test", "CSa2018", "test", 0);
-
-        //System.out.println(sd.createStudent(test, "test", PasswordEncryptor.encryptPassword("test")));
         
-<<<<<<< HEAD
         Calendar dato = Calendar.getInstance();
         dato.set(
                 Calendar.DAY_OF_WEEK,
@@ -39,7 +36,7 @@ public class dbTest {
         cal.set(
                 Calendar.DAY_OF_WEEK,
                 Calendar.SUNDAY);
-        
+
         int day = cal.get(Calendar.DAY_OF_WEEK);
         int week = cal.get(Calendar.WEEK_OF_YEAR);
         int year = cal.get(Calendar.YEAR);
@@ -49,10 +46,7 @@ public class dbTest {
         cal.set(Calendar.DAY_OF_WEEK, 7);
         CalenderOrganiser calorg = new CalenderOrganiser();
         calorg.checkDate(cal);
-=======
-        System.out.println(ab.linesIngetDocumentetAbsence(test));
-        sdb.addDaysOfClass(test.getStuID());
->>>>>>> 934d2f28a651fb9d3e06209d354b40236b114338
+
     }
 
 }

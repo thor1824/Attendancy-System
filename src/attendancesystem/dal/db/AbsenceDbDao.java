@@ -10,7 +10,7 @@ import attendancesystem.dal.AbsenceDAO;
 import attendancesystem.be.Absence;
 import attendancesystem.be.Student;
 import attendancesystem.be.Teacher;
-import attendancesystem.bll.LoginSimolator;
+import attendancesystem.bll.NFCScanner;
 import attendancesystem.dal.db.Server.ConnectionPool;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
@@ -28,7 +28,7 @@ import java.util.List;
  */
 public class AbsenceDbDao implements AbsenceDAO {
 
-    public LoginSimolator loginSim;
+    public NFCScanner loginSim;
 
     private static ServerConnect server;
 
@@ -378,14 +378,13 @@ public class AbsenceDbDao implements AbsenceDAO {
         Connection con = ServerConnect.getConnection();
         String sql = "INSERT INTO [Atendens].[dbo].[Absense]"//+"AS a"
                 //+ "JOIN [Atendens].[dbo].[Class_Absense]"
-                + "(StuID ,Reason, DialogBox, Date ) VALUES (?, ?, ?, ?); ";
+                + "(StuID, Date ) VALUES (?, ?); ";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
         ps.setInt(1, student.getStuID());
-        ps.setNString(2, null);
-        ps.setNString(3, null);
-        ps.setNString(4, loginSim.getDate());
+        
+        ps.setNString(4, absence.getDate());
 
         int affectedRows = ps.executeUpdate();
 

@@ -6,7 +6,7 @@
 package attendancesystem.gui.user.controller;
 
 import attendancesystem.be.Student;
-import attendancesystem.bll.LoginSimolator;
+import attendancesystem.bll.NFCScanner;
 import attendancesystem.gui.user.model.UserModel;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -36,7 +36,7 @@ public class UserViewController implements Initializable {
     private static final String SUCCES_FXML = "attendancesystem/gui/user/view/LoginSucces.fxml";
     private static final String MAIN_FXML = "attendancesystem/gui/user/view/StudentMain.fxml";
     private UserModel model;
-    private LoginSimolator logSim;
+    private NFCScanner logSim;
 
     @FXML
     private Button btnLogin;

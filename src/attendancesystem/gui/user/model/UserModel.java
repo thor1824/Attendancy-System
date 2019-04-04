@@ -9,7 +9,7 @@ import attendancesystem.be.Student;
 import attendancesystem.be.Absence;
 import attendancesystem.be.User;
 import attendancesystem.bll.BLLManager;
-import attendancesystem.bll.LoginSimolator;
+import attendancesystem.bll.NFCScanner;
 import attendancesystem.dal.db.AbsenceDbDao;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -28,20 +28,20 @@ public class UserModel
 
     BLLManager bllMan;
     
-    LoginSimolator loginSim;
+    NFCScanner loginSim;
 
     AbsenceDbDao absenceDbDao;
 
     Student logedInStudent;
     
-    LoginSimolator loginsim;
+    NFCScanner loginsim;
 
     public UserModel() 
     {
         try
         {
             bllMan = new BLLManager();
-            loginSim = new LoginSimolator();
+            loginSim = new NFCScanner();
         } catch (IOException ex)
         {
             Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -115,10 +115,6 @@ public class UserModel
     public List<Absence> getDocumentetAbsence(Student student) throws Exception
     {
        return bllMan.getDocumentetAbsence(student);
-    }
-    
-    public int getRandomStudent() {
-        return loginSim.getRandomStudent();
     }
     
     public boolean studentPresent() {
