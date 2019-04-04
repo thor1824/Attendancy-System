@@ -22,12 +22,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
  * @author Christian
  */
 public class AbsenceDbDao implements AbsenceDAO {
+
     public LoginSimolator loginSim;
 
     private static ServerConnect server;
@@ -45,7 +45,7 @@ public class AbsenceDbDao implements AbsenceDAO {
                 + "JOIN [Atendens].[dbo].[Absense] AS c ON a.StuID = c.StuID "
                 + "WHERE a.StuID = (?) AND Approved = ? "
                 + "OR a.StuID = (?) and Approved IS NULL";
-        ConnectionPool cp= ConnectionPool.getInstance();
+        ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection(); //create connection
 
         PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement
@@ -76,12 +76,12 @@ public class AbsenceDbDao implements AbsenceDAO {
     }
 
     @Override
-    public synchronized int linesIngetUndocumentetAbsence(Student student) throws SQLException, SQLServerException, IOException{
+    public synchronized int linesIngetUndocumentetAbsence(Student student) throws SQLException, SQLServerException, IOException {
         String sql = "SELECT COUNT(*) FROM [Atendens].[dbo].[Absense] "
                 + "WHERE StuID = (?) AND Approved = ? "
                 + "OR StuID = (?) and Approved IS NULL";;
         int rowCount = -1;
-        ConnectionPool cp= ConnectionPool.getInstance();
+        ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection(); //create connection
 
         PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement
@@ -92,9 +92,8 @@ public class AbsenceDbDao implements AbsenceDAO {
 
         ResultSet rs = ps.executeQuery();
 
-        if (rs.next())
-        {
-          rowCount = rs.getInt(1);
+        if (rs.next()) {
+            rowCount = rs.getInt(1);
         }
 
         cp.releaseConnection(con);
@@ -103,11 +102,11 @@ public class AbsenceDbDao implements AbsenceDAO {
     }
 
     @Override
-    public synchronized int linesIngetDocumentetAbsence(Student student) throws SQLException, SQLServerException, IOException{
+    public synchronized int linesIngetDocumentetAbsence(Student student) throws SQLException, SQLServerException, IOException {
         String sql = "SELECT COUNT(*) FROM [Atendens].[dbo].[Absense] "
                 + "WHERE StuID = (?) AND Approved = ?";
         int rowCount = -1;
-        ConnectionPool cp= ConnectionPool.getInstance();
+        ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection(); //create connection
 
         PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement
@@ -117,9 +116,8 @@ public class AbsenceDbDao implements AbsenceDAO {
 
         ResultSet rs = ps.executeQuery();
 
-        if (rs.next())
-        {
-           rowCount = rs.getInt(1);
+        if (rs.next()) {
+            rowCount = rs.getInt(1);
         }
 
         cp.releaseConnection(con);
@@ -138,7 +136,7 @@ public class AbsenceDbDao implements AbsenceDAO {
     @Override
     public List<Absence> getAllAbsence(Student student) throws IOException, SQLServerException, SQLException {
         List<Absence> absences = new ArrayList<>();
-        ConnectionPool cp= ConnectionPool.getInstance();
+        ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection(); //create connection
         String sql = "SELECT * FROM [Atendens].[dbo].[Student] AS a "
                 + "JOIN [Atendens].[dbo].[Class] AS b ON a.ClassID = b.ClassID "
@@ -175,7 +173,7 @@ public class AbsenceDbDao implements AbsenceDAO {
 
         String sql = "DELETE FROM [Atendens].[dbo].[Absense] WHERE AbsenceID = (?) AND StuID = (?)";
 
-        ConnectionPool cp= ConnectionPool.getInstance();
+        ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection(); //create connection
 
         PreparedStatement ps = con.prepareStatement(sql);
@@ -201,7 +199,7 @@ public class AbsenceDbDao implements AbsenceDAO {
                 + "SET Reason = (?), DialogBox = (?), Pending = (?)"
                 + "WHERE AbsenceID = (?)";
 
-        ConnectionPool cp= ConnectionPool.getInstance();
+        ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection(); //create connection
 
         PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement
@@ -222,7 +220,7 @@ public class AbsenceDbDao implements AbsenceDAO {
     @Override
     public List<Absence> getAllRequestAbence(Teacher teacher) throws SQLServerException, IOException, SQLException {
         List<Absence> absences = new ArrayList<>();
-        ConnectionPool cp= ConnectionPool.getInstance();
+        ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection(); //create connection
         String sql = "SELECT * FROM [Atendens].[dbo].[Teacher_Class] AS a "
                 + "JOIN [Atendens].[dbo].[Class_Absense] AS b ON a.ClassID = b.ClassID "
@@ -261,7 +259,7 @@ public class AbsenceDbDao implements AbsenceDAO {
     public ArrayList<Absence> getDocumentetAbsence(Student student) throws SQLException, SQLServerException, IOException {
         ArrayList<Absence> listOfDocumentetAbsence = new ArrayList<>();
 
-        ConnectionPool cp= ConnectionPool.getInstance();
+        ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection(); //create connection
 
         String sql = "SELECT * FROM [Atendens].[dbo].[Student] AS a "
@@ -295,10 +293,6 @@ public class AbsenceDbDao implements AbsenceDAO {
 
     }
 
-
-
-
-
     @Override
     public boolean deleteAbsence() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -306,7 +300,7 @@ public class AbsenceDbDao implements AbsenceDAO {
 
     @Override
     public boolean makeAbsenceRequest(Absence absence) throws Exception {
-        ConnectionPool cp= ConnectionPool.getInstance();
+        ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection(); //create connection
 
         String sql = "INSERT INTO [Atendens].[dbo].[Class_Absense] (AbsenceID, ClassID) VALUES (?,?);";
@@ -324,7 +318,7 @@ public class AbsenceDbDao implements AbsenceDAO {
 
     @Override
     public boolean approveRequest(Absence absence) throws Exception {
-        ConnectionPool cp= ConnectionPool.getInstance();
+        ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection(); //create connection
 
         String updateSql = "UPDATE [Atendens].[dbo].[Absense] Set Approved = ?, Pending = ? WHERE AbsenceID = ?;";
@@ -352,7 +346,7 @@ public class AbsenceDbDao implements AbsenceDAO {
 
     @Override
     public boolean declineAbsenceRequest(Absence absence) throws Exception {
-        ConnectionPool cp= ConnectionPool.getInstance();
+        ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection(); //create connection
 
         String updateSql = "UPDATE [Atendens].[dbo].[Absense] Set Approved = ?, Pending = ? WHERE AbsenceID = ?;";
@@ -384,37 +378,18 @@ public class AbsenceDbDao implements AbsenceDAO {
         Connection con = ServerConnect.getConnection();
         String sql = "INSERT INTO [Atendens].[dbo].[Absense]"//+"AS a"
                 //+ "JOIN [Atendens].[dbo].[Class_Absense]"
-                + "(StuID ,Reason, DialogBox, Date, Approved, Pending, ) VALUES (?, ?, ?, ?, ?, ?); ";
+                + "(StuID ,Reason, DialogBox, Date ) VALUES (?, ?, ?, ?); ";
 
-        PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ResultSet rs = ps.getGeneratedKeys();
-        int id = 0;
+        PreparedStatement ps = con.prepareStatement(sql);
 
-        if (rs.next()) {
-        id = rs.getInt(1);
-        absence.setID(id);
-
-
-
-        }
         ps.setInt(1, student.getStuID());
         ps.setNString(2, null);
         ps.setNString(3, null);
         ps.setNString(4, loginSim.getDate());
-        ps.setObject(5, false);
-        ps.setObject(6, true);
 
-       int affectedRows = ps.executeUpdate();
+        int affectedRows = ps.executeUpdate();
 
+        return affectedRows != 0;
 
-        if (affectedRows == 0) {
-            return false;
-        }
-        else
-
-            return true;
-       }
-
-
-
+    }
 }

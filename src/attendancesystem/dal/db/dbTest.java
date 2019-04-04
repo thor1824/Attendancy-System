@@ -6,28 +6,48 @@
 package attendancesystem.dal.db;
 
 import attendancesystem.be.Student;
-import attendancesystem.bll.PasswordEncryptor;
+import attendancesystem.bll.CalenderOrganiser;
+import attendancesystem.bll.LoginSimolator;
 import attendancesystem.dal.StudentDAO;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 /**
  *
  * @author Thorbjørn Schultz Damkjær
  */
-public class dbTest
-{
-    public static void main(String[] args) throws IOException, SQLException
-    {
+public class dbTest {
+
+    public static void main(String[] args) throws IOException, SQLException {
         StudentDAO sd = new StudentDbDao();
         StudentDbDao sdb = new StudentDbDao();
         AbsenceDbDao ab = new AbsenceDbDao();
+        LoginSimolator logSim = new LoginSimolator();
         Student test = new Student(1, "test", "test", "test", "test", "test", "test", "test", "CSa2018", "test", 0);
-        
+
         //System.out.println(sd.createStudent(test, "test", PasswordEncryptor.encryptPassword("test")));
         
-        System.out.println(ab.linesIngetDocumentetAbsence(test));
-        sdb.addDaysOfClass(test);
+        Calendar dato = Calendar.getInstance();
+        dato.set(
+                Calendar.DAY_OF_WEEK,
+                Calendar.MONDAY);
+        System.out.println(dato.getTime());
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(
+                Calendar.DAY_OF_WEEK,
+                Calendar.SUNDAY);
+        
+        int day = cal.get(Calendar.DAY_OF_WEEK);
+        int week = cal.get(Calendar.WEEK_OF_YEAR);
+        int year = cal.get(Calendar.YEAR);
+        System.out.println(day);
+        System.out.println(week);
+        System.out.println(year);
+        cal.set(Calendar.DAY_OF_WEEK, 7);
+        CalenderOrganiser calorg = new CalenderOrganiser();
+        calorg.checkDate(cal);
     }
 
 }

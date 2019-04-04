@@ -32,40 +32,35 @@ public class LoginSimolator {
 
     public StudentDbDao studentDb;
     public AbsenceDbDao ab;
-    
+
     List<Student> simStudents;
     List<Student> absend;
     List<Student> presend;
 
-    public LoginSimolator(StudentDbDao studentDb, AbsenceDbDao ab, List<Student> simStudents, List<Student> absend, List<Student> presend) {
-        this.studentDb = studentDb;
-        this.ab = ab;
-        this.simStudents = simStudents;
-        this.absend = absend;
-        this.presend = presend;
-    }
-    
-    
-
+//    public LoginSimolator(StudentDbDao studentDb, AbsenceDbDao ab, List<Student> simStudents, List<Student> absend, List<Student> presend) {
+//        this.studentDb = studentDb;
+//        this.ab = ab;
+//        this.simStudents = simStudents;
+//        this.absend = absend;
+//        this.presend = presend;
+//    }
     public List addStudentToList() throws SQLException, SQLServerException, IOException {
 
         simStudents = studentDb.getAllStudents().subList(0, 4);
 
         return simStudents;
     }
-    
-    
-    
+
     /**
-     * 
-     * @returns a random student from the sublist simStudents 
+     *
+     * @returns a random student from the sublist simStudents
      */
     public User getRandomStudent() {
         Random random = new Random();
         int randomNumber = random.nextInt(5);
-        
+
         User student = simStudents.get(randomNumber);
-        
+
         return student;
     }
 
@@ -74,15 +69,14 @@ public class LoginSimolator {
 
         Random rand = new Random();
         int randomNumber = rand.nextInt(5);
-      
 
         User user = simStudents.get(randomNumber);
-        
+
         return null;
     }
-    
-    public void absentStudents(Absence absence){
-        
+
+    public void absentStudents(Absence absence) {
+
         for (Student student : absend) {
             try {
                 ab.createAbsence(absence, student);
@@ -90,11 +84,11 @@ public class LoginSimolator {
             } catch (Exception ex) {
                 Logger.getLogger(LoginSimolator.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         }
-        
+
     }
-    
+
     public void studentsPresend() {
         for (Student student : presend) {
             try {
@@ -104,11 +98,11 @@ public class LoginSimolator {
             } catch (SQLException ex) {
                 Logger.getLogger(LoginSimolator.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         }
     }
-    
-    public void setStudentToPresent(Student student){
+
+    public void setStudentToPresent(Student student) {
         simStudents.remove(student.getStuID());
         presend.add(student);
     }
@@ -116,23 +110,27 @@ public class LoginSimolator {
     public String getDate() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
-
+        
         return dateFormat.format(date);
     }
-    
-        public void runOnTime(){
-     Timer timer = new Timer();
-    Calendar dato = Calendar.getInstance();
-    dato.set(
-            Calendar.MONDAY,
-            Calendar.TUESDAY,
-            Calendar.WEDNESDAY,
-            Calendar.THURSDAY,
-            Calendar.FRIDAY);
-    dato.set(Calendar.HOUR, 0);
-    dato.set(Calendar.MINUTE, 0);
-    dato.set(Calendar.SECOND, 0);
-    dato.set(Calendar.MILLISECOND, 0);
-    timer.schedule(new TimeKeeper(),dato.getTime(), 1000 * 60 * 60 * 24 * 7);
-            }
+
+//    public void runOnTime() {
+//        Timer timer = new Timer();
+//        Calendar dato = Calendar.getInstance();
+//        dato.set(
+//                Calendar.DAY_OF_WEEK,
+//                Calendar.MONDAY,
+//                Calendar.TUESDAY,
+//                Calendar.WEDNESDAY,
+//                Calendar.THURSDAY,
+//                Calendar.FRIDAY);
+//
+//        dato.set(Calendar.HOUR, 0);
+//        dato.set(Calendar.MINUTE, 0);
+//        dato.set(Calendar.SECOND, 0);
+//        dato.set(Calendar.MILLISECOND, 0);
+//
+//        timer.schedule(new TimeKeeper(), dato.getTime().);
+//        timer.
+//    }
 }
