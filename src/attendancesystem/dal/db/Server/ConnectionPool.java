@@ -21,16 +21,20 @@ public class ConnectionPool
     private static ConnectionPool connectionPool;
     private static Deque<Connection> cPool;
 
-    private ConnectionPool() throws SQLServerException, IOException
+    private ConnectionPool(int startPool) throws SQLServerException, IOException
     {
         cPool = new ArrayDeque<>();
+        for (int i = 0; i < startPool; i++)
+        {
+            cPool.add(ServerConnect.getConnection());
+        }
     }
 
     public static ConnectionPool getInstance() throws SQLServerException, IOException
     {
         if (connectionPool == null)
         {
-            connectionPool = new ConnectionPool();
+            connectionPool = new ConnectionPool(30);
         }
         return connectionPool;
     }

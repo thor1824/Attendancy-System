@@ -26,9 +26,8 @@ import attendancesystem.dal.facade.IAbsenceDAO;
 public class AbsenceDbDao implements IAbsenceDAO
 {
 
-    
     @Override
-    public ArrayList<Absence> getUndocumentetAbsence(Student user) throws SQLException, SQLServerException, IOException
+    public ArrayList<Absence> getUndocumentetAbsence(Student user) throws Exception
     {
         ArrayList<Absence> absences = new ArrayList<>();
         String sql = "SELECT * FROM [Atendens].[dbo].[Student] AS a "
@@ -36,7 +35,7 @@ public class AbsenceDbDao implements IAbsenceDAO
                 + "JOIN [Atendens].[dbo].[Absense] AS c ON a.StuID = c.StuID "
                 + "WHERE a.StuID = (?) AND Approved = ? "
                 + "OR a.StuID = (?) and Approved IS NULL";
-        
+
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection(); //create connection
 
@@ -69,7 +68,7 @@ public class AbsenceDbDao implements IAbsenceDAO
     }
 
     @Override
-    public int linesIngetUndocumentetAbsence(Student student) throws SQLException, SQLServerException, IOException
+    public int linesIngetUndocumentetAbsence(Student student) throws Exception
     {
         String sql = "SELECT COUNT(*) FROM [Atendens].[dbo].[Absense] "
                 + "WHERE StuID = (?) AND Approved = ? "
@@ -85,7 +84,7 @@ public class AbsenceDbDao implements IAbsenceDAO
         ps.setInt(3, student.getStuID());
 
         ResultSet rs = ps.executeQuery();
-
+        
         if (rs.next())
         {
             rowCount = rs.getInt(1);
@@ -97,7 +96,7 @@ public class AbsenceDbDao implements IAbsenceDAO
     }
 
     @Override
-    public int linesIngetDocumentetAbsence(Student student) throws SQLException, SQLServerException, IOException
+    public int linesIngetDocumentetAbsence(Student student) throws Exception
     {
         String sql = "SELECT COUNT(*) FROM [Atendens].[dbo].[Absense] "
                 + "WHERE StuID = (?) AND Approved = ?";
@@ -109,9 +108,9 @@ public class AbsenceDbDao implements IAbsenceDAO
 
         ps.setInt(1, student.getStuID());
         ps.setBoolean(2, true);
-
+        
         ResultSet rs = ps.executeQuery();
-
+        
         if (rs.next())
         {
             rowCount = rs.getInt(1);
@@ -131,7 +130,7 @@ public class AbsenceDbDao implements IAbsenceDAO
      * @throws SQLException
      */
     @Override
-    public List<Absence> getAllAbsence(Student student) throws IOException, SQLServerException, SQLException
+    public List<Absence> getAllAbsence(Student student) throws Exception
     {
         List<Absence> absences = new ArrayList<>();
         ConnectionPool cp = ConnectionPool.getInstance();
@@ -167,10 +166,8 @@ public class AbsenceDbDao implements IAbsenceDAO
 
     }
 
-   
-
     @Override
-    public boolean updateAbsence(Absence absence) throws SQLException, SQLServerException, IOException
+    public boolean updateAbsence(Absence absence) throws Exception
     {
         String sql = "UPDATE [Atendens].[dbo].[Absense] "
                 + "SET Reason = (?), DialogBox = (?), Pending = (?)"
@@ -195,7 +192,7 @@ public class AbsenceDbDao implements IAbsenceDAO
     }
 
     @Override
-    public List<Absence> getAllRequestAbence(Teacher teacher) throws SQLServerException, IOException, SQLException
+    public List<Absence> getAllRequestAbence(Teacher teacher) throws Exception
     {
         List<Absence> absences = new ArrayList<>();
         ConnectionPool cp = ConnectionPool.getInstance();
@@ -235,7 +232,7 @@ public class AbsenceDbDao implements IAbsenceDAO
     }
 
     @Override
-    public ArrayList<Absence> getDocumentetAbsence(Student student) throws SQLException, SQLServerException, IOException
+    public ArrayList<Absence> getDocumentetAbsence(Student student) throws Exception
     {
         ArrayList<Absence> listOfDocumentetAbsence = new ArrayList<>();
 
@@ -273,7 +270,6 @@ public class AbsenceDbDao implements IAbsenceDAO
         return listOfDocumentetAbsence;
 
     }
-
 
     @Override
     public boolean makeAbsenceRequest(Absence absence) throws Exception
@@ -390,7 +386,7 @@ public class AbsenceDbDao implements IAbsenceDAO
             ps.setString(1, date);
             ps.addBatch();
         }
-        
+
         ps.executeBatch();
     }
 }

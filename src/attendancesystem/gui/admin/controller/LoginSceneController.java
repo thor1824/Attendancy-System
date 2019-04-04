@@ -23,6 +23,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -59,6 +60,7 @@ public class LoginSceneController implements Initializable
     {
 
         model = new AdminModel();
+        
 
     }
 
@@ -112,5 +114,22 @@ public class LoginSceneController implements Initializable
     private void cancel(ActionEvent event)
     {
         System.exit(0);
+    }
+
+    @FXML
+    private void enter(KeyEvent event)
+    {
+    }
+
+    @FXML
+    private void enter(ActionEvent event)
+    {
+        try
+        {
+            handleLoginButton(null);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(LoginSceneController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

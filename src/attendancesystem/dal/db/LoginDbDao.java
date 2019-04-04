@@ -43,11 +43,9 @@ public class LoginDbDao implements ILoginDAO
         
         if (rs.next()) {
             int id = rs.getInt("StuID");
-            System.out.println(id);
+            
             String fname = rs.getNString("StuFName");
-            System.out.println(fname);
             String lname = rs.getNString("StuLName");
-            System.out.println(lname);
             String email = rs.getNString("Email");
             String phone = rs.getNString("Phone");
             String cpr = rs.getNString("Cpr");
@@ -56,7 +54,7 @@ public class LoginDbDao implements ILoginDAO
             String sClass = rs.getNString("ClassName");
             String picUrl = rs.getNString("StuPicUrl");
             int days_of_classes = rs.getInt("Days_of_classes");
-            return new Student(id, fname, lname, email, phone, cpr, adress, zipCode, sClass, picUrl, days_of_classes);
+            return new Student(id, fname, lname, email, phone, cpr, adress, zipCode, sClass, picUrl, days_of_classes,0 ,0);
         }
         return null;
     }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -28,8 +27,6 @@
       <AnchorPane fx:id="apMenu" layoutY="79.0" prefHeight="509.0" prefWidth="121.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="80.0">
          <children>
             <JFXButton layoutX="1.0" layoutY="10.0" onAction="#btnAllMy" text="All My Studets" />
-            <JFXCheckBox fx:id="chechAsc" layoutX="11.0" layoutY="414.0" onAction="#asc" text="Ascending" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="10.0" />
-            <JFXCheckBox fx:id="chechDesc" layoutX="11.0" layoutY="439.0" onAction="#desc" text="Descending" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0" />
             <AnchorPane layoutX="133.0" prefHeight="200.0" prefWidth="1.0" style="-fx-background-color: #595959;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="145.0" AnchorPane.topAnchor="10.0" />
             <JFXButton fx:id="btnAbsReq" buttonType="RAISED" layoutX="15.0" layoutY="470.0" onAction="#OpenRequests" style="-fx-background-color: gray;" text="Absence Requests" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
             <Label fx:id="lblReqCount" alignment="CENTER" layoutX="117.0" layoutY="483.0" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: #cc0000; -fx-background-radius: 10; -fx-text-fill: white;" text="99+" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="117.0">

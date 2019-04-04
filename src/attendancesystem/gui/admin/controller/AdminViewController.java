@@ -71,19 +71,11 @@ public class AdminViewController implements Initializable
     @FXML
     private AnchorPane apMenu;
     @FXML
-    private JFXCheckBox check1;
-    @FXML
-    private JFXCheckBox chechAsc;
-    @FXML
-    private JFXCheckBox chechDesc;
-    @FXML
     private JFXButton btnAbsReq;
     @FXML
     private Label lblReqCount;
     @FXML
     private JFXTextField txtSeach;
-    @FXML
-    private JFXCheckBox check11;
 
     /**
      * Initializes the controller class.
@@ -189,6 +181,8 @@ public class AdminViewController implements Initializable
                         }
                         maxLoad = sortedData.size();
                     }
+                    
+                    spUsers.setVvalue((maxLoad/3.00/100.00));
                 }
             }
         });
@@ -220,17 +214,6 @@ public class AdminViewController implements Initializable
 
     }
 
-    @FXML
-    private void asc(ActionEvent event)
-    {
-
-    }
-
-    @FXML
-    private void desc(ActionEvent event)
-    {
-
-    }
 
     private void setupSeachBarStu()
     {
@@ -281,7 +264,9 @@ public class AdminViewController implements Initializable
 
             return false; // Does not match.
         });
-
+        
+        resetMaxLoad();
+        
         if (sortedData.size() >= maxLoad)
         {
             UserElementIncrementLoader uLoader = new UserElementIncrementLoader(sortedData, model, 0, maxLoad, executor);
@@ -365,9 +350,11 @@ public class AdminViewController implements Initializable
         AdminViewController.loggedInTeacher = loggedInTeacher;
     }
 
-    private void disableAllCheckBoxes()
+    private void resetMaxLoad()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        maxLoad = 10;
+        spUsers.setVvalue(0.0);
     }
+    
 
 }

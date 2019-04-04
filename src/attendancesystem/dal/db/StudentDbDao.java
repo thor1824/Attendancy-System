@@ -51,7 +51,9 @@ public class StudentDbDao implements IStudentDAO
             String stuCPR = rs.getNString("Cpr");
             String stuPicUrl = rs.getNString("StuPicURL");
 
-            Student stu = new Student(stuID, stuFName, stuLName, stuEmail, stuPhone, stuCPR, stuAdress, stuZip, stuClass, stuPicUrl, Days_of_classes);
+            Student stu = new Student(stuID, stuFName, stuLName, stuEmail, stuPhone, stuCPR, stuAdress, stuZip, stuClass, stuPicUrl, Days_of_classes,0 ,0);
+            //stu.setUndocAbsence(getUndocumentetAbsenceCount(stu));
+            //stu.setDocAbsence(getDocumentetAbsenceCount(stu));
             //put Student in list
             students.add(stu);
         }
@@ -62,7 +64,61 @@ public class StudentDbDao implements IStudentDAO
         return students;
 
     }
+    
+    private int getDocumentetAbsenceCount(Student student) throws SQLException, SQLServerException, IOException
+    {
+        String sql = "SELECT COUNT(*) FROM [Atendens].[dbo].[Absense] "
+                + "WHERE StuID = (?) AND Approved = ?";
+        int rowCount = -1;
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection(); //create connection
 
+        PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement
+
+        ps.setInt(1, student.getStuID());
+        ps.setBoolean(2, true);
+        
+        ResultSet rs = ps.executeQuery();
+        
+        if (rs.next())
+        {
+            rowCount = rs.getInt(1);
+        }
+
+        cp.releaseConnection(con);
+
+        return rowCount;
+    }
+    
+    private int getUndocumentetAbsenceCount(Student student) throws SQLException, SQLServerException, IOException
+    {
+        String sql = "SELECT COUNT(*) FROM [Atendens].[dbo].[Absense] "
+                + "WHERE StuID = (?) AND Approved = ? "
+                + "OR StuID = (?) and Approved IS NULL";;
+        int rowCount = -1;
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection(); //create connection
+
+        PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement
+
+        ps.setInt(1, student.getStuID());
+        ps.setBoolean(2, false);
+        ps.setInt(3, student.getStuID());
+
+        ResultSet rs = ps.executeQuery();
+        
+        if (rs.next())
+        {
+            rowCount = rs.getInt(1);
+        }
+
+        cp.releaseConnection(con);
+
+        return rowCount;
+    }
+    
+    
+    
     @Override
     public boolean createStudent(Student student, String username, String encruptedPassword) throws SQLServerException, IOException, SQLException
     {

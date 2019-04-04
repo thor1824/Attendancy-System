@@ -24,7 +24,8 @@ public class PieChartGenerater {
                 new Data("Undocumentet Absence", daysUndocAbsence),
                 new Data("Documentet Absence", daysDocAbsence)
         );
-
+        
+        
         PieChart pie = new PieChart(pieData);
         
         

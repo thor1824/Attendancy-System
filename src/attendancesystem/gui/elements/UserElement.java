@@ -10,6 +10,7 @@ import attendancesystem.gui.admin.controller.SpecificStudentInfoController;
 import attendancesystem.gui.admin.model.AdminModel;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -33,39 +34,41 @@ import javafx.stage.StageStyle;
  *
  * @author Thorbjørn Schultz Damkjær
  */
-public class UserElement extends AnchorPane {
+public class UserElement extends AnchorPane
+{
 
     private static final String defaultUserImageURL = "Resources/Images/deafultUserImage.png";
     private boolean previewMode = false;
     private int apUserPreviewHeight = 180;
     private int apUserRealHight = 600;
-
-    private AnchorPane apUser;
     private AnchorPane apMoreUserInfo;
     private Student student;
     private AdminModel adminModel;
     private JFXButton btnShowMore;
 
-    public UserElement(Student student, AdminModel adminModel) {
+    public UserElement(Student student, AdminModel adminModel)
+    {
         this.adminModel = adminModel;
         this.student = student;
-        
+
         createPreviewPane();
-        
+
         createUserInfoPane();
     }
 
-    private void createPreviewPane() {
+    private void createPreviewPane()
+    {
         setupAnchorPanePreview();
-        
+
         setupImageView();
-        
+
         setupLabelsPreview();
-       
+
         setupShowMoreBtn();
     }
 
-    private void setupShowMoreBtn() {
+    private void setupShowMoreBtn()
+    {
 
         //creates and adds the button to maximice det userElement
         double btnShowMoreHeight = 35;
@@ -77,14 +80,18 @@ public class UserElement extends AnchorPane {
         btnShowMore.setTextFill(new Color(1, 1, 1, 1.0));
 
         //creates the button action to expand and collapses the UserElement
-        btnShowMore.setOnAction(new EventHandler<ActionEvent>() {
+        btnShowMore.setOnAction(new EventHandler<ActionEvent>()
+        {
 
             @Override
-            public void handle(ActionEvent event) {
-                if (!previewMode) {
+            public void handle(ActionEvent event)
+            {
+                if (!previewMode)
+                {
                     showMore();
 
-                } else {
+                } else
+                {
                     showLess();
                 }
             }
@@ -100,7 +107,8 @@ public class UserElement extends AnchorPane {
         AnchorPane.setTopAnchor(btnShowMore, btnMaximize_TopAnchor);
     }
 
-    private void showMore() {
+    private void showMore()
+    {
         previewMode = true;
         btnShowMore.setText("Show Less");
         super.getChildren().add(apMoreUserInfo);
@@ -111,17 +119,19 @@ public class UserElement extends AnchorPane {
         super.setMaxHeight(apUserRealHight);
     }
 
-    private void showLess() {
+    private void showLess()
+    {
         previewMode = false;
         btnShowMore.setText("Show More");
         super.getChildren().remove(apMoreUserInfo);
         super.setPrefHeight(apUserPreviewHeight);
         super.setMinHeight(apUserPreviewHeight);
         super.setMaxHeight(apUserPreviewHeight);
-        
+
     }
 
-    private void setupLabelsPreview() {
+    private void setupLabelsPreview()
+    {
         //create and adds Info Labels for the preview mode
 
         Label lblId = new Label("ID:");
@@ -175,7 +185,8 @@ public class UserElement extends AnchorPane {
 
     }
 
-    private void setupImageView() {
+    private void setupImageView()
+    {
         //setup User Image
         ImageView ivUser = new ImageView();
 //        try {
@@ -183,9 +194,9 @@ public class UserElement extends AnchorPane {
 //        } catch (Exception e) {
 //            ivUser.setImage(new Image(defaultUserImageURL));
 //        }
-        
+
         ivUser.setImage(new Image(defaultUserImageURL));
-        
+
         ivUser.setFitHeight(150);
         ivUser.setFitWidth(150);
         super.getChildren().add(ivUser);
@@ -193,7 +204,8 @@ public class UserElement extends AnchorPane {
         AnchorPane.setLeftAnchor(ivUser, 15.0);
     }
 
-    private void setupAnchorPanePreview() {
+    private void setupAnchorPanePreview()
+    {
         //Create and add shadowEffect
         DropShadow ds1 = new DropShadow();
         ds1.setOffsetY(4.0f);
@@ -208,7 +220,8 @@ public class UserElement extends AnchorPane {
         super.setMaxHeight(apUserPreviewHeight);
     }
 
-    private void createUserInfoPane() {
+    private void createUserInfoPane()
+    {
         setupAnchorPaneInfo();
 
         setupLabelInfo();
@@ -219,16 +232,20 @@ public class UserElement extends AnchorPane {
 
     }
 
-    private void setupShowAbsenceBtn() {
+    private void setupShowAbsenceBtn()
+    {
         JFXButton btnShowAbsenceInfo = new JFXButton("Show Absence");
 
         btnShowAbsenceInfo.setStyle("-fx-background-color:#4d79ff");
         btnShowAbsenceInfo.setTextFill(new Color(1, 1, 1, 1.0));
 
-        btnShowAbsenceInfo.setOnAction(new EventHandler<ActionEvent>() {
+        btnShowAbsenceInfo.setOnAction(new EventHandler<ActionEvent>()
+        {
             @Override
-            public void handle(ActionEvent event) {
-                try {
+            public void handle(ActionEvent event)
+            {
+                try
+                {
                     FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("attendancesystem/gui/admin/view/SpecificStudentInfo.fxml"));
 
                     Parent root = loader.load();
@@ -241,7 +258,8 @@ public class UserElement extends AnchorPane {
                     controller.setStudent(student);
 
                     newStage.showAndWait();
-                } catch (IOException ex) {
+                } catch (IOException ex)
+                {
                     Logger.getLogger(UserElement.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -251,33 +269,138 @@ public class UserElement extends AnchorPane {
         AnchorPane.setRightAnchor(btnShowAbsenceInfo, 40.0);
     }
 
-    private void setupPieChart() {
+    private void setupPieChart()
+    {
         PieChart pie = adminModel.getPieChart(student);
         pie.setPrefSize(360, 360);
+        pie.setMinSize(360, 360);
+        pie.setMaxSize(360, 360);
         pie.setLabelsVisible(false);
         apMoreUserInfo.getChildren().add(pie);
         AnchorPane.setTopAnchor(pie, 20.0);
         AnchorPane.setLeftAnchor(pie, 20.0);
+
+        double sum = 0;
+        double deviation = 0;
+        for (PieChart.Data data : pie.getData())
+        {
+
+            String name = data.getName();
+            if (name == "Undocumentet Absence")
+            {
+                deviation = deviation + data.getPieValue();
+                sum = sum + data.getPieValue();
+                Label lblUndoc = new Label("" + (int) data.getPieValue());
+                lblUndoc.setPrefWidth(20);
+                lblUndoc.setAlignment(Pos.CENTER_RIGHT);
+                apMoreUserInfo.getChildren().add(lblUndoc);
+                AnchorPane.setTopAnchor(lblUndoc, 275.0 - apUserPreviewHeight);
+                AnchorPane.setLeftAnchor(lblUndoc, 575.0);
+
+            }
+            if (name == "Documentet Absence")
+            {
+                deviation = deviation + data.getPieValue();
+                sum = sum + data.getPieValue();
+                Label lblDoc = new Label("" + (int) data.getPieValue());
+                lblDoc.setPrefWidth(20);
+                lblDoc.setAlignment(Pos.CENTER_RIGHT);
+                apMoreUserInfo.getChildren().add(lblDoc);
+                AnchorPane.setTopAnchor(lblDoc, 320.0 - apUserPreviewHeight);
+                AnchorPane.setLeftAnchor(lblDoc, 575.0);
+            }
+            if (name == "Days of Precense")
+            {
+                
+                sum = sum + data.getPieValue();
+                Label lblDaysPrecend = new Label("" + (int) data.getPieValue());
+                lblDaysPrecend.setPrefWidth(20);
+                lblDaysPrecend.setAlignment(Pos.CENTER_RIGHT);
+                apMoreUserInfo.getChildren().add(lblDaysPrecend);
+                AnchorPane.setTopAnchor(lblDaysPrecend, 230.0 - apUserPreviewHeight);
+                AnchorPane.setLeftAnchor(lblDaysPrecend, 575.0);
+
+            }
+        }
+        double procentage = deviation / sum * 100;
+        DecimalFormat df = new DecimalFormat("#.00");
+        Label lblAbPro = new Label(df.format(procentage));
+        lblAbPro.setPrefWidth(35);
+        lblAbPro.setAlignment(Pos.CENTER_RIGHT);
+        apMoreUserInfo.getChildren().add(lblAbPro);
+        AnchorPane.setTopAnchor(lblAbPro, 445.0 - apUserPreviewHeight);
+        AnchorPane.setLeftAnchor(lblAbPro, 575.0);
+
     }
 
-    private void setupLabelInfo() {
-        Label cpr = new Label("Cpr:       " + student.getCpr());
+    private void setupLabelInfo()
+    {
+        Label cpr = new Label("Cpr:      " + student.getCpr());
         apMoreUserInfo.getChildren().add(cpr);
-        AnchorPane.setTopAnchor(cpr, 130.0);
-        AnchorPane.setLeftAnchor(cpr, 415.0);
+        AnchorPane.setTopAnchor(cpr, 275.0 - apUserPreviewHeight);
+        AnchorPane.setLeftAnchor(cpr, 739.0);
 
-        Label adress = new Label("Address:  " + student.getAdresse());
+        Label adress = new Label("Address:      " + student.getAdresse());
         apMoreUserInfo.getChildren().add(adress);
-        AnchorPane.setTopAnchor(adress, 90.0);
-        AnchorPane.setLeftAnchor(adress, 415.0);
+        AnchorPane.setTopAnchor(adress, 320.0 - apUserPreviewHeight);
+        AnchorPane.setLeftAnchor(adress, 716.0);
 
-        Label schoolClass = new Label("Phone:    " + student.getSchoolClass());
+        Label schoolClass = new Label("Phone:      " + student.getPhoneNr());
         apMoreUserInfo.getChildren().add(schoolClass);
-        AnchorPane.setTopAnchor(schoolClass, 50.0);
-        AnchorPane.setLeftAnchor(schoolClass, 415.0);
+        AnchorPane.setTopAnchor(schoolClass, 230.0 - apUserPreviewHeight);
+        AnchorPane.setLeftAnchor(schoolClass, 725.0);
+
+        Label lblDays1 = new Label("Days");
+        apMoreUserInfo.getChildren().add(lblDays1);
+        AnchorPane.setTopAnchor(lblDays1, 230.0 - apUserPreviewHeight);
+        AnchorPane.setLeftAnchor(lblDays1, 610.0);
+
+        Label lblDays2 = new Label("Days");
+        apMoreUserInfo.getChildren().add(lblDays2);
+        AnchorPane.setTopAnchor(lblDays2, 275.0 - apUserPreviewHeight);
+        AnchorPane.setLeftAnchor(lblDays2, 610.0);
+
+        Label lblDays3 = new Label("Days");
+        apMoreUserInfo.getChildren().add(lblDays3);
+        AnchorPane.setTopAnchor(lblDays3, 320.0 - apUserPreviewHeight);
+        AnchorPane.setLeftAnchor(lblDays3, 610.0);
+        
+        Label lblProSym = new Label("%");
+        apMoreUserInfo.getChildren().add(lblProSym);
+        AnchorPane.setTopAnchor(lblProSym, 445.0 - apUserPreviewHeight);
+        AnchorPane.setLeftAnchor(lblProSym, 623.0);
+
+        Label lblUndoc = new Label("Days present:");
+        lblUndoc.setPrefWidth(130);
+        lblUndoc.setAlignment(Pos.CENTER_RIGHT);
+        apMoreUserInfo.getChildren().add(lblUndoc);
+        AnchorPane.setTopAnchor(lblUndoc, 275.0 - apUserPreviewHeight);
+        AnchorPane.setLeftAnchor(lblUndoc, 410.0);
+
+        Label lblDoc = new Label("Undocumentet Absence:");
+        lblDoc.setPrefWidth(130);
+        lblDoc.setAlignment(Pos.CENTER_RIGHT);
+        apMoreUserInfo.getChildren().add(lblDoc);
+        AnchorPane.setTopAnchor(lblDoc, 230.0 - apUserPreviewHeight);
+        AnchorPane.setLeftAnchor(lblDoc, 410.0);
+
+        Label lblDaysPrecend = new Label("Documentet Absence:");
+        lblDaysPrecend.setPrefWidth(130);
+        lblDaysPrecend.setAlignment(Pos.CENTER_RIGHT);
+        apMoreUserInfo.getChildren().add(lblDaysPrecend);
+        AnchorPane.setTopAnchor(lblDaysPrecend, 320.0 - apUserPreviewHeight);
+        AnchorPane.setLeftAnchor(lblDaysPrecend, 410.0);
+        
+        Label lblPro = new Label("absences procentage:");
+        lblPro.setPrefWidth(130);
+        lblPro.setAlignment(Pos.CENTER_RIGHT);
+        apMoreUserInfo.getChildren().add(lblPro);
+        AnchorPane.setTopAnchor(lblPro, 445.0 - apUserPreviewHeight);
+        AnchorPane.setLeftAnchor(lblPro, 410.0);
     }
 
-    private void setupAnchorPaneInfo() {
+    private void setupAnchorPaneInfo()
+    {
         apMoreUserInfo = new AnchorPane();
         AnchorPane.setLeftAnchor(apMoreUserInfo, 0.0);
         AnchorPane.setBottomAnchor(apMoreUserInfo, 0.0);
@@ -286,12 +409,14 @@ public class UserElement extends AnchorPane {
         setXnYKordinats(apMoreUserInfo, 0, apUserPreviewHeight);
     }
 
-    private void setXnYKordinats(Node node, double X, double Y) {
+    private void setXnYKordinats(Node node, double X, double Y)
+    {
         node.setLayoutX(X);
         node.setLayoutY(Y);
     }
 
-    private void setAnchorPaneHeight(AnchorPane ap, double height) {
+    private void setAnchorPaneHeight(AnchorPane ap, double height)
+    {
         ap.setMinHeight(height);
         ap.setPrefHeight(height);
         ap.setMaxHeight(height);
@@ -300,11 +425,8 @@ public class UserElement extends AnchorPane {
 //        ap.setPrefSize(width, height);
     }
 
-    public AnchorPane getUserPane() {
-        return apUser;
-    }
-
-    public Student getStudent() {
+    public Student getStudent()
+    {
         return student;
     }
 

@@ -18,8 +18,8 @@
       <Text layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EASV ADMIN LOGIN" textAlignment="CENTER" wrappingWidth="400.41016088810284" AnchorPane.bottomAnchor="191.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <JFXTextField fx:id="txtfldTeacherID" layoutX="33.0" layoutY="284.0" prefHeight="26.0" prefWidth="334.0" promptText="Username" AnchorPane.bottomAnchor="139.6" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="32.60000000000002" />
       <JFXPasswordField fx:id="txtfldPassword" layoutX="33.0" layoutY="348.0" prefWidth="334.0" promptText="Password" AnchorPane.bottomAnchor="76.4" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="32.60000000000002" />
-      <JFXButton fx:id="btnLogin" defaultButton="true" layoutX="271.0" layoutY="284.0" onMouseClicked="#handleLoginButton" style="-fx-background-color: #4d79ff; -fx-text-fill: White;" text="Log in" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="80.0" />
       <Label fx:id="lblLogMessage" layoutX="33.0" layoutY="257.0" />
       <JFXButton fx:id="btncancel" defaultButton="true" layoutX="327.0" layoutY="284.0" onAction="#cancel" onMouseClicked="#handleLoginButton" style="-fx-background-color: #4d79ff; -fx-text-fill: white;" text="Cancel" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="20.0" />
+      <JFXButton fx:id="btnLogin" defaultButton="true" layoutX="271.0" layoutY="284.0" onAction="#enter" onKeyPressed="#enter" onMouseClicked="#handleLoginButton" style="-fx-background-color: #4d79ff; -fx-text-fill: White;" text="Log in" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="80.0" />
    </children>
 </AnchorPane>
