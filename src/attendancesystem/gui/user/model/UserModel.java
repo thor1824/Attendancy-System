@@ -36,13 +36,16 @@ public class UserModel
     
     LoginSimolator loginsim;
 
-    public UserModel()
+    public UserModel() 
     {
         try
         {
             bllMan = new BLLManager();
+            loginSim = new LoginSimolator();
         } catch (IOException ex)
         {
+            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -114,8 +117,12 @@ public class UserModel
        return bllMan.getDocumentetAbsence(student);
     }
     
-    public User getRandomStudent() {
+    public int getRandomStudent() {
         return loginSim.getRandomStudent();
+    }
+    
+    public boolean studentPresent() {
+        return loginSim.studentsPresend();
     }
 
 }

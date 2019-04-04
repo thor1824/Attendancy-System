@@ -28,6 +28,7 @@ public class dbTest {
 
         //System.out.println(sd.createStudent(test, "test", PasswordEncryptor.encryptPassword("test")));
         
+<<<<<<< HEAD
         Calendar dato = Calendar.getInstance();
         dato.set(
                 Calendar.DAY_OF_WEEK,
@@ -48,6 +49,10 @@ public class dbTest {
         cal.set(Calendar.DAY_OF_WEEK, 7);
         CalenderOrganiser calorg = new CalenderOrganiser();
         calorg.checkDate(cal);
+=======
+        System.out.println(ab.linesIngetDocumentetAbsence(test));
+        sdb.addDaysOfClass(test.getStuID());
+>>>>>>> 934d2f28a651fb9d3e06209d354b40236b114338
     }
 
 }

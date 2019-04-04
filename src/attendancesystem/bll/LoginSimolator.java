@@ -37,15 +37,20 @@ public class LoginSimolator {
     List<Student> absend;
     List<Student> presend;
 
-//    public LoginSimolator(StudentDbDao studentDb, AbsenceDbDao ab, List<Student> simStudents, List<Student> absend, List<Student> presend) {
-//        this.studentDb = studentDb;
-//        this.ab = ab;
-//        this.simStudents = simStudents;
-//        this.absend = absend;
-//        this.presend = presend;
-//    }
-    public List addStudentToList() throws SQLException, SQLServerException, IOException {
+    public LoginSimolator() throws IOException, SQLException {
+        studentDb = new StudentDbDao();
+        addStudentToList();
+    }
 
+    /**
+     * adds students to a sublist of 5
+     *
+     * @return a sublist of students
+     * @throws SQLException
+     * @throws SQLServerException
+     * @throws IOException
+     */
+    public List addStudentToList() throws SQLException, SQLServerException, IOException {
         simStudents = studentDb.getAllStudents().subList(0, 4);
 
         return simStudents;
@@ -53,9 +58,9 @@ public class LoginSimolator {
 
     /**
      *
-     * @returns a random student from the sublist simStudents
+     * @return a random student from the sublist simStudents
      */
-    public User getRandomStudent() {
+    public int getRandomStudent() {
         Random random = new Random();
         int randomNumber = random.nextInt(5);
 
@@ -64,8 +69,7 @@ public class LoginSimolator {
         return student;
     }
 
-    public User setUserByTime() {
-        //todo
+        Student student = simStudents.get(randomNumber);
 
         Random rand = new Random();
         int randomNumber = rand.nextInt(5);
@@ -80,7 +84,7 @@ public class LoginSimolator {
         for (Student student : absend) {
             try {
                 ab.createAbsence(absence, student);
-                studentDb.addDaysOfClass(student);
+                studentDb.addDaysOfClass(student.getStuID());
             } catch (Exception ex) {
                 Logger.getLogger(LoginSimolator.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -89,17 +93,19 @@ public class LoginSimolator {
 
     }
 
-    public void studentsPresend() {
-        for (Student student : presend) {
-            try {
-                studentDb.addDaysOfClass(student);
-            } catch (IOException ex) {
-                Logger.getLogger(LoginSimolator.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(LoginSimolator.class.getName()).log(Level.SEVERE, null, ex);
-            }
+    public boolean studentsPresend() {
 
+        try {
+            Random rand = new Random();
+            int randomNumber = rand.nextInt((347 - 1) + 1) + 1;
+
+            return studentDb.addDaysOfClass(randomNumber);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginSimolator.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginSimolator.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return false;
     }
 
     public void setStudentToPresent(Student student) {
@@ -110,7 +116,7 @@ public class LoginSimolator {
     public String getDate() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
-        
+
         return dateFormat.format(date);
     }
 
