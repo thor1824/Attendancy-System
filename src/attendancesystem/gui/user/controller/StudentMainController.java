@@ -72,6 +72,7 @@ public class StudentMainController implements Initializable
         this.user = user;
         generateAbsenceElements(user);
         setPie();
+        
 
     }
 
@@ -150,15 +151,7 @@ public class StudentMainController implements Initializable
         }
     }
     
-    public void loginRandomStudent() {
-        //Todo
-        User user = userModel.getRandomStudent();
-        
-        
-        
-        
-        
-    }
+    
 
 //    
 }

@@ -27,7 +27,7 @@ public class dbTest
         //System.out.println(sd.createStudent(test, "test", PasswordEncryptor.encryptPassword("test")));
         
         System.out.println(ab.linesIngetDocumentetAbsence(test));
-        sdb.addDaysOfClass(test);
+        sdb.addDaysOfClass(test.getStuID());
     }
 
 }

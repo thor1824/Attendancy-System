@@ -6,6 +6,7 @@
 package attendancesystem.gui.user.controller;
 
 import attendancesystem.be.Student;
+import attendancesystem.bll.LoginSimolator;
 import attendancesystem.gui.user.model.UserModel;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -28,14 +29,14 @@ import javafx.stage.StageStyle;
  *
  * @author Thorbjørn Schultz Damkjær
  */
-public class UserViewController implements Initializable
-{
+public class UserViewController implements Initializable {
 
     private static final String FAILED_FXML = "attendancesystem/gui/user/view/LoginFailed.fxml";
     private static final String LATE_FXML = "attendancesystem/gui/user/view/LoginLate.fxml";
     private static final String SUCCES_FXML = "attendancesystem/gui/user/view/LoginSucces.fxml";
     private static final String MAIN_FXML = "attendancesystem/gui/user/view/StudentMain.fxml";
     private UserModel model;
+    private LoginSimolator logSim;
 
     @FXML
     private Button btnLogin;
@@ -57,33 +58,37 @@ public class UserViewController implements Initializable
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {
+    public void initialize(URL url, ResourceBundle rb) {
         model = new UserModel();
     }
 
     @FXML
-    private void btnSuccesPress(ActionEvent event) throws IOException
-    {
+    private void btnSuccesPress(ActionEvent event) throws IOException, Exception {
+        
+        
 
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(MAIN_FXML));
-
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setAlwaysOnTop(true);
-        stage.setResizable(false);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setScene(new Scene(root));
-        StudentMainController controller = loader.getController();
-        controller.setModel(model);
-        controller.setStage(stage);
-        stage.showAndWait();
+        
+            if (logSim.studentsPresend()) {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(SUCCES_FXML));
+            
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setAlwaysOnTop(true);
+            stage.setResizable(false);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(root));
+            LoginSuccesController controller = loader.getController();
+            controller.setStage(stage);
+            controller.setDate();
+            
+            stage.showAndWait();
+        }
+        
 
     }
 
     @FXML
-    private void btnLatePress(ActionEvent event) throws IOException
-    {
+    private void btnLatePress(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(LATE_FXML));
 
         Parent root = loader.load();
@@ -102,8 +107,7 @@ public class UserViewController implements Initializable
     }
 
     @FXML
-    private void btnFailedPress(ActionEvent event) throws IOException
-    {
+    private void btnFailedPress(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(FAILED_FXML));
 
         Parent root = loader.load();
@@ -121,16 +125,13 @@ public class UserViewController implements Initializable
     }
 
     @FXML
-    private void btnLoginPress(ActionEvent event) throws IOException, Exception
-    {
+    private void btnLoginPress(ActionEvent event) throws IOException, Exception {
 
-        try
-        {
-            
+        try {
+
             Student user = model.handleLoginRequest(txtUserName.getText(), txtPassword.getText());
-            
-            if (user != null)
-            {
+
+            if (user != null) {
                 model.setLogedInStudent(user);
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(MAIN_FXML));
                 Parent root = loader.load();
@@ -145,21 +146,18 @@ public class UserViewController implements Initializable
                 controller.setUser(user);
                 stage.show();
                 currentStage.close();
-            } else
-            {
+            } else {
                 throw new Exception();
             }
-        } catch (NullPointerException e)
-        {   
+        } catch (NullPointerException e) {
             e.printStackTrace();
             lblLoginMessage.setStyle("-fx-text-fill:red");
             lblLoginMessage.setText("WRONG PASSWORD!!");
         }
 
     }
-    
-    public void setStage(Stage stage)
-    {
+
+    public void setStage(Stage stage) {
         this.currentStage = stage;
     }
 

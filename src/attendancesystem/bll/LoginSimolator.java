@@ -32,83 +32,78 @@ public class LoginSimolator {
 
     public StudentDbDao studentDb;
     public AbsenceDbDao ab;
-    
+
     List<Student> simStudents;
     List<Student> absend;
     List<Student> presend;
 
-    public LoginSimolator(StudentDbDao studentDb, AbsenceDbDao ab, List<Student> simStudents, List<Student> absend, List<Student> presend) {
-        this.studentDb = studentDb;
-        this.ab = ab;
-        this.simStudents = simStudents;
-        this.absend = absend;
-        this.presend = presend;
+    public LoginSimolator() throws IOException, SQLException {
+        studentDb = new StudentDbDao();
+        addStudentToList();
     }
-    
-    
 
+    /**
+     * adds students to a sublist of 5
+     *
+     * @return a sublist of students
+     * @throws SQLException
+     * @throws SQLServerException
+     * @throws IOException
+     */
     public List addStudentToList() throws SQLException, SQLServerException, IOException {
-
         simStudents = studentDb.getAllStudents().subList(0, 4);
 
         return simStudents;
     }
-    
-    
-    
+
     /**
-     * 
-     * @returns a random student from the sublist simStudents 
+     *
+     * @return a random student from the sublist simStudents
      */
-    public User getRandomStudent() {
+    public int getRandomStudent() {
         Random random = new Random();
-        int randomNumber = random.nextInt(5);
-        
-        User student = simStudents.get(randomNumber);
-        
-        return student;
+        int randomNumber = random.nextInt(4);
+
+        Student student = simStudents.get(randomNumber);
+
+        return student.getStuID();
     }
 
-    public User setUserByTime() {
-        //todo
+    /**
+     * creates absence for each student on the absend list
+     *
+     * @param absence
+     */
+    public void absentStudents(Absence absence) {
 
-        Random rand = new Random();
-        int randomNumber = rand.nextInt(5);
-      
-
-        User user = simStudents.get(randomNumber);
-        
-        return null;
-    }
-    
-    public void absentStudents(Absence absence){
-        
         for (Student student : absend) {
             try {
                 ab.createAbsence(absence, student);
-                studentDb.addDaysOfClass(student);
+                studentDb.addDaysOfClass(student.getStuID());
             } catch (Exception ex) {
                 Logger.getLogger(LoginSimolator.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         }
+
+    }
+
+    public boolean studentsPresend() {
         
-    }
-    
-    public void studentsPresend() {
-        for (Student student : presend) {
-            try {
-                studentDb.addDaysOfClass(student);
-            } catch (IOException ex) {
-                Logger.getLogger(LoginSimolator.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(LoginSimolator.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            Random rand = new Random();
+            int randomNumber = rand.nextInt((347 - 1) + 1) + 1;
             
+            return studentDb.addDaysOfClass(randomNumber);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginSimolator.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginSimolator.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return false;
     }
-    
-    public void setStudentToPresent(Student student){
+
+    public void setStudentToPresent(Student student) {
         simStudents.remove(student.getStuID());
         presend.add(student);
     }
@@ -119,20 +114,20 @@ public class LoginSimolator {
 
         return dateFormat.format(date);
     }
-    
-        public void runOnTime(){
-     Timer timer = new Timer();
-    Calendar dato = Calendar.getInstance();
-    dato.set(
-            Calendar.MONDAY,
-            Calendar.TUESDAY,
-            Calendar.WEDNESDAY,
-            Calendar.THURSDAY,
-            Calendar.FRIDAY);
-    dato.set(Calendar.HOUR, 0);
-    dato.set(Calendar.MINUTE, 0);
-    dato.set(Calendar.SECOND, 0);
-    dato.set(Calendar.MILLISECOND, 0);
-    timer.schedule(new TimeKeeper(),dato.getTime(), 1000 * 60 * 60 * 24 * 7);
-            }
+
+    public void runOnTime() {
+        Timer timer = new Timer();
+        Calendar dato = Calendar.getInstance();
+        dato.set(
+                Calendar.MONDAY,
+                Calendar.TUESDAY,
+                Calendar.WEDNESDAY,
+                Calendar.THURSDAY,
+                Calendar.FRIDAY);
+        dato.set(Calendar.HOUR, 0);
+        dato.set(Calendar.MINUTE, 0);
+        dato.set(Calendar.SECOND, 0);
+        dato.set(Calendar.MILLISECOND, 0);
+        timer.schedule(new TimeKeeper(), dato.getTime(), 1000 * 60 * 60 * 24 * 7);
+    }
 }

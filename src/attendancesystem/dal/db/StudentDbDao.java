@@ -237,16 +237,18 @@ public class StudentDbDao implements StudentDAO
         
     }
     
-    public boolean addDaysOfClass(Student student) throws SQLServerException, IOException, SQLException{
+    public boolean addDaysOfClass(int id) throws SQLServerException, IOException, SQLException{
         
-       
+        System.out.println(id);
+        
        String sql = "UPDATE [Atendens].[dbo].[Student] SET Days_of_classes = Days_of_classes +1  WHERE StuID = (?)";
         Connection con = ServerConnect.getConnection();
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, student.getStuID());
+        ps.setInt(1, id);
 
        int rowsAffected = ps.executeUpdate();
         if (rowsAffected == 1) {
+            
             return true;
         }
         
@@ -257,6 +259,8 @@ public class StudentDbDao implements StudentDAO
        
 
         } 
+    
+    
         
     
 

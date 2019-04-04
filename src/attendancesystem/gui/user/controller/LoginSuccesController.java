@@ -21,8 +21,7 @@ import javafx.util.Duration;
  *
  * @author Thorbjørn Schultz Damkjær
  */
-public class LoginSuccesController implements Initializable
-{
+public class LoginSuccesController implements Initializable {
 
     UserModel model;
     Stage stage;
@@ -34,23 +33,25 @@ public class LoginSuccesController implements Initializable
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {
+    public void initialize(URL url, ResourceBundle rb) {
+        
         PauseTransition delay = new PauseTransition(Duration.seconds(2));
         delay.setOnFinished(event -> stage.close());
         delay.play();
     }
 
-    void setModel(UserModel model)
-    {
+    void setModel(UserModel model) {
         this.model = model;
     }
 
-    void setStage(Stage stage)
-    {
+    void setStage(Stage stage) {
         this.stage = stage;
     }
 
-    
+    void setDate()
+    {
+       Calendar cal = Calendar.getInstance();
+       lblArrivalTime.setText("Time of Arrival: " + cal.getTime().toString());
+    }
 
 }
