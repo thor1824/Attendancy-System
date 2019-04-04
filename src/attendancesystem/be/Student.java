@@ -13,19 +13,33 @@ public class Student extends User{
 
     private String schoolClass;
     private int StuID;
+    private int daysPrecend;
+    
     
    
 
 
-    public Student(int StuID, String firstName, String lastName, String email, String phoneNr, String cpr, String Adresse, String zipCode, String schoolClass, String picUrl, int Days_of_classes)
+    public Student(int StuID, String firstName, String lastName, String email, String phoneNr, String cpr, String Adresse, String zipCode, String schoolClass, String picUrl, int daysPrecend)
     {
         super(StuID, firstName, lastName, email, phoneNr, cpr, User.CLEARANCE_STUDENT, Adresse, zipCode, picUrl);
         this.schoolClass = schoolClass;
-        this.StuID = StuID; 
+        this.StuID = StuID;
+        this.daysPrecend = daysPrecend;
         
         
         
     }
+
+    public int getDaysPrecend()
+    {
+        return daysPrecend;
+    }
+
+    public void setDaysPrecend(int daysPrecend)
+    {
+        this.daysPrecend = daysPrecend;
+    }
+    
 
     public int getStuID() {
         return StuID;

@@ -24,17 +24,6 @@ public class ConnectionPool
     private ConnectionPool() throws SQLServerException, IOException
     {
         cPool = new ArrayDeque<>();
-//        cPool.add(ServerConnect.getConnection());
-//        cPool.add(ServerConnect.getConnection());
-//        cPool.add(ServerConnect.getConnection());
-//        cPool.add(ServerConnect.getConnection());
-//        cPool.add(ServerConnect.getConnection());
-//        cPool.add(ServerConnect.getConnection());
-//        cPool.add(ServerConnect.getConnection());
-//        cPool.add(ServerConnect.getConnection());
-//        cPool.add(ServerConnect.getConnection());
-//        cPool.add(ServerConnect.getConnection());
-//        cPool.add(ServerConnect.getConnection());
     }
 
     public static ConnectionPool getInstance() throws SQLServerException, IOException

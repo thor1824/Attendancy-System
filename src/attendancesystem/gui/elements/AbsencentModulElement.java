@@ -58,41 +58,29 @@ public class AbsencentModulElement
         ds1.setOffsetY(4.0f);
         ds1.setOffsetX(4.0f);
         ds1.setColor(new Color(0.183, 0.183, 0.149, 1.0));
-        
+
         ap = new AnchorPane();
         ap.setPrefHeight(60.0);
-        
-        
+
         ap.setStyle("-fx-background-color:lightGray");
         ap.setEffect(ds1);
         ap.setId("absenceAp");
-        
+
         Label lblDato = new Label("Date:    " + absence.getDate());
         lblDato.setFont(new Font(14));
         ap.getChildren().add(lblDato);
         AnchorPane.setTopAnchor(lblDato, 16.5);
         AnchorPane.setLeftAnchor(lblDato, 200.0);
 
-        Label lblFag = new Label("Class:    " +absence.getStuClass());
+        Label lblFag = new Label("Class:    " + absence.getStuClass());
         lblFag.setFont(new Font(14));
         ap.getChildren().add(lblFag);
         AnchorPane.setTopAnchor(lblFag, 16.5);
         AnchorPane.setLeftAnchor(lblFag, 30.0);
 
-        
         if (absence.isApproved())
         {
             Label lblApp = new Label("Approved");
-            lblApp.setFont(new Font(13));
-            ap.getChildren().add(lblApp);
-            AnchorPane.setTopAnchor(lblApp, 16.5);
-            AnchorPane.setRightAnchor(lblApp, 30.0);
-            
-        } 
-        
-        if (absence.isPending())
-        {
-            Label lblApp = new Label("Pending");
             lblApp.setFont(new Font(13));
             ap.getChildren().add(lblApp);
             AnchorPane.setTopAnchor(lblApp, 16.5);
@@ -103,16 +91,28 @@ public class AbsencentModulElement
             ap.getChildren().add(lblReason);
             AnchorPane.setTopAnchor(lblReason, 16.5);
             AnchorPane.setRightAnchor(lblReason, 165.0);
-            
-            
-        } 
-        
-        else
+
+        }
+        else if (absence.isPending())
+        {
+            Label lblApp = new Label("Pending");
+            lblApp.setFont(new Font(13));
+            ap.getChildren().add(lblApp);
+            AnchorPane.setTopAnchor(lblApp, 16.5);
+            AnchorPane.setRightAnchor(lblApp, 30.0);
+
+            Label lblReason = new Label(absence.getReason());
+            lblReason.setFont(new Font(13));
+            ap.getChildren().add(lblReason);
+            AnchorPane.setTopAnchor(lblReason, 16.5);
+            AnchorPane.setRightAnchor(lblReason, 165.0);
+
+        } else
         {
             setupComboBox();
             setupButton();
         }
-        
+
     }
 
     private void setupButton()
@@ -123,11 +123,11 @@ public class AbsencentModulElement
         btnSend.setId("btnSend");
         btnSend.setDisable(true);
         btnSend.setButtonType(JFXButton.ButtonType.RAISED);
-                
+
         ap.getChildren().add(btnSend);
         AnchorPane.setTopAnchor(btnSend, 9.0);
         AnchorPane.setRightAnchor(btnSend, 15.0);
-        
+
         btnSend.setOnAction((event) ->
         {
             try
@@ -138,9 +138,9 @@ public class AbsencentModulElement
                 {
                     try
                     {
-                        
+
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/attendancesystem/gui/user/view/ReasonForAbsence.fxml"));
-                        
+
                         Parent root = loader.load();
                         Stage stage = new Stage();
                         stage.setAlwaysOnTop(true);
@@ -148,19 +148,19 @@ public class AbsencentModulElement
                         stage.initStyle(StageStyle.UNDECORATED);
                         stage.setScene(new Scene(root));
                         ReasonForAbsenceController controller = loader.getController();
-                        
+
                         controller.setModel(userModel);
                         controller.setStage(stage);
                         controller.setExplanation(lblExplanation);
-                        
+
                         stage.showAndWait();
-                        
+
                     } catch (IOException ex)
                     {
                         Logger.getLogger(AbsencentModulElement.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                
+
                 if (comBox.getValue() != "Other")
                 {
                     absence.setReason(reason);
@@ -180,14 +180,14 @@ public class AbsencentModulElement
                     userModel.updateAbsence(absence);
                     vBox.getChildren().remove(ap);
                     AbsencentModulElement newAme = new AbsencentModulElement(absence, vBox);
-                    
+
                     vBox.getChildren().add(newAme.getAnchorPane());
                 }
             } catch (Exception ex)
             {
                 Logger.getLogger(AbsencentModulElement.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         });
     }
 
@@ -198,17 +198,17 @@ public class AbsencentModulElement
                 "Doctor",
                 "Late",
                 "Other");
-        
+
         comBox = new JFXComboBox(element);
         comBox.setPromptText("Choose Cause:");
         comBox.setId("absCombo");
         comBox.setStyle("-fx-font-size : 13");
         comBox.setPrefSize(140, 35);
-        
+
         ap.getChildren().add(comBox);
         AnchorPane.setTopAnchor(comBox, 7.0);
         AnchorPane.setRightAnchor(comBox, 110.0);
-        
+
         comBox.setOnAction((Event event) ->
         {
             if (comBox.getValue() != comBox.getPromptText())

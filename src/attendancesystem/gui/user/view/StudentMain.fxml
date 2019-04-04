@@ -12,15 +12,15 @@
 
 <AnchorPane id="AnchorPane" prefHeight="1024.0" prefWidth="768.0" stylesheets="@../../../../Resources/SuperiorWhite.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendancesystem.gui.user.controller.StudentMainController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="195.0" stroke="BLACK" strokeType="INSIDE" width="768.0" />
+      <Rectangle fill="#595959" height="160.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="768.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <ImageView fitHeight="195.0" fitWidth="267.0" pickOnBounds="true" preserveRatio="true" />
-      <SplitPane dividerPositions="0.5325" layoutY="195.0" orientation="VERTICAL" prefHeight="488.0" prefWidth="757.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="195.0">
+      <SplitPane dividerPositions="0.5522041763341067" layoutY="195.0" orientation="VERTICAL" prefHeight="488.0" prefWidth="757.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="160.0">
          <items>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="243.0" prefWidth="768.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="473.0" prefWidth="766.0">
                <children>
                   <ScrollPane fitToHeight="true" fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <content>
-                        <VBox fx:id="vBoxUndokumentet" prefHeight="200.0" prefWidth="100.0" />
+                        <VBox fx:id="vBoxUndokumentet" prefHeight="485.0" prefWidth="764.0" />
                      </content>
                   </ScrollPane>
                </children>

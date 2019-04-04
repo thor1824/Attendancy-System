@@ -29,7 +29,8 @@ import javafx.stage.Stage;
  *
  * @author Nijas Hansen
  */
-public class SpecificStudentInfoController implements Initializable {
+public class SpecificStudentInfoController implements Initializable
+{
 
     private AdminModel adminmodel;
     private Student student;
@@ -44,29 +45,30 @@ public class SpecificStudentInfoController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        try {
-            adminmodel = new AdminModel();
-            makeButton();
+    public void initialize(URL url, ResourceBundle rb)
+    {
 
-        } catch (IOException ex) {
-            Logger.getLogger(SpecificStudentInfoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        adminmodel = new AdminModel();
+        makeButton();
+
     }
 
     /**
      * Making Cancel button in the stage + handles the cancel button
      */
-    private void makeButton() {
+    private void makeButton()
+    {
         btnCancel.setText("Cancel");
         AnchorPane.setBottomAnchor(btnCancel, 20.0);
         AnchorPane.setRightAnchor(btnCancel, 20.0);
         btnCancel.setStyle("-fx-background-color:#4d79ff");
         btnCancel.setTextFill(new Color(1, 1, 1, 1.0));
 
-        btnCancel.setOnAction(new EventHandler<ActionEvent>() {
+        btnCancel.setOnAction(new EventHandler<ActionEvent>()
+        {
             @Override
-            public void handle(ActionEvent event) {
+            public void handle(ActionEvent event)
+            {
                 stage.close();
             }
         });
@@ -77,7 +79,8 @@ public class SpecificStudentInfoController implements Initializable {
      *
      * @param student
      */
-    public void setStudent(Student student) {
+    public void setStudent(Student student)
+    {
         this.student = student;
         List<Absence> absences = adminmodel.getAllAbsence(student);
 
@@ -89,7 +92,8 @@ public class SpecificStudentInfoController implements Initializable {
      *
      * @param newStage
      */
-    public void setStage(Stage newStage) {
+    public void setStage(Stage newStage)
+    {
         this.stage = newStage;
     }
 

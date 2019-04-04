@@ -5,7 +5,7 @@
  */
 package attendancesystem.main;
 
-import attendancesystem.gui.user.controller.UserViewController;
+import attendancesystem.gui.user.controller.StudentLoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,7 +24,7 @@ public class UserStart extends Application
     public void start(Stage stage) throws Exception
     {
         
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("attendancesystem/gui/user/view/UserView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("attendancesystem/gui/user/view/StudentLogin.fxml"));
 
         Parent root = loader.load();
         
@@ -32,7 +32,7 @@ public class UserStart extends Application
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(new Scene(root));
-        UserViewController controller = loader.getController();
+        StudentLoginController controller = loader.getController();
         controller.setStage(stage);
         stage.show();
     }

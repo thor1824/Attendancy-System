@@ -7,20 +7,20 @@ package attendancesystem.dal.db;
 
 import attendancesystem.be.Student;
 import attendancesystem.be.Teacher;
-import attendancesystem.dal.LoginDAO;
-import attendancesystem.dal.db.Server.ServerConnect;
+import attendancesystem.dal.db.Server.ConnectionPool;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import attendancesystem.dal.facade.ILoginDAO;
 
 /**
  *
  * @author Thorbjørn Schultz Damkjær
  */
-public class LoginDbDao implements LoginDAO
+public class LoginDbDao implements ILoginDAO
 {
 
     @Override
@@ -32,7 +32,9 @@ public class LoginDbDao implements LoginDAO
                 + "ON Student.ClassID = Class.ClassID "
                 + "WHERE Username = ? and Password = ?;";
         
-        Connection con = ServerConnect.getConnection(); //create connection
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection(); //create connection
+        
         PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement
         ps.setString(1, username);
         ps.setString(2, encrypytedPassword);
@@ -66,7 +68,9 @@ public class LoginDbDao implements LoginDAO
                 + "on Login.UserId = Teacher.UserID "
                 + "WHERE Username = ? and Password = ?;";
         
-        Connection con = ServerConnect.getConnection(); //create connection
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection(); //create connection
+        
         PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement
         ps.setString(1, username);
         ps.setString(2, encrypytedPassword);

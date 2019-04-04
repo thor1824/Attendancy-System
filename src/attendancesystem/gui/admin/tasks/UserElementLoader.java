@@ -10,8 +10,6 @@ import attendancesystem.gui.admin.model.AdminModel;
 import attendancesystem.gui.elements.UserElement;
 import java.time.Duration;
 import java.time.Instant;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.scene.image.ImageView;
 

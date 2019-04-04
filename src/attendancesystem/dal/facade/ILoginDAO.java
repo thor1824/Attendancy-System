@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package attendancesystem.dal;
+package attendancesystem.dal.facade;
 
 import attendancesystem.be.Student;
 import attendancesystem.be.Teacher;
@@ -15,7 +15,7 @@ import java.sql.SQLException;
  *
  * @author Thorbjørn Schultz Damkjær
  */
-public interface LoginDAO
+public interface ILoginDAO
 {
 
     public Student handleLoginRequestStudent(String username, String encrypytedPassword) throws SQLServerException, IOException, SQLException; 

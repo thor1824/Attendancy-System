@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package attendancesystem.dal;
+package attendancesystem.dal.db.Server;
 
-import attendancesystem.bll.PasswordEncryptor;
+import attendancesystem.bll.essentials.PasswordEncryptor;
 import attendancesystem.dal.db.Server.ServerConnect;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.BufferedReader;

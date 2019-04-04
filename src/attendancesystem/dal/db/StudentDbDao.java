@@ -5,11 +5,9 @@
  */
 package attendancesystem.dal.db;
 
-import attendancesystem.dal.db.Server.ServerConnect;
-import attendancesystem.dal.StudentDAO;
 import attendancesystem.be.Student;
+import attendancesystem.dal.db.Server.ConnectionPool;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,20 +16,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import attendancesystem.dal.facade.IStudentDAO;
 
 /**
  *
  * @author Nijas Hansen
  */
-public class StudentDbDao implements StudentDAO
+public class StudentDbDao implements IStudentDAO
 {
-
-    private static ServerConnect server;
-
-    public StudentDbDao() throws IOException
-    {
-
-    }
 
     @Override
     public List<Student> getAllStudents() throws SQLServerException, SQLException, IOException
@@ -39,7 +31,8 @@ public class StudentDbDao implements StudentDAO
         String sql = "SELECT * FROM [Atendens].[dbo].[Student] "
                 + "join [Atendens].[dbo].[Class] on Class.ClassID = Student.ClassID;";
 
-        Connection con = ServerConnect.getConnection(); //create connection
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection(); //create connection
 
         PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement
         ResultSet rs = ps.executeQuery(); //get all Students
@@ -57,7 +50,6 @@ public class StudentDbDao implements StudentDAO
             String stuZip = rs.getNString("ZipCode");
             String stuCPR = rs.getNString("Cpr");
             String stuPicUrl = rs.getNString("StuPicURL");
-
 
             Student stu = new Student(stuID, stuFName, stuLName, stuEmail, stuPhone, stuCPR, stuAdress, stuZip, stuClass, stuPicUrl, Days_of_classes);
             //put Student in list
@@ -79,9 +71,10 @@ public class StudentDbDao implements StudentDAO
         String sqlSetStudent = "INSERT INTO [Atendens].[dbo].[Student] (UserID, StuLName, StuFName, ClassID, Phone, Email, Adress, ZipCode, Cpr) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
         String sqlGetClass = "SELECT ClassID FROM [Atendens].[dbo].[Class] "
-                + "WHERE ClassName = '" + student.getSchoolClass()+ "' ;";
+                + "WHERE ClassName = '" + student.getSchoolClass() + "' ;";
 
-        Connection con = ServerConnect.getConnection(); //create connection
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection(); //create connection
 
         PreparedStatement psLogin = con.prepareStatement(sqlSetLogin, Statement.RETURN_GENERATED_KEYS); //create prepared Statement for Login
         psLogin.setNString(1, username);
@@ -132,138 +125,64 @@ public class StudentDbDao implements StudentDAO
     }
 
     @Override
-    public boolean deleteStudent(Student student) throws SQLServerException, IOException, SQLException
+    public int getDaysOfClass(Student student) throws SQLServerException, IOException, SQLException
     {
-        String sql = "";
-        Connection con = ServerConnect.getConnection();
+
+        int daysofclass = 0;
+
+        String sql = "SELECT Days_of_classes, StuID FROM [Atendens].[dbo].[Student] WHERE StuID = (?)";
+
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection(); //create connection
+
         PreparedStatement ps = con.prepareStatement(sql);
-        //to do
-        //create connection
-        //create prepared Statement
-        //delete Student where userID =="input users ID"
-        //check if entry was deletet
-        //close connection
-
-        int lineAffected = ps.executeUpdate();
-        con.close();
-        return lineAffected != 0; //return true if deleted, false if not
-    }
-
-    @Override
-    public Student getStudent(int id) throws SQLServerException, IOException, SQLException
-    {
-        String sql = "";
-        int days_of_classes = 0;
-        Connection con = ServerConnect.getConnection(); //create connection
-        PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement
-        ResultSet rs = ps.executeQuery(); //get Student where userID =="input users ID"
-
-        while (rs.next()) //does not enter if no student is found
-        {
-
-            con.close();
-            return new Student(id, sql, sql, sql, sql, sql, sql, sql, sql, sql, days_of_classes);
-        }
-        con.close();
-
-        //close connection
-        //retrun Student
-        return null;
-    }
-
-    @Override
-    public boolean updateStudent(Student student) throws SQLServerException, IOException, SQLException
-    {
-        String sql = "";
-        Connection con = ServerConnect.getConnection();
-        PreparedStatement ps = con.prepareStatement(sql);
-        //to do
-        //create connection
-        //create prepared Statement
-        //update Student where userID =="input users ID"
-        //check if entry was updated
-        //close connection
-        //retrun true if updated, false if not
-        int lineAffected = ps.executeUpdate();
-        con.close();
-        return lineAffected != 0; //return true if deleted, false if not
-    }
-
-    @Override
-    public List<Student> getStudentsFromClass(String className) throws SQLServerException, IOException, SQLException
-    {
-        String sql = "";
-        Connection con = ServerConnect.getConnection(); //create connection
-        PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement
-
-        ArrayList<Student> students = new ArrayList<>();
+        ps.setInt(1, student.getStuID());
 
         ResultSet rs = ps.executeQuery();
 
         while (rs.next())
         {
 
-        }
-        con.close();
-        return students;
-    }
-
-    @Override
-    public boolean setUserImage(Student user, String picURL) throws SQLServerException, SQLException, FileNotFoundException, IOException
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int getDaysOfClass(Student student) throws SQLServerException, IOException, SQLException{
-
-        int daysofclass = 0;
-
-        String sql = "SELECT Days_of_classes, StuID FROM [Atendens].[dbo].[Student] WHERE StuID = (?)";
-        Connection con = ServerConnect.getConnection();
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, student.getStuID());
-
-        ResultSet rs = ps.executeQuery();
-
-        while (rs.next()){
-           
             daysofclass = rs.getInt(1);
 
         }
 
         con.close();
         return daysofclass;
-        
+
     }
-    
-    public boolean addDaysOfClass(int id) throws SQLServerException, IOException, SQLException{
+
+    /**
+     *
+     * @param id
+     * @return
+     * @throws SQLServerException
+     * @throws IOException
+     * @throws SQLException
+     */
+    @Override
+    public boolean addDaysOfClass(int id) throws Exception
+    {
+
+        String sql = "UPDATE [Atendens].[dbo].[Student] SET Days_of_classes = Days_of_classes +1  WHERE StuID = (?)";
         
-        System.out.println(id);
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection(); //create connection
         
-       String sql = "UPDATE [Atendens].[dbo].[Student] SET Days_of_classes = Days_of_classes +1  WHERE StuID = (?)";
-        Connection con = ServerConnect.getConnection();
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, id);
 
-       int rowsAffected = ps.executeUpdate();
-        if (rowsAffected == 1) {
-            
+        int rowsAffected = ps.executeUpdate();
+        if (rowsAffected == 1)
+        {
+
             return true;
         }
-        
+
         con.close();
-        
+
         return false;
-       
-       
 
-        } 
-    
-    
-        
-    
-
-
+    }
 
 }

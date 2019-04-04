@@ -3,35 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package attendancesystem.dal;
+package attendancesystem.dal.facade;
 
 import attendancesystem.be.Absence;
 import attendancesystem.be.Student;
 import attendancesystem.be.Teacher;
-import attendancesystem.be.User;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author Thorbjørn Schultz Damkjær
  */
-public interface AbsenceDAO
+public interface IAbsenceDAO
 {
 
-    boolean createAbsence(Absence absence, Student student) throws Exception;
-
-    boolean deleteAbsence() throws Exception;
-
-
+    public boolean createAbsence(Absence absence, Student student) throws Exception;
+    
     public List<Absence> getDocumentetAbsence(Student student) throws Exception;
 
     public List<Absence> getUndocumentetAbsence(Student user) throws Exception;
 
-    boolean updateAbsence(Absence absence) throws Exception;
+    public boolean updateAbsence(Absence absence) throws Exception;
 
     public List<Absence> getAllAbsence(Student student) throws Exception;
 
@@ -46,5 +38,7 @@ public interface AbsenceDAO
     public int linesIngetDocumentetAbsence(Student student) throws Exception;
     
     public int linesIngetUndocumentetAbsence(Student student) throws Exception;
+
+    public void createAbsenceBatch(List<Integer> absend, String date) throws Exception;
 
 }

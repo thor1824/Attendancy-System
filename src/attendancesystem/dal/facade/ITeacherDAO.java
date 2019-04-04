@@ -3,29 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package attendancesystem.dal;
+package attendancesystem.dal.facade;
 
 import attendancesystem.be.Teacher;
-import attendancesystem.be.User;
 import java.util.List;
 
 /**
  *
  * @author Thorbjørn Schultz Damkjær
  */
-public interface TeacherDAO
+public interface ITeacherDAO
 {
 
-    void createTeacher(User user);
-
-    void deleteTeacher(User user);
-
-    void getAllTeachers();
-
-    void getTeacher(User user);
-
-    void updateTeacher(User user);
-
     public List<String> getSchoolClasses(Teacher teacher) throws Exception;
-    
+
 }

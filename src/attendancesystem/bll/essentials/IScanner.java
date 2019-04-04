@@ -3,17 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package attendancesystem.dal;
-
-import attendancesystem.be.User;
+package attendancesystem.bll.essentials;
 
 /**
  *
  * @author Thorbjørn Schultz Damkjær
  */
-public interface UserDAO
+public interface IScanner
 {
 
-    User handleLoginRequest(String username, String password);
+    String scan();
     
 }

@@ -8,13 +8,11 @@ package attendancesystem.gui.admin.controller;
 import attendancesystem.be.Absence;
 import attendancesystem.be.Student;
 import attendancesystem.be.Teacher;
-import attendancesystem.gui.admin.tasks.UserElementLoader;
 import attendancesystem.gui.admin.model.AdminModel;
 import attendancesystem.gui.admin.tasks.UserElementIncrementLoader;
 import attendancesystem.gui.elements.UserElement;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
@@ -26,10 +24,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.beans.property.BooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -97,33 +92,25 @@ public class AdminViewController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
 
-        try
-        {
+        model = new AdminModel();
+        students = model.getAllStudents();
+        obsStudents = FXCollections.observableArrayList();
+        obsStudents.setAll(students);
 
-            model = new AdminModel();
-            students = model.getAllStudents();
-            obsStudents = FXCollections.observableArrayList();
-            obsStudents.setAll(students);
+        setupSeachBarStu();
+        sortedData = new SortedList<>(searchList); // Wrap the FilteredList in a SortedList.
 
-            setupSeachBarStu();
-            sortedData = new SortedList<>(searchList); // Wrap the FilteredList in a SortedList.
+        executor = Executors.newFixedThreadPool(1);
 
-            executor = Executors.newFixedThreadPool(1);
+        SetUpUserElements();
 
-            SetUpUserElements();
+        setUpScrollPane();
 
-            setUpScrollPane();
+        setUpAbsenceRequest();
 
-            setUpAbsenceRequest();
+        hbxUserOverview.setSpacing(12);
 
-            hbxUserOverview.setSpacing(12);
-
-            setupCheckBoxes();
-
-        } catch (IOException ex)
-        {
-            Logger.getLogger(AdminViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        setupCheckBoxes();
 
     }
 
@@ -140,7 +127,7 @@ public class AdminViewController implements Initializable
 
                 if (newValue == true)
                 {
-                    System.out.println("in:" + classe);
+                    
                     activeFilters.add(classe);
                 }
                 if (newValue == false)
@@ -170,7 +157,7 @@ public class AdminViewController implements Initializable
 
         Instant finish = Instant.now();
         long elapsedTime = Duration.between(start, finish).toMillis();
-        System.out.println("createAndAddUserElement: " + elapsedTime + " ms");
+        
     }
 
     private void setUpScrollPane()
@@ -269,15 +256,15 @@ public class AdminViewController implements Initializable
             // Compare Title, Artist and Genre of every Song with filter text.
             String lowerCaseFilter = newValue.toLowerCase();
             Boolean onFilterlist = null;
-            
+
             if (!activeFilters.isEmpty())
             {
                 for (String activeFilter : activeFilters)
                 {
-                    
+
                     if (activeFilter.toLowerCase().contains(node.getSchoolClass().toLowerCase()))
                     {
-                        
+
                         onFilterlist = true;
                         break;
                     } else
@@ -286,12 +273,11 @@ public class AdminViewController implements Initializable
                     }
                 }
             }
-            System.out.println(node);
+            
             if (node.getFullName().toLowerCase().contains(lowerCaseFilter) && (onFilterlist == null || onFilterlist == true))
             {
                 return true; // Filter matches Title.
             }
-            
 
             return false; // Does not match.
         });

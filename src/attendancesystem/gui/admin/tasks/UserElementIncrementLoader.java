@@ -60,12 +60,12 @@ public class UserElementIncrementLoader extends Task<ObservableList<UserElement>
                     latch.countDown();
                 });
 
-                Thread.sleep(10);
+                
             }
-            System.out.println("b");
+            
             latch.await();
             updateValue(elements);
-            System.out.println("c");
+            
             
 
         } catch (InterruptedException interruptedException)

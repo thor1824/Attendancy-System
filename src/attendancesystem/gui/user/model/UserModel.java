@@ -7,12 +7,9 @@ package attendancesystem.gui.user.model;
 
 import attendancesystem.be.Student;
 import attendancesystem.be.Absence;
-import attendancesystem.be.User;
 import attendancesystem.bll.BLLManager;
-import attendancesystem.bll.NFCScanner;
-import attendancesystem.dal.db.AbsenceDbDao;
-import java.io.IOException;
-import java.sql.SQLException;
+import attendancesystem.bll.facade.IBuisness;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,35 +23,16 @@ import javafx.scene.chart.PieChart;
 public class UserModel
 {
 
-    BLLManager bllMan;
-    
-    NFCScanner loginSim;
-
-    AbsenceDbDao absenceDbDao;
-
+    IBuisness bllMan;
     Student logedInStudent;
-    
-    NFCScanner loginsim;
 
-    public UserModel() 
+    public UserModel()
     {
-        try
-        {
-            bllMan = new BLLManager();
-            loginSim = new NFCScanner();
-        } catch (IOException ex)
-        {
-            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        bllMan = new BLLManager();
+
     }
 
-//    public String calculateDate()
-//    {
-//
-//        return date and time
-//    }
     public PieChart getPieChard(Student student)
     {
         try
@@ -72,19 +50,37 @@ public class UserModel
         try
         {
             return bllMan.handleLoginRequestStudent(username, password);
-        } catch (IOException ex)
-        {
-            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex)
+        } catch (Exception ex)
         {
             Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
-    public List<Absence> getUndocumentetAbsence(Student user) throws Exception
+    public List<Absence> getUndocumentetAbsence(Student user)
     {
-        return bllMan.getUndocumentetAbsence(user);
+        List<Absence> undocAbsences = new ArrayList<>();
+        try
+        {
+            undocAbsences = bllMan.getUndocumentetAbsence(user);
+        } catch (Exception ex)
+        {
+            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return undocAbsences;
+    }
+
+    public List<Absence> getDocumentetAbsence(Student student)
+    {
+        List<Absence> docAbsences = new ArrayList<>();
+        try
+        {
+            docAbsences = bllMan.getDocumentetAbsence(student);
+        } catch (Exception ex)
+        {
+            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return docAbsences;
     }
 
     public void setLogedInStudent(Student logedInStudent)
@@ -97,28 +93,49 @@ public class UserModel
         return logedInStudent;
     }
 
-    public List<Absence> getAllAbsence(Student student) throws Exception
+    public List<Absence> getAllAbsence(Student student)
     {
-        return bllMan.getAllAbsence(student);
+        List<Absence> Absences = new ArrayList<>();
+        try
+        {
+            Absences = bllMan.getAllAbsence(student);
+        } catch (Exception ex)
+        {
+            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Absences;
     }
 
-    public boolean updateAbsence(Absence absnece) throws Exception
+    public boolean updateAbsence(Absence absnece)
     {
-        return bllMan.updateAbsence(absnece);
+        boolean updated = false;
+        try
+        {
+            updated = bllMan.updateAbsence(absnece);
+        } catch (Exception ex)
+        {
+            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return updated;
     }
 
-    public boolean makeAbsenceRequest(Absence absence) throws Exception
+    public boolean makeAbsenceRequest(Absence absence)
     {
-        return bllMan.makeAbsenceRequest(absence);
+        boolean isRequested = false;
+        try
+        {
+            isRequested = bllMan.makeAbsenceRequest(absence);
+        } catch (Exception ex)
+        {
+            Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return isRequested;
     }
 
-    public List<Absence> getDocumentetAbsence(Student student) throws Exception
+   
+    public boolean scan()
     {
-       return bllMan.getDocumentetAbsence(student);
-    }
-    
-    public boolean studentPresent() {
-        return loginSim.studentsPresend();
+        return bllMan.scan();
     }
 
 }
