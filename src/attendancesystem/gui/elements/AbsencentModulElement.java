@@ -76,9 +76,9 @@ public class AbsencentModulElement
         ap.getChildren().add(lblFag);
         AnchorPane.setTopAnchor(lblFag, 16.5);
         AnchorPane.setLeftAnchor(lblFag, 30.0);
-
-        if (absence.isApproved())
-        {
+        
+        if (absence.isApproved()) {
+            
             Label lblApp = new Label("Approved");
             lblApp.setFont(new Font(13));
             ap.getChildren().add(lblApp);
@@ -90,10 +90,9 @@ public class AbsencentModulElement
             ap.getChildren().add(lblReason);
             AnchorPane.setTopAnchor(lblReason, 16.5);
             AnchorPane.setRightAnchor(lblReason, 165.0);
-
-        }
-        else if (absence.isPending())
-        {
+            System.out.println("bon");
+            
+        } else if (absence.isPending()) {
             Label lblApp = new Label("Pending");
             lblApp.setFont(new Font(13));
             ap.getChildren().add(lblApp);
@@ -105,13 +104,13 @@ public class AbsencentModulElement
             ap.getChildren().add(lblReason);
             AnchorPane.setTopAnchor(lblReason, 16.5);
             AnchorPane.setRightAnchor(lblReason, 165.0);
-
-        } else
-        {
+            
+        } else {
+            
             setupComboBox();
             setupButton();
+        
         }
-
     }
 
     private void setupButton()
