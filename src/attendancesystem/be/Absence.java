@@ -22,7 +22,8 @@ public class Absence
     private boolean approved;
     private boolean pending;
 
-    public Absence(String StuFullName, int stuClassID, int absenceID, String stuClass, String reason, String explanation, String date, boolean approved, boolean pending)
+    public Absence(String StuFullName, int stuClassID, int absenceID, String stuClass, 
+            String reason, String explanation, String date, boolean approved, boolean pending)
     {
         this.stuFullName = StuFullName;
         this.absenceID = absenceID;

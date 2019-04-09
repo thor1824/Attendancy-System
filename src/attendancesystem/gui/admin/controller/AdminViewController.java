@@ -318,6 +318,7 @@ public class AdminViewController implements Initializable
         controller.setStage(newStage);
         controller.setModel(model);
         controller.setAbsences(requests);
+        controller.setSizelbl(lblReqCount);
 
         newStage.showAndWait();
 
@@ -328,7 +329,7 @@ public class AdminViewController implements Initializable
 
         lblReqCount.setOpacity(0);
         requests = FXCollections.observableArrayList();
-
+        
         requests.setAll(model.getAllRequestAbence(loggedInTeacher));
         if (requests.size() >= 1)
         {
@@ -341,6 +342,14 @@ public class AdminViewController implements Initializable
                 lblReqCount.setText("" + requests.size());
             }
         }
+        lblReqCount.textProperty().addListener((observable, oldValue, newValue) ->
+        {
+            if (Integer.parseInt(newValue) <= 0)
+            {
+                lblReqCount.setOpacity(0);
+            }
+ 
+        });
 
     }
 

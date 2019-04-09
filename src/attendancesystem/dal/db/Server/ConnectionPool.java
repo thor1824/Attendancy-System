@@ -42,15 +42,12 @@ public class ConnectionPool
 
     public synchronized Connection getConnection() throws SQLServerException, IOException
     {
-
         if (cPool.isEmpty())
         {
             Connection con = ServerConnect.getConnection();
-            cPool.add(con);
             return cPool.poll();
         }
         return cPool.poll();
-        
     }
 
     public synchronized void releaseConnection(Connection con)
