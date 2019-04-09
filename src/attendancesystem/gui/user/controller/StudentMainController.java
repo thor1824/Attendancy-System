@@ -129,11 +129,10 @@ public class StudentMainController implements Initializable
 
     public void generateAbsenceElements(Student student) throws SQLException, Exception
     {
-
-        List<Absence> undocumentedAbsences = userModel.getUndocumentetAbsence(student);
-        undocumentedAbsences.addAll(userModel.getDocumentetAbsence(student));
+        List<Absence> absences = userModel.getUndocumentetAbsence(student);
+        absences.addAll(userModel.getDocumentetAbsence(student));
         
-        Collections.sort(undocumentedAbsences, new Comparator<Absence>()
+        Collections.sort(absences, new Comparator<Absence>()
         {
             @Override
             public int compare(Absence absence1, Absence absence2)
@@ -142,7 +141,7 @@ public class StudentMainController implements Initializable
             }
         });
         
-        for (Absence undocumentedAbsence : undocumentedAbsences)
+        for (Absence undocumentedAbsence : absences)
         {
 
             AbsencentModulElement ame = new AbsencentModulElement(undocumentedAbsence, vBoxUndokumentet);
