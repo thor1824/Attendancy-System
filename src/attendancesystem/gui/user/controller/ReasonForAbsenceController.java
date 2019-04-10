@@ -57,7 +57,7 @@ public class ReasonForAbsenceController implements Initializable {
         });
     }    
 
-    public void setExplanation(Label explanation) {
+    public void bindExplanation(Label explanation) {
         explanation.textProperty().bind(label.textProperty());
         
     }
@@ -71,12 +71,7 @@ public class ReasonForAbsenceController implements Initializable {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-
-    private void handleCancelBtn(MouseEvent event) {
-         
-    }
-
-
+    
     @FXML
     private void handleCancelBtn(ActionEvent event)
     {

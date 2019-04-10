@@ -41,7 +41,12 @@ public class AbsencentModulElement
     private Absence absence;
     private JFXComboBox comBox;
     private JFXButton btnSend;
-
+    private final String OPTION_OTHER = "Other";
+    private final String OPTION_SICK = "Sick";
+    private final String OPTION_DOCTOR = "Doctor";
+    private final String OPTION_LATE = "Late";
+    
+    
     public AbsencentModulElement(Absence absence, VBox vBox)
     {
         this.absence = absence;
@@ -76,23 +81,25 @@ public class AbsencentModulElement
         ap.getChildren().add(lblFag);
         AnchorPane.setTopAnchor(lblFag, 16.5);
         AnchorPane.setLeftAnchor(lblFag, 30.0);
-        
-        if (absence.isApproved()) {
-            
+
+        if (absence.isApproved())
+        {
+
             Label lblApp = new Label("Approved");
             lblApp.setFont(new Font(13));
             ap.getChildren().add(lblApp);
             AnchorPane.setTopAnchor(lblApp, 16.5);
             AnchorPane.setRightAnchor(lblApp, 30.0);
-            
+
             Label lblReason = new Label(absence.getReason());
             lblReason.setFont(new Font(13));
             ap.getChildren().add(lblReason);
             AnchorPane.setTopAnchor(lblReason, 16.5);
             AnchorPane.setRightAnchor(lblReason, 165.0);
             System.out.println("bon");
-            
-        } else if (absence.isPending()) {
+
+        } else if (absence.isPending())
+        {
             Label lblApp = new Label("Pending");
             lblApp.setFont(new Font(13));
             ap.getChildren().add(lblApp);
@@ -104,12 +111,13 @@ public class AbsencentModulElement
             ap.getChildren().add(lblReason);
             AnchorPane.setTopAnchor(lblReason, 16.5);
             AnchorPane.setRightAnchor(lblReason, 165.0);
-            
-        } else {
-            
+
+        } else
+        {
+
             setupComboBox();
             setupButton();
-        
+
         }
     }
 
@@ -132,11 +140,10 @@ public class AbsencentModulElement
             {
                 String reason = comBox.getValue().toString();
                 Label lblExplanation = new Label();
-                if (comBox.getValue() == "Other")
+                if (comBox.getValue().equals(OPTION_OTHER) )
                 {
                     try
                     {
-
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/attendancesystem/gui/user/view/ReasonForAbsence.fxml"));
 
                         Parent root = loader.load();
@@ -149,17 +156,16 @@ public class AbsencentModulElement
 
                         controller.setModel(userModel);
                         controller.setStage(stage);
-                        controller.setExplanation(lblExplanation);
+                        controller.bindExplanation(lblExplanation);
 
                         stage.showAndWait();
-
                     } catch (IOException ex)
                     {
                         Logger.getLogger(AbsencentModulElement.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
 
-                if (comBox.getValue() != "Other")
+                if (!comBox.getValue().equals(OPTION_OTHER))
                 {
                     absence.setReason(reason);
                     absence.setPending(true);
@@ -169,7 +175,7 @@ public class AbsencentModulElement
                     AbsencentModulElement newAme = new AbsencentModulElement(absence, vBox);
                     vBox.getChildren().add(newAme.getAnchorPane());
                 }
-                if (comBox.getValue() == "Other" && !lblExplanation.getText().isEmpty())
+                if (comBox.getValue().equals(OPTION_OTHER) && !lblExplanation.getText().isEmpty())
                 {
                     absence.setReason(reason);
                     absence.setExplanation(lblExplanation.getText());
@@ -191,13 +197,12 @@ public class AbsencentModulElement
 
     private void setupComboBox()
     {
-        ObservableList element = FXCollections.observableArrayList(
-                "Sick",
-                "Doctor",
-                "Late",
-                "Other");
-
-        comBox = new JFXComboBox(element);
+        comBox = new JFXComboBox(FXCollections.observableArrayList(
+                OPTION_SICK,
+                OPTION_DOCTOR,
+                OPTION_LATE,
+                OPTION_OTHER
+        ));
         comBox.setPromptText("Choose Cause:");
         comBox.setId("absCombo");
         comBox.setStyle("-fx-font-size : 13");
@@ -209,7 +214,7 @@ public class AbsencentModulElement
 
         comBox.setOnAction((Event event) ->
         {
-            if (comBox.getValue() != comBox.getPromptText())
+            if (!comBox.getValue().equals(comBox.getPromptText()))
             {
                 btnSend.setDisable(false);
             }
