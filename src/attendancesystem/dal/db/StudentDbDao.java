@@ -51,20 +51,17 @@ public class StudentDbDao implements IStudentDAO
             String stuCPR = rs.getNString("Cpr");
             String stuPicUrl = rs.getNString("StuPicURL");
 
-            Student stu = new Student(stuID, stuFName, stuLName, stuEmail, stuPhone, stuCPR, stuAdress, stuZip, stuClass, stuPicUrl, Days_of_classes,0 ,0);
-            //stu.setUndocAbsence(getUndocumentetAbsenceCount(stu));
-            //stu.setDocAbsence(getDocumentetAbsenceCount(stu));
-            //put Student in list
+            Student stu = new Student(stuID, stuFName, stuLName, stuEmail, stuPhone, stuCPR, stuAdress, stuZip, stuClass, stuPicUrl, Days_of_classes, 0, 0);
             students.add(stu);
         }
 
-        //close connection
-        con.close();
+        
+        cp.releaseConnection(con);
 
         return students;
 
     }
-    
+
     private int getDocumentetAbsenceCount(Student student) throws SQLException, SQLServerException, IOException
     {
         String sql = "SELECT COUNT(*) FROM [Atendens].[dbo].[Absense] "
@@ -77,9 +74,9 @@ public class StudentDbDao implements IStudentDAO
 
         ps.setInt(1, student.getStuID());
         ps.setBoolean(2, true);
-        
+
         ResultSet rs = ps.executeQuery();
-        
+
         if (rs.next())
         {
             rowCount = rs.getInt(1);
@@ -89,7 +86,7 @@ public class StudentDbDao implements IStudentDAO
 
         return rowCount;
     }
-    
+
     private int getUndocumentetAbsenceCount(Student student) throws SQLException, SQLServerException, IOException
     {
         String sql = "SELECT COUNT(*) FROM [Atendens].[dbo].[Absense] "
@@ -106,7 +103,7 @@ public class StudentDbDao implements IStudentDAO
         ps.setInt(3, student.getStuID());
 
         ResultSet rs = ps.executeQuery();
-        
+
         if (rs.next())
         {
             rowCount = rs.getInt(1);
@@ -116,9 +113,7 @@ public class StudentDbDao implements IStudentDAO
 
         return rowCount;
     }
-    
-    
-    
+
     @Override
     public boolean createStudent(Student student, String username, String encruptedPassword) throws SQLServerException, IOException, SQLException
     {
@@ -221,10 +216,10 @@ public class StudentDbDao implements IStudentDAO
     {
 
         String sql = "UPDATE [Atendens].[dbo].[Student] SET Days_of_classes = Days_of_classes +1  WHERE StuID = (?)";
-        
+
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection(); //create connection
-        
+
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, id);
 

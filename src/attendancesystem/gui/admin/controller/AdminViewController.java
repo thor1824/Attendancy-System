@@ -138,25 +138,16 @@ public class AdminViewController implements Initializable
 
     private void SetUpUserElements()
     {
-        Instant start = Instant.now();
-
         for (int i = 0; i < maxLoad; i++)
         {
-
             createAndAddUserElement(sortedData.get(i));
-
         }
-
-        Instant finish = Instant.now();
-        long elapsedTime = Duration.between(start, finish).toMillis();
-        
     }
 
     private void setUpScrollPane()
     {
         spUsers.setFitToWidth(true);
         spUsers.setFitToHeight(true);
-        //scrollPane load incriments
         spUsers.vvalueProperty().addListener((observable, oldValue, newValue) ->
         {
             if (newValue.doubleValue() == spUsers.getVmax())
@@ -168,21 +159,21 @@ public class AdminViewController implements Initializable
                     int newMax = maxLoad + loadIncriments;
                     if (sortedData.size() > newMax)
                     {
-                        for (int i = maxLoad + 1; i <= maxLoad + loadIncriments; i++)
+                        for (int i = oldMax + 1; i <= newMax; i++)
                         {
                             createAndAddUserElement(sortedData.get(i));
                         }
                         maxLoad = newMax;
                     } else
                     {
-                        for (int i = oldMax; i < sortedData.size(); i++)
+                        for (int i = oldMax + 1; i <= sortedData.size(); i++)
                         {
                             createAndAddUserElement(sortedData.get(i));
                         }
                         maxLoad = sortedData.size();
                     }
                     
-                    spUsers.setVvalue((maxLoad/3.00/100.00));
+                    spUsers.setVvalue(2 * spUsers.getVmax() / 3.00);
                 }
             }
         });

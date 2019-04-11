@@ -47,8 +47,8 @@ public class UserElementIncrementLoader extends Task<ObservableList<UserElement>
         try
         {
 
-            ExecutorService executor = Executors.newFixedThreadPool(10);
-            CountDownLatch latch = new CountDownLatch(end);
+            ExecutorService executor = Executors.newFixedThreadPool(end - begin);
+            CountDownLatch latch = new CountDownLatch(end - begin);
             for (int i = begin; i < end; i++)
             {
                 UserElementLoader ueLoader = new UserElementLoader(students.get(i), model);
@@ -64,6 +64,7 @@ public class UserElementIncrementLoader extends Task<ObservableList<UserElement>
             }
             
             latch.await();
+            executor.shutdown();
             updateValue(elements);
             
             
