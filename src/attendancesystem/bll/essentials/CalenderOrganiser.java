@@ -8,7 +8,6 @@ package attendancesystem.bll.essentials;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  *
@@ -42,7 +41,7 @@ public class CalenderOrganiser
     }
 
     private void nextValidDate(Calendar cal)
-    {
+    { 
         int day = cal.get(Calendar.DAY_OF_WEEK);
         int week = cal.get(Calendar.WEEK_OF_YEAR);
         int year = cal.get(Calendar.YEAR);
