@@ -22,40 +22,61 @@ import attendancesystem.dal.facade.IStudentDAO;
  *
  * @author Nijas Hansen
  */
-public class StudentDbDao implements IStudentDAO
-{
+public class StudentDbDao implements IStudentDAO {
 
     @Override
-    public List<Student> getAllStudents() throws SQLServerException, SQLException, IOException
-    {
+    public List<Student> getAllStudents() throws SQLServerException, SQLException, IOException {
         String sql = "SELECT * FROM [Atendens].[dbo].[Student] "
-                + "join [Atendens].[dbo].[Class] on Class.ClassID = Student.ClassID;";
+                + "Left join [Atendens].[dbo].[Class] on Class.ClassID = Student.ClassID "
+                + "Left join [Atendens].[dbo].[Absense] on Student.StuID = Absense.StuID "
+                + "order by Student.StuID;";
 
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection(); //create connection
 
-        PreparedStatement ps = con.prepareStatement(sql); //create prepared Statement
+        PreparedStatement ps = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY); //create prepared Statement
         ResultSet rs = ps.executeQuery(); //get all Students
         ArrayList<Student> students = new ArrayList<>();
-        while (rs.next())
-        {
+        int doc = 0;
+        int undoc = 0;
+        while (rs.next()) {
+            
             int stuID = rs.getInt("StuID");
-            int Days_of_classes = rs.getInt("Days_of_classes");
-            String stuLName = rs.getNString("StuLName");
-            String stuFName = rs.getNString("StuFName");
-            String stuClass = rs.getNString("ClassName");
-            String stuPhone = rs.getNString("Phone");
-            String stuEmail = rs.getNString("Email");
-            String stuAdress = rs.getNString("Adress");
-            String stuZip = rs.getNString("ZipCode");
-            String stuCPR = rs.getNString("Cpr");
-            String stuPicUrl = rs.getNString("StuPicURL");
 
-            Student stu = new Student(stuID, stuFName, stuLName, stuEmail, stuPhone, stuCPR, stuAdress, stuZip, stuClass, stuPicUrl, Days_of_classes,0 ,0);
-            //stu.setUndocAbsence(getUndocumentetAbsenceCount(stu));
-            //stu.setDocAbsence(getDocumentetAbsenceCount(stu));
-            //put Student in list
-            students.add(stu);
+            if (rs.getBoolean("Approved")) {
+                doc++;
+            } else {
+                undoc++;
+            }
+
+            if (rs.next()) {
+                System.out.println("new: " + rs.getInt("StuID"));
+                System.out.println("old: " + stuID);
+                if (stuID != rs.getInt("StuID")) {
+                    rs.previous();
+                    int Days_of_classes = rs.getInt("Days_of_classes");
+                    String stuLName = rs.getNString("StuLName");
+                    String stuFName = rs.getNString("StuFName");
+                    String stuClass = rs.getNString("ClassName");
+                    String stuPhone = rs.getNString("Phone");
+                    String stuEmail = rs.getNString("Email");
+                    String stuAdress = rs.getNString("Adress");
+                    String stuZip = rs.getNString("ZipCode");
+                    String stuCPR = rs.getNString("Cpr");
+                    String stuPicUrl = rs.getNString("StuPicURL");
+                   
+                    Student stu = new Student(stuID, stuFName, stuLName, stuEmail, stuPhone, stuCPR, stuAdress, stuZip,
+                            stuClass, stuPicUrl, Days_of_classes, undoc, doc);
+                    System.out.println(stu.getUndocAbsence());
+                    System.out.println(stu.getDocAbsence());
+                    students.add(stu);
+                    doc = 0;
+                    undoc = 0;
+                } else {
+                    rs.previous();
+                }
+            }
+
         }
 
         //close connection
@@ -64,9 +85,8 @@ public class StudentDbDao implements IStudentDAO
         return students;
 
     }
-    
-    private int getDocumentetAbsenceCount(Student student) throws SQLException, SQLServerException, IOException
-    {
+
+    private int getDocumentetAbsenceCount(Student student) throws SQLException, SQLServerException, IOException {
         String sql = "SELECT COUNT(*) FROM [Atendens].[dbo].[Absense] "
                 + "WHERE StuID = (?) AND Approved = ?";
         int rowCount = -1;
@@ -77,11 +97,10 @@ public class StudentDbDao implements IStudentDAO
 
         ps.setInt(1, student.getStuID());
         ps.setBoolean(2, true);
-        
+
         ResultSet rs = ps.executeQuery();
-        
-        if (rs.next())
-        {
+
+        if (rs.next()) {
             rowCount = rs.getInt(1);
         }
 
@@ -89,9 +108,8 @@ public class StudentDbDao implements IStudentDAO
 
         return rowCount;
     }
-    
-    private int getUndocumentetAbsenceCount(Student student) throws SQLException, SQLServerException, IOException
-    {
+
+    private int getUndocumentetAbsenceCount(Student student) throws SQLException, SQLServerException, IOException {
         String sql = "SELECT COUNT(*) FROM [Atendens].[dbo].[Absense] "
                 + "WHERE StuID = (?) AND Approved = ? "
                 + "OR StuID = (?) and Approved IS NULL";;
@@ -106,9 +124,8 @@ public class StudentDbDao implements IStudentDAO
         ps.setInt(3, student.getStuID());
 
         ResultSet rs = ps.executeQuery();
-        
-        if (rs.next())
-        {
+
+        if (rs.next()) {
             rowCount = rs.getInt(1);
         }
 
@@ -116,12 +133,9 @@ public class StudentDbDao implements IStudentDAO
 
         return rowCount;
     }
-    
-    
-    
+
     @Override
-    public boolean createStudent(Student student, String username, String encruptedPassword) throws SQLServerException, IOException, SQLException
-    {
+    public boolean createStudent(Student student, String username, String encruptedPassword) throws SQLServerException, IOException, SQLException {
         String sqlSetLogin = "INSERT INTO [Atendens].[dbo].[Login] (Username, Password) "
                 + "VALUES (?, ?);";
         String sqlSetStudent = "INSERT INTO [Atendens].[dbo].[Student] (UserID, StuLName, StuFName, ClassID, Phone, Email, Adress, ZipCode, Cpr) "
@@ -136,17 +150,14 @@ public class StudentDbDao implements IStudentDAO
         psLogin.setNString(1, username);
         psLogin.setNString(2, encruptedPassword);
 
-        if (psLogin.executeUpdate() != 0)
-        {
+        if (psLogin.executeUpdate() != 0) {
             PreparedStatement psClass = con.prepareStatement(sqlGetClass);
             ResultSet rsClass = psClass.executeQuery();
-            if (rsClass.next())
-            {
+            if (rsClass.next()) {
 
                 int userID = 0;
                 ResultSet rsUserID = psLogin.getGeneratedKeys(); //extracts the auto generated key from Student tabel
-                while (rsUserID.next())
-                {
+                while (rsUserID.next()) {
                     userID = rsUserID.getInt(1);
                 }
                 PreparedStatement psStudent = con.prepareStatement(sqlSetStudent, Statement.RETURN_GENERATED_KEYS); //create prepared Statement for Student
@@ -164,8 +175,7 @@ public class StudentDbDao implements IStudentDAO
 
                 ResultSet rsStuID = psStudent.getGeneratedKeys();
 
-                if (rsStuID.next())
-                {
+                if (rsStuID.next()) {
                     student.setUserID(rsStuID.getInt(1));
                     con.close(); //close connection
                     return lineAffected != 0; //create Student and return true if created, false if not
@@ -181,8 +191,7 @@ public class StudentDbDao implements IStudentDAO
     }
 
     @Override
-    public int getDaysOfClass(Student student) throws SQLServerException, IOException, SQLException
-    {
+    public int getDaysOfClass(Student student) throws SQLServerException, IOException, SQLException {
 
         int daysofclass = 0;
 
@@ -196,8 +205,7 @@ public class StudentDbDao implements IStudentDAO
 
         ResultSet rs = ps.executeQuery();
 
-        while (rs.next())
-        {
+        while (rs.next()) {
 
             daysofclass = rs.getInt(1);
 
@@ -217,20 +225,18 @@ public class StudentDbDao implements IStudentDAO
      * @throws SQLException
      */
     @Override
-    public boolean addDaysOfClass(int id) throws Exception
-    {
+    public boolean addDaysOfClass(int id) throws Exception {
 
         String sql = "UPDATE [Atendens].[dbo].[Student] SET Days_of_classes = Days_of_classes +1  WHERE StuID = (?)";
-        
+
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection(); //create connection
-        
+
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, id);
 
         int rowsAffected = ps.executeUpdate();
-        if (rowsAffected == 1)
-        {
+        if (rowsAffected == 1) {
 
             return true;
         }

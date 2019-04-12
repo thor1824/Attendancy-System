@@ -211,7 +211,6 @@ public class AbsenceDbDao implements IAbsenceDAO
         while (rs.next())
         {
             String stuFName = rs.getString("StuFName");
-
             String stuLName = rs.getString("StuLName");
             String stuFullName = stuFName + " " + stuLName;
             String stuClass = rs.getString("ClassName");
@@ -224,7 +223,6 @@ public class AbsenceDbDao implements IAbsenceDAO
             boolean pending = rs.getBoolean("Pending");
 
             absences.add(new Absence(stuFullName, stuClassID, absenceID, stuClass, reason, explenation, date, approved, pending));
-
         }
         cp.releaseConnection(con);
 
@@ -296,8 +294,12 @@ public class AbsenceDbDao implements IAbsenceDAO
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection(); //create connection
 
-        String updateSql = "UPDATE [Atendens].[dbo].[Absense] Set Approved = ?, Pending = ? WHERE AbsenceID = ?;";
-        String deleteSql = "DELETE FROM [Atendens].[dbo].[Class_Absense] WHERE AbsenceID = ?;";
+        String updateSql = "UPDATE [Atendens].[dbo].[Absense] "
+                + "Set Approved = ?, Pending = ? "
+                + "WHERE AbsenceID = ?;";
+        
+        String deleteSql = "DELETE FROM [Atendens].[dbo].[Class_Absense] "
+                + "WHERE AbsenceID = ?;";
 
         PreparedStatement upPs = con.prepareStatement(updateSql);
         upPs.setBoolean(1, true);
@@ -326,8 +328,10 @@ public class AbsenceDbDao implements IAbsenceDAO
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection(); //create connection
 
-        String updateSql = "UPDATE [Atendens].[dbo].[Absense] Set Approved = ?, Pending = ? WHERE AbsenceID = ?;";
-        String deleteSql = "DELETE FROM [Atendens].[dbo].[Class_Absense] WHERE AbsenceID = ?;";
+        String updateSql = "UPDATE [Atendens].[dbo].[Absense] Set Approved = ?, Pending = ? "
+                + "WHERE AbsenceID = ?;";
+        String deleteSql = "DELETE FROM [Atendens].[dbo].[Class_Absense] "
+                + "WHERE AbsenceID = ?;";
 
         PreparedStatement upPs = con.prepareStatement(updateSql);
         upPs.setBoolean(1, false);

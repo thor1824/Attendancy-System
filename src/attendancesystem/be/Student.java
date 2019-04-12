@@ -50,6 +50,18 @@ public class Student extends User
         this.docAbsence = docAbsence;
     }
     
+    public int getTotalAbsence()
+    {
+        return docAbsence + undocAbsence;
+    }
+    public double getAbsenceProcentage()
+    {
+        int diviance = docAbsence + undocAbsence;
+        int sum = diviance + daysPrecend;
+        System.out.println(diviance / sum * 100);
+        return diviance / sum * 100;
+    }
+    
     
     
     public int getDaysPrecend()

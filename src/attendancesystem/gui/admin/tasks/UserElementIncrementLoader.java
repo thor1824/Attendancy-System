@@ -46,7 +46,6 @@ public class UserElementIncrementLoader extends Task<ObservableList<UserElement>
         ObservableList<UserElement> elements = FXCollections.observableArrayList();
         try
         {
-
             ExecutorService executor = Executors.newFixedThreadPool(10);
             CountDownLatch latch = new CountDownLatch(end);
             for (int i = begin; i < end; i++)
@@ -62,12 +61,8 @@ public class UserElementIncrementLoader extends Task<ObservableList<UserElement>
 
                 
             }
-            
             latch.await();
             updateValue(elements);
-            
-            
-
         } catch (InterruptedException interruptedException)
         {
             interruptedException.printStackTrace();

@@ -255,10 +255,8 @@ public class BLLManager implements IBuisness
     public PieChart getPieChart(Student student) throws Exception
     {
         int daysPresend = student.getDaysPrecend();
-//        int daysUndocAbsence = student.getUndocAbsence();
-//        int daysDocAbsence = student.getDocAbsence();
-        int daysUndocAbsence = absenceDao.linesIngetUndocumentetAbsence(student);
-        int daysDocAbsence = absenceDao.linesIngetDocumentetAbsence(student);
+        int daysUndocAbsence = student.getUndocAbsence();
+        int daysDocAbsence = student.getDocAbsence();
 
         return PieChartGenerater.buildPieChard(student, daysPresend, daysUndocAbsence, daysDocAbsence);
     }
