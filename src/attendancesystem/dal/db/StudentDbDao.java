@@ -40,7 +40,7 @@ public class StudentDbDao implements IStudentDAO {
         int doc = 0;
         int undoc = 0;
         while (rs.next()) {
-            
+
             int stuID = rs.getInt("StuID");
 
             if (rs.getBoolean("Approved")) {
@@ -64,7 +64,7 @@ public class StudentDbDao implements IStudentDAO {
                     String stuZip = rs.getNString("ZipCode");
                     String stuCPR = rs.getNString("Cpr");
                     String stuPicUrl = rs.getNString("StuPicURL");
-                   
+
                     Student stu = new Student(stuID, stuFName, stuLName, stuEmail, stuPhone, stuCPR, stuAdress, stuZip,
                             stuClass, stuPicUrl, Days_of_classes, undoc, doc);
                     System.out.println(stu.getUndocAbsence());
@@ -79,14 +79,15 @@ public class StudentDbDao implements IStudentDAO {
 
         }
 
-        //close connection
-        con.close();
+
+        cp.releaseConnection(con);
 
         return students;
 
     }
 
-    private int getDocumentetAbsenceCount(Student student) throws SQLException, SQLServerException, IOException {
+    private int getDocumentetAbsenceCount(Student student) throws SQLException, SQLServerException, IOException
+    {
         String sql = "SELECT COUNT(*) FROM [Atendens].[dbo].[Absense] "
                 + "WHERE StuID = (?) AND Approved = ?";
         int rowCount = -1;
@@ -100,7 +101,8 @@ public class StudentDbDao implements IStudentDAO {
 
         ResultSet rs = ps.executeQuery();
 
-        if (rs.next()) {
+        if (rs.next())
+        {
             rowCount = rs.getInt(1);
         }
 
@@ -109,7 +111,8 @@ public class StudentDbDao implements IStudentDAO {
         return rowCount;
     }
 
-    private int getUndocumentetAbsenceCount(Student student) throws SQLException, SQLServerException, IOException {
+    private int getUndocumentetAbsenceCount(Student student) throws SQLException, SQLServerException, IOException
+    {
         String sql = "SELECT COUNT(*) FROM [Atendens].[dbo].[Absense] "
                 + "WHERE StuID = (?) AND Approved = ? "
                 + "OR StuID = (?) and Approved IS NULL";;
@@ -125,7 +128,8 @@ public class StudentDbDao implements IStudentDAO {
 
         ResultSet rs = ps.executeQuery();
 
-        if (rs.next()) {
+        if (rs.next())
+        {
             rowCount = rs.getInt(1);
         }
 

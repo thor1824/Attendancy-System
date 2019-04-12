@@ -134,63 +134,62 @@ public class AdminViewController implements Initializable {
         cboxSortAbsence.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == true) {
                 sortedData.setComparator((o1, o2) -> {
-                    
+
                     return ((Student) o2).getTotalAbsence() - ((Student) o1).getTotalAbsence();
-                    
+
                 });
-                
+
 
             }
             if (newValue == false) {
                 sortedData.setComparator((o1, o2) -> {
-                    
+
                     return ((Student) o1).getStuID() - ((Student) o2).getStuID();
-                    
+
                 });
-                
+
             }
             seach(txtSeach.getText());
         });
     }
 
-    private void SetUpUserElements() {
-        Instant start = Instant.now();
-
-        for (int i = 0; i < maxLoad; i++) {
-
+    private void SetUpUserElements()
+    {
+        for (int i = 0; i < maxLoad; i++)
+        {
             createAndAddUserElement(sortedData.get(i));
-
         }
-
-        Instant finish = Instant.now();
-        long elapsedTime = Duration.between(start, finish).toMillis();
-
     }
 
     private void setUpScrollPane() {
         spUsers.setFitToWidth(true);
         spUsers.setFitToHeight(true);
-        //scrollPane load incriments
-        spUsers.vvalueProperty().addListener((observable, oldValue, newValue)
-                -> {
-            if (newValue.doubleValue() == spUsers.getVmax()) {
-                if (maxLoad != sortedData.size()) {
+        spUsers.vvalueProperty().addListener((observable, oldValue, newValue) ->
+        {
+            if (newValue.doubleValue() == spUsers.getVmax())
+            {
+                if (maxLoad != sortedData.size())
+                {
                     int loadIncriments = 10;
                     int oldMax = maxLoad;
                     int newMax = maxLoad + loadIncriments;
-                    if (sortedData.size() > newMax) {
-                        for (int i = maxLoad + 1; i <= maxLoad + loadIncriments; i++) {
+                    if (sortedData.size() > newMax)
+                    {
+                        for (int i = oldMax + 1; i <= newMax; i++)
+                        {
                             createAndAddUserElement(sortedData.get(i));
                         }
                         maxLoad = newMax;
-                    } else {
-                        for (int i = oldMax; i < sortedData.size(); i++) {
+                    } else
+                    {
+                        for (int i = oldMax + 1; i <= sortedData.size(); i++)
+                        {
                             createAndAddUserElement(sortedData.get(i));
                         }
                         maxLoad = sortedData.size();
                     }
 
-                    spUsers.setVvalue((maxLoad / 3.00 / 100.00));
+                    spUsers.setVvalue(2 * spUsers.getVmax() / 3.00);
                 }
             }
         });
